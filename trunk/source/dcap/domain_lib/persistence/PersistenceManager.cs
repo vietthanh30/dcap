@@ -836,9 +836,10 @@ namespace domain_lib.persistence
                 IList<BangKeVW> list = criteria.List<BangKeVW>();
 
                 // Set return value
+                var stt = 0;
                 foreach (var row in list)
                 {
-                    var stt = row.Stt;
+                    stt++;
                     var hoTen = row.HoTen;
                     var userName = row.UserName;
                     var maGioiTinh = row.GioiTinh;
