@@ -223,7 +223,8 @@ namespace domain_lib.controller
                         }
 
                         // insert into QL1 tree
-                        if (accountPreCalc.AccountLevel == 3 && accountPreCalc.LevelIndex == 27)
+                        if (accountPreCalc.AccountLevel == 3 
+                            && m_PersistenceManager.CountCalculatedByLevel(accountPreCalc.CalcAccountId, 3) == 26)
                         {
                             AddToQl1Tree(accountPreCalc.CalcAccountId);
                         }
@@ -974,7 +975,8 @@ namespace domain_lib.controller
                 return true;
             if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "LK" && accountPreCalc.LevelIndex > 1)
                 return true;
-            return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel - 1) == Math.Pow(3, accountPreCalc.AccountLevel - 1) /*&& m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1)s*/;
+            return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel - 1) == Math.Pow(3, accountPreCalc.AccountLevel - 1) 
+                /*&& m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1)s*/;
         }
         
         #endregion

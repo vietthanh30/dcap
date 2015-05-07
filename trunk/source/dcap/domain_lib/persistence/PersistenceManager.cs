@@ -896,9 +896,29 @@ namespace domain_lib.persistence
             return allResults.ToArray();
         }
 
+        private long GetAccountNumberBy(long accountId)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select a.AccountNumber from Account a "
+                    + " where a.AccountId = :accountId");
+                query.SetParameter("accountId", accountId);
+
+                // Get the matching objects
+                var accountNumber = query.UniqueResult();
+
+                // Set return value
+                if (accountNumber == null)
+                {
+                    return -1;
+                }
+                return Convert.ToInt64(accountNumber);
+            }
+        }
+
         public UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
         {
-            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
                     + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a, Users u "+
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID";
             var sqlParams = new Hashtable();
@@ -950,6 +970,8 @@ namespace domain_lib.persistence
                     userDto.AccountNumber = memberInfo.AccountNumber;
                     userDto.FullName = memberInfo.HoTen;
                     userDto.UserName = memberInfo.UserName;
+                    userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
+                    userDto.ParentDirectId = GetAccountNumberBy(memberInfo.ParentDirectId);
                     userDto.NgaySinh = memberInfo.NgaySinh;
                     userDto.SoCmnd = memberInfo.SoCmnd;
                     userDto.NgayCap = memberInfo.NgayCap;
@@ -1209,6 +1231,25 @@ namespace domain_lib.persistence
 
                 // Set return value
                 return Convert.ToInt32(count);*/
+            }
+        }
+
+        public int CountCalculatedByLevel(long calcAccountId, int accountLevel)
+        {
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(*) from AccountPreCalc a "
+                   + " where a.CalcAccountId = :calcAccountId and a.AccountLevel = :accountLevel and a.IsCalculated = :isCalculated");
+                query.SetParameter("calcAccountId", calcAccountId);
+                query.SetParameter("accountLevel", accountLevel);
+                query.SetParameter("isCalculated", "Y");
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
             }
         }
 

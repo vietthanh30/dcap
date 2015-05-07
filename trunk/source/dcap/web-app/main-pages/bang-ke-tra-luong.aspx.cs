@@ -106,7 +106,7 @@ namespace web_app.main_pages
                 dataRow[columnNames[index++]] = bangKeDto.SoTaiKhoan;
                 dataRow[columnNames[index++]] = bangKeDto.ChiNhanhNH;
                 dataRow[columnNames[index++]] = bangKeDto.SoDienThoai;
-                dataRow[columnNames[index++]] = bangKeDto.SoTien;
+                dataRow[columnNames[index++]] = bangKeDto.SoTien*1000000;
                 dataRow[columnNames[index]] = bangKeDto.Thang;
                 dataTable.Rows.Add(dataRow);
             }

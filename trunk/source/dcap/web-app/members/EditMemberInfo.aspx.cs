@@ -29,6 +29,18 @@ namespace web_app.members
             if (userDto != null)
             {
                 HoTen.Value = userDto.FullName;
+                var sParentId = string.Empty;
+                if (userDto.ParentId != -1)
+                {
+                    sParentId = Convert.ToString(userDto.ParentId);
+                }
+                ParentId.Value = sParentId;
+                var sParentDirectId = string.Empty;
+                if (userDto.ParentDirectId != -1)
+                {
+                    sParentDirectId = Convert.ToString(userDto.ParentDirectId);
+                }
+                DirectParentId.Value = sParentDirectId;
                 NgaySinh.Value = DateUtil.GetDateTimeAsDdmmyyyy(userDto.NgaySinh);
                 SoCmnd.Value = userDto.SoCmnd;
                 NgayCap.Value =  DateUtil.GetDateTimeAsDdmmyyyy(userDto.NgayCap);

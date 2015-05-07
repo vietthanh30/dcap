@@ -45,6 +45,10 @@ namespace domain_lib.dto
 
         private string _message = string.Empty;
 
+        private long _parentId = -1;
+
+        private long _parentDirectId = -1;
+
         #endregion
 
     	#region Constructor
@@ -73,6 +77,24 @@ namespace domain_lib.dto
         {
             get { return _accountNumber; }
             set { _accountNumber = value; }
+        }
+
+        /// <summary>
+        /// Parent ID
+        /// </summary>
+        public virtual long ParentId
+        {
+            get { return _parentId; }
+            set { _parentId = value; }
+        }
+
+        /// <summary>
+        /// Parent Direct ID
+        /// </summary>
+        public virtual long ParentDirectId
+        {
+            get { return _parentDirectId; }
+            set { _parentDirectId = value; }
         }
 
         /// <summary>

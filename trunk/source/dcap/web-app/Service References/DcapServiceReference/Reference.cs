@@ -26,6 +26,10 @@ namespace web_app.DcapServiceReference {
         
         private long AccountNumberField;
         
+        private long ParentIdField;
+        
+        private long ParentDirectIdField;
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserNameField;
         
@@ -104,7 +108,33 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public long ParentId {
+            get {
+                return this.ParentIdField;
+            }
+            set {
+                if ((this.ParentIdField.Equals(value) != true)) {
+                    this.ParentIdField = value;
+                    this.RaisePropertyChanged("ParentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public long ParentDirectId {
+            get {
+                return this.ParentDirectIdField;
+            }
+            set {
+                if ((this.ParentDirectIdField.Equals(value) != true)) {
+                    this.ParentDirectIdField = value;
+                    this.RaisePropertyChanged("ParentDirectId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string UserName {
             get {
                 return this.UserNameField;
@@ -117,7 +147,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public string FullName {
             get {
                 return this.FullNameField;
@@ -130,7 +160,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
         public System.Nullable<System.DateTime> NgaySinh {
             get {
                 return this.NgaySinhField;
@@ -143,7 +173,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string SoCmnd {
             get {
                 return this.SoCmndField;
@@ -156,7 +186,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
         public System.Nullable<System.DateTime> NgayCap {
             get {
                 return this.NgayCapField;
@@ -169,7 +199,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
         public string SoDienThoai {
             get {
                 return this.SoDienThoaiField;
@@ -182,7 +212,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
         public string DiaChi {
             get {
                 return this.DiaChiField;
@@ -195,7 +225,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
         public string GioiTinh {
             get {
                 return this.GioiTinhField;
@@ -208,7 +238,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
         public string SoTaiKhoan {
             get {
                 return this.SoTaiKhoanField;
@@ -221,7 +251,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
         public string ChiNhanhNH {
             get {
                 return this.ChiNhanhNHField;
@@ -234,7 +264,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
         public string ImageUrl {
             get {
                 return this.ImageUrlField;
@@ -247,7 +277,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=15)]
         public System.DateTime CreatedDate {
             get {
                 return this.CreatedDateField;
@@ -260,7 +290,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
         public string CreatedBy {
             get {
                 return this.CreatedByField;
@@ -273,7 +303,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=17)]
         public string Message {
             get {
                 return this.MessageField;
@@ -286,7 +316,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=18)]
         public web_app.DcapServiceReference.RoleDto[] AllRoles {
             get {
                 return this.AllRolesField;

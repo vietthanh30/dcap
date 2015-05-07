@@ -40,6 +40,16 @@
                 </div>
 				<div class="row">
 					<div class="col-xs-4">
+					<label for="DirectParentId">Người giới thiệu</label>
+					<input type="text" class="form-control" readonly="true" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
+					</div>
+					<div class="col-xs-4">
+					<label for="ParentId">Tuyến trên</label>
+					<input type="text" class="form-control" readonly="true" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
 					<label for="HoTen">Họ tên</label>
 					<input type="text" class="form-control" readonly="true" id="HoTen" runat="server" placeholder="Nhập họ tên">
                     <asp:RequiredFieldValidator ID="HoTenRequired" runat="server" ControlToValidate="HoTen" 

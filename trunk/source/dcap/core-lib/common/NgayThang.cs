@@ -88,7 +88,9 @@ namespace core_lib.common
                     DateTimeStyles.None,
                     out dt);
 
-                return dt != DateTime.MinValue ? (DateTime?)dt : null;
+                return ( !DateTime.MinValue.Equals(dt) 
+                    && !DateTime.MaxValue.Equals(dt) 
+                    && !default(DateTime).Equals(dt) ) ? (DateTime?)dt : null;
             }
         }
 

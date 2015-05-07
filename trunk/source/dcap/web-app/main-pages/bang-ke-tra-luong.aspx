@@ -72,7 +72,7 @@
                 <asp:BoundField DataField="SoDienThoai" HeaderText="Số ĐT" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="SoTien" HeaderText="Tổng tiền" >
+                <asp:BoundField DataField="SoTien" HeaderText="Tổng điểm" >
                 <ItemStyle HorizontalAlign="Right" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Thang" HeaderText="Tháng" >
