@@ -35,7 +35,7 @@ namespace domain_lib.dto
 
         private string _nguoiBaoTro = String.Empty;
 
-        private long _soTien = -1;
+        private double _soTien = -1.0;
 
         private string _thang = String.Empty;
 
@@ -162,7 +162,7 @@ namespace domain_lib.dto
         /// <summary>
         /// So Tien
         /// </summary>
-        public virtual long SoTien
+        public virtual double SoTien
         {
             get { return _soTien; }
             set { _soTien = value; }

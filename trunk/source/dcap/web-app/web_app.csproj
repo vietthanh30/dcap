@@ -104,7 +104,7 @@
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\npm.js" />
     <Content Include="main-pages\bang-ke-tra-luong.aspx" />
-    <Content Include="main-pages\member-network.aspx" />
+    <Content Include="main-pages\member-network2.aspx" />
     <Content Include="main-pages\tong-quan.aspx" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
@@ -888,7 +888,7 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="TreeDemo.aspx" />
+    <Content Include="main-pages\member-network.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -980,12 +980,12 @@
     <Compile Include="main-pages\bang-ke-tra-luong.aspx.designer.cs">
       <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
     </Compile>
-    <Compile Include="main-pages\member-network.aspx.cs">
-      <DependentUpon>member-network.aspx</DependentUpon>
+    <Compile Include="main-pages\member-network2.aspx.cs">
+      <DependentUpon>member-network2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="main-pages\member-network.aspx.designer.cs">
-      <DependentUpon>member-network.aspx</DependentUpon>
+    <Compile Include="main-pages\member-network2.aspx.designer.cs">
+      <DependentUpon>member-network2.aspx</DependentUpon>
     </Compile>
     <Compile Include="main-pages\tong-quan.aspx.cs">
       <DependentUpon>tong-quan.aspx</DependentUpon>
@@ -1017,12 +1017,12 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="TreeDemo.aspx.cs">
-      <DependentUpon>TreeDemo.aspx</DependentUpon>
+    <Compile Include="main-pages\member-network.aspx.cs">
+      <DependentUpon>member-network.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TreeDemo.aspx.designer.cs">
-      <DependentUpon>TreeDemo.aspx</DependentUpon>
+    <Compile Include="main-pages\member-network.aspx.designer.cs">
+      <DependentUpon>member-network.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

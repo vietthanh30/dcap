@@ -73,9 +73,15 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public MemberNodeDto[] SearchMemberNodeDto(string idMember)
+        public MemberNodeDto[] SearchMemberNodeDto(string accountNumber)
         {
-            return controller.SearchMemberNodeDto(idMember);
+            return controller.SearchMemberNodeDto(accountNumber);
+        }
+
+        [WebMethod]
+        public MemberNodeDto GetNodeDto(string accountNumber)
+        {
+            return controller.GetNodeDto(accountNumber);
         }
 
         [WebMethod]

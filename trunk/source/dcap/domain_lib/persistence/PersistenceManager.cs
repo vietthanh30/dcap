@@ -975,7 +975,7 @@ namespace domain_lib.persistence
             var childNumber = CountAccountByParentId(rootId);
             if (childNumber == 0)
             {
-                MemberNodeDto rootDto = GetRootMemberNodeDto(accountNumber);
+                MemberNodeDto rootDto = GetNodeDto(accountNumber);
                 if (rootDto == null)
                 {
                     return memberNodeDtos.ToArray();
@@ -1055,7 +1055,7 @@ namespace domain_lib.persistence
             return mapMemberNodeDto;
         }
 
-        private MemberNodeDto GetRootMemberNodeDto(string accountNumber)
+        public MemberNodeDto GetNodeDto(string accountNumber)
         {
             var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID";

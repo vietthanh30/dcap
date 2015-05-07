@@ -444,7 +444,7 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NguoiBaoTroField;
         
-        private long SoTienField;
+        private double SoTienField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ThangField;
@@ -616,7 +616,7 @@ namespace web_app.DcapServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
-        public long SoTien {
+        public double SoTien {
             get {
                 return this.SoTienField;
             }
@@ -762,9 +762,13 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUserInfo", ReplyAction="*")]
         web_app.DcapServiceReference.SearchUserInfoResponse SearchUserInfo(web_app.DcapServiceReference.SearchUserInfoRequest request);
         
-        // CODEGEN: Generating message contract since element name idMember from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchMemberNodeDto", ReplyAction="*")]
         web_app.DcapServiceReference.SearchMemberNodeDtoResponse SearchMemberNodeDto(web_app.DcapServiceReference.SearchMemberNodeDtoRequest request);
+        
+        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetNodeDto", ReplyAction="*")]
+        web_app.DcapServiceReference.GetNodeDtoResponse GetNodeDto(web_app.DcapServiceReference.GetNodeDtoRequest request);
         
         // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetParentNodeByChildNo", ReplyAction="*")]
@@ -1515,13 +1519,13 @@ namespace web_app.DcapServiceReference {
     public partial class SearchMemberNodeDtoRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string idMember;
+        public string accountNumber;
         
         public SearchMemberNodeDtoRequestBody() {
         }
         
-        public SearchMemberNodeDtoRequestBody(string idMember) {
-            this.idMember = idMember;
+        public SearchMemberNodeDtoRequestBody(string accountNumber) {
+            this.accountNumber = accountNumber;
         }
     }
     
@@ -1556,6 +1560,74 @@ namespace web_app.DcapServiceReference {
         
         public SearchMemberNodeDtoResponseBody(web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDtoResult) {
             this.SearchMemberNodeDtoResult = SearchMemberNodeDtoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetNodeDtoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNodeDto", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetNodeDtoRequestBody Body;
+        
+        public GetNodeDtoRequest() {
+        }
+        
+        public GetNodeDtoRequest(web_app.DcapServiceReference.GetNodeDtoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetNodeDtoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string accountNumber;
+        
+        public GetNodeDtoRequestBody() {
+        }
+        
+        public GetNodeDtoRequestBody(string accountNumber) {
+            this.accountNumber = accountNumber;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetNodeDtoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNodeDtoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetNodeDtoResponseBody Body;
+        
+        public GetNodeDtoResponse() {
+        }
+        
+        public GetNodeDtoResponse(web_app.DcapServiceReference.GetNodeDtoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetNodeDtoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.MemberNodeDto GetNodeDtoResult;
+        
+        public GetNodeDtoResponseBody() {
+        }
+        
+        public GetNodeDtoResponseBody(web_app.DcapServiceReference.MemberNodeDto GetNodeDtoResult) {
+            this.GetNodeDtoResult = GetNodeDtoResult;
         }
     }
     
@@ -1804,12 +1876,25 @@ namespace web_app.DcapServiceReference {
             return base.Channel.SearchMemberNodeDto(request);
         }
         
-        public web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDto(string idMember) {
+        public web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDto(string accountNumber) {
             web_app.DcapServiceReference.SearchMemberNodeDtoRequest inValue = new web_app.DcapServiceReference.SearchMemberNodeDtoRequest();
             inValue.Body = new web_app.DcapServiceReference.SearchMemberNodeDtoRequestBody();
-            inValue.Body.idMember = idMember;
+            inValue.Body.accountNumber = accountNumber;
             web_app.DcapServiceReference.SearchMemberNodeDtoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchMemberNodeDto(inValue);
             return retVal.Body.SearchMemberNodeDtoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.GetNodeDtoResponse web_app.DcapServiceReference.DcapServiceSoap.GetNodeDto(web_app.DcapServiceReference.GetNodeDtoRequest request) {
+            return base.Channel.GetNodeDto(request);
+        }
+        
+        public web_app.DcapServiceReference.MemberNodeDto GetNodeDto(string accountNumber) {
+            web_app.DcapServiceReference.GetNodeDtoRequest inValue = new web_app.DcapServiceReference.GetNodeDtoRequest();
+            inValue.Body = new web_app.DcapServiceReference.GetNodeDtoRequestBody();
+            inValue.Body.accountNumber = accountNumber;
+            web_app.DcapServiceReference.GetNodeDtoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetNodeDto(inValue);
+            return retVal.Body.GetNodeDtoResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

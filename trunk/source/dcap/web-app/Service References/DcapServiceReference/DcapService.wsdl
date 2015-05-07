@@ -192,7 +192,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="SoDienThoai" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="NgayDangKy" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="NguoiBaoTro" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="SoTien" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SoTien" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Thang" type="s:string" />
         </s:sequence>
       </s:complexType>
@@ -220,7 +220,7 @@
       <s:element name="SearchMemberNodeDto">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="idMember" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -243,6 +243,20 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="GetNodeDto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNodeDtoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNodeDtoResult" type="tns:MemberNodeDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetParentNodeByChildNo">
         <s:complexType>
           <s:sequence>
@@ -353,6 +367,12 @@
   <wsdl:message name="SearchMemberNodeDtoSoapOut">
     <wsdl:part name="parameters" element="tns:SearchMemberNodeDtoResponse" />
   </wsdl:message>
+  <wsdl:message name="GetNodeDtoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNodeDto" />
+  </wsdl:message>
+  <wsdl:message name="GetNodeDtoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNodeDtoResponse" />
+  </wsdl:message>
   <wsdl:message name="GetParentNodeByChildNoSoapIn">
     <wsdl:part name="parameters" element="tns:GetParentNodeByChildNo" />
   </wsdl:message>
@@ -419,6 +439,10 @@
     <wsdl:operation name="SearchMemberNodeDto">
       <wsdl:input message="tns:SearchMemberNodeDtoSoapIn" />
       <wsdl:output message="tns:SearchMemberNodeDtoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeDto">
+      <wsdl:input message="tns:GetNodeDtoSoapIn" />
+      <wsdl:output message="tns:GetNodeDtoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetParentNodeByChildNo">
       <wsdl:input message="tns:GetParentNodeByChildNoSoapIn" />
@@ -517,6 +541,15 @@
     </wsdl:operation>
     <wsdl:operation name="SearchMemberNodeDto">
       <soap:operation soapAction="http://tempuri.org/SearchMemberNodeDto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeDto">
+      <soap:operation soapAction="http://tempuri.org/GetNodeDto" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -646,6 +679,15 @@
     </wsdl:operation>
     <wsdl:operation name="SearchMemberNodeDto">
       <soap12:operation soapAction="http://tempuri.org/SearchMemberNodeDto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeDto">
+      <soap12:operation soapAction="http://tempuri.org/GetNodeDto" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
