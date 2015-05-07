@@ -1,15 +1,16 @@
 ﻿using System;
 using System.ServiceProcess;
 using System.Timers;
+using core_lib.common;
+using domain_lib.controller;
 using win_sv_app.common;
-using win_sv_app.DcapServiceReference;
 
 namespace win_sv_app.service
 {
     public partial class DcapWinService : ServiceBase
     {
         private Timer timer1 = null;
-        private DcapServiceSoapClient service;
+        private Controller service;
 
         public DcapWinService()
         {
@@ -18,11 +19,17 @@ namespace win_sv_app.service
 
         protected override void OnStart(string[] args)
         {
+            long intervalTime;
+            if (!long.TryParse(ParameterUtil.GetParameter("IntervalTime"), out intervalTime))
+            {
+                intervalTime = 300000; //every 5 minutes
+            }
             timer1 = new Timer();
-            this.timer1.Interval = 30000; //every 30 secs
+            this.timer1.Interval = intervalTime;
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
-            this.service = new DcapServiceSoapClient();
+            this.service = new Controller();
             timer1.Enabled = true;
+            timer1.Start();
             Library.WriteErrorLog("DCAP window service started");
         }
 

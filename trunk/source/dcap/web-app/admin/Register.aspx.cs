@@ -67,7 +67,7 @@ namespace web_app.admin
                 photoUrl = "~/upload/" + photoDir + "/" + photoName;
             }
             var createdBy = User.Identity.Name;
-            returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, sNgaySinh, soCmnd, sNgayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
             int code;
             var error = int.TryParse(returnCode, out code);
             if (!error)
@@ -158,7 +158,7 @@ namespace web_app.admin
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
+            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, sNgaySinh, soCmnd, sNgayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
             if (string.Compare(returnCode, "-1", true) != 0)
             {
                 var message = "";

@@ -156,6 +156,37 @@ namespace domain_lib.persistence
         }
 
         /// <summary>
+        /// Retrieves objects of a specified type where a specified property equals a specified value.
+        /// </summary>
+        /// <typeparam name="T">The type of the objects to be retrieved.</typeparam>
+        /// <param name="propertyName">The name of the property to be tested.</param>
+        /// <param name="propertyValue">The value that the named property must hold.</param>
+        /// <returns>A list of all objects meeting the specified criteria.</returns>
+        public IList<T> RetrieveEqualsWithOrder<T>(string propertyName, object propertyValue, string orderField, string orderType)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(T));
+                criteria.Add(Expression.Eq(propertyName, propertyValue));
+                if (string.Compare(orderType, "ASC", true) == 0)
+                {
+                    criteria.AddOrder(Order.Asc(orderField));
+                }
+                else
+                {
+                    criteria.AddOrder(Order.Desc(orderField));
+                }
+
+                // Get the matching objects
+                IList<T> matchingObjects = criteria.List<T>();
+
+                // Set return value
+                return matchingObjects;
+            }
+        }
+
+        /// <summary>
         /// Saves an object and its persistent children.
         /// </summary>
         public void Save<T>(T item)
@@ -416,7 +447,7 @@ namespace domain_lib.persistence
             return user.UserName;
         }
 
-        public string UpdateUser(String userName, String fullName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+        public string UpdateUser(String userName, String fullName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl)
         {
             if (String.IsNullOrEmpty(userName))
@@ -427,14 +458,8 @@ namespace domain_lib.persistence
             {
                 return "-2";
             }
-            if (default(DateTime).Equals(ngaySinh))
-            {
-                ngaySinh = null;
-            }
-            if (default(DateTime).Equals(ngayCap))
-            {
-                ngayCap = null;
-            }
+            var dateNgaySinh = DateUtil.GetDateTime(ngaySinh);
+            var dateNgayCap = DateUtil.GetDateTime(ngayCap);
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count == 0)
             {
@@ -444,9 +469,9 @@ namespace domain_lib.persistence
 
             memberInfo.HoTen = fullName;
             memberInfo.HoTenKd = VnStringHelper.toEnglish(fullName);
-            memberInfo.NgaySinh = ngaySinh;
+            memberInfo.NgaySinh = dateNgaySinh;
             memberInfo.SoCmnd = soCmnd;
-            memberInfo.NgayCap = ngayCap;
+            memberInfo.NgayCap = dateNgayCap;
             memberInfo.SoDienThoai = soDienThoai;
             memberInfo.DiaChi = diaChi;
             memberInfo.GioiTinh = gioiTinh;
@@ -458,7 +483,7 @@ namespace domain_lib.persistence
             return "0";
         }
 
-        public string CreateUser(String parentId, String directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+        public string CreateUser(String parentId, String directParentId, String userName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
             if (String.IsNullOrEmpty(userName))
@@ -494,21 +519,15 @@ namespace domain_lib.persistence
                     return "-5";
                 }
             }
-            if (default(DateTime).Equals(ngaySinh))
-            {
-                ngaySinh = null;
-            }
-            if (default(DateTime).Equals(ngayCap))
-            {
-                ngayCap = null;
-            }
+            var dateNgaySinh = DateUtil.GetDateTime(ngaySinh);
+            var dateNgayCap = DateUtil.GetDateTime(ngayCap);
 
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count > 0)
             {
                 return CreateAccountForExistingMember(memberInfos[0], parentIdVal, directParentIdVal, photoUrl, createdBy);
             }
-            return CreateAccountForNewMember(parentIdVal, directParentIdVal, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            return CreateAccountForNewMember(parentIdVal, directParentIdVal, userName, dateNgaySinh, soCmnd, dateNgayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
         private string CreateAccountForExistingMember(MemberInfo memberInfo, long parentId, long directParentId, string photoUrl, string createdBy)
@@ -776,7 +795,7 @@ namespace domain_lib.persistence
             return account.AccountNumber + "|" + user.UserName;
         }
 
-        public string SearchUser(String parentId, String directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+        public string SearchUser(String parentId, String directParentId, String userName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH)
         {
             if (String.IsNullOrEmpty(userName))
@@ -1162,7 +1181,7 @@ namespace domain_lib.persistence
 
         public IList<AccountPreCalc> GetPreCalcQueue()
         {
-            return RetrieveEquals<AccountPreCalc>("IsCalculated", "N");
+            return RetrieveEqualsWithOrder<AccountPreCalc>("IsCalculated", "N", "Id", "ASC");
         }
 
         public long CountUpLevel(long calcAccountId, int upAccountLevel)
@@ -1290,7 +1309,7 @@ namespace domain_lib.persistence
 
         public IList<ManagerApproval> GetApprovedManager()
         {
-            return RetrieveEquals<ManagerApproval>("IsApproved", "Y");
+            return RetrieveEqualsWithOrder<ManagerApproval>("IsApproved", "Y", "Id", "Asc");
         }
 
         public Account GetAccount(long accountId)

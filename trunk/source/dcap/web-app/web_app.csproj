@@ -877,13 +877,18 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\excanvas.js" />
+    <Content Include="Scripts\jit.js" />
+    <Content Include="Scripts\jquery.spacetree.js" />
     <Content Include="Styles\GridPager.css" />
+    <Content Include="Styles\jquery.spacetree.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="TreeDemo.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1011,6 +1016,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TreeDemo.aspx.cs">
+      <DependentUpon>TreeDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TreeDemo.aspx.designer.cs">
+      <DependentUpon>TreeDemo.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

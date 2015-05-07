@@ -260,21 +260,23 @@ namespace web_app.admin
         protected void TraCuuThanhVien_EditUser(object sender, EventArgs e)
         {
             var fullName = HoTen.Value.Trim();
-            var ngaySinh = DateUtil.GetDateTime(NgaySinh.Value.Trim());
+            var sNgaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = DateUtil.GetDateTime(sNgaySinh);
             var soCmnd = SoCmnd.Value.Trim();
-            var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
+            var sNgayCap = NgayCap.Value.Trim();
+            var ngayCap = DateUtil.GetDateTime(sNgayCap);
             var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            if (ngaySinh == null)
+            if (!String.IsNullOrEmpty(sNgaySinh) && ngaySinh == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            if (ngayCap == null)
+            if (!String.IsNullOrEmpty(sNgayCap) && ngayCap == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày cấp không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
@@ -297,7 +299,7 @@ namespace web_app.admin
                 }
             }
             var userName = User.Identity.Name;
-            returnCode = DcapServiceUtil.UpdateUser(userName, fullName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl);
+            returnCode = DcapServiceUtil.UpdateUser(userName, fullName, sNgaySinh, soCmnd, sNgayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl);
             int code;
             var status = int.TryParse(returnCode, out code);
             if (status && code == 0)

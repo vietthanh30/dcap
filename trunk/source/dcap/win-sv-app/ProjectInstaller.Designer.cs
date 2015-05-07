@@ -33,7 +33,6 @@
             // 
             // dcapServiceProcessInstaller
             // 
-            this.dcapServiceProcessInstaller.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.dcapServiceProcessInstaller.Password = null;
             this.dcapServiceProcessInstaller.Username = null;
             // 
