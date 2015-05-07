@@ -282,6 +282,42 @@ namespace web_app.admin
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
+            if (!string.IsNullOrEmpty(fullName) && fullName.Length > 100)
+            {
+                InvalidCredentialsMessage.Text = "Họ tên quá dài (Nhiều hơn 100 ký tự). Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (!string.IsNullOrEmpty(soCmnd) && soCmnd.Length > 15)
+            {
+                InvalidCredentialsMessage.Text = "Số CMND quá dài (Nhiều hơn 15 ký tự). Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (!string.IsNullOrEmpty(soDienThoai) && soDienThoai.Length > 15)
+            {
+                InvalidCredentialsMessage.Text = "Số điện thoại quá dài (Nhiều hơn 15 ký tự). Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (!string.IsNullOrEmpty(diaChi) && diaChi.Length > 500)
+            {
+                InvalidCredentialsMessage.Text = "Địa chỉ quá dài (Nhiều hơn 500 ký tự). Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (!string.IsNullOrEmpty(soTaiKhoan) && soTaiKhoan.Length > 50)
+            {
+                InvalidCredentialsMessage.Text = "Số tài khoản quá dài (Nhiều hơn 50 ký tự). Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (!string.IsNullOrEmpty(chiNhanhNH) && chiNhanhNH.Length > 100)
+            {
+                InvalidCredentialsMessage.Text = "Tên ngân hàng quá dài (Nhiều hơn 100 ký tự). Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
             var photoName = soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
             var photoPath = Server.MapPath("~/upload") + "\\" + photoName;
             var returnCode = SavePhotoToUploadFolder(photoPath);
