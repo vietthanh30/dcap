@@ -1,0 +1,5 @@
+F:\NguyenBH\ban hang da cap\dcap\dcap\win-sv-app\bin\Debug\win-sv-app.exe.config
+F:\NguyenBH\ban hang da cap\dcap\dcap\win-sv-app\bin\Debug\win-sv-app.exe
+F:\NguyenBH\ban hang da cap\dcap\dcap\win-sv-app\bin\Debug\win-sv-app.pdb
+F:\NguyenBH\ban hang da cap\dcap\dcap\win-sv-app\obj\x86\Debug\win-sv-app.exe
+F:\NguyenBH\ban hang da cap\dcap\dcap\win-sv-app\obj\x86\Debug\win-sv-app.pdb
