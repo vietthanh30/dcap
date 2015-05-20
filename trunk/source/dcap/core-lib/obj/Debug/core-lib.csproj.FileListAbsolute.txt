@@ -1,4 +1,0 @@
-F:\NguyenBH\ban hang da cap\dcap\dcap\core-lib\bin\Debug\core-lib.dll
-F:\NguyenBH\ban hang da cap\dcap\dcap\core-lib\bin\Debug\core-lib.pdb
-F:\NguyenBH\ban hang da cap\dcap\dcap\core-lib\obj\Debug\core-lib.dll
-F:\NguyenBH\ban hang da cap\dcap\dcap\core-lib\obj\Debug\core-lib.pdb

@@ -1,4 +1,0 @@
-F:\NguyenBH\ban hang da cap\dcap\dcap\ws-server\bin\ws-server.dll
-F:\NguyenBH\ban hang da cap\dcap\dcap\ws-server\bin\ws-server.pdb
-F:\NguyenBH\ban hang da cap\dcap\dcap\ws-server\obj\Debug\ws-server.dll
-F:\NguyenBH\ban hang da cap\dcap\dcap\ws-server\obj\Debug\ws-server.pdb
