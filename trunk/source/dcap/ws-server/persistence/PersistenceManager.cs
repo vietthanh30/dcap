@@ -225,6 +225,14 @@ namespace ws_server.persistence
             // Add class mappings to configuration object
             Assembly thisAssembly = typeof(Users).Assembly;
             cfg.AddAssembly(thisAssembly);
+            thisAssembly = typeof(UserRole).Assembly;
+            cfg.AddAssembly(thisAssembly);
+            thisAssembly = typeof(Roles).Assembly;
+            cfg.AddAssembly(thisAssembly);
+            thisAssembly = typeof(Objects).Assembly;
+            cfg.AddAssembly(thisAssembly);
+            thisAssembly = typeof(RoleObject).Assembly;
+            cfg.AddAssembly(thisAssembly);
 
             // Create session factory from configuration object
             m_SessionFactory = cfg.BuildSessionFactory();

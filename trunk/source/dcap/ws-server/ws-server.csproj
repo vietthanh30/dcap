@@ -89,6 +89,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\Controller.cs" />
+    <Compile Include="model\Objects.cs" />
+    <Compile Include="model\RoleObject.cs" />
+    <Compile Include="model\Roles.cs" />
+    <Compile Include="model\UserRole.cs" />
     <Compile Include="model\Users.cs" />
     <Compile Include="persistence\PersistenceManager.cs" />
     <Compile Include="view\Service1.svc.cs">
@@ -102,7 +107,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="calculation\" />
     <Folder Include="common\" />
-    <Folder Include="controller\" />
     <Folder Include="members\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
