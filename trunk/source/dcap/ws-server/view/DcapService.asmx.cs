@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 
-namespace ws_server
+namespace ws_server.view
 {
     /// <summary>
     /// Summary description for DcapService
@@ -19,19 +19,19 @@ namespace ws_server
         [WebMethod]
         public string login(String userName, String password)
         {
-            return "";
+            return "login success";
         }
 
         [WebMethod]
         public string changePassword(String userName, String oldPassword, String newPassword, String confirmPassword)
         {
-            return "";
+            return "change password success";
         }
 
         [WebMethod]
         public string createUser(String userName, String password, String confirmPassword)
         {
-            return "";
+            return "create user success";
         }
     }
 }

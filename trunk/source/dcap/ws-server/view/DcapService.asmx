@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="DcapService.asmx.cs" Class="ws_server.Service1" %>
+﻿<%@ WebService Language="C#" CodeBehind="DcapService.asmx.cs" Class="ws_server.view.DcapService" %>

@@ -2,8 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-app", "web-app\web-app.csproj", "{CC6F35DD-FA26-445D-8FDF-2DBD89838EAC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9DE0ABC9-9737-4B08-88B9-2335A8347B5E} = {9DE0ABC9-9737-4B08-88B9-2335A8347B5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "win-sv-app", "win-sv-app\win-sv-app.csproj", "{C2BA114F-1FE1-4907-ADDF-97D974155472}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9DE0ABC9-9737-4B08-88B9-2335A8347B5E} = {9DE0ABC9-9737-4B08-88B9-2335A8347B5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core-lib", "core-lib\core-lib.csproj", "{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}"
 EndProject
@@ -12,6 +18,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelLibrary", "ExcelLibrary\ExcelLibrary.csproj", "{0716F257-72DD-41EF-8E79-54BA388E3AB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ws-server", "ws-server\ws-server.csproj", "{9DE0ABC9-9737-4B08-88B9-2335A8347B5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-ws-server", "test-ws-server\test-ws-server.csproj", "{F142A420-E1AE-41AD-8146-3A8E247A8F3E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9DE0ABC9-9737-4B08-88B9-2335A8347B5E} = {9DE0ABC9-9737-4B08-88B9-2335A8347B5E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +94,16 @@ Global
 		{9DE0ABC9-9737-4B08-88B9-2335A8347B5E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9DE0ABC9-9737-4B08-88B9-2335A8347B5E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9DE0ABC9-9737-4B08-88B9-2335A8347B5E}.Release|x86.ActiveCfg = Release|Any CPU
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Debug|x86.ActiveCfg = Debug|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Debug|x86.Build.0 = Debug|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Release|Any CPU.ActiveCfg = Release|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Release|x86.ActiveCfg = Release|x86
+		{F142A420-E1AE-41AD-8146-3A8E247A8F3E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
