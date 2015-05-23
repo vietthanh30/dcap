@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</ProjectGuid>
+    <ProjectGuid>{5BDF984B-9487-488D-B419-F0CF8F19DFE1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>core_lib</RootNamespace>
-    <AssemblyName>core-lib</AssemblyName>
+    <RootNamespace>reportutil</RootNamespace>
+    <AssemblyName>reportutil</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -32,30 +32,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.Office">
+      <HintPath>..\lib\word-dll\Interop.Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.VBIDE">
+      <HintPath>..\lib\word-dll\Interop.VBIDE.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.Word">
+      <HintPath>..\lib\word-dll\Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="common\ConstUtil.cs" />
-    <Compile Include="common\DateUtil.cs" />
-    <Compile Include="common\ExcelUtil.cs" />
-    <Compile Include="common\NgayThang.cs" />
-    <Compile Include="common\ParameterUtil.cs" />
+    <Compile Include="util\ReportUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="util\WordAppUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="admin\" />
-    <Folder Include="members\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExcelLibrary\ExcelLibrary.csproj">
-      <Project>{0716F257-72DD-41EF-8E79-54BA388E3AB1}</Project>
-      <Name>ExcelLibrary</Name>
+    <ProjectReference Include="..\core-lib\core-lib.csproj">
+      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
+      <Name>core-lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
