@@ -64,6 +64,24 @@ namespace ws_server.model
             return role_ID + "|" + user_ID;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj.GetType().Equals(typeof(UserRole))))
+            {
+                return false;
+            }
+            var other = obj as UserRole;
+            return RoleID.Equals(other.RoleID) && UserID.Equals(other.UserID);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 13;
+            hashCode = (hashCode*7) + UserID.GetHashCode();
+            hashCode = (hashCode*7) + RoleID.GetHashCode();
+            return hashCode;
+        }
+
         #endregion
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ws_server.model;
 using ws_server.persistence;
 
 namespace ws_server.controller
@@ -31,18 +32,9 @@ namespace ws_server.controller
 
         #region Public Methods
 
-        /// <summary>
-        /// Clears all records from the database.
-        /// </summary>
-        /// <remarks>We use this method to reset the database at the beginning or each run.</remarks>
-        public void ClearDatabase()
-        {
-            m_PersistenceManager.ClearDatabase();
-        }
-
         public string login(string userName, string password)
         {
-            return "login success";
+            return m_PersistenceManager.checkUser(userName, password);
         }
 
         public string changePassword(string userName, string oldPassword, string newPassword, string confirmPassword)

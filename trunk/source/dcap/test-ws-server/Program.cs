@@ -10,7 +10,9 @@ namespace test_ws_server
         static void Main(string[] args)
         {
             var service = new DcapServiceReference.DcapServiceSoapClient();
-            String result = service.login("nguyenbh", "123456");
+            String result = service.login("nguyenbh", "nguyenbh");
+            Console.Out.WriteLine(result);
+            result = service.login("nguyenbh", "123456");
             Console.Out.WriteLine(result);
             result = service.changePassword("nguyenbh", "123456", "123456", "123456");
             Console.Out.WriteLine(result);

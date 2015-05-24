@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using NHibernate;
 using NHibernate.Cfg;
-using System.Xml;
-using System.Reflection;
 using System.Data.SqlClient;
-using System.Collections.Specialized;
-using NHibernate.Criterion;
-using ws_server.model;
+using NHibernate.Expression;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace ws_server.persistence
@@ -53,31 +48,6 @@ namespace ws_server.persistence
         #region Public Methods
 
         /// <summary>
-        /// Clears all records from all tables in the database
-        /// </summary>
-        public void ClearDatabase()
-        {
-            // Initialize
-            SqlConnection connection = m_SessionFactory.OpenSession().Connection as SqlConnection;
-            SqlCommand command = null;
-            string[] dataTables = new string[] { "OrderItems", "Products", "Orders", "Customers" };
-            string sql = null;
-
-            // Delete all records from all tables
-            using (connection)
-            {
-                // Iterate tables
-                for (int i = 0; i < dataTables.Length; i++)
-                {
-                    // Build query and command, and execute
-                    sql = String.Format("Delete from {0}", dataTables[i]);
-                    command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        /// <summary>
         /// Close this Persistence Manager and release all resources (connection pools, etc). It is the responsibility of the application to ensure that there are no open Sessions before calling Close().
         /// </summary>
         public void Close()
@@ -88,8 +58,8 @@ namespace ws_server.persistence
         /// <summary>
         /// Deletes an object of a specified type.
         /// </summary>
-        /// <param name="itemsToDelete">The items to delete.</param>
-        /// <typeparam name="T">The type of objects to delete.</typeparam>
+        /// <param name="item">The item to delete.</param>
+        /// <typeparam name="T">The type of object to delete.</typeparam>
         public void Delete<T>(T item)
         {
             using (ISession session = m_SessionFactory.OpenSession())
@@ -187,13 +157,33 @@ namespace ws_server.persistence
         /// </summary>
         public void Save<T>(T item)
         {
-            using (ISession session = m_SessionFactory.OpenSession())
+            using (var session = m_SessionFactory.OpenSession())
             {
                 using (session.BeginTransaction())
                 {
                     session.SaveOrUpdate(item);
                     session.Transaction.Commit();
                 }
+            }
+        }
+
+        public string checkUser(string userName, string password)
+        {
+            using (var session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select u.UserID from Users u where u.UserName = :user_Name and u.Password = :password");
+                query.SetParameter("user_Name", userName);
+                query.SetParameter("password", password);
+
+                // Get the matching objects
+                var userId = query.UniqueResult();
+                
+                // Set return value
+                if (userId == null)
+                {
+                    return "Login error: Khong ton tai user";
+                }
+                return "User ID: " + userId;
             }
         }
 
@@ -215,24 +205,12 @@ namespace ws_server.persistence
         private void ConfigureNHibernate()
         {
             // Initialize
-            Configuration cfg = new Configuration();
+            var cfg = new Configuration();
             cfg.Configure();
 
             /* Note: The AddAssembly() method requires that mappings be 
              * contained in hbm.xml files whose BuildAction properties 
              * are set to ‘Embedded Resource’. */
-
-            // Add class mappings to configuration object
-            Assembly thisAssembly = typeof(Users).Assembly;
-            cfg.AddAssembly(thisAssembly);
-            thisAssembly = typeof(UserRole).Assembly;
-            cfg.AddAssembly(thisAssembly);
-            thisAssembly = typeof(Roles).Assembly;
-            cfg.AddAssembly(thisAssembly);
-            thisAssembly = typeof(Objects).Assembly;
-            cfg.AddAssembly(thisAssembly);
-            thisAssembly = typeof(RoleObject).Assembly;
-            cfg.AddAssembly(thisAssembly);
 
             // Create session factory from configuration object
             m_SessionFactory = cfg.BuildSessionFactory();

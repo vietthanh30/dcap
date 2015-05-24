@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+xmlns="urn:nhibernate-mapping-2.2"
+namespace="ws_server.model"
+assembly="ws_server">
+  <class name="MemberTreeL1" table="MEMBER_TREE_L1" lazy="false">
+    <id name="MemberID" column="MEMBER_ID" unsaved-value="-1" />
+
+    <property name="MemberIndex">
+      <column name="MEMBER_INDEX" not-null="true" />
+    </property>
+
+    <property name="ParentID">
+      <column name="PARENT_ID" not-null="false" />
+    </property>
+
+    <property name="ChildrenID">
+      <column name="CHILDREN_ID" not-null="false" />
+    </property>
+
+    <property name="Status">
+      <column name="STATUS" not-null="true" />
+    </property>
+
+  </class>
+</hibernate-mapping>

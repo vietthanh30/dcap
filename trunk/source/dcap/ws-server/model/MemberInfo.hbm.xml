@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+xmlns="urn:nhibernate-mapping-2.2"
+namespace="ws_server.model"
+assembly="ws_server">
+  <class name="MemberInfo" table="MEMBER_INFO" lazy="false">
+    <id name="MemberID" column="MEMBER_ID" unsaved-value="-1">
+      <generator class="identity" />
+    </id>
+
+    <property name="HoTen">
+      <column name="HO_TEN" not-null="true" />
+    </property>
+
+    <property name="NgaySinh">
+      <column name="NGAY_SINH" not-null="false" />
+    </property>
+
+    <property name="SoCmnd">
+      <column name="SO_CMND" not-null="true" />
+    </property>
+
+    <property name="SoDienThoai">
+      <column name="SO_DIEN_THOAI" not-null="false" />
+    </property>
+
+    <property name="SoTaiKhoan">
+      <column name="SO_TAI_KHOAN" not-null="false" />
+    </property>
+
+    <property name="ChiNhanhNH">
+      <column name="CHI_NHANH_NH" not-null="false" />
+    </property>
+
+    <property name="MemberCode">
+      <column name="MEMBER_CODE" not-null="true" />
+    </property>
+
+  </class>
+</hibernate-mapping>

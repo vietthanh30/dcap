@@ -59,9 +59,9 @@
     <Compile Include="util\WordAppUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\core-lib\core-lib.csproj">
+    <ProjectReference Include="..\core-lib\core_lib.csproj">
       <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
-      <Name>core-lib</Name>
+      <Name>core_lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
