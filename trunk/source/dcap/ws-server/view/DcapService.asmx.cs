@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using ws_server.controller;
 
 namespace ws_server.view
 {
@@ -16,22 +17,25 @@ namespace ws_server.view
     // [System.Web.Script.Services.ScriptService]
     public class DcapService : System.Web.Services.WebService
     {
+        private Controller controller = new Controller();
+
         [WebMethod]
         public string login(String userName, String password)
         {
-            return "login success";
+
+            return controller.login(userName, password);
         }
 
         [WebMethod]
         public string changePassword(String userName, String oldPassword, String newPassword, String confirmPassword)
         {
-            return "change password success";
+            return controller.changePassword(userName, oldPassword, newPassword, confirmPassword);
         }
 
         [WebMethod]
         public string createUser(String userName, String password, String confirmPassword)
         {
-            return "create user success";
+            return controller.createUser(userName, password, confirmPassword);
         }
     }
 }

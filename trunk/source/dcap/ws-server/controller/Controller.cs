@@ -11,7 +11,7 @@ namespace ws_server.controller
         #region Declarations
 
         // Member variables
-        PersistenceManager m_PersistenceManager = new PersistenceManager();
+        private PersistenceManager m_PersistenceManager = new PersistenceManager();
         
         // Property variables
 
@@ -40,21 +40,19 @@ namespace ws_server.controller
             m_PersistenceManager.ClearDatabase();
         }
 
-        /// <summary>
-        /// Converts an ICollection of dictionary keys to a string array.
-        /// </summary>
-        /// <param name="keys">The ICollection of keys to convert.</param>
-        /// <returns>A string array of keys.</returns>
-        public string[] ConvertKeys(ICollection<string> keys)
+        public string login(string userName, string password)
         {
-            int i = 0;
-            string[] keyArray = new string[keys.Count];
-            foreach (string key in keys)
-            {
-                keyArray[i] = key;
-                i++;
-            }
-            return keyArray;
+            return "login success";
+        }
+
+        public string changePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
+        {
+            return "change password success";
+        }
+
+        public string createUser(string userName, string password, string confirmPassword)
+        {
+            return "create user success";
         }
 
         #endregion
