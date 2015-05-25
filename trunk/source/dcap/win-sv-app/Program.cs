@@ -16,7 +16,7 @@ namespace wsv_dcap
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new Service1() 
+				new DcapService() 
 			};
             ServiceBase.Run(ServicesToRun);
         }

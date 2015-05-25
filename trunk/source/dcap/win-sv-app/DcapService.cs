@@ -9,9 +9,9 @@ using System.Text;
 
 namespace wsv_dcap
 {
-    public partial class Service1 : ServiceBase
+    public partial class DcapService : ServiceBase
     {
-        public Service1()
+        public DcapService()
         {
             InitializeComponent();
         }
