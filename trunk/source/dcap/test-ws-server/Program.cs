@@ -14,7 +14,13 @@ namespace test_ws_server
             Console.Out.WriteLine(result);
             result = service.login("nguyenbh", "123456");
             Console.Out.WriteLine(result);
+            result = service.changePassword("nguyenbh", "nguyenbh", "123456", "123456");
+            Console.Out.WriteLine(result);
             result = service.changePassword("nguyenbh", "123456", "123456", "123456");
+            Console.Out.WriteLine(result);
+            result = service.changePassword("nguyenbh", "123456", "nguyenbh", "nguyenbh");
+            Console.Out.WriteLine(result);
+            result = service.changePassword("nguyenbh", "nguyenbh", "123456", "123456");
             Console.Out.WriteLine(result);
             result = service.createUser("nguyenbh", "123456", "123456");
             Console.Out.WriteLine(result);

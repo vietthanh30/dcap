@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Cfg;
-using System.Data.SqlClient;
 using NHibernate.Expression;
+using ws_server.model;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace ws_server.persistence
@@ -177,14 +177,89 @@ namespace ws_server.persistence
 
                 // Get the matching objects
                 var userId = query.UniqueResult();
-                
+
                 // Set return value
                 if (userId == null)
                 {
-                    return "Login error: Khong ton tai user";
+                    return "-1";
                 }
-                return "User ID: " + userId;
+                
+                return userId.ToString();
             }
+        }
+
+        public string changePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
+        {
+            if (String.Empty.Equals(userName))
+            {
+                return "-1";
+            }
+            if (String.Empty.Equals(oldPassword))
+            {
+                return "-2";
+            }
+            var userId = checkUser(userName, oldPassword);
+            if ("-1".Equals(userId))
+            {
+                return "-3";
+            }
+            if (String.Empty.Equals(newPassword))
+            {
+                return "-4";
+            }
+            if (oldPassword.Equals(newPassword))
+            {
+                return "-5";
+            }
+            if (String.Empty.Equals(confirmPassword))
+            {
+                return "-6";
+            }
+            if (!newPassword.Equals(confirmPassword))
+            {
+                return "-7";
+            }
+            var user = RetrieveEquals<Users>("UserID", Convert.ToInt32(userId))[0];
+
+            // Update new password
+            user.Password = newPassword;
+
+            // Save user
+            Save(user);
+            return userId;
+        }
+
+        public string createUser(string userName, string password, string confirmPassword)
+        {
+            if (String.Empty.Equals(userName))
+            {
+                return "-1";
+            }
+            if (String.Empty.Equals(password))
+            {
+                return "-2";
+            }
+            if (String.Empty.Equals(confirmPassword))
+            {
+                return "-3";
+            }
+            if (!password.Equals(confirmPassword))
+            {
+                return "-4";
+            }
+            var userId = checkUser(userName, password);
+            if (!"-1".Equals(userId))
+            {
+                return "-5";
+            }
+
+            // Init user object
+            var user = new Users {UserName = userName, Password = password};
+
+            // Save user
+            Save(user);
+
+            return "0";
         }
 
         #endregion
