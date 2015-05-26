@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Security;
+using web_app.common;
 
 namespace web_app.admin
 {
@@ -23,5 +24,21 @@ namespace web_app.admin
             Response.Redirect(continueUrl);
         }
 
+        protected void CreateUser(object sender, EventArgs e)
+        {
+            var userName = RegisterUser.UserName;
+            var password = RegisterUser.Password;
+            var confirmPassword = RegisterUser.ConfirmPassword;
+            var returnCode = DcapServiceUtil.createUser(userName, password, confirmPassword);
+            if (string.Compare(returnCode, "Create User success", true) == 0)
+            {
+                RegisterUser_CreatedUser(sender, e);
+            }
+            else
+            {
+                RegisterUser.InstructionText = returnCode;
+                Response.Redirect("Register.aspx");
+            }
+        }
     }
 }

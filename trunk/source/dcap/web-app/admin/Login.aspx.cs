@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Security;
 using web_app.common;
 
 namespace web_app.admin
@@ -11,11 +12,20 @@ namespace web_app.admin
             RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
         }
 
-        protected void CheckUser(object sender, EventArgs e)
+        protected void ValidateUser(object sender, EventArgs e)
         {
             var userName = LoginUser.UserName;
             var password = LoginUser.Password;
             var returnCode = DcapServiceUtil.login(userName, password);
+            if (string.Compare(returnCode, "Khong ton tai user", true) != 0)
+            {
+                FormsAuthentication.RedirectFromLoginPage(userName, LoginUser.RememberMeSet);
+            }
+            else
+            {
+                LoginUser.InstructionText = returnCode;
+                Response.Redirect("Login.aspx", true);
+            }
         }
     }
 }

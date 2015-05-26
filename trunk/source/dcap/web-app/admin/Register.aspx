@@ -5,10 +5,6 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
-        <LayoutTemplate>
-            <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
-            <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
-        </LayoutTemplate>
         <WizardSteps>
             <asp:CreateUserWizardStep ID="RegisterUserWizardStep" runat="server">
                 <ContentTemplate>
@@ -37,13 +33,6 @@
                                      ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p>
                             <p>
-                                <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email">E-mail:</asp:Label>
-                                <asp:TextBox ID="Email" runat="server" CssClass="textEntry"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" 
-                                     CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
-                                     ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                            </p>
-                            <p>
                                 <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
                                 <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
@@ -62,14 +51,15 @@
                             </p>
                         </fieldset>
                         <p class="submitButton">
-                            <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="Create User" 
-                                 ValidationGroup="RegisterUserValidationGroup"/>
+                            <asp:Button ID="CreateUserButton" runat="server" Text="Create User" 
+                                 ValidationGroup="RegisterUserValidationGroup" onclick="CreateUser"/>
                         </p>
                     </div>
                 </ContentTemplate>
                 <CustomNavigationTemplate>
                 </CustomNavigationTemplate>
             </asp:CreateUserWizardStep>
+<asp:CompleteWizardStep runat="server"></asp:CompleteWizardStep>
         </WizardSteps>
     </asp:CreateUserWizard>
 </asp:Content>

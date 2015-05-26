@@ -50,7 +50,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
     <Content Include="admin\ChangePassword.aspx" />
     <Content Include="admin\ChangePasswordSuccess.aspx" />
     <Content Include="admin\Login.aspx" />
@@ -78,13 +77,6 @@
     <None Include="Service References\DcapServiceReference\DcapService.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="admin\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -143,7 +135,9 @@
     <Folder Include="members\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\Web.config" />
+    <Content Include="admin\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
