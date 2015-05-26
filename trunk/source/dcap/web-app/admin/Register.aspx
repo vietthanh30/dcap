@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Register.aspx.cs" Inherits="dcap.Account.Register" %>
+    CodeBehind="Register.aspx.cs" Inherits="web_app.admin.Register" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>

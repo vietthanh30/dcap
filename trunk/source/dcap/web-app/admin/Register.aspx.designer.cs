@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace dcap.Account
+namespace web_app.admin
 {
 
 
