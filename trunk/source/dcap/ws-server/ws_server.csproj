@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\Controller.cs" />
+    <Compile Include="model\Account.cs" />
     <Compile Include="model\ManagerL1Log.cs" />
     <Compile Include="model\ManagerL1PreRpt.cs" />
     <Compile Include="model\ManagerL2Log.cs" />
@@ -142,6 +143,12 @@
     <Folder Include="calculation\" />
     <Folder Include="common\" />
     <Folder Include="members\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\core-lib\core_lib.csproj">
+      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
+      <Name>core_lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

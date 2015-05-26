@@ -24,6 +24,8 @@
                     </AnonymousTemplate>
                     <LoggedInTemplate>
                         Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                        [ <a href="~/admin/ChangePassword.aspx" ID="HeadChangePassword" runat="server">Change Password</a> ]
+                        [ <a href="~/admin/Register.aspx" ID="HeadRegisterUser" runat="server">Register</a> ]
                         [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
                     </LoggedInTemplate>
                 </asp:LoginView>

@@ -4,7 +4,7 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
+    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" RequireEmail="False" OnCreatedUser="RegisterUser_CreatedUser">
         <WizardSteps>
             <asp:CreateUserWizardStep ID="RegisterUserWizardStep" runat="server">
                 <ContentTemplate>
@@ -52,7 +52,8 @@
                         </fieldset>
                         <p class="submitButton">
                             <asp:Button ID="CreateUserButton" runat="server" Text="Create User" 
-                                 ValidationGroup="RegisterUserValidationGroup" onclick="CreateUser"/>
+                                 ValidationGroup="RegisterUserValidationGroup" 
+                                onclick="RegisterUser_CreatingUser"/>
                         </p>
                     </div>
                 </ContentTemplate>

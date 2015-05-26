@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing.Imaging;
 using System.Web;
 using System.Web.Security;
 using web_app.common;
@@ -9,22 +10,29 @@ namespace web_app.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
         }
 
         protected void ValidateUser(object sender, EventArgs e)
         {
-            var userName = LoginUser.UserName;
-            var password = LoginUser.Password;
-            var returnCode = DcapServiceUtil.login(userName, password);
-            if (string.Compare(returnCode, "Khong ton tai user", true) != 0)
+            string captchaImageText = Convert.ToString(Session["CaptchaImageText"]);
+            string confirmCaptcha = this.CaptchaImage.Text;
+            if (string.Compare(captchaImageText, confirmCaptcha, true) != 0)
             {
-                FormsAuthentication.RedirectFromLoginPage(userName, LoginUser.RememberMeSet);
+                InvalidCredentialsMessage.Text = "Captcha is invalid. Please try again.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            var userName = this.UserName.Text;
+            var password = this.Password.Text;
+            var returnCode = DcapServiceUtil.login(userName, password);
+            if (Convert.ToInt32(returnCode) == 0)
+            {
+                FormsAuthentication.RedirectFromLoginPage(userName.ToUpper(), this.RememberMe.Checked);
             }
             else
             {
-                LoginUser.InstructionText = returnCode;
-                Response.Redirect("Login.aspx", true);
+                InvalidCredentialsMessage.Text = "Your username or password is invalid. Please try again.";
+                InvalidCredentialsMessage.Visible = true;
             }
         }
     }

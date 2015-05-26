@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using core_lib.common;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Expression;
@@ -169,23 +170,25 @@ namespace ws_server.persistence
 
         public string checkUser(string userName, string password)
         {
-            using (var session = m_SessionFactory.OpenSession())
+            if (String.Empty.Equals(userName))
             {
-                var query = session.CreateQuery("select u.UserID from Users u where u.UserName = :user_Name and u.Password = :password");
-                query.SetParameter("user_Name", userName);
-                query.SetParameter("password", password);
-
-                // Get the matching objects
-                var userId = query.UniqueResult();
-
-                // Set return value
-                if (userId == null)
-                {
-                    return "-1";
-                }
-                
-                return userId.ToString();
+                return "-1";
             }
+            if (String.Empty.Equals(password))
+            {
+                return "-2";
+            }
+            var users = RetrieveEquals<Users>("UserName", userName.ToUpper());
+            if (users.Count == 0)
+            {
+                return "-3";
+            }
+            var user = users[0];
+            if (string.Compare(MD5Util.EncodeMD5(password), user.Password, true) != 0)
+            {
+                return "-4";
+            }
+            return "0";
         }
 
         public string changePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
@@ -198,35 +201,42 @@ namespace ws_server.persistence
             {
                 return "-2";
             }
-            var userId = checkUser(userName, oldPassword);
-            if ("-1".Equals(userId))
+            var users = RetrieveEquals<Users>("UserName", userName.ToUpper());
+            if (users.Count == 0)
             {
                 return "-3";
             }
-            if (String.Empty.Equals(newPassword))
+            var user = users[0];
+            oldPassword = MD5Util.EncodeMD5(oldPassword);
+            newPassword = MD5Util.EncodeMD5(newPassword);
+            confirmPassword = MD5Util.EncodeMD5(confirmPassword);
+            if (string.Compare(oldPassword, user.Password, true) != 0)
             {
                 return "-4";
             }
-            if (oldPassword.Equals(newPassword))
+            if (String.Empty.Equals(newPassword))
             {
                 return "-5";
             }
-            if (String.Empty.Equals(confirmPassword))
+            if (string.Compare(oldPassword,newPassword, true) == 0)
             {
                 return "-6";
             }
-            if (!newPassword.Equals(confirmPassword))
+            if (String.Empty.Equals(confirmPassword))
             {
                 return "-7";
             }
-            var user = RetrieveEquals<Users>("UserID", Convert.ToInt32(userId))[0];
+            if (string.Compare(newPassword,confirmPassword,true) != 0)
+            {
+                return "-8";
+            }
 
             // Update new password
             user.Password = newPassword;
 
             // Save user
             Save(user);
-            return userId;
+            return "0";
         }
 
         public string createUser(string userName, string password, string confirmPassword)
@@ -243,18 +253,18 @@ namespace ws_server.persistence
             {
                 return "-3";
             }
-            if (!password.Equals(confirmPassword))
+            if (string.Compare(password,confirmPassword,true) != 0)
             {
                 return "-4";
             }
-            var userId = checkUser(userName, password);
-            if (!"-1".Equals(userId))
+            var users = RetrieveEquals<Users>("UserName", userName.ToUpper());
+            if (users.Count > 0)
             {
                 return "-5";
             }
 
             // Init user object
-            var user = new Users {UserName = userName, Password = password};
+            var user = new Users { UserName = userName.ToUpper(), Password = MD5Util.EncodeMD5(password) };
 
             // Save user
             Save(user);

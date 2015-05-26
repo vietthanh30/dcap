@@ -14,8 +14,6 @@ namespace web_app.admin
 
         protected void RegisterUser_CreatedUser(object sender, EventArgs e)
         {
-            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
-
             string continueUrl = RegisterUser.ContinueDestinationPageUrl;
             if (String.IsNullOrEmpty(continueUrl))
             {
@@ -24,19 +22,18 @@ namespace web_app.admin
             Response.Redirect(continueUrl);
         }
 
-        protected void CreateUser(object sender, EventArgs e)
+        protected void RegisterUser_CreatingUser(object sender, EventArgs e)
         {
             var userName = RegisterUser.UserName;
             var password = RegisterUser.Password;
             var confirmPassword = RegisterUser.ConfirmPassword;
             var returnCode = DcapServiceUtil.createUser(userName, password, confirmPassword);
-            if (string.Compare(returnCode, "Create User success", true) == 0)
+            if (Convert.ToInt32(returnCode) == 0)
             {
                 RegisterUser_CreatedUser(sender, e);
             }
             else
             {
-                RegisterUser.InstructionText = returnCode;
                 Response.Redirect("Register.aspx");
             }
         }
