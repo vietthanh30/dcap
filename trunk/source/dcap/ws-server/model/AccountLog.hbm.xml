@@ -12,10 +12,10 @@ assembly="ws_server">
 		<property name="Dml">      
 		  <column name="DML" not-null="true" />
 		</property>
-
-		<property name="CreatedDate">
-		  <column name="CREATED_DATE" not-null="true" />
-		</property>
     </composite-id>
+
+	<property name="CreatedDate">
+	  <column name="CREATED_DATE" not-null="true" />
+	</property>
   </class>
 </hibernate-mapping>
