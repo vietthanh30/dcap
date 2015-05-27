@@ -22,7 +22,7 @@ namespace web_app.admin
             // Create a CAPTCHA image using the text stored in the Session object.
             CaptchaImage ci =
                 new CaptchaImage(
-                    this.Session["CaptchaImageText"].ToString(), 300, 75);
+                    this.Session["CaptchaImageText"].ToString(), 200, 40);
 
             // Change the response headers to output a JPEG image.
             this.Response.Clear();

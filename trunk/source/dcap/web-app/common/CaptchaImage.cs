@@ -86,7 +86,7 @@ namespace web_app.common
               GraphicsPath path = new GraphicsPath();
               //path.AddString(this.text, font.FontFamily, (int) font.Style, 
               //    font.Size, rect, format);
-            path.AddString(this.text, font.FontFamily, (int)font.Style, 75, rect, format);
+            path.AddString(this.text, font.FontFamily, (int)font.Style, 40, rect, format);
               float v = 4F;
               PointF[] points =
               {
@@ -100,7 +100,7 @@ namespace web_app.common
                         rect.Height - this.random.Next(rect.Height) / v)
               };
               Matrix matrix = new Matrix();
-              matrix.Translate(0F, 0F);
+              matrix.Translate(0F, 3F);
               path.Warp(points, rect, matrix, WarpMode.Perspective, 0F);
               hatchBrush = new HatchBrush(HatchStyle.Percent10, Color.Black, Color.SkyBlue);
               g.FillPath(hatchBrush, path);
