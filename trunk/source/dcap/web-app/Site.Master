@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
-    <title></title>
+    <title>DCAP | Dashboard</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -13,9 +13,6 @@
     <div class="page">
         <div class="header">
             <div class="title">
-                <h1>
-                    HỆ THỐNG BÁN HÀNG ĐA CẤP
-                </h1>
             </div>
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
@@ -45,7 +42,10 @@
         </div>
     </div>
     <div class="footer">
-        
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; 2014-2015 <a href="#">VNI</a>.</strong> All rights reserved.
     </div>
     </form>
 </body>
