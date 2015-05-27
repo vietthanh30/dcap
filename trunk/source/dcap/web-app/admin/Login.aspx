@@ -38,6 +38,8 @@
             </p>
             <p>
                 <asp:Image ID="lblCaptchaImage" ImageUrl="~/admin/CImage.aspx" runat="server"></asp:Image>
+            </p>
+            <p>
                 <asp:TextBox ID="CaptchaImage" runat="server" CssClass="textEntry"></asp:TextBox>
             </p>
             <p>

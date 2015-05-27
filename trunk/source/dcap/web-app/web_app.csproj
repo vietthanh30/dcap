@@ -60,6 +60,13 @@
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="control\dropdown-menu.aspx" />
+    <Content Include="main-pages\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="control\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="plugins\ckeditor\CHANGES.md" />
     <None Include="plugins\ckeditor\LICENSE.md" />
     <None Include="plugins\ckeditor\plugins\scayt\LICENSE.md" />
@@ -94,6 +101,9 @@
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\npm.js" />
+    <Content Include="main-pages\bang-ke-tra-luong.aspx" />
+    <Content Include="main-pages\member-network.aspx" />
+    <Content Include="main-pages\tong-quan.aspx" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\skins\skin-black-light.css" />
@@ -913,6 +923,34 @@
     </Compile>
     <Compile Include="common\CaptchaImage.cs" />
     <Compile Include="common\DcapServiceUtil.cs" />
+    <Compile Include="control\dropdown-menu.aspx.cs">
+      <DependentUpon>dropdown-menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="control\dropdown-menu.aspx.designer.cs">
+      <DependentUpon>dropdown-menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="main-pages\bang-ke-tra-luong.aspx.cs">
+      <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="main-pages\bang-ke-tra-luong.aspx.designer.cs">
+      <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="main-pages\member-network.aspx.cs">
+      <DependentUpon>member-network.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="main-pages\member-network.aspx.designer.cs">
+      <DependentUpon>member-network.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="main-pages\tong-quan.aspx.cs">
+      <DependentUpon>tong-quan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="main-pages\tong-quan.aspx.designer.cs">
+      <DependentUpon>tong-quan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

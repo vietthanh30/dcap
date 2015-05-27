@@ -22,6 +22,15 @@ namespace web_app {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
         
         /// <summary>
+        /// DropdownContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder DropdownContent;
+        
+        /// <summary>
         /// HeadLoginView control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,13 @@ namespace web_app {
         protected global::System.Web.UI.WebControls.LoginView HeadLoginView;
         
         /// <summary>
-        /// NavigationMenu control.
+        /// LoginView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu NavigationMenu;
+        protected global::System.Web.UI.WebControls.LoginView LoginView1;
         
         /// <summary>
         /// MainContent control.
