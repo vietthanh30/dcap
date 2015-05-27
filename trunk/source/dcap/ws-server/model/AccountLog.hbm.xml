@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+xmlns="urn:nhibernate-mapping-2.2"
+namespace="ws_server.model"
+assembly="ws_server">
+  <class name="AccountLog" table="ACCOUNT_LOG" lazy="false">
+    
+    <property name="AcountID">
+      <column name="ACCOUNT_ID" not-null="true" />
+    </property>
+    
+    <property name="Dml">      
+      <column name="DML" not-null="true" />
+    </property>
+
+    <property name="CreatedDate">
+      <column name="CREATED_DATE" not-null="true" />
+    </property>
+
+  </class>
+</hibernate-mapping>
