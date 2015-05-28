@@ -48,22 +48,9 @@ namespace ws_server.controller
         }
 
 
-        public int CalculateAccountLog()
+        public IList<AccountLog> CalculateAccountLog()
         {
-            IList<AccountLog> allAccountLog = m_PersistenceManager.GetAccountLog();
-            if (allAccountLog != null)
-                return allAccountLog.Count;
-            else
-                return 0;
-
-            if (allAccountLog != null)
-            {
-                foreach (var accountLog in allAccountLog)
-                {
-                    
-                }
-            }
-
+            return m_PersistenceManager.GetAccountLog();
         }
         
         #endregion

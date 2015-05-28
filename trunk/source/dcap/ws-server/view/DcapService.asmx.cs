@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using ws_server.controller;
+using ws_server.model;
 
 namespace ws_server.view
 {
@@ -39,9 +40,9 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public int CalculateAccountLog()
+        public AccountLog[] CalculateAccountLog()
         {
-            return controller.CalculateAccountLog();
+            return controller.CalculateAccountLog().ToArray();
         }
 
         

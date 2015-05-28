@@ -9,7 +9,99 @@
 //------------------------------------------------------------------------------
 
 namespace test_ws_server.DcapServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountLog", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class AccountLog : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long IdField;
+        
+        private long AccountIDField;
+        
+        private System.DateTime CreatedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DmlField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public long AccountID {
+            get {
+                return this.AccountIDField;
+            }
+            set {
+                if ((this.AccountIDField.Equals(value) != true)) {
+                    this.AccountIDField = value;
+                    this.RaisePropertyChanged("AccountID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.DateTime CreatedDate {
+            get {
+                return this.CreatedDateField;
+            }
+            set {
+                if ((this.CreatedDateField.Equals(value) != true)) {
+                    this.CreatedDateField = value;
+                    this.RaisePropertyChanged("CreatedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Dml {
+            get {
+                return this.DmlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DmlField, value) != true)) {
+                    this.DmlField = value;
+                    this.RaisePropertyChanged("Dml");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DcapServiceReference.DcapServiceSoap")]
@@ -26,6 +118,10 @@ namespace test_ws_server.DcapServiceReference {
         // CODEGEN: Generating message contract since element name userName from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/createUser", ReplyAction="*")]
         test_ws_server.DcapServiceReference.createUserResponse createUser(test_ws_server.DcapServiceReference.createUserRequest request);
+        
+        // CODEGEN: Generating message contract since element name CalculateAccountLogResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
+        test_ws_server.DcapServiceReference.CalculateAccountLogResponse CalculateAccountLog(test_ws_server.DcapServiceReference.CalculateAccountLogRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -256,6 +352,67 @@ namespace test_ws_server.DcapServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CalculateAccountLogRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CalculateAccountLog", Namespace="http://tempuri.org/", Order=0)]
+        public test_ws_server.DcapServiceReference.CalculateAccountLogRequestBody Body;
+        
+        public CalculateAccountLogRequest() {
+        }
+        
+        public CalculateAccountLogRequest(test_ws_server.DcapServiceReference.CalculateAccountLogRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class CalculateAccountLogRequestBody {
+        
+        public CalculateAccountLogRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CalculateAccountLogResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CalculateAccountLogResponse", Namespace="http://tempuri.org/", Order=0)]
+        public test_ws_server.DcapServiceReference.CalculateAccountLogResponseBody Body;
+        
+        public CalculateAccountLogResponse() {
+        }
+        
+        public CalculateAccountLogResponse(test_ws_server.DcapServiceReference.CalculateAccountLogResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class CalculateAccountLogResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public test_ws_server.DcapServiceReference.AccountLog[] CalculateAccountLogResult;
+        
+        public CalculateAccountLogResponseBody() {
+        }
+        
+        public CalculateAccountLogResponseBody(test_ws_server.DcapServiceReference.AccountLog[] CalculateAccountLogResult) {
+            this.CalculateAccountLogResult = CalculateAccountLogResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface DcapServiceSoapChannel : test_ws_server.DcapServiceReference.DcapServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -326,6 +483,18 @@ namespace test_ws_server.DcapServiceReference {
             inValue.Body.confirmPassword = confirmPassword;
             test_ws_server.DcapServiceReference.createUserResponse retVal = ((test_ws_server.DcapServiceReference.DcapServiceSoap)(this)).createUser(inValue);
             return retVal.Body.createUserResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        test_ws_server.DcapServiceReference.CalculateAccountLogResponse test_ws_server.DcapServiceReference.DcapServiceSoap.CalculateAccountLog(test_ws_server.DcapServiceReference.CalculateAccountLogRequest request) {
+            return base.Channel.CalculateAccountLog(request);
+        }
+        
+        public test_ws_server.DcapServiceReference.AccountLog[] CalculateAccountLog() {
+            test_ws_server.DcapServiceReference.CalculateAccountLogRequest inValue = new test_ws_server.DcapServiceReference.CalculateAccountLogRequest();
+            inValue.Body = new test_ws_server.DcapServiceReference.CalculateAccountLogRequestBody();
+            test_ws_server.DcapServiceReference.CalculateAccountLogResponse retVal = ((test_ws_server.DcapServiceReference.DcapServiceSoap)(this)).CalculateAccountLog(inValue);
+            return retVal.Body.CalculateAccountLogResult;
         }
     }
 }

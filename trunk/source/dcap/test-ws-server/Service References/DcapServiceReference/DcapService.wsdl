@@ -50,6 +50,29 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="CalculateAccountLog">
+        <s:complexType />
+      </s:element>
+      <s:element name="CalculateAccountLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CalculateAccountLogResult" type="tns:ArrayOfAccountLog" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAccountLog">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountLog" nillable="true" type="tns:AccountLog" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountLog">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Dml" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="loginSoapIn">
@@ -70,6 +93,12 @@
   <wsdl:message name="createUserSoapOut">
     <wsdl:part name="parameters" element="tns:createUserResponse" />
   </wsdl:message>
+  <wsdl:message name="CalculateAccountLogSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateAccountLog" />
+  </wsdl:message>
+  <wsdl:message name="CalculateAccountLogSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateAccountLogResponse" />
+  </wsdl:message>
   <wsdl:portType name="DcapServiceSoap">
     <wsdl:operation name="login">
       <wsdl:input message="tns:loginSoapIn" />
@@ -82,6 +111,10 @@
     <wsdl:operation name="createUser">
       <wsdl:input message="tns:createUserSoapIn" />
       <wsdl:output message="tns:createUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CalculateAccountLog">
+      <wsdl:input message="tns:CalculateAccountLogSoapIn" />
+      <wsdl:output message="tns:CalculateAccountLogSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DcapServiceSoap" type="tns:DcapServiceSoap">
@@ -113,6 +146,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CalculateAccountLog">
+      <soap:operation soapAction="http://tempuri.org/CalculateAccountLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="DcapServiceSoap12" type="tns:DcapServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -136,6 +178,15 @@
     </wsdl:operation>
     <wsdl:operation name="createUser">
       <soap12:operation soapAction="http://tempuri.org/createUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateAccountLog">
+      <soap12:operation soapAction="http://tempuri.org/CalculateAccountLog" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

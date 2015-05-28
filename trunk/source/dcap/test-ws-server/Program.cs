@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using test_ws_server.DcapServiceReference;
 
 namespace test_ws_server
 {
@@ -24,6 +23,11 @@ namespace test_ws_server
             Console.Out.WriteLine("changePassword code: " + result);
             result = service.createUser("nguyenbh", "123456", "123456");
             Console.Out.WriteLine("createUser code: " + result);
+            var accountLogs = service.CalculateAccountLog();
+            foreach (var accountLog in accountLogs)
+            {
+                Console.Out.WriteLine("AccountLog AccountID: " + accountLog.AccountID);
+            }
         }
     }
 }

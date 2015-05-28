@@ -92,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\Controller.cs" />
-    <Compile Include="dto\AccountBonusDto.cs" />
     <Compile Include="model\Account.cs" />
     <Compile Include="model\AccountLog.cs" />
     <Compile Include="model\AccountBonus.cs" />
