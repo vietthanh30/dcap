@@ -239,35 +239,75 @@ namespace ws_server.persistence
             return "0";
         }
 
-        public string createUser(string userName, string password, string confirmPassword)
+        public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
         {
             if (String.Empty.Equals(userName))
             {
                 return "-1";
             }
-            if (String.Empty.Equals(password))
+            if (String.Empty.Equals(soCmnd))
             {
                 return "-2";
             }
-            if (String.Empty.Equals(confirmPassword))
+            var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
+            if (memberInfos.Count > 0)
             {
                 return "-3";
             }
-            if (string.Compare(password,confirmPassword,true) != 0)
+
+            var tenDangNhap = string.Empty;
+            int index = 0;
+            while (true)
             {
-                return "-4";
-            }
-            var users = RetrieveEquals<Users>("UserName", userName.ToUpper());
-            if (users.Count > 0)
-            {
-                return "-5";
+                if (tenDangNhap == string.Empty)
+                {
+                    tenDangNhap = userName.Replace(" ", "").ToUpper();
+                }
+                else
+                {
+                    tenDangNhap = userName.Replace(" ", "").ToUpper() + string.Format("{0:00}", ++index);
+                }
+                var users = RetrieveEquals<Users>("UserName", tenDangNhap);
+                if (users.Count == 0)
+                {
+                    break;
+                }
             }
 
+
             // Init user object
-            var user = new Users { UserName = userName.ToUpper(), Password = MD5Util.EncodeMD5(password) };
+            var memberInfo = new MemberInfo();
+            memberInfo.HoTen = userName;
+            memberInfo.NgaySinh = DateUtil.GetDateTime(ngaySinh);
+            memberInfo.SoCmnd = soCmnd;
+            memberInfo.NgayCap = DateTime.Now;
+            memberInfo.DiaChi = diaChi;
+            memberInfo.SoTaiKhoan = soTaiKhoan;
+            memberInfo.ChiNhanhNH = chiNhanhNH;
+            memberInfo.ImageUrl = photoUrl;
+
+            var user = new Users { UserName = tenDangNhap, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
 
             // Save user
             Save(user);
+
+            return "0";
+        }
+
+        public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
+            if (String.Empty.Equals(userName))
+            {
+                return "-1";
+            }
+            if (String.Empty.Equals(soCmnd))
+            {
+                return "-2";
+            }
+
+            //Todo: Working
 
             return "0";
         }

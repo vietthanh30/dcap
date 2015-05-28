@@ -43,6 +43,7 @@
     <Compile Include="common\ConstUtil.cs" />
     <Compile Include="common\DateUtil.cs" />
     <Compile Include="common\ExcelUtil.cs" />
+    <Compile Include="common\FileUtil.cs" />
     <Compile Include="common\MD5Util.cs" />
     <Compile Include="common\NgayThang.cs" />
     <Compile Include="common\ParameterUtil.cs" />

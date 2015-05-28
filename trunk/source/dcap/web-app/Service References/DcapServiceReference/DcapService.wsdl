@@ -34,22 +34,73 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="createUser">
+      <s:element name="CreateUser">
         <s:complexType>
           <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parentId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="directParentId" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="confirmPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ngaySinh" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="soCmnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="diaChi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="soTaiKhoan" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="chiNhanhNH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="photoUrl" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="createUserResponse">
+      <s:element name="CreateUserResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="createUserResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreateUserResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SearchUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parentId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="directParentId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ngaySinh" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="soCmnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="diaChi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="soTaiKhoan" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="chiNhanhNH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="photoUrl" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculateAccountLog">
+        <s:complexType />
+      </s:element>
+      <s:element name="CalculateAccountLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CalculateAccountLogResult" type="tns:ArrayOfAccountLog" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAccountLog">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountLog" nillable="true" type="tns:AccountLog" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountLog">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Dml" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="loginSoapIn">
@@ -64,11 +115,23 @@
   <wsdl:message name="changePasswordSoapOut">
     <wsdl:part name="parameters" element="tns:changePasswordResponse" />
   </wsdl:message>
-  <wsdl:message name="createUserSoapIn">
-    <wsdl:part name="parameters" element="tns:createUser" />
+  <wsdl:message name="CreateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
   </wsdl:message>
-  <wsdl:message name="createUserSoapOut">
-    <wsdl:part name="parameters" element="tns:createUserResponse" />
+  <wsdl:message name="CreateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUserSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUser" />
+  </wsdl:message>
+  <wsdl:message name="SearchUserSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CalculateAccountLogSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateAccountLog" />
+  </wsdl:message>
+  <wsdl:message name="CalculateAccountLogSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateAccountLogResponse" />
   </wsdl:message>
   <wsdl:portType name="DcapServiceSoap">
     <wsdl:operation name="login">
@@ -79,9 +142,17 @@
       <wsdl:input message="tns:changePasswordSoapIn" />
       <wsdl:output message="tns:changePasswordSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="createUser">
-      <wsdl:input message="tns:createUserSoapIn" />
-      <wsdl:output message="tns:createUserSoapOut" />
+    <wsdl:operation name="CreateUser">
+      <wsdl:input message="tns:CreateUserSoapIn" />
+      <wsdl:output message="tns:CreateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUser">
+      <wsdl:input message="tns:SearchUserSoapIn" />
+      <wsdl:output message="tns:SearchUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CalculateAccountLog">
+      <wsdl:input message="tns:CalculateAccountLogSoapIn" />
+      <wsdl:output message="tns:CalculateAccountLogSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DcapServiceSoap" type="tns:DcapServiceSoap">
@@ -104,8 +175,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="createUser">
-      <soap:operation soapAction="http://tempuri.org/createUser" style="document" />
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://tempuri.org/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUser">
+      <soap:operation soapAction="http://tempuri.org/SearchUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateAccountLog">
+      <soap:operation soapAction="http://tempuri.org/CalculateAccountLog" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -134,8 +223,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="createUser">
-      <soap12:operation soapAction="http://tempuri.org/createUser" style="document" />
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://tempuri.org/CreateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUser">
+      <soap12:operation soapAction="http://tempuri.org/SearchUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateAccountLog">
+      <soap12:operation soapAction="http://tempuri.org/CalculateAccountLog" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -12,5 +12,7 @@ namespace core_lib.common
         public const string TABLE_INDEX = "TABLE_INDEX";
         public const string IS_HEADER = "IS_HEADER";
         public const string INCLUDE_HEADER = "INCLUDE_HEADER";
+
+        public const string DEFAULT_PASSWORD = "12345";
     }
 }

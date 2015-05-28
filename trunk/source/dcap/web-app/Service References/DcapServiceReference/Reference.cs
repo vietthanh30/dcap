@@ -9,7 +9,99 @@
 //------------------------------------------------------------------------------
 
 namespace web_app.DcapServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountLog", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class AccountLog : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long IdField;
+        
+        private long AccountIDField;
+        
+        private System.DateTime CreatedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DmlField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public long AccountID {
+            get {
+                return this.AccountIDField;
+            }
+            set {
+                if ((this.AccountIDField.Equals(value) != true)) {
+                    this.AccountIDField = value;
+                    this.RaisePropertyChanged("AccountID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.DateTime CreatedDate {
+            get {
+                return this.CreatedDateField;
+            }
+            set {
+                if ((this.CreatedDateField.Equals(value) != true)) {
+                    this.CreatedDateField = value;
+                    this.RaisePropertyChanged("CreatedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Dml {
+            get {
+                return this.DmlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DmlField, value) != true)) {
+                    this.DmlField = value;
+                    this.RaisePropertyChanged("Dml");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DcapServiceReference.DcapServiceSoap")]
@@ -23,9 +115,17 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/changePassword", ReplyAction="*")]
         web_app.DcapServiceReference.changePasswordResponse changePassword(web_app.DcapServiceReference.changePasswordRequest request);
         
-        // CODEGEN: Generating message contract since element name userName from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/createUser", ReplyAction="*")]
-        web_app.DcapServiceReference.createUserResponse createUser(web_app.DcapServiceReference.createUserRequest request);
+        // CODEGEN: Generating message contract since element name parentId from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CreateUser", ReplyAction="*")]
+        web_app.DcapServiceReference.CreateUserResponse CreateUser(web_app.DcapServiceReference.CreateUserRequest request);
+        
+        // CODEGEN: Generating message contract since element name parentId from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUser", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchUserResponse SearchUser(web_app.DcapServiceReference.SearchUserRequest request);
+        
+        // CODEGEN: Generating message contract since element name CalculateAccountLogResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
+        web_app.DcapServiceReference.CalculateAccountLogResponse CalculateAccountLog(web_app.DcapServiceReference.CalculateAccountLogRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -184,15 +284,15 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class createUserRequest {
+    public partial class CreateUserRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="createUser", Namespace="http://tempuri.org/", Order=0)]
-        public web_app.DcapServiceReference.createUserRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateUser", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.CreateUserRequestBody Body;
         
-        public createUserRequest() {
+        public CreateUserRequest() {
         }
         
-        public createUserRequest(web_app.DcapServiceReference.createUserRequestBody Body) {
+        public CreateUserRequest(web_app.DcapServiceReference.CreateUserRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -201,24 +301,48 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class createUserRequestBody {
+    public partial class CreateUserRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string userName;
+        public string parentId;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string password;
+        public string directParentId;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string confirmPassword;
+        public string userName;
         
-        public createUserRequestBody() {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string ngaySinh;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string soCmnd;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string diaChi;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string soTaiKhoan;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string chiNhanhNH;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string photoUrl;
+        
+        public CreateUserRequestBody() {
         }
         
-        public createUserRequestBody(string userName, string password, string confirmPassword) {
+        public CreateUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+            this.parentId = parentId;
+            this.directParentId = directParentId;
             this.userName = userName;
-            this.password = password;
-            this.confirmPassword = confirmPassword;
+            this.ngaySinh = ngaySinh;
+            this.soCmnd = soCmnd;
+            this.diaChi = diaChi;
+            this.soTaiKhoan = soTaiKhoan;
+            this.chiNhanhNH = chiNhanhNH;
+            this.photoUrl = photoUrl;
         }
     }
     
@@ -226,15 +350,15 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class createUserResponse {
+    public partial class CreateUserResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="createUserResponse", Namespace="http://tempuri.org/", Order=0)]
-        public web_app.DcapServiceReference.createUserResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateUserResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.CreateUserResponseBody Body;
         
-        public createUserResponse() {
+        public CreateUserResponse() {
         }
         
-        public createUserResponse(web_app.DcapServiceReference.createUserResponseBody Body) {
+        public CreateUserResponse(web_app.DcapServiceReference.CreateUserResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -243,16 +367,177 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class createUserResponseBody {
+    public partial class CreateUserResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string createUserResult;
+        public string CreateUserResult;
         
-        public createUserResponseBody() {
+        public CreateUserResponseBody() {
         }
         
-        public createUserResponseBody(string createUserResult) {
-            this.createUserResult = createUserResult;
+        public CreateUserResponseBody(string CreateUserResult) {
+            this.CreateUserResult = CreateUserResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchUserRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchUser", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchUserRequestBody Body;
+        
+        public SearchUserRequest() {
+        }
+        
+        public SearchUserRequest(web_app.DcapServiceReference.SearchUserRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchUserRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string parentId;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string directParentId;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string userName;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string ngaySinh;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string soCmnd;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string diaChi;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string soTaiKhoan;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string chiNhanhNH;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string photoUrl;
+        
+        public SearchUserRequestBody() {
+        }
+        
+        public SearchUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+            this.parentId = parentId;
+            this.directParentId = directParentId;
+            this.userName = userName;
+            this.ngaySinh = ngaySinh;
+            this.soCmnd = soCmnd;
+            this.diaChi = diaChi;
+            this.soTaiKhoan = soTaiKhoan;
+            this.chiNhanhNH = chiNhanhNH;
+            this.photoUrl = photoUrl;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchUserResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchUserResponseBody Body;
+        
+        public SearchUserResponse() {
+        }
+        
+        public SearchUserResponse(web_app.DcapServiceReference.SearchUserResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchUserResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SearchUserResult;
+        
+        public SearchUserResponseBody() {
+        }
+        
+        public SearchUserResponseBody(string SearchUserResult) {
+            this.SearchUserResult = SearchUserResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CalculateAccountLogRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CalculateAccountLog", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.CalculateAccountLogRequestBody Body;
+        
+        public CalculateAccountLogRequest() {
+        }
+        
+        public CalculateAccountLogRequest(web_app.DcapServiceReference.CalculateAccountLogRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class CalculateAccountLogRequestBody {
+        
+        public CalculateAccountLogRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CalculateAccountLogResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CalculateAccountLogResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.CalculateAccountLogResponseBody Body;
+        
+        public CalculateAccountLogResponse() {
+        }
+        
+        public CalculateAccountLogResponse(web_app.DcapServiceReference.CalculateAccountLogResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class CalculateAccountLogResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.AccountLog[] CalculateAccountLogResult;
+        
+        public CalculateAccountLogResponseBody() {
+        }
+        
+        public CalculateAccountLogResponseBody(web_app.DcapServiceReference.AccountLog[] CalculateAccountLogResult) {
+            this.CalculateAccountLogResult = CalculateAccountLogResult;
         }
     }
     
@@ -314,18 +599,57 @@ namespace web_app.DcapServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        web_app.DcapServiceReference.createUserResponse web_app.DcapServiceReference.DcapServiceSoap.createUser(web_app.DcapServiceReference.createUserRequest request) {
-            return base.Channel.createUser(request);
+        web_app.DcapServiceReference.CreateUserResponse web_app.DcapServiceReference.DcapServiceSoap.CreateUser(web_app.DcapServiceReference.CreateUserRequest request) {
+            return base.Channel.CreateUser(request);
         }
         
-        public string createUser(string userName, string password, string confirmPassword) {
-            web_app.DcapServiceReference.createUserRequest inValue = new web_app.DcapServiceReference.createUserRequest();
-            inValue.Body = new web_app.DcapServiceReference.createUserRequestBody();
+        public string CreateUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+            web_app.DcapServiceReference.CreateUserRequest inValue = new web_app.DcapServiceReference.CreateUserRequest();
+            inValue.Body = new web_app.DcapServiceReference.CreateUserRequestBody();
+            inValue.Body.parentId = parentId;
+            inValue.Body.directParentId = directParentId;
             inValue.Body.userName = userName;
-            inValue.Body.password = password;
-            inValue.Body.confirmPassword = confirmPassword;
-            web_app.DcapServiceReference.createUserResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).createUser(inValue);
-            return retVal.Body.createUserResult;
+            inValue.Body.ngaySinh = ngaySinh;
+            inValue.Body.soCmnd = soCmnd;
+            inValue.Body.diaChi = diaChi;
+            inValue.Body.soTaiKhoan = soTaiKhoan;
+            inValue.Body.chiNhanhNH = chiNhanhNH;
+            inValue.Body.photoUrl = photoUrl;
+            web_app.DcapServiceReference.CreateUserResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).CreateUser(inValue);
+            return retVal.Body.CreateUserResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchUserResponse web_app.DcapServiceReference.DcapServiceSoap.SearchUser(web_app.DcapServiceReference.SearchUserRequest request) {
+            return base.Channel.SearchUser(request);
+        }
+        
+        public string SearchUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+            web_app.DcapServiceReference.SearchUserRequest inValue = new web_app.DcapServiceReference.SearchUserRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchUserRequestBody();
+            inValue.Body.parentId = parentId;
+            inValue.Body.directParentId = directParentId;
+            inValue.Body.userName = userName;
+            inValue.Body.ngaySinh = ngaySinh;
+            inValue.Body.soCmnd = soCmnd;
+            inValue.Body.diaChi = diaChi;
+            inValue.Body.soTaiKhoan = soTaiKhoan;
+            inValue.Body.chiNhanhNH = chiNhanhNH;
+            inValue.Body.photoUrl = photoUrl;
+            web_app.DcapServiceReference.SearchUserResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchUser(inValue);
+            return retVal.Body.SearchUserResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.CalculateAccountLogResponse web_app.DcapServiceReference.DcapServiceSoap.CalculateAccountLog(web_app.DcapServiceReference.CalculateAccountLogRequest request) {
+            return base.Channel.CalculateAccountLog(request);
+        }
+        
+        public web_app.DcapServiceReference.AccountLog[] CalculateAccountLog() {
+            web_app.DcapServiceReference.CalculateAccountLogRequest inValue = new web_app.DcapServiceReference.CalculateAccountLogRequest();
+            inValue.Body = new web_app.DcapServiceReference.CalculateAccountLogRequestBody();
+            web_app.DcapServiceReference.CalculateAccountLogResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).CalculateAccountLog(inValue);
+            return retVal.Body.CalculateAccountLogResult;
         }
     }
 }

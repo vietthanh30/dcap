@@ -84,13 +84,6 @@
     <None Include="plugins\datatables\extensions\TableTools\Readme.md" />
     <None Include="plugins\input-mask\phone-codes\phone-be.json" />
     <None Include="plugins\input-mask\phone-codes\phone-codes.json" />
-    <None Include="Service References\DcapServiceReference\DcapService.disco" />
-    <None Include="Service References\DcapServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\DcapServiceReference\configuration.svcinfo" />
-    <None Include="Service References\DcapServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -864,6 +857,13 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
+    <None Include="Service References\DcapServiceReference\DcapService.disco" />
+    <None Include="Service References\DcapServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\DcapServiceReference\configuration.svcinfo" />
+    <None Include="Service References\DcapServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -880,6 +880,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <None Include="Service References\DcapServiceReference\DcapService.wsdl" />
+    <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.AccountLog.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\ChangePassword.aspx.cs">

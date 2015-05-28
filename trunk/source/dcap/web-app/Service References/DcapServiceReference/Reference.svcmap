@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5cfcd6db-24a6-4fc6-9c38-ede58913fccf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="752c63d7-0d10-41d8-aec3-567f3f1fe3b1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,8 +21,8 @@
     <MetadataSource Address="http://localhost:33593/view/DcapService.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DcapService.disco" MetadataType="Disco" ID="3ef7336c-05a0-44d1-ac4f-53c402c68a68" SourceId="1" SourceUrl="http://localhost:33593/view/DcapService.asmx?disco" />
-    <MetadataFile FileName="DcapService.wsdl" MetadataType="Wsdl" ID="05ded58a-04e6-4807-acff-de6e23001050" SourceId="1" SourceUrl="http://localhost:33593/view/DcapService.asmx?wsdl" />
+    <MetadataFile FileName="DcapService.disco" MetadataType="Disco" ID="25ea5f45-6121-42df-b1ef-ad2992ca82c9" SourceId="1" SourceUrl="http://localhost:33593/view/DcapService.asmx?disco" />
+    <MetadataFile FileName="DcapService.wsdl" MetadataType="Wsdl" ID="08743881-71e4-43e3-a46e-ec12598b88a8" SourceId="1" SourceUrl="http://localhost:33593/view/DcapService.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

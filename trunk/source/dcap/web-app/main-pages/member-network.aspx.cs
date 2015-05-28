@@ -13,5 +13,10 @@ namespace web_app.main_pages
         {
 
         }
+
+        protected void MemberNetwork_SearchNetwork(object sender, EventArgs e)
+        {
+
+        }
     }
 }

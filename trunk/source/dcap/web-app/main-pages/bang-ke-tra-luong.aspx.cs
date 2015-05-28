@@ -13,5 +13,20 @@ namespace web_app.main_pages
         {
 
         }
+
+        protected void BangKeTraLuong_SearchBangKe(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BangKeTraLuong_ExportExcel(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BangKeTraLuong_ExportPDF(object sender, EventArgs e)
+        {
+
+        }
     }
 }

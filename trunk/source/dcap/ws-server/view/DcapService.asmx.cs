@@ -34,9 +34,17 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public string createUser(String userName, String password, String confirmPassword)
+        public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
         {
-            return controller.createUser(userName, password, confirmPassword);
+            return controller.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+        }
+
+        [WebMethod]
+        public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
+            return controller.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
         }
 
         [WebMethod]

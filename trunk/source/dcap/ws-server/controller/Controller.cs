@@ -42,9 +42,16 @@ namespace ws_server.controller
             return m_PersistenceManager.changePassword(userName, oldPassword, newPassword, confirmPassword);
         }
 
-        public string createUser(string userName, string password, string confirmPassword)
+        public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
         {
-            return m_PersistenceManager.createUser(userName, password, confirmPassword);
+            return m_PersistenceManager.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+        }
+
+        public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
+            return m_PersistenceManager.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
         }
 
 

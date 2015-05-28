@@ -19,9 +19,16 @@ namespace web_app.common
             return dcapService.changePassword(userName, oldPassword, newPassword, confirmPassword);
         }
 
-        public static string createUser(string userName, string password, string confirmPassword)
+        public static string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
         {
-            return dcapService.createUser(userName, password, confirmPassword);
+            return dcapService.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+        }
+
+        public static string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
+            return dcapService.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
         }
     }
 }
