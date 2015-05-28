@@ -4,20 +4,20 @@ xmlns="urn:nhibernate-mapping-2.2"
 namespace="ws_server.model"
 assembly="ws_server">
   <class name="Account" table="ACCOUNT" lazy="false">
-    <id name="AccountID" column="ACCOUNT_ID" unsaved-value="-1">
+    <id name="AccountId" column="ACCOUNT_ID" unsaved-value="-1">
       <generator class="identity" />
     </id>
     
-    <property name="ParentID">
+    <property name="ParentId">
       <column name="PARENT_ID" not-null="false" />
     </property>
 
-    <property name="ParentDirectID">
+    <property name="ParentDirectId">
       <column name="PARENT_DIRECT_ID" not-null="false" />
     </property>
 
     <property name="AccountNumber">
-      <column name="ACCOUNT" not-null="false" />
+      <column name="ACCOUNT_NUMBER" not-null="false" />
     </property>
     
     <property name="IsActive">

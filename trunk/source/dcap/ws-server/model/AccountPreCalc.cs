@@ -10,20 +10,21 @@ namespace ws_server.model
         #region Declarations
 
         // Member variables
-        private long account_ID = -1;
+        private long _id = -1;
 
-        private long calc_Account_ID = -1;
+        private long _accountId = -1;
 
-        private int account_Level = 0;
+        private long _calcAccountId = -1;
 
-        private long level_Index = -1;
+        private int _accountLevel;
 
-        private string is_calculated = string.Empty;
+        private long _levelIndex = -1;
 
-        private DateTime calculated_Date = default(DateTime);
+        private string _isCalculated = string.Empty;
 
-        private DateTime created_Date = default(DateTime);
+        private DateTime _calculatedDate = default(DateTime);
 
+        private DateTime _createdDate = default(DateTime);
         
         #endregion
 
@@ -36,23 +37,31 @@ namespace ws_server.model
     	#endregion
 
         #region Properties
+        /// <summary>
+        /// Id
+        /// </summary>
+        public virtual long Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         /// <summary>
         /// Account ID
         /// </summary>
-        public virtual long AccountID
+        public virtual long AccountId
         {
-            get { return account_ID; }
-            set { account_ID = value; }
+            get { return _accountId; }
+            set { _accountId = value; }
         }
 
         /// <summary>
         /// Calc Account ID
         /// </summary>
-        public virtual long CalcAccountID
+        public virtual long CalcAccountId
         {
-            get { return calc_Account_ID; }
-            set { calc_Account_ID= value; }
+            get { return _calcAccountId; }
+            set { _calcAccountId= value; }
         }
 
         /// <summary>
@@ -60,8 +69,8 @@ namespace ws_server.model
         /// </summary>
         public virtual int AccountLevel
         {
-            get { return account_Level; }
-            set { account_Level = value; }
+            get { return _accountLevel; }
+            set { _accountLevel = value; }
         }
 
         /// <summary>
@@ -69,8 +78,8 @@ namespace ws_server.model
         /// </summary>
         public virtual long LevelIndex
         {
-            get { return level_Index; }
-            set { level_Index = value; }
+            get { return _levelIndex; }
+            set { _levelIndex = value; }
         }
 
         /// <summary>
@@ -78,8 +87,8 @@ namespace ws_server.model
         /// </summary>
         public virtual string IsCalculated
         {
-            get { return is_calculated; }
-            set { is_calculated= value; }
+            get { return _isCalculated; }
+            set { _isCalculated= value; }
         }
         
         /// <summary>
@@ -87,8 +96,8 @@ namespace ws_server.model
         /// </summary>
         public virtual DateTime CalculatedDate
         {
-            get { return calculated_Date; }
-            set { calculated_Date = value; }
+            get { return _calculatedDate; }
+            set { _calculatedDate = value; }
         }
 
         /// <summary>
@@ -96,8 +105,8 @@ namespace ws_server.model
         /// </summary>
         public virtual DateTime CreatedDate
         {
-            get { return created_Date; }
-            set { created_Date = value; }
+            get { return _createdDate; }
+            set { _createdDate = value; }
         }
 
         #endregion
@@ -106,7 +115,7 @@ namespace ws_server.model
 
         public override string ToString()
         {
-            return calc_Account_ID + ":" + account_ID;
+            return _calcAccountId + ":" + _accountId;
         }
 
         #endregion

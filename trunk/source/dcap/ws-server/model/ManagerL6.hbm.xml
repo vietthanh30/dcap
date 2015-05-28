@@ -3,13 +3,13 @@
 xmlns="urn:nhibernate-mapping-2.2"
 namespace="ws_server.model"
 assembly="ws_server">
-  <class name="ManagerL5" table="MANAGER_L5" lazy="false">
-    
-    <property name="AcountID">
-      <column name="ACCOUNT_ID" not-null="false" />
-    </property>
+  <class name="ManagerL6" table="MANAGER_L6" lazy="false">
 
-    <property name="ParentID">
+    <id name="AccountId" column="ACCOUNT_ID" unsaved-value="-1">
+      <generator class="identity" />
+    </id>
+
+    <property name="ParentId">
       <column name="PARENT_ID" not-null="false" />
     </property>
 

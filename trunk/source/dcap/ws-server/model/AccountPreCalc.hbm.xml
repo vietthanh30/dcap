@@ -4,12 +4,15 @@ xmlns="urn:nhibernate-mapping-2.2"
 namespace="ws_server.model"
 assembly="ws_server">
   <class name="AccountPreCalc" table="ACCOUNT_PRE_CALC" lazy="false">
+    <id name="Id" column="ID" unsaved-value="-1">
+      <generator class="identity" />
+    </id>
     
-    <property name="AcountID">
+    <property name="AccountId">
       <column name="ACCOUNT_ID" not-null="false" />
     </property>
 
-    <property name="CalcAcountID">
+    <property name="CalcAccountId">
       <column name="CALC_ACCOUNT_ID" not-null="false" />
     </property>
     

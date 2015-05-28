@@ -44,7 +44,7 @@ namespace ws_server.model
         /// <summary>
         /// Account ID
         /// </summary>
-        public virtual long AccountID
+        public virtual long AccountId
         {
             get { return account_ID; }
             set { account_ID = value; }
@@ -53,7 +53,7 @@ namespace ws_server.model
         /// <summary>
         /// Parent ID
         /// </summary>
-        public virtual long ParentID
+        public virtual long ParentId
         {
             get { return parent_ID; }
             set { parent_ID= value; }

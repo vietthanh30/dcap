@@ -7,26 +7,26 @@ namespace ws_server.model
         #region Declarations
 
         // Property variables
-        private long account_ID = -1;
+        private long _accountId = -1;
 
         // Member variables
-        private long parent_ID = -1;
+        private long _parentId = -1;
 
-        private long parent_Direct_ID = -1;
+        private long _parentDirectId = -1;
 
-        private long account_Number = -1;
+        private long _accountNumber = -1;
 
-        private int child_Index = -1;
+        private int _childIndex = -1;
 
-        private string is_Active = string.Empty;
+        private string _isActive = string.Empty;
 
-        private long member_ID = -1;
+        private long _memberId = -1;
 
-        private long user_ID = -1;
+        private long _userId = -1;
 
-        private DateTime created_Date = default(DateTime);
+        private DateTime _createdDate = default(DateTime);
 
-        private string created_By = string.Empty;
+        private string _createdBy = string.Empty;
 
         #endregion
 
@@ -43,28 +43,28 @@ namespace ws_server.model
         /// <summary>
         /// Account ID
         /// </summary>
-        public virtual long AccountID
+        public virtual long AccountId
         {
-            get { return account_ID; }
-            set { account_ID = value; }
+            get { return _accountId; }
+            set { _accountId = value; }
         }
 
         /// <summary>
         /// Parent ID
         /// </summary>
-        public virtual long ParentID
+        public virtual long ParentId
         {
-            get { return parent_ID; }
-            set { parent_ID = value; }
+            get { return _parentId; }
+            set { _parentId = value; }
         }
 
         /// <summary>
         /// Parent Direct ID
         /// </summary>
-        public virtual long ParentDirectID
+        public virtual long ParentDirectId
         {
-            get { return parent_Direct_ID; }
-            set { parent_Direct_ID = value; }
+            get { return _parentDirectId; }
+            set { _parentDirectId = value; }
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace ws_server.model
         /// </summary>
         public virtual long AccountNumber
         {
-            get { return account_Number; }
-            set { account_Number = value; }
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace ws_server.model
         /// </summary>
         public virtual int ChildIndex
         {
-            get { return child_Index; }
-            set { child_Index = value; }
+            get { return _childIndex; }
+            set { _childIndex = value; }
         }
 
         /// <summary>
@@ -90,26 +90,26 @@ namespace ws_server.model
         /// </summary>
         public virtual string IsActive
         {
-            get { return is_Active; }
-            set { is_Active = value; }
+            get { return _isActive; }
+            set { _isActive = value; }
         }
 
         /// <summary>
         /// Member ID
         /// </summary>
-        public virtual long MemberID
+        public virtual long MemberId
         {
-            get { return member_ID; }
-            set { member_ID = value; }
+            get { return _memberId; }
+            set { _memberId = value; }
         }
 
         /// <summary>
         /// User ID
         /// </summary>
-        public virtual long UserID
+        public virtual long UserId
         {
-            get { return user_ID; }
-            set { user_ID = value; }
+            get { return _userId; }
+            set { _userId = value; }
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace ws_server.model
         /// </summary>
         public virtual DateTime CreatedDate
         {
-            get { return created_Date; }
-            set { created_Date = value; }
+            get { return _createdDate; }
+            set { _createdDate = value; }
         }
 
         /// <summary>
@@ -126,8 +126,8 @@ namespace ws_server.model
         /// </summary>
         public virtual string CreatedBy
         {
-            get { return created_By; }
-            set { created_By = value; }
+            get { return _createdBy; }
+            set { _createdBy = value; }
         }
 
         #endregion
@@ -136,7 +136,7 @@ namespace ws_server.model
 
         public override string ToString()
         {
-            return member_ID + ":" + account_ID;
+            return _memberId + ":" + _accountId;
         }
 
         #endregion

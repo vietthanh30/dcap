@@ -10,11 +10,13 @@ namespace ws_server.model
         #region Declarations
 
         // Member variables
-        private long account_ID = -1;
+        private long _id = -1;
 
-        private string dml = string.Empty;
+        private long _accountId = -1;
 
-        private DateTime created_Date = default(DateTime);
+        private string _dml = string.Empty;
+
+        private DateTime _createdDate = default(DateTime);
 
         #endregion
 
@@ -27,14 +29,23 @@ namespace ws_server.model
     	#endregion
 
         #region Properties
+        
+        /// <summary>
+        /// ID
+        /// </summary>
+        public virtual long Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         /// <summary>
         /// Account ID
         /// </summary>
         public virtual long AccountID
         {
-            get { return account_ID; }
-            set { account_ID = value; }
+            get { return _accountId; }
+            set { _accountId = value; }
         }
 
         /// <summary>
@@ -42,8 +53,8 @@ namespace ws_server.model
         /// </summary>
         public virtual DateTime CreatedDate
         {
-            get { return created_Date; }
-            set { created_Date = value; }
+            get { return _createdDate; }
+            set { _createdDate = value; }
         }
 
         /// <summary>
@@ -51,8 +62,8 @@ namespace ws_server.model
         /// </summary>
         public virtual string Dml
         {
-            get { return dml; }
-            set { dml = value; }
+            get { return _dml; }
+            set { _dml = value; }
         }
 
         #endregion
@@ -61,7 +72,7 @@ namespace ws_server.model
 
         public override string ToString()
         {
-            return dml + ":" + account_ID;
+            return _id.ToString();
         }
 
         #endregion

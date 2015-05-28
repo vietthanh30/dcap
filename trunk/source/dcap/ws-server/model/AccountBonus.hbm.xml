@@ -4,8 +4,11 @@ xmlns="urn:nhibernate-mapping-2.2"
 namespace="ws_server.model"
 assembly="ws_server">
   <class name="AccountBonus" table="ACCOUNT_BONUS" lazy="false">
+    <id name="Id" column="ID" unsaved-value="-1">
+      <generator class="identity" />
+    </id>
     
-    <property name="AcountID">
+    <property name="AccountId">
       <column name="ACCOUNT_ID" not-null="true" />
     </property>
     

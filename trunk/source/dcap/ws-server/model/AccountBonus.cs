@@ -10,17 +10,19 @@ namespace ws_server.model
         #region Declarations
 
         // Member variables
-        private long account_ID = -1;
+        private long _id = -1;
 
-        private string bonus_Type = string.Empty;
+        private long _accountId = -1;
 
-        private DateTime created_Date = default(DateTime);
+        private string _bonusType = string.Empty;
 
-        private long bonus_Amount = -1;
+        private DateTime _createdDate = default(DateTime);
 
-        private string month = string.Empty;
+        private long _bonusAmount = -1;
 
-        private long is_Paid = -1;
+        private string _month = string.Empty;
+
+        private long _isPaid = -1;
         
         #endregion
 
@@ -33,14 +35,22 @@ namespace ws_server.model
     	#endregion
 
         #region Properties
+        /// <summary>
+        /// Account ID
+        /// </summary>
+        public virtual long Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         /// <summary>
         /// Account ID
         /// </summary>
-        public virtual long AccountID
+        public virtual long AccountId
         {
-            get { return account_ID; }
-            set { account_ID = value; }
+            get { return _accountId; }
+            set { _accountId = value; }
         }
         
         /// <summary>
@@ -48,8 +58,8 @@ namespace ws_server.model
         /// </summary>
         public virtual string BonusType
         {
-            get { return bonus_Type; }
-            set { bonus_Type = value; }
+            get { return _bonusType; }
+            set { _bonusType = value; }
         }
 
         /// <summary>
@@ -57,8 +67,8 @@ namespace ws_server.model
         /// </summary>
         public virtual long BonusAmount
         {
-            get { return bonus_Amount; }
-            set { bonus_Amount = value; }
+            get { return _bonusAmount; }
+            set { _bonusAmount = value; }
         }
 
         /// <summary>
@@ -66,8 +76,8 @@ namespace ws_server.model
         /// </summary>
         public virtual string Month
         {
-            get { return month; }
-            set { month = value; }
+            get { return _month; }
+            set { _month = value; }
         }
 
         /// <summary>
@@ -75,8 +85,8 @@ namespace ws_server.model
         /// </summary>
         public virtual long IsPaid
         {
-            get { return is_Paid; }
-            set { is_Paid= value; }
+            get { return _isPaid; }
+            set { _isPaid= value; }
         }
 
         /// <summary>
@@ -84,8 +94,8 @@ namespace ws_server.model
         /// </summary>
         public virtual DateTime CreatedDate
         {
-            get { return created_Date; }
-            set { created_Date = value; }
+            get { return _createdDate; }
+            set { _createdDate = value; }
         }
 
         #endregion
@@ -94,7 +104,7 @@ namespace ws_server.model
 
         public override string ToString()
         {
-            return bonus_Type + ":" + account_ID;
+            return _bonusType + ":" + _accountId;
         }
 
         #endregion

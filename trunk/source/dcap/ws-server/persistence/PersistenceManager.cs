@@ -281,7 +281,15 @@ namespace ws_server.persistence
         public Account GetAccount(long accountId)
         {
             IList<Account> retrieveEquals = RetrieveEquals<Account>("AccountId", accountId);
-            if (retrieveEquals == null)
+            if (retrieveEquals == null || retrieveEquals.Count == 0)
+                return null;
+            return retrieveEquals[0];
+        }
+
+        public ManagerL1 GetManagerL1(long accountId)
+        {
+            IList<ManagerL1> retrieveEquals = RetrieveEquals<ManagerL1>("AccountId", accountId);
+            if (retrieveEquals == null || retrieveEquals.Count == 0)
                 return null;
             return retrieveEquals[0];
         }

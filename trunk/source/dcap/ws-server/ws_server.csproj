@@ -13,6 +13,7 @@
     <RootNamespace>ws_server</RootNamespace>
     <AssemblyName>ws_server</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,16 +71,16 @@
     <EmbeddedResource Include="model\RoleObject.hbm.xml" />
     <EmbeddedResource Include="model\Roles.hbm.xml" />
     <EmbeddedResource Include="model\UserRole.hbm.xml" />
-    <Content Include="model\Account.hbm.xml" />
-    <Content Include="model\AccountBonus.hbm.xml" />
-    <Content Include="model\AccountLog.hbm.xml" />
-    <Content Include="model\AccountPreCalc.hbm.xml" />
-    <Content Include="model\ManagerL1.hbm.xml" />
-    <Content Include="model\ManagerL2.hbm.xml" />
-    <Content Include="model\ManagerL3.hbm.xml" />
-    <Content Include="model\ManagerL4.hbm.xml" />
-    <Content Include="model\ManagerL5.hbm.xml" />
-    <Content Include="model\ManagerL6.hbm.xml" />
+    <EmbeddedResource Include="model\AccountLog.hbm.xml" />
+    <EmbeddedResource Include="model\AccountBonus.hbm.xml" />
+    <EmbeddedResource Include="model\AccountPreCalc.hbm.xml" />
+    <EmbeddedResource Include="model\Account.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerL6.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerL5.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerL4.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerL3.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerL2.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerL1.hbm.xml" />
     <Content Include="view\DcapService.asmx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -91,16 +92,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\Controller.cs" />
+    <Compile Include="dto\AccountBonusDto.cs" />
     <Compile Include="model\Account.cs" />
-    <Compile Include="model\AccountBonus.cs" />
     <Compile Include="model\AccountLog.cs" />
+    <Compile Include="model\AccountBonus.cs" />
     <Compile Include="model\AccountPreCalc.cs" />
-    <Compile Include="model\ManagerL1.cs" />
-    <Compile Include="model\ManagerL2.cs" />
-    <Compile Include="model\ManagerL3.cs" />
-    <Compile Include="model\ManagerL4.cs" />
-    <Compile Include="model\ManagerL5.cs" />
     <Compile Include="model\ManagerL6.cs" />
+    <Compile Include="model\ManagerL5.cs" />
+    <Compile Include="model\ManagerL4.cs" />
+    <Compile Include="model\ManagerL3.cs" />
+    <Compile Include="model\ManagerL2.cs" />
+    <Compile Include="model\ManagerL1.cs" />
     <Compile Include="model\ManagerLevel.cs" />
     <Compile Include="model\MemberInfo.cs" />
     <Compile Include="model\Objects.cs" />

@@ -4,12 +4,11 @@ xmlns="urn:nhibernate-mapping-2.2"
 namespace="ws_server.model"
 assembly="ws_server">
   <class name="ManagerL2" table="MANAGER_L2" lazy="false">
-    
-    <property name="AcountID">
-      <column name="ACCOUNT_ID" not-null="false" />
-    </property>
+    <id name="AccountId" column="ACCOUNT_ID" unsaved-value="-1">
+      <generator class="identity" />
+    </id>
 
-    <property name="ParentID">
+    <property name="ParentId">
       <column name="PARENT_ID" not-null="false" />
     </property>
 

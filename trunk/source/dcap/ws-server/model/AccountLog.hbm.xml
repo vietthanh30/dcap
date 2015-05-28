@@ -4,18 +4,21 @@ xmlns="urn:nhibernate-mapping-2.2"
 namespace="ws_server.model"
 assembly="ws_server">
   <class name="AccountLog" table="ACCOUNT_LOG" lazy="false">
-    <composite-id>
-		<property name="AcountID">
-		  <column name="ACCOUNT_ID" not-null="true" />
-		</property>
-		
-		<property name="Dml">      
-		  <column name="DML" not-null="true" />
-		</property>
-    </composite-id>
 
-	<property name="CreatedDate">
-	  <column name="CREATED_DATE" not-null="true" />
-	</property>
+    <id name="Id" column="ID" unsaved-value="-1">
+      <generator class="identity" />
+    </id>
+
+    <property name="AccountID">
+      <column name="ACCOUNT_ID" not-null="true" />
+    </property>
+    
+    <property name="Dml">
+      <column name="DML" not-null="true" />
+    </property>
+
+    <property name="CreatedDate">
+      <column name="CREATED_DATE" not-null="true" />
+    </property>
   </class>
 </hibernate-mapping>
