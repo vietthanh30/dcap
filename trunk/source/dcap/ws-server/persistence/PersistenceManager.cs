@@ -272,6 +272,20 @@ namespace ws_server.persistence
             return "0";
         }
 
+
+        public IList<AccountLog> GetAccountLog()
+        {
+            return RetrieveAll<AccountLog>(SessionAction.BeginAndEnd);
+        }
+
+        public Account GetAccount(long accountId)
+        {
+            IList<Account> retrieveEquals = RetrieveEquals<Account>("AccountId", accountId);
+            if (retrieveEquals == null)
+                return null;
+            return retrieveEquals[0];
+        }
+
         #endregion
 
         #region Private Methods

@@ -7,22 +7,30 @@ namespace ws_server.model
         #region Declarations
 
         // Property variables
-        private int member_ID = -1;
+        private int _memberId = -1;
 
         // Member variables
-        private string ho_Ten = String.Empty;
+        private string _hoTen = String.Empty;
 
-        private DateTime ngay_Sinh = default(DateTime);
+        private DateTime _ngaySinh = default(DateTime);
 
-        private String so_Cmnd = String.Empty;
+        private String _soCmnd = String.Empty;
 
-        private String so_Dien_Thoai = String.Empty;
+        private DateTime _ngayCap = default(DateTime);
 
-        private String so_Tai_Khoan = String.Empty;
+        private String _soDienThoai = String.Empty;
 
-        private String chi_Nhanh_NH = String.Empty;
+        private String _diaChi = String.Empty;
 
-        private String member_Code = String.Empty;
+        private String _soTaiKhoan = String.Empty;
+
+        private String _chiNhanhNh = String.Empty;
+
+        private String _imageUrl = String.Empty;
+
+        private DateTime _createdDate = default(DateTime);
+
+        private String _createdBy = String.Empty;
 
         #endregion
 
@@ -41,8 +49,8 @@ namespace ws_server.model
         /// </summary>
         public virtual int MemberID
         {
-            get { return member_ID; }
-            set { member_ID = value; }
+            get { return _memberId; }
+            set { _memberId = value; }
         }
 
         /// <summary>
@@ -50,8 +58,8 @@ namespace ws_server.model
         /// </summary>
         public virtual string HoTen
         {
-            get { return ho_Ten; }
-            set { ho_Ten = value; }
+            get { return _hoTen; }
+            set { _hoTen = value; }
         }
 
         /// <summary>
@@ -59,8 +67,8 @@ namespace ws_server.model
         /// </summary>
         public virtual DateTime NgaySinh
         {
-            get { return ngay_Sinh; }
-            set { ngay_Sinh = value; }
+            get { return _ngaySinh; }
+            set { _ngaySinh = value; }
         }
 
         /// <summary>
@@ -68,8 +76,17 @@ namespace ws_server.model
         /// </summary>
         public virtual String SoCmnd
         {
-            get { return so_Cmnd; }
-            set { so_Cmnd = value; }
+            get { return _soCmnd; }
+            set { _soCmnd = value; }
+        }
+
+        /// <summary>
+        /// Ngay Cap
+        /// </summary>
+        public virtual DateTime NgayCap
+        {
+            get { return _ngayCap; }
+            set { _ngayCap = value; }
         }
 
         /// <summary>
@@ -77,8 +94,17 @@ namespace ws_server.model
         /// </summary>
         public virtual String SoDienThoai
         {
-            get { return so_Dien_Thoai; }
-            set { so_Dien_Thoai = value; }
+            get { return _soDienThoai; }
+            set { _soDienThoai = value; }
+        }
+
+        /// <summary>
+        /// Dia Chi
+        /// </summary>
+        public virtual String DiaChi
+        {
+            get { return _diaChi; }
+            set { _diaChi = value; }
         }
 
         /// <summary>
@@ -86,8 +112,8 @@ namespace ws_server.model
         /// </summary>
         public virtual String SoTaiKhoan
         {
-            get { return so_Tai_Khoan; }
-            set { so_Tai_Khoan = value; }
+            get { return _soTaiKhoan; }
+            set { _soTaiKhoan = value; }
         }
 
         /// <summary>
@@ -95,17 +121,35 @@ namespace ws_server.model
         /// </summary>
         public virtual String ChiNhanhNH
         {
-            get { return chi_Nhanh_NH; }
-            set { chi_Nhanh_NH = value; }
+            get { return _chiNhanhNh; }
+            set { _chiNhanhNh = value; }
         }
 
         /// <summary>
         /// Member Code
         /// </summary>
-        public virtual String MemberCode
+        public virtual String ImageUrl
         {
-            get { return member_Code; }
-            set { member_Code = value; }
+            get { return _imageUrl; }
+            set { _imageUrl = value; }
+        }
+
+        /// <summary>
+        /// Created Date
+        /// </summary>
+        public virtual DateTime CreatedDate
+        {
+            get { return _createdDate; }
+            set { _createdDate = value; }
+        }
+
+        /// <summary>
+        /// So Cmnd
+        /// </summary>
+        public virtual String CreatedBy
+        {
+            get { return _createdBy; }
+            set { _createdBy = value; }
         }
 
         #endregion
@@ -114,7 +158,7 @@ namespace ws_server.model
 
         public override string ToString()
         {
-            return member_Code;
+            return _imageUrl;
         }
 
         #endregion

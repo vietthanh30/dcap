@@ -47,6 +47,25 @@ namespace ws_server.controller
             return m_PersistenceManager.createUser(userName, password, confirmPassword);
         }
 
+
+        public int CalculateAccountLog()
+        {
+            IList<AccountLog> allAccountLog = m_PersistenceManager.GetAccountLog();
+            if (allAccountLog != null)
+                return allAccountLog.Count;
+            else
+                return 0;
+
+            if (allAccountLog != null)
+            {
+                foreach (var accountLog in allAccountLog)
+                {
+                    
+                }
+            }
+
+        }
+        
         #endregion
     }
 }

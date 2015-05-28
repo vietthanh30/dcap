@@ -32,7 +32,7 @@ assembly="ws_server">
       <column name="CHI_NHANH_NH" not-null="false" />
     </property>
 
-    <property name="MemberCode">
+    <property name="ImageUrl">
       <column name="MEMBER_CODE" not-null="true" />
     </property>
 

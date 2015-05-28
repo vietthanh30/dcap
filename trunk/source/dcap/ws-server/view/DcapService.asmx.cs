@@ -37,5 +37,13 @@ namespace ws_server.view
         {
             return controller.createUser(userName, password, confirmPassword);
         }
+
+        [WebMethod]
+        public int CalculateAccountLog()
+        {
+            return controller.CalculateAccountLog();
+        }
+
+        
     }
 }
