@@ -50,15 +50,13 @@
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js" type="text/javascript"></script>
 	
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-    </asp:ContentPlaceHolder>
 </head>
 <body class="skin-blue sidebar-mini">
     <form runat="server">
     <div class="wrapper">
         <header class="main-header">
 			<!-- Logo -->
-			<a href="~/main-pages/tong-quan.aspx" runat="server" class="logo">
+			<a href="~/Default.aspx" runat="server" class="logo">
 			  <!-- mini logo for sidebar mini 50x50 pixels -->
 			  <span class="logo-mini"><b>A</b>LT</span>
 			  <!-- logo for regular state and mobile devices -->
@@ -99,7 +97,9 @@
         
         <asp:LoginView ID="LoginView1" runat="server" EnableViewState="false">
             <LoggedInTemplate>
-             <div class="sidebar-toggle">
+             <div class="left-side">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
                 <div class="user-panel">
                     <div class="pull-left image">
                         <img ID="HeadLoginImg" src="~/dist/img/user2-160x160.jpg" runat="server" class="img-circle" alt="User Image" />
@@ -132,16 +132,28 @@
                     <i class="fa fa-table"></i> <span>Bảng kê trả lương</span>
                   </a>
                 </li>
-              </ul>	  
+              </ul>	 
+            </section>
+            <!-- /.sidebar --> 
              </div>  
             </LoggedInTemplate>
         </asp:LoginView>
        
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </section><!-- /.content -->
+
     </div> <!-- /.content-wrapper -->
 
-    <div class="content-wrapper">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
-    </div>
     <footer class="main-footer">
     <div class="pull-right hidden-xs">
         <b>Version</b> 1.0

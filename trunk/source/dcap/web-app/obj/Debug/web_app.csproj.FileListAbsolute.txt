@@ -1,5 +1,0 @@
-F:\NguyenBH\ban hang da cap\dcap\trunk\source\dcap\web-app\bin\web_app.dll
-F:\NguyenBH\ban hang da cap\dcap\trunk\source\dcap\web-app\bin\web_app.pdb
-F:\NguyenBH\ban hang da cap\dcap\trunk\source\dcap\web-app\obj\Debug\web_app.dll
-F:\NguyenBH\ban hang da cap\dcap\trunk\source\dcap\web-app\obj\Debug\web_app.pdb
-F:\NguyenBH\ban hang da cap\dcap\trunk\source\dcap\web-app\obj\Debug\web_app.csprojResolveAssemblyReference.cache
