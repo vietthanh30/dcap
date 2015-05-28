@@ -60,11 +60,7 @@
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="control\dropdown-menu.aspx" />
     <Content Include="main-pages\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="control\Web.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="plugins\ckeditor\CHANGES.md" />
@@ -923,13 +919,6 @@
     </Compile>
     <Compile Include="common\CaptchaImage.cs" />
     <Compile Include="common\DcapServiceUtil.cs" />
-    <Compile Include="control\dropdown-menu.aspx.cs">
-      <DependentUpon>dropdown-menu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="control\dropdown-menu.aspx.designer.cs">
-      <DependentUpon>dropdown-menu.aspx</DependentUpon>
-    </Compile>
     <Compile Include="main-pages\bang-ke-tra-luong.aspx.cs">
       <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -56,7 +56,7 @@
     <div class="wrapper">
         <header class="main-header">
 			<!-- Logo -->
-			<a href="~/Default.aspx" runat="server" class="logo">
+			<a href="#" runat="server" class="logo">
 			  <!-- mini logo for sidebar mini 50x50 pixels -->
 			  <span class="logo-mini"><b>A</b>LT</span>
 			  <!-- logo for regular state and mobile devices -->
@@ -66,7 +66,7 @@
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top" role="navigation">
 			  <!-- Sidebar toggle button-->
-			  <a href="~/Default.aspx" runat="server" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			  <a href="#" runat="server" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 				<span class="sr-only">Toggle navigation</span>
 			  </a>		  			
 			      <!-- Navbar Right Menu -->
@@ -80,13 +80,32 @@
                         <ul class="nav navbar-nav">
 	                        <!-- User Account: style can be found in dropdown.less -->
 	                        <li class="dropdown user user-menu">
-	                        <a id="A1" href="~/control/dropdown-menu.aspx" runat="server" class="dropdown-toggle" data-toggle="dropdown">
+	                        <a id="A1" href="#" runat="server" class="dropdown-toggle" data-toggle="dropdown">
 		                        <img ID="Img1" src="~/dist/img/user2-160x160.jpg" runat="server" class="user-image" alt="User Image"/>
 		                        <span class="hidden-xs"><asp:LoginName ID="HeadLoginName" runat="server" /></span>
 	                        </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img ID="HeadLoginImg" src="~/dist/img/user2-160x160.jpg" runat="server" class="img-circle" alt="User Image" />
+                                    <p>
+	                                    <asp:LoginName ID="LoginName1" runat="server" /> - Admin
+                                    </p>
+                                </li>
+					  
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+	                                    <a href="~/admin/ChangePassword.aspx" runat="server" ID="HeadChangePassword" class="btn btn-default btn-flat">Đổi mật khẩu</a>
+                                    </div>
+                                    <div class="pull-right">
+	                                    <asp:LoginStatus ID="HeadLoginStatus" runat="server" class="btn btn-default btn-flat" LogoutAction="Redirect" LogoutText="Đăng xuất" LogoutPageUrl="~/"/>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
                         </ul>
-                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Đăng xuất" LogoutPageUrl="~/"/>               
+                        
                     </LoggedInTemplate>
                     </asp:LoginView>
                     </asp:ContentPlaceHolder>  			
