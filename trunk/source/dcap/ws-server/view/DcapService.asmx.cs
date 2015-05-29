@@ -35,16 +35,16 @@ namespace ws_server.view
 
         [WebMethod]
         public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH, String photoUrl, string createdBy)
         {
-            return controller.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+            return controller.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
         [WebMethod]
         public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH)
         {
-            return controller.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+            return controller.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH);
         }
 
         [WebMethod]

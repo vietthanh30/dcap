@@ -330,10 +330,13 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
         public string photoUrl;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string createdBy;
+        
         public CreateUserRequestBody() {
         }
         
-        public CreateUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+        public CreateUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy) {
             this.parentId = parentId;
             this.directParentId = directParentId;
             this.userName = userName;
@@ -343,6 +346,7 @@ namespace web_app.DcapServiceReference {
             this.soTaiKhoan = soTaiKhoan;
             this.chiNhanhNH = chiNhanhNH;
             this.photoUrl = photoUrl;
+            this.createdBy = createdBy;
         }
     }
     
@@ -427,13 +431,10 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string chiNhanhNH;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
-        public string photoUrl;
-        
         public SearchUserRequestBody() {
         }
         
-        public SearchUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+        public SearchUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH) {
             this.parentId = parentId;
             this.directParentId = directParentId;
             this.userName = userName;
@@ -442,7 +443,6 @@ namespace web_app.DcapServiceReference {
             this.diaChi = diaChi;
             this.soTaiKhoan = soTaiKhoan;
             this.chiNhanhNH = chiNhanhNH;
-            this.photoUrl = photoUrl;
         }
     }
     
@@ -603,7 +603,7 @@ namespace web_app.DcapServiceReference {
             return base.Channel.CreateUser(request);
         }
         
-        public string CreateUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+        public string CreateUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy) {
             web_app.DcapServiceReference.CreateUserRequest inValue = new web_app.DcapServiceReference.CreateUserRequest();
             inValue.Body = new web_app.DcapServiceReference.CreateUserRequestBody();
             inValue.Body.parentId = parentId;
@@ -615,6 +615,7 @@ namespace web_app.DcapServiceReference {
             inValue.Body.soTaiKhoan = soTaiKhoan;
             inValue.Body.chiNhanhNH = chiNhanhNH;
             inValue.Body.photoUrl = photoUrl;
+            inValue.Body.createdBy = createdBy;
             web_app.DcapServiceReference.CreateUserResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).CreateUser(inValue);
             return retVal.Body.CreateUserResult;
         }
@@ -624,7 +625,7 @@ namespace web_app.DcapServiceReference {
             return base.Channel.SearchUser(request);
         }
         
-        public string SearchUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH, string photoUrl) {
+        public string SearchUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string diaChi, string soTaiKhoan, string chiNhanhNH) {
             web_app.DcapServiceReference.SearchUserRequest inValue = new web_app.DcapServiceReference.SearchUserRequest();
             inValue.Body = new web_app.DcapServiceReference.SearchUserRequestBody();
             inValue.Body.parentId = parentId;
@@ -635,7 +636,6 @@ namespace web_app.DcapServiceReference {
             inValue.Body.diaChi = diaChi;
             inValue.Body.soTaiKhoan = soTaiKhoan;
             inValue.Body.chiNhanhNH = chiNhanhNH;
-            inValue.Body.photoUrl = photoUrl;
             web_app.DcapServiceReference.SearchUserResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchUser(inValue);
             return retVal.Body.SearchUserResult;
         }

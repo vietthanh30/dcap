@@ -93,7 +93,10 @@
                 <asp:Button ID="CreateUserButton" runat="server" Text="Cập nhật" 
                         ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" 
                     onclick="RegisterUser_CreatingUser"/>
-                </div>
+                </div>                
+                <p>
+                    <asp:Label ID="AccountCode" runat="server" Text="" Visible="False"></asp:Label>
+                </p>
             </div><!-- /.box -->
         </div><!-- /.box -->
     </div><!--/.col (left) -->

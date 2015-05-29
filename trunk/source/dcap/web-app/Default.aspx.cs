@@ -6,7 +6,13 @@ namespace web_app
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            if (!User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+            } else
+            {
+                Response.Redirect("~/main-pages/tong-quan.aspx");
+            }
         }
     }
 }

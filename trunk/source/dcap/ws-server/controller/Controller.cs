@@ -43,15 +43,15 @@ namespace ws_server.controller
         }
 
         public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH, String photoUrl, string createdBy)
         {
-            return m_PersistenceManager.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+            return m_PersistenceManager.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
         public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH)
         {
-            return m_PersistenceManager.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+            return m_PersistenceManager.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH);
         }
 
 

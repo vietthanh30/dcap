@@ -241,16 +241,18 @@ namespace ws_server.persistence
 
         private bool IsExistingAccount(string accountId)
         {
-            return true;
+            var accounts = RetrieveEquals<Account>("AccountId", Convert.ToInt64(accountId));
+            return accounts.Count > 0;
         }
 
         private int CountAccountByParentId(string parentId)
         {
-            return 0;
+            var accounts = RetrieveEquals<Account>("ParentId", Convert.ToInt64(parentId));
+            return accounts.Count;
         }
 
         public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH, String photoUrl, string createdBy)
         {
             if (String.Empty.Equals(userName))
             {
@@ -258,78 +260,235 @@ namespace ws_server.persistence
             }
             if (String.Empty.Equals(soCmnd))
             {
-                return "-2";
+                return "-1";
             }
             if (!String.Empty.Equals(parentId) & !IsExistingAccount(parentId))
             {
-                return "-3";
+                return "-1";
             }
             if (!String.Empty.Equals(directParentId) & !IsExistingAccount(directParentId))
             {
-                return "-4";
+                return "-1";
             }
-            if (!String.Empty.Equals(parentId) & CountAccountByParentId(parentId) >= 3)
+            if (!String.Empty.Equals(parentId) & CountAccountByParentId(parentId) > 3)
             {
-                return "-5";
+                return "-1";
             }
 
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count > 0)
             {
-                return CreateAccountForExistingMember(memberInfos[0], photoUrl);
+                return CreateAccountForExistingMember(memberInfos[0], parentId, directParentId, photoUrl, createdBy);
             }
-            return CreateAccountForNewMember(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+            return CreateAccountForNewMember(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
-        private string CreateAccountForExistingMember(MemberInfo memberInfo, string photoUrl)
+        private string CreateAccountForExistingMember(MemberInfo memberInfo, String parentId, String directParentId, string photoUrl, string createdBy)
         {
-            return "0";
-        }
-
-        private string CreateAccountForNewMember(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
-        {
-            var tenDangNhap = string.Empty;
-            int index = 0;
-            while (true)
-            {
-                if (tenDangNhap == string.Empty)
-                {
-                    tenDangNhap = userName.Replace(" ", "").ToUpper();
-                }
-                else
-                {
-                    tenDangNhap = userName.Replace(" ", "").ToUpper() + string.Format("{0:00}", ++index);
-                }
-                var users = RetrieveEquals<Users>("UserName", tenDangNhap);
-                if (users.Count == 0)
-                {
-                    break;
-                }
-            }
-
-
-            // Init user object
-            var memberInfo = new MemberInfo();
-            memberInfo.HoTen = userName;
-            memberInfo.NgaySinh = DateUtil.GetDateTime(ngaySinh);
-            memberInfo.SoCmnd = soCmnd;
-            memberInfo.NgayCap = DateTime.Now;
-            memberInfo.DiaChi = diaChi;
-            memberInfo.SoTaiKhoan = soTaiKhoan;
-            memberInfo.ChiNhanhNH = chiNhanhNH;
+            var memberID = memberInfo.MemberID;
+            var accountAmount = GetAccountAmountBy(memberID);
+            var tenDangNhap = GetNextTenDangNhap(memberID, accountAmount);
+            
             memberInfo.ImageUrl = photoUrl;
+            Save(memberInfo);
 
             var user = new Users { UserName = tenDangNhap, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
 
             // Save user
             Save(user);
 
-            return "0";
+            var users = RetrieveEquals<Users>("UserName", tenDangNhap);
+            if (users.Count == 0)
+            {
+                return "-1";
+            }
+            user = users[0];
+
+            var account = new Account();
+            account.AccountNumber = GetNextAccountNumber();
+            account.MemberId = memberID;
+            if (!String.Empty.Equals(parentId))
+            {
+                account.ParentId = Convert.ToInt64(parentId);
+            }
+            if (!String.Empty.Equals(directParentId))
+            {
+                account.ParentId = Convert.ToInt64(directParentId);
+            }
+            account.UserId = user.UserID;
+            account.ChildIndex = accountAmount;
+            account.IsActive = ConstUtil.ACTIVE_STATUS;
+            account.CreatedBy = createdBy;
+            account.CreatedDate = DateTime.Now;
+
+            Save(account);
+
+            return user.UserName;
+        }
+
+        private long GetNextAccountNumber()
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select max(a.AccountNumber) from Account a ");
+
+                // Get the matching objects
+                var max = query.UniqueResult();
+
+                // Set return value
+                if (max == null)
+                {
+                    return 1;
+                }
+                return Convert.ToInt32(max) + 1;
+            }
+        }
+
+        private string GetTenDangNhapBy(long memberId)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select u.UserName from Users u, Account a "
+                    + " where u.UserID = a.UserId and a.MemberId = :memberId");
+                query.SetParameter("memberId", memberId);
+
+                // Get the matching objects
+                var tenDangNhap = (string)query.UniqueResult();
+
+                // Set return value
+                return tenDangNhap;
+            }
+        }
+
+        private int GetAccountAmountBy(long memberId)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(a.MemberId) from Account a "
+                    + " where a.MemberId = :memberId");
+                query.SetParameter("memberId", memberId);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+            }
+        }
+
+        private string GetNextTenDangNhap(long memberId, int accountAmount)
+        {
+            var tenDangNhap = GetTenDangNhapBy(memberId);
+            if (char.IsNumber(tenDangNhap[tenDangNhap.Length-1]))
+            {
+                tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 2);
+            }
+            return tenDangNhap + string.Format("{0:00}", accountAmount);
+        }
+
+        private int CountUserNameBy(string username)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(u.UserName) from Users u "
+                    + " where u.UserName like ':username'");
+                query.SetParameter("username", username + "%");
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+            }
+        }
+        private string GetValidTenDangNhapBy(string fullname)
+        {
+            var tenDangNhap = fullname.Replace(" ", "").ToUpper();
+            var count = CountUserNameBy(tenDangNhap);
+            if (count == 0)
+            {
+                return tenDangNhap;
+            }
+            char achar = 'A';
+            char zchar = 'Z';
+            for (int i = 0; i <= count/26; i++)
+            {
+                if (i < count / 26)
+                {
+                    tenDangNhap = tenDangNhap + zchar;
+                }
+                else
+                {
+                    tenDangNhap = tenDangNhap + (achar + (count % 26) - 1);
+                }
+            }
+            return tenDangNhap;
+        }
+
+        private string CreateAccountForNewMember(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl, string createdBy)
+        {
+            var tenDangNhap = GetValidTenDangNhapBy(userName);
+
+            // Init member object
+            var memberInfo = new MemberInfo
+                                 {
+                                     HoTen = userName,
+                                     NgaySinh = DateUtil.GetDateTime(ngaySinh),
+                                     SoCmnd = soCmnd,
+                                     NgayCap = DateTime.Now,
+                                     DiaChi = diaChi,
+                                     SoTaiKhoan = soTaiKhoan,
+                                     ChiNhanhNH = chiNhanhNH,
+                                     ImageUrl = photoUrl
+                                 };
+            // Save memberInfo
+            Save(memberInfo);
+
+            var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
+            if (memberInfos.Count == 0)
+            {
+                return "-1";
+            }
+            memberInfo = memberInfos[0];
+
+
+            var user = new Users { UserName = tenDangNhap, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
+
+            // Save user
+            Save(user);
+
+            var users = RetrieveEquals<Users>("UserName", tenDangNhap);
+            if (users.Count == 0)
+            {
+                return "-1";
+            }
+            user = users[0];
+
+            var account = new Account();
+            account.AccountNumber = GetNextAccountNumber();
+            account.MemberId = memberInfo.MemberID;
+            if (!String.Empty.Equals(parentId))
+            {
+                account.ParentId = Convert.ToInt64(parentId);
+            }
+            if (!String.Empty.Equals(directParentId))
+            {
+                account.ParentId = Convert.ToInt64(directParentId);
+            }
+            account.UserId = user.UserID;
+            account.ChildIndex = 0;
+            account.IsActive = ConstUtil.ACTIVE_STATUS;
+            account.CreatedBy = createdBy;
+            account.CreatedDate = DateTime.Now;
+
+            Save(account);
+
+            return user.UserName;
         }
 
         public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH)
         {
             if (String.Empty.Equals(userName))
             {
@@ -337,12 +496,35 @@ namespace ws_server.persistence
             }
             if (String.Empty.Equals(soCmnd))
             {
-                return "-2";
+                return "-1";
             }
 
-            //Todo: Working
+            var allTenDangNhap = string.Empty;
 
-            return "0";
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select u.UserName from MemberInfo m, Users u, Account a "
+                    + " where m.MemberID = a.MemberId and u.UserID = a.UserId and m.SoCmnd = :soCmnd");
+                query.SetParameter("soCmnd", soCmnd);
+
+                // Get the matching objects
+                var list = (IList<string>) query.List();
+
+                foreach (var tenDangNhap in list)
+                {
+                    if (String.Empty.Equals(allTenDangNhap))
+                    {
+                        allTenDangNhap = tenDangNhap;   
+                    }
+                    else
+                    {
+                        allTenDangNhap = allTenDangNhap + ";" + tenDangNhap;
+                    }
+                }
+            }
+
+            // Set return value
+            return allTenDangNhap;
         }
 
 

@@ -20,15 +20,15 @@ namespace web_app.common
         }
 
         public static string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH, String photoUrl, string createdBy)
         {
-            return dcapService.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+            return dcapService.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
         public static string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl)
+            String chiNhanhNH)
         {
-            return dcapService.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+            return dcapService.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH);
         }
     }
 }

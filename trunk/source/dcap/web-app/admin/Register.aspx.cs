@@ -34,10 +34,12 @@ namespace web_app.admin
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
             var photoUrl = Server.MapPath("upload") + "\\" + soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
             SavePhotoToUploadFolder(photoUrl);
-            var returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
-            if (Convert.ToInt32(returnCode) == 0)
+            var createdBy = User.Identity.Name;
+            var returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            if (string.Compare(returnCode, "-1", true) != 0)
             {
-                RegisterUser_CreatedUser(sender, e);
+                AccountCode.Text = "Đăng ký thành công mã: " + returnCode;
+                AccountCode.Visible = true;
             }
             else
             {
@@ -56,12 +58,11 @@ namespace web_app.admin
             var diaChi = DiaChi.Value.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            var photoUrl = Server.MapPath("upload") + "\\" + soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
-            SavePhotoToUploadFolder(photoUrl);
-            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
-            if (Convert.ToInt32(returnCode) == 0)
+            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH);
+            if (string.Compare(returnCode, "-1", true) != 0)
             {
-                RegisterUser_CreatedUser(sender, e);
+                AccountCode.Text = "Mã hệ thống: " + returnCode;
+                AccountCode.Visible = true;
             }
             else
             {

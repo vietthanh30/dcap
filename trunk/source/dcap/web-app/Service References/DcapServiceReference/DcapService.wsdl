@@ -46,6 +46,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="soTaiKhoan" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="chiNhanhNH" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="photoUrl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -67,7 +68,6 @@
             <s:element minOccurs="0" maxOccurs="1" name="diaChi" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="soTaiKhoan" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="chiNhanhNH" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="photoUrl" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>

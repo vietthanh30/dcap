@@ -14,5 +14,7 @@ namespace core_lib.common
         public const string INCLUDE_HEADER = "INCLUDE_HEADER";
 
         public const string DEFAULT_PASSWORD = "12345";
+        public const string ACTIVE_STATUS = "Y";
+        public const string INACTIVE_STATUS = "N";
     }
 }
