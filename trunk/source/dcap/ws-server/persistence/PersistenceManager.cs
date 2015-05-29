@@ -508,13 +508,13 @@ namespace ws_server.persistence
                 query.SetParameter("soCmnd", soCmnd);
 
                 // Get the matching objects
-                var list = (IList<string>) query.List();
+                var list = query.List();
 
                 foreach (var tenDangNhap in list)
                 {
                     if (String.Empty.Equals(allTenDangNhap))
                     {
-                        allTenDangNhap = tenDangNhap;   
+                        allTenDangNhap = tenDangNhap.ToString();   
                     }
                     else
                     {
