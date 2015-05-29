@@ -30,13 +30,13 @@ namespace core_lib.common
             return GetDateTimeAsStringWithProvider(dateTime, dateFormat, "en-US");
         }
 
-        public static DateTime GetDateTime(string date)
+        public static DateTime? GetDateTime(string date)
         {
-            var result = new NgayThang(GetDateStringFromShortedFormat(date)).GetDateTime;
-            return result == null ? default(DateTime) : (DateTime)result;
+            date = date.Replace("/", "");
+            return new NgayThang(GetDateStringFromShortedFormat(date)).GetDateTime;
         }
 
-        public static DateTime TruncateDateTime(DateTime date)
+        public static DateTime? TruncateDateTime(DateTime date)
         {
             var dateVal = GetDateTimeAsDdmmyyyy(date);
             return GetDateTime(dateVal);

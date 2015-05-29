@@ -12,11 +12,11 @@ namespace ws_server.model
         // Member variables
         private string _hoTen = String.Empty;
 
-        private DateTime _ngaySinh = default(DateTime);
+        private DateTime? _ngaySinh;
 
         private String _soCmnd = String.Empty;
 
-        private DateTime _ngayCap = default(DateTime);
+        private DateTime? _ngayCap;
 
         private String _soDienThoai = String.Empty;
 
@@ -28,7 +28,7 @@ namespace ws_server.model
 
         private String _imageUrl = String.Empty;
 
-        private DateTime _createdDate = default(DateTime);
+        private DateTime _createdDate = DateTime.Now;
 
         private String _createdBy = String.Empty;
 
@@ -65,7 +65,7 @@ namespace ws_server.model
         /// <summary>
         /// Ngay Sinh
         /// </summary>
-        public virtual DateTime NgaySinh
+        public virtual DateTime? NgaySinh
         {
             get { return _ngaySinh; }
             set { _ngaySinh = value; }
@@ -83,7 +83,7 @@ namespace ws_server.model
         /// <summary>
         /// Ngay Cap
         /// </summary>
-        public virtual DateTime NgayCap
+        public virtual DateTime? NgayCap
         {
             get { return _ngayCap; }
             set { _ngayCap = value; }
