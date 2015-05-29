@@ -20,8 +20,16 @@ assembly="ws_server">
       <column name="SO_CMND" not-null="true" />
     </property>
 
+    <property name="NgayCap">
+      <column name="NGAY_CAP" not-null="false" />
+    </property>
+
     <property name="SoDienThoai">
       <column name="SO_DIEN_THOAI" not-null="false" />
+    </property>
+
+    <property name="DiaChi">
+      <column name="DIA_CHI" not-null="false" />
     </property>
 
     <property name="SoTaiKhoan">
@@ -33,7 +41,15 @@ assembly="ws_server">
     </property>
 
     <property name="ImageUrl">
-      <column name="MEMBER_CODE" not-null="true" />
+      <column name="IMAGE_URL" not-null="false" />
+    </property>
+
+    <property name="CreatedDate">
+      <column name="CREATED_DATE" not-null="false" />
+    </property>
+
+    <property name="CreatedBy">
+      <column name="CREATED_BY" not-null="false" />
     </property>
 
   </class>

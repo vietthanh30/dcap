@@ -170,11 +170,11 @@ namespace ws_server.persistence
 
         public string checkUser(string userName, string password)
         {
-            if (String.Empty.Equals(userName))
+            if (String.IsNullOrEmpty(userName))
             {
                 return "-1";
             }
-            if (String.Empty.Equals(password))
+            if (String.IsNullOrEmpty(password))
             {
                 return "-2";
             }
@@ -193,11 +193,11 @@ namespace ws_server.persistence
 
         public string changePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
         {
-            if (String.Empty.Equals(userName))
+            if (String.IsNullOrEmpty(userName))
             {
                 return "-1";
             }
-            if (String.Empty.Equals(oldPassword))
+            if (String.IsNullOrEmpty(oldPassword))
             {
                 return "-2";
             }
@@ -214,7 +214,7 @@ namespace ws_server.persistence
             {
                 return "-4";
             }
-            if (String.Empty.Equals(newPassword))
+            if (String.IsNullOrEmpty(newPassword))
             {
                 return "-5";
             }
@@ -222,7 +222,7 @@ namespace ws_server.persistence
             {
                 return "-6";
             }
-            if (String.Empty.Equals(confirmPassword))
+            if (String.IsNullOrEmpty(confirmPassword))
             {
                 return "-7";
             }
@@ -239,40 +239,55 @@ namespace ws_server.persistence
             return "0";
         }
 
-        private bool IsExistingAccount(string accountId)
+        private bool IsExistingAccount(long accountId)
         {
-            var accounts = RetrieveEquals<Account>("AccountId", Convert.ToInt64(accountId));
+            var accounts = RetrieveEquals<Account>("AccountId", accountId);
             return accounts.Count > 0;
         }
 
-        private int CountAccountByParentId(string parentId)
+        private int CountAccountByParentId(long parentId)
         {
-            var accounts = RetrieveEquals<Account>("ParentId", Convert.ToInt64(parentId));
+            var accounts = RetrieveEquals<Account>("ParentId", parentId);
             return accounts.Count;
         }
 
         public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
-            if (String.Empty.Equals(userName))
+            if (String.IsNullOrEmpty(userName))
             {
                 return "-1";
             }
-            if (String.Empty.Equals(soCmnd))
+            if (String.IsNullOrEmpty(soCmnd))
             {
                 return "-1";
             }
-            if (!String.Empty.Equals(parentId) & !IsExistingAccount(parentId))
+            if (!String.IsNullOrEmpty(parentId))
             {
-                return "-1";
+                long parentIdVal;
+                long.TryParse(parentId, out parentIdVal);
+                if (parentIdVal == -1 || !IsExistingAccount(parentIdVal))
+                {
+                    return "-1";
+                }
             }
-            if (!String.Empty.Equals(directParentId) & !IsExistingAccount(directParentId))
+            if (!String.IsNullOrEmpty(directParentId))
             {
-                return "-1";
+                long directParentIdVal;
+                long.TryParse(directParentId, out directParentIdVal);
+                if (directParentIdVal == -1 || !IsExistingAccount(directParentIdVal))
+                {
+                    return "-1";
+                }
             }
-            if (!String.Empty.Equals(parentId) & CountAccountByParentId(parentId) > 3)
+            if (!String.IsNullOrEmpty(parentId))
             {
-                return "-1";
+                long parentIdVal;
+                long.TryParse(parentId, out parentIdVal);
+                if (parentIdVal == -1 || (CountAccountByParentId(parentIdVal) > 3))
+                {
+                    return "-1";
+                }
             }
 
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
@@ -307,11 +322,11 @@ namespace ws_server.persistence
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
             account.MemberId = memberID;
-            if (!String.Empty.Equals(parentId))
+            if (!String.IsNullOrEmpty(parentId))
             {
                 account.ParentId = Convert.ToInt64(parentId);
             }
-            if (!String.Empty.Equals(directParentId))
+            if (!String.IsNullOrEmpty(directParentId))
             {
                 account.ParentId = Convert.ToInt64(directParentId);
             }
@@ -391,8 +406,8 @@ namespace ws_server.persistence
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery("select count(u.UserName) from Users u "
-                    + " where u.UserName like ':username'");
-                query.SetParameter("username", username + "%");
+                    + " where u.UserName like :userName");
+                query.SetParameter("userName", username + "%");
 
                 // Get the matching objects
                 var count = query.UniqueResult();
@@ -468,11 +483,11 @@ namespace ws_server.persistence
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
             account.MemberId = memberInfo.MemberID;
-            if (!String.Empty.Equals(parentId))
+            if (!String.IsNullOrEmpty(parentId))
             {
                 account.ParentId = Convert.ToInt64(parentId);
             }
-            if (!String.Empty.Equals(directParentId))
+            if (!String.IsNullOrEmpty(directParentId))
             {
                 account.ParentId = Convert.ToInt64(directParentId);
             }
@@ -490,11 +505,11 @@ namespace ws_server.persistence
         public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
             String chiNhanhNH)
         {
-            if (String.Empty.Equals(userName))
+            if (String.IsNullOrEmpty(userName))
             {
                 return "-1";
             }
-            if (String.Empty.Equals(soCmnd))
+            if (String.IsNullOrEmpty(soCmnd))
             {
                 return "-1";
             }
@@ -512,7 +527,7 @@ namespace ws_server.persistence
 
                 foreach (var tenDangNhap in list)
                 {
-                    if (String.Empty.Equals(allTenDangNhap))
+                    if (String.IsNullOrEmpty(allTenDangNhap))
                     {
                         allTenDangNhap = tenDangNhap.ToString();   
                     }
