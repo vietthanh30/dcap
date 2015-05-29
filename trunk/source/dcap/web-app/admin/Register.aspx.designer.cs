@@ -22,6 +22,15 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.HiddenField ContinueDestinationPageUrl;
         
         /// <summary>
+        /// InvalidCredentialsMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
+        
+        /// <summary>
         /// ErrorMessage control.
         /// </summary>
         /// <remarks>

@@ -41,7 +41,8 @@ namespace web_app.admin
             }
             else
             {
-                Response.Redirect("Register.aspx");
+                InvalidCredentialsMessage.Text = "Đăng ký không thành công.";
+                InvalidCredentialsMessage.Visible = true;
             }
         }
 
@@ -64,7 +65,8 @@ namespace web_app.admin
             }
             else
             {
-                Response.Redirect("Register.aspx");
+                InvalidCredentialsMessage.Text = "Có lỗi khi tra cứu.";
+                InvalidCredentialsMessage.Visible = true;
             }
         }
 

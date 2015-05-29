@@ -12,6 +12,10 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:HiddenField ID="ContinueDestinationPageUrl" runat="server" />
+    <p>
+        <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification"
+         Text="" Visible="False"></asp:Label>
+    </p>
     <span class="failureNotification">
         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
     </span>
