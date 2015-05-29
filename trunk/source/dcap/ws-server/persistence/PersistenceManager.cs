@@ -239,6 +239,16 @@ namespace ws_server.persistence
             return "0";
         }
 
+        private bool IsExistingAccount(string accountId)
+        {
+            return true;
+        }
+
+        private int CountAccountByParentId(string parentId)
+        {
+            return 0;
+        }
+
         public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
             String chiNhanhNH, String photoUrl)
         {
@@ -250,12 +260,35 @@ namespace ws_server.persistence
             {
                 return "-2";
             }
-            var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
-            if (memberInfos.Count > 0)
+            if (!String.Empty.Equals(parentId) & !IsExistingAccount(parentId))
             {
                 return "-3";
             }
+            if (!String.Empty.Equals(directParentId) & !IsExistingAccount(directParentId))
+            {
+                return "-4";
+            }
+            if (!String.Empty.Equals(parentId) & CountAccountByParentId(parentId) >= 3)
+            {
+                return "-5";
+            }
 
+            var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
+            if (memberInfos.Count > 0)
+            {
+                return CreateAccountForExistingMember(memberInfos[0], photoUrl);
+            }
+            return CreateAccountForNewMember(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl);
+        }
+
+        private string CreateAccountForExistingMember(MemberInfo memberInfo, string photoUrl)
+        {
+            return "0";
+        }
+
+        private string CreateAccountForNewMember(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
             var tenDangNhap = string.Empty;
             int index = 0;
             while (true)
