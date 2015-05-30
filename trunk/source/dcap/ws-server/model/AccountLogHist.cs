@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ws_server.model
 {
-    public class AccountLog
+    public class AccountLogHist
     {
         #region Declarations
 
@@ -16,13 +16,15 @@ namespace ws_server.model
 
         private string _dml = string.Empty;
 
+        private string _error = string.Empty;
+
         private DateTime _createdDate = default(DateTime);
 
         #endregion
 
     	#region Constructor
 
-        public AccountLog()
+        public AccountLogHist()
         {
         }
 
@@ -46,6 +48,15 @@ namespace ws_server.model
         {
             get { return _accountId; }
             set { _accountId = value; }
+        }
+
+        /// <summary>
+        /// Error
+        /// </summary>
+        public virtual string Error
+        {
+            get { return _error; }
+            set { _error = value; }
         }
 
         /// <summary>

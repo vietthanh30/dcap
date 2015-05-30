@@ -48,11 +48,15 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public AccountLog[] CalculateAccountLog()
+        public int CalculateAccountLog()
         {
-            return controller.CalculateAccountLog().ToArray();
+            return controller.CalculateAccountLog();
         }
 
-        
+        [WebMethod]
+        public int CalculateBonusOfAccountTree()
+        {
+            return controller.CalculateBonusOfAccountTree();
+        }
     }
 }

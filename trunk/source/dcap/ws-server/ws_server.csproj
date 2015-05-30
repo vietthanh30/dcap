@@ -81,8 +81,11 @@
     <EmbeddedResource Include="model\ManagerL3.hbm.xml" />
     <EmbeddedResource Include="model\ManagerL2.hbm.xml" />
     <EmbeddedResource Include="model\ManagerL1.hbm.xml" />
+    <EmbeddedResource Include="model\AccountLogHist.hbm.xml" />
     <Content Include="view\DcapService.asmx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -96,6 +99,7 @@
     <Compile Include="model\AccountLog.cs" />
     <Compile Include="model\AccountBonus.cs" />
     <Compile Include="model\AccountPreCalc.cs" />
+    <Compile Include="model\AccountLogHist.cs" />
     <Compile Include="model\ManagerL6.cs" />
     <Compile Include="model\ManagerL5.cs" />
     <Compile Include="model\ManagerL4.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="model\Roles.cs" />
     <Compile Include="model\UserRole.cs" />
     <Compile Include="model\Users.cs" />
+    <Compile Include="persistence\AccountPersistenceManager.cs" />
     <Compile Include="persistence\PersistenceManager.cs" />
     <Compile Include="view\DcapService.asmx.cs">
       <DependentUpon>DcapService.asmx</DependentUpon>

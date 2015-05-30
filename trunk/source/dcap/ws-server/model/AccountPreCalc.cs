@@ -20,6 +20,8 @@ namespace ws_server.model
 
         private long _levelIndex = -1;
 
+        private string _bonusType = string.Empty;
+
         private string _isCalculated = string.Empty;
 
         private DateTime _calculatedDate = default(DateTime);
@@ -89,6 +91,15 @@ namespace ws_server.model
         {
             get { return _isCalculated; }
             set { _isCalculated= value; }
+        }
+
+        /// <summary>
+        /// Bonus Type
+        /// </summary>
+        public virtual string BonusType
+        {
+            get { return _bonusType; }
+            set { _bonusType = value; }
         }
         
         /// <summary>

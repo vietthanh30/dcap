@@ -18,7 +18,7 @@ namespace ws_server.model
 
         private DateTime _createdDate = default(DateTime);
 
-        private long _bonusAmount = -1;
+        private double _bonusAmount = 0;
 
         private string _month = string.Empty;
 
@@ -65,7 +65,7 @@ namespace ws_server.model
         /// <summary>
         /// Bonus Amount
         /// </summary>
-        public virtual long BonusAmount
+        public virtual double BonusAmount
         {
             get { return _bonusAmount; }
             set { _bonusAmount = value; }

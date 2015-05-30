@@ -28,6 +28,10 @@ assembly="ws_server">
       <column name="IS_CALCULATED" not-null="false" />
     </property>
 
+    <property name="BonusType">
+      <column name="BONUS_TYPE" not-null="false" />
+    </property>
+
     <property name="CalculatedDate">
       <column name="CALCULATED_DATE" not-null="false" />
     </property>

@@ -542,7 +542,64 @@ namespace ws_server.persistence
             return allTenDangNhap;
         }
 
+				public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
+        {
+            DateTime now = DateTime.Now;
+            var bonus = new AccountBonus
+                            {
+                                AccountId = accountId,
+                                BonusAmount = bonusAmount,
+                                BonusType = bonusType,
+                                Month = now.ToString("yyyyMM"),
+                                CreatedDate = now
+                            };
 
+            Save(bonus);
+            return bonus;
+        }
+        
+        public ManagerL1 InsertQl1Tree(long accountId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ManagerL2 InsertQl2Tree(long calcAccountId)
+        {
+            throw new NotImplementedException();
+        }
+				
+        public IList<AccountPreCalc> GetPreCalcQueue()
+        {
+            return RetrieveEquals<AccountPreCalc>("IsCalculated", "N");
+        }
+
+        public long CountUpLevel(long calcAccountId, int accountLevel)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(AccountPreCalc));
+                criteria.Add(Expression.Eq("CalcAccountId", calcAccountId));
+                criteria.Add(Expression.Lt("AccountLevel", accountLevel));
+
+                return (long) criteria.UniqueResult();
+            }
+        }
+
+        public long CountLeft(long calcAccountId, int accountLevel, long levelIndex)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(AccountPreCalc));
+                criteria.Add(Expression.Eq("CalcAccountId", calcAccountId));
+                criteria.Add(Expression.Eq("AccountLevel", accountLevel));
+                criteria.Add(Expression.Lt("LevelIndex", levelIndex));
+
+                return (long)criteria.UniqueResult();
+            }
+        }
+				
         public IList<AccountLog> GetAccountLog()
         {
             return RetrieveAll<AccountLog>(SessionAction.BeginAndEnd);

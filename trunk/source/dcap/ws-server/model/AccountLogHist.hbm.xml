@@ -17,6 +17,10 @@ assembly="ws_server">
       <column name="DML" not-null="true" />
     </property>
 
+    <property name="Error">
+      <column name="ERROR" not-null="true" />
+    </property>
+
     <property name="CreatedDate">
       <column name="CREATED_DATE" not-null="true" />
     </property>
