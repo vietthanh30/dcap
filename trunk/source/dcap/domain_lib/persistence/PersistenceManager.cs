@@ -390,8 +390,9 @@ namespace domain_lib.persistence
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery("select u.UserName from Users u, Account a "
-                    + " where u.UserID = a.UserId and a.MemberId = :memberId");
+                    + " where u.UserID = a.UserId and a.MemberId = :memberId order by a.ChildIndex asc");
                 query.SetParameter("memberId", memberId);
+                query.SetMaxResults(1);
 
                 // Get the matching objects
                 var tenDangNhap = (string)query.UniqueResult();
