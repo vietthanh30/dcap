@@ -176,6 +176,8 @@ namespace domain_lib.controller
                         }
 
                         //mark calculated
+                        accountPreCalc.IsCalculated = "Y";
+                        m_PersistenceManager.Save(accountPreCalc);
                     }
                 }
                 return 1;
@@ -189,10 +191,10 @@ namespace domain_lib.controller
         private ManagerL1 AddToQl1Tree(AccountPreCalc accountPreCalc)
         {
             // Get level and level_index
-            ManagerL1 ql1LatestChild = m_PersistenceManager.GetQl1LatestChild(accountPreCalc.CalcAccountId);
+            ManagerL1 lastestChild = m_PersistenceManager.GetQl1LatestChild(accountPreCalc.CalcAccountId);
             
             // Find Parent account
-            if (ql1LatestChild == null)
+            if (lastestChild == null)
             {
                 var root = new ManagerL1
                                {
@@ -210,19 +212,19 @@ namespace domain_lib.controller
             }else
             {
 
-                var newLevel = ql1LatestChild.Level;
-                var newLevelIndex = ql1LatestChild.LevelIndex + 1;
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
                
-                if (Math.Pow(3,ql1LatestChild.Level)==ql1LatestChild.LevelIndex)
+                if (Math.Pow(3,lastestChild.Level)==lastestChild.LevelIndex)
                 {
-                    newLevel = ql1LatestChild.Level + 1;
+                    newLevel = lastestChild.Level + 1;
                     newLevelIndex = 1;
                 }
 
                 var l1ParentLevel = newLevel - 1;
                 var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3)+1) : (newLevelIndex/3);
 
-                ManagerL1 l1Parent = m_PersistenceManager.FindQl1Parent(l1ParentLevel, l1ParentLevelIndex);
+                ManagerL1 managerParent = m_PersistenceManager.FindQl1Parent(l1ParentLevel, l1ParentLevelIndex);
                 
                 // Insert into QL1 tree
                 var newNode = new ManagerL1
@@ -232,7 +234,7 @@ namespace domain_lib.controller
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
                     IsActive = "Y",
-                    ParentId = l1Parent.AccountId,
+                    ParentId = managerParent.AccountId,
                     CreatedBy = "JOB",
                     CreatedDate = DateTime.Now
                 };
@@ -242,13 +244,62 @@ namespace domain_lib.controller
             }
         }
 
-        private void AddToQl2Tree(AccountPreCalc accountPreCalc)
+        private ManagerL2 AddToQl2Tree(AccountPreCalc accountPreCalc)
         {
-            // Get level and level_index
 
+            // Get level and level_index
+            ManagerL2 lastestChild = m_PersistenceManager.GetQl2LatestChild(accountPreCalc.CalcAccountId);
+            
             // Find Parent account
-            // Insert into QL1 tree
-            m_PersistenceManager.InsertQl1Tree(accountPreCalc.CalcAccountId);
+            if (lastestChild == null)
+            {
+                var root = new ManagerL2
+                               {
+                                   AccountId = accountPreCalc.AccountId,
+                                   ChildIndex = 0,
+                                   Level = 0,
+                                   LevelIndex = 0,
+                                   IsActive = "Y",
+                                   ParentId = -1,
+                                   CreatedBy = "JOB",
+                                   CreatedDate = DateTime.Now
+                               };
+                m_PersistenceManager.Save(root);
+                return root;
+            }
+            else
+            {
+
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
+
+                if (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex)
+                {
+                    newLevel = lastestChild.Level + 1;
+                    newLevelIndex = 1;
+                }
+
+                var l1ParentLevel = newLevel - 1;
+                var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3) + 1) : (newLevelIndex/3);
+
+                ManagerL2 managerParent = m_PersistenceManager.FindQl2Parent(l1ParentLevel, l1ParentLevelIndex);
+
+                // Insert into QL2 tree
+                var newNode = new ManagerL2
+                                  {
+                                      AccountId = accountPreCalc.AccountId,
+                                      ChildIndex = (newLevelIndex/3) + 1,
+                                      Level = newLevel,
+                                      LevelIndex = newLevelIndex,
+                                      IsActive = "Y",
+                                      ParentId = managerParent.AccountId,
+                                      CreatedBy = "JOB",
+                                      CreatedDate = DateTime.Now
+                                  };
+                m_PersistenceManager.Save(newNode);
+
+                return newNode;
+            }
         }
 
         private void CalculateHtBonus(AccountPreCalc accountPreCalc)
