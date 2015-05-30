@@ -24,9 +24,9 @@ namespace domain_lib.model
 
         private string _isCalculated = string.Empty;
 
-        private DateTime _calculatedDate = default(DateTime);
+        private DateTime? _calculatedDate;
 
-        private DateTime _createdDate = default(DateTime);
+        private DateTime _createdDate;
         
         #endregion
 
@@ -105,7 +105,7 @@ namespace domain_lib.model
         /// <summary>
         /// Calculated Date.
         /// </summary>
-        public virtual DateTime CalculatedDate
+        public virtual DateTime? CalculatedDate
         {
             get { return _calculatedDate; }
             set { _calculatedDate = value; }
