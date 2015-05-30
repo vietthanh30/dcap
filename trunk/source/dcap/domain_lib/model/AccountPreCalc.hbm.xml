@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+xmlns="urn:nhibernate-mapping-2.2"
+namespace="domain_lib.model"
+assembly="domain_lib">
+  <class name="AccountPreCalc" table="ACCOUNT_PRE_CALC" lazy="false">
+    <id name="Id" column="ID" unsaved-value="-1">
+      <generator class="identity" />
+    </id>
+    
+    <property name="AccountId">
+      <column name="ACCOUNT_ID" not-null="false" />
+    </property>
+
+    <property name="CalcAccountId">
+      <column name="CALC_ACCOUNT_ID" not-null="false" />
+    </property>
+    
+    <property name="AccountLevel">      
+      <column name="ACCOUNT_LEVEL" not-null="false" />
+    </property>
+
+    <property name="LevelIndex">
+      <column name="LEVEL_INDEX" not-null="false" />
+    </property>
+
+    <property name="IsCalculated">
+      <column name="IS_CALCULATED" not-null="false" />
+    </property>
+
+    <property name="BonusType">
+      <column name="BONUS_TYPE" not-null="false" />
+    </property>
+
+    <property name="CalculatedDate">
+      <column name="CALCULATED_DATE" not-null="false" />
+    </property>
+
+    <property name="CreatedDate">
+      <column name="CREATED_DATE" not-null="false" />
+    </property>
+
+  </class>
+</hibernate-mapping>
