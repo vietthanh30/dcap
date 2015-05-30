@@ -37,13 +37,20 @@ namespace web_app.admin
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
             var photoName = soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
             var photoPath = Server.MapPath("upload") + "\\" + photoName;
-            SavePhotoToUploadFolder(photoPath);
-            var photoUrl = "~/upload/" + photoName;
+            var returnCode = SavePhotoToUploadFolder(photoPath);
+            var photoUrl = string.Empty;
+            if (string.Compare(returnCode, "-1") != 0)
+            {
+                photoUrl = "~/upload/" + photoName;
+            }
             var createdBy = User.Identity.Name;
-            var returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
             if (string.Compare(returnCode, "-1", true) != 0)
             {
-                AccountCode.Text = "Đăng ký thành công mã: " + returnCode;
+                var codes = returnCode.Split(new[] {'|'});
+                var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
+                var tenDangNhap = codes[1];
+                AccountCode.Text = "Id thành viên: " + accountNumber + "; Tên đăng nhập: " + tenDangNhap + "/12345";
                 AccountCode.Visible = true;
             }
             else
@@ -69,7 +76,25 @@ namespace web_app.admin
             var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
             if (string.Compare(returnCode, "-1", true) != 0)
             {
-                AccountCode.Text = "Mã đăng nhập hệ thống: " + returnCode;
+                var message = "";
+                var records = returnCode.Split(new[] { ';' });
+                int count = 0;
+                foreach (var record in records)
+                {
+                    var codes = record.Split(new[] { '|' });
+                    var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
+                    var tenDangNhap = codes[1];
+                    if (count == 0)
+                    {
+                        message = "(Id thành viên, Tên đăng nhập): (" + accountNumber + ", " + tenDangNhap + ")";
+                    }
+                    else
+                    {
+                        message += "; (" + accountNumber + ", " + tenDangNhap + ")";
+                    }
+                    count++;
+                }
+                AccountCode.Text = message;
                 AccountCode.Visible = true;
             }
             else
@@ -79,7 +104,7 @@ namespace web_app.admin
             }
         }
 
-        private void SavePhotoToUploadFolder(string saveLocation)
+        private string SavePhotoToUploadFolder(string saveLocation)
         {
             if ((filePhotoUpload.PostedFile != null) && (filePhotoUpload.PostedFile.ContentLength > 0))
             {
@@ -87,12 +112,14 @@ namespace web_app.admin
                 try
                 {
                     filePhotoUpload.PostedFile.SaveAs(saveLocation);
+                    return "0";
                 }
                 catch (Exception ex)
                 {
                     Response.Write("Error: " + ex.Message);
                 }
             }
+            return "-1";
         }
     }
 }

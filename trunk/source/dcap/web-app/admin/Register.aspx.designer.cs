@@ -49,6 +49,15 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.ValidationSummary RegisterUserValidationSummary;
         
         /// <summary>
+        /// AccountCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AccountCode;
+        
+        /// <summary>
         /// ParentId control.
         /// </summary>
         /// <remarks>
@@ -139,6 +148,15 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.RadioButtonList GioiTinh;
         
         /// <summary>
+        /// GioiTinhRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator GioiTinhRequired;
+        
+        /// <summary>
         /// DiaChi control.
         /// </summary>
         /// <remarks>
@@ -191,14 +209,5 @@ namespace web_app.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CreateUserButton;
-        
-        /// <summary>
-        /// AccountCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AccountCode;
     }
 }
