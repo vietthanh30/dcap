@@ -19,6 +19,10 @@ assembly="ws_server">
     <property name="AccountNumber">
       <column name="ACCOUNT_NUMBER" not-null="false" />
     </property>
+
+    <property name="ChildIndex">
+      <column name="CHILD_INDEX" not-null="false" />
+    </property>
     
     <property name="IsActive">
       <column name="IS_ACTIVE" not-null="false" />
