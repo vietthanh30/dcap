@@ -9,9 +9,6 @@ namespace web_app
             if (!User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/admin/Login.aspx");
-            } else
-            {
-                Response.Redirect("~/main-pages/tong-quan.aspx");
             }
         }
     }

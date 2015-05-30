@@ -113,7 +113,8 @@
 
 			</nav>
         </header> <!-- /.content-main-header -->
-        
+
+        <asp:ContentPlaceHolder ID="LeftContent" runat="server">
         <asp:LoginView ID="LoginView1" runat="server" EnableViewState="false">
             <LoggedInTemplate>
              <div class="left-side">
@@ -157,6 +158,7 @@
              </div>  
             </LoggedInTemplate>
         </asp:LoginView>
+        </asp:ContentPlaceHolder>
        
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
