@@ -142,66 +142,42 @@ namespace domain_lib.controller
                         // truc tiep
                         if (accountPreCalc.BonusType == "TT")
                         {
-                            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 1.2, "TT");
+                            CalculateTtBonus(accountPreCalc);
                         }
 
                         // can cap
                         if ((accountPreCalc.LevelIndex % 3)!=1)
                         {
-                            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.2, "CC");
+                            CalculateCcBonus(accountPreCalc);
                         }
 
                         // ma roi
                         if (accountPreCalc.AccountLevel>1)
                         {
-                            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.2, "MR");
+                            CalculateMrBonus(accountPreCalc);
                         }
 
                         // he thong
                         if (accountPreCalc.AccountLevel>1)
                         {
-                            double bonusAmmount;
-                            switch(accountPreCalc.AccountLevel)
-                            {   
-                                case 2:
-                                    bonusAmmount = 0.2;
-                                    break;
-                                case 3:
-                                    bonusAmmount = 0.2;
-                                    break;
-                                case 4:
-                                    bonusAmmount = 0.03;
-                                    break;
-                                case 5:
-                                    bonusAmmount = 0.01;
-                                    break;
-                                case 6:
-                                    bonusAmmount = 0.005;
-                                    break;
-                                case 7:
-                                    bonusAmmount = 0.003;
-                                    break;
-                                default:
-                                    bonusAmmount = 0.001;
-                                    break;
-                            }
-
-                            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, bonusAmmount, "HT");
+                            CalculateHtBonus(accountPreCalc);
                         }
 
                         // insert into QL1 tree
                         if (accountPreCalc.AccountLevel == 2 && accountPreCalc.LevelIndex == 9)
                         {
-                            m_PersistenceManager.InsertQl1Tree(accountPreCalc.CalcAccountId);
+                            AddToQl1Tree(accountPreCalc);
                         }
 
                         // insert into QL2 tree
                         if (accountPreCalc.AccountLevel == 3 && accountPreCalc.LevelIndex == 27)
                         {
-                            m_PersistenceManager.InsertQl2Tree(accountPreCalc.CalcAccountId);
+                            AddToQl2Tree(accountPreCalc);
                         }
 
                         //mark calculated
+                        accountPreCalc.IsCalculated = "Y";
+                        m_PersistenceManager.Save(accountPreCalc);
                     }
                 }
                 return 1;
@@ -212,8 +188,172 @@ namespace domain_lib.controller
             }
         }
 
+        private ManagerL1 AddToQl1Tree(AccountPreCalc accountPreCalc)
+        {
+            // Get level and level_index
+            ManagerL1 lastestChild = m_PersistenceManager.GetQl1LatestChild(accountPreCalc.CalcAccountId);
+            
+            // Find Parent account
+            if (lastestChild == null)
+            {
+                var root = new ManagerL1
+                               {
+                                   AccountId = accountPreCalc.AccountId,
+                                   ChildIndex = 0,
+                                   Level = 0,
+                                   LevelIndex = 0,
+                                   IsActive = "Y",
+                                   ParentId = -1,
+                                   CreatedBy = "JOB",
+                                   CreatedDate = DateTime.Now
+                               };
+                m_PersistenceManager.Save(root);
+                return root;
+            }else
+            {
+
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
+               
+                if (Math.Pow(3,lastestChild.Level)==lastestChild.LevelIndex)
+                {
+                    newLevel = lastestChild.Level + 1;
+                    newLevelIndex = 1;
+                }
+
+                var l1ParentLevel = newLevel - 1;
+                var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3)+1) : (newLevelIndex/3);
+
+                ManagerL1 managerParent = m_PersistenceManager.FindQl1Parent(l1ParentLevel, l1ParentLevelIndex);
+                
+                // Insert into QL1 tree
+                var newNode = new ManagerL1
+                {
+                    AccountId = accountPreCalc.AccountId,
+                    ChildIndex = (newLevelIndex/3)+1,
+                    Level = newLevel,
+                    LevelIndex = newLevelIndex,
+                    IsActive = "Y",
+                    ParentId = managerParent.AccountId,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(newNode);
+                
+                return newNode;
+            }
+        }
+
+        private ManagerL2 AddToQl2Tree(AccountPreCalc accountPreCalc)
+        {
+
+            // Get level and level_index
+            ManagerL2 lastestChild = m_PersistenceManager.GetQl2LatestChild(accountPreCalc.CalcAccountId);
+            
+            // Find Parent account
+            if (lastestChild == null)
+            {
+                var root = new ManagerL2
+                               {
+                                   AccountId = accountPreCalc.AccountId,
+                                   ChildIndex = 0,
+                                   Level = 0,
+                                   LevelIndex = 0,
+                                   IsActive = "Y",
+                                   ParentId = -1,
+                                   CreatedBy = "JOB",
+                                   CreatedDate = DateTime.Now
+                               };
+                m_PersistenceManager.Save(root);
+                return root;
+            }
+            else
+            {
+
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
+
+                if (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex)
+                {
+                    newLevel = lastestChild.Level + 1;
+                    newLevelIndex = 1;
+                }
+
+                var l1ParentLevel = newLevel - 1;
+                var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3) + 1) : (newLevelIndex/3);
+
+                ManagerL2 managerParent = m_PersistenceManager.FindQl2Parent(l1ParentLevel, l1ParentLevelIndex);
+
+                // Insert into QL2 tree
+                var newNode = new ManagerL2
+                                  {
+                                      AccountId = accountPreCalc.AccountId,
+                                      ChildIndex = (newLevelIndex/3) + 1,
+                                      Level = newLevel,
+                                      LevelIndex = newLevelIndex,
+                                      IsActive = "Y",
+                                      ParentId = managerParent.AccountId,
+                                      CreatedBy = "JOB",
+                                      CreatedDate = DateTime.Now
+                                  };
+                m_PersistenceManager.Save(newNode);
+
+                return newNode;
+            }
+        }
+
+        private void CalculateHtBonus(AccountPreCalc accountPreCalc)
+        {
+            double bonusAmmount;
+            switch(accountPreCalc.AccountLevel)
+            {   
+                case 2:
+                    bonusAmmount = 0.2;
+                    break;
+                case 3:
+                    bonusAmmount = 0.2;
+                    break;
+                case 4:
+                    bonusAmmount = 0.03;
+                    break;
+                case 5:
+                    bonusAmmount = 0.01;
+                    break;
+                case 6:
+                    bonusAmmount = 0.005;
+                    break;
+                case 7:
+                    bonusAmmount = 0.003;
+                    break;
+                default:
+                    bonusAmmount = 0.001;
+                    break;
+            }
+
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, bonusAmmount, "HT");
+        }
+
+        private void CalculateMrBonus(AccountPreCalc accountPreCalc)
+        {
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.2, "MR");
+        }
+
+        private void CalculateCcBonus(AccountPreCalc accountPreCalc)
+        {
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.2, "CC");
+        }
+
+        private void CalculateTtBonus(AccountPreCalc accountPreCalc)
+        {
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 1.2, "TT");
+        }
+
         private bool IsCalculated(AccountPreCalc accountPreCalc)
         {
+            if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "TT")
+                return true;
+            if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "LK" && accountPreCalc.LevelIndex > 1)
+                return true;
             return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel) == Math.Pow(3, accountPreCalc.AccountLevel - 1) && m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1);
         }
         
