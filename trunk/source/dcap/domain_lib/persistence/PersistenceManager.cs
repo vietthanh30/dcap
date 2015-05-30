@@ -364,7 +364,7 @@ namespace domain_lib.persistence
 
             Save(account);
 
-            return user.UserName;
+            return account.AccountNumber + "|" + user.UserName;
         }
 
         private long GetNextAccountNumber()
@@ -522,7 +522,7 @@ namespace domain_lib.persistence
 
             Save(account);
 
-            return user.UserName;
+            return account.AccountNumber + "|" + user.UserName;
         }
 
         public string SearchUser(String parentId, String directParentId, String userName, DateTime ngaySinh, String soCmnd, DateTime ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
@@ -537,32 +537,35 @@ namespace domain_lib.persistence
                 return "-1";
             }
 
-            var allTenDangNhap = string.Empty;
+            var allResults = string.Empty;
 
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select u.UserName from MemberInfo m, Users u, Account a "
+                var query = session.CreateQuery("select a.AccountNumber, u.UserName from MemberInfo m, Users u, Account a "
                     + " where m.MemberID = a.MemberId and u.UserID = a.UserId and m.SoCmnd = :soCmnd");
                 query.SetParameter("soCmnd", soCmnd);
 
                 // Get the matching objects
                 var list = query.List();
 
-                foreach (var tenDangNhap in list)
+                foreach (var row in list)
                 {
-                    if (String.IsNullOrEmpty(allTenDangNhap))
+                    var values = (Object[]) row;
+                    var accountNumber = values[0];
+                    var tenDangNhap = values[1];
+                    if (String.IsNullOrEmpty(allResults))
                     {
-                        allTenDangNhap = tenDangNhap.ToString();   
+                        allResults = accountNumber + "|" + tenDangNhap;   
                     }
                     else
                     {
-                        allTenDangNhap = allTenDangNhap + ";" + tenDangNhap;
+                        allResults = allResults + ";" + accountNumber + "|" + tenDangNhap;
                     }
                 }
             }
 
             // Set return value
-            return allTenDangNhap;
+            return allResults;
         }
 
 				public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)

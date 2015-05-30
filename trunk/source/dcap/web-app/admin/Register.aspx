@@ -13,21 +13,32 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:HiddenField ID="ContinueDestinationPageUrl" runat="server" />
-    <p>
-        <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification"
-         Text="" Visible="False"></asp:Label>
-    </p>
-    <span class="failureNotification">
-        <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
-    </span>
-    <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification" 
-            ValidationGroup="RegisterUserValidationGroup"/>
     <div class="row">
     <!-- left column -->
         <div class="col-xs-12">
         <!-- general form elements -->
             <div class="box box-primary">
-                <div class="box-body">
+                <div class="box-body">   
+                <div class="row">
+					<div class="col-xs-8">
+                    <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification"
+                     Text="" Visible="False"></asp:Label>
+                     </div>
+                </div>          
+                <div class="row">
+					<div class="col-xs-8">
+                    <span class="failureNotification">
+                        <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
+                    </span>
+                    <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification" 
+                            ValidationGroup="RegisterUserValidationGroup"/>  
+                    </div>
+                </div>          
+                <div class="row">
+					<div class="col-xs-8">
+                    <asp:Label ID="AccountCode" runat="server" Text="" ForeColor="Blue" Visible="False"></asp:Label>
+                    </div>
+                </div>
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="ParentId">Người giới thiệu</label>
@@ -99,7 +110,7 @@
                         <asp:ListItem Text="Nam" Value="M" />
                         <asp:ListItem Text="Nữ" Value="F" />
                     </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="GioiTinh" 
+                    <asp:RequiredFieldValidator ID="GioiTinhRequired" runat="server" ControlToValidate="GioiTinh" 
                         CssClass="failureNotification" ErrorMessage="Giới tính bắt buộc nhập." ToolTip="Giới tính bắt buộc nhập." 
                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
 					</div>
@@ -136,10 +147,7 @@
                 <asp:Button ID="CreateUserButton" runat="server" Text="Cập nhật" 
                         ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" 
                     onclick="RegisterUser_CreatingUser"/>
-                </div>                
-                <p>
-                    <asp:Label ID="AccountCode" runat="server" Text="" Visible="False"></asp:Label>
-                </p>
+                </div> 
             </div><!-- /.box -->
         </div><!-- /.box -->
     </div><!--/.col (left) -->

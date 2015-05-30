@@ -40,9 +40,9 @@
             <s:element minOccurs="0" maxOccurs="1" name="parentId" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="directParentId" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="ngaySinh" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ngaySinh" nillable="true" type="s:dateTime" />
             <s:element minOccurs="0" maxOccurs="1" name="soCmnd" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="ngayCap" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ngayCap" nillable="true" type="s:dateTime" />
             <s:element minOccurs="0" maxOccurs="1" name="soDienThoai" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="diaChi" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="gioiTinh" type="s:string" />
@@ -66,9 +66,9 @@
             <s:element minOccurs="0" maxOccurs="1" name="parentId" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="directParentId" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="ngaySinh" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ngaySinh" nillable="true" type="s:dateTime" />
             <s:element minOccurs="0" maxOccurs="1" name="soCmnd" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="ngayCap" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ngayCap" nillable="true" type="s:dateTime" />
             <s:element minOccurs="0" maxOccurs="1" name="soDienThoai" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="diaChi" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="gioiTinh" type="s:string" />
