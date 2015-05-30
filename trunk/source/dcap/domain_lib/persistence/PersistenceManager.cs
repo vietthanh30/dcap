@@ -688,17 +688,17 @@ namespace domain_lib.persistence
             }
         }
 
-        public ManagerL1 GetQl1LatestChild()
+        public Object GetQlLatestChild<T>()
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
 
                 // Create a criteria object with the specified criteria
-                ICriteria criteria = session.CreateCriteria(typeof(ManagerL1));
+                ICriteria criteria = session.CreateCriteria(typeof(T));
                 criteria.AddOrder(Order.Desc("Level")).AddOrder(Order.Desc("LevelIndex"));
                 criteria.SetMaxResults(1);
 
-                var all = criteria.List<ManagerL1>();
+                var all = criteria.List<T>();
                 if (all == null || all.Count == 0)
                     return null;
                 // Set return value
@@ -706,52 +706,16 @@ namespace domain_lib.persistence
             }
         }
 
-        public ManagerL2 GetQl2LatestChild(long parentId)
-        {
-            using (ISession session = m_SessionFactory.OpenSession())
-            {
-
-                // Create a criteria object with the specified criteria
-                ICriteria criteria = session.CreateCriteria(typeof(ManagerL2));
-                criteria.Add(Expression.Eq("ParentId", parentId));
-                criteria.AddOrder(Order.Desc("Level")).AddOrder(Order.Desc("LevelIndex"));
-                criteria.SetMaxResults(1);
-
-                var all = criteria.List<ManagerL2>();
-                if (all == null || all.Count == 0)
-                    return null;
-                // Set return value
-                return all[0];
-            }
-        }
-
-        public ManagerL1 FindQl1Parent(long level, long levelIndex)
+        public Object FindQlByLocation<T>(long level, long levelIndex)
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 // Create a criteria object with the specified criteria
-                ICriteria criteria = session.CreateCriteria(typeof(ManagerL1));
+                ICriteria criteria = session.CreateCriteria(typeof(T));
                 criteria.Add(Expression.Eq("Level", level));
-                criteria.Add(Expression.Lt("LevelIndex", levelIndex));
+                criteria.Add(Expression.Eq("LevelIndex", levelIndex));
 
-                var all = criteria.List<ManagerL1>();
-                if (all == null || all.Count == 0)
-                    return null;
-                // Set return value
-                return all[0];
-            }
-        }
-
-        public ManagerL2 FindQl2Parent(long level, long levelIndex)
-        {
-            using (ISession session = m_SessionFactory.OpenSession())
-            {
-                // Create a criteria object with the specified criteria
-                ICriteria criteria = session.CreateCriteria(typeof(ManagerL2));
-                criteria.Add(Expression.Eq("Level", level));
-                criteria.Add(Expression.Lt("LevelIndex", levelIndex));
-
-                var all = criteria.List<ManagerL2>();
+                var all = criteria.List<T>();
                 if (all == null || all.Count == 0)
                     return null;
                 // Set return value

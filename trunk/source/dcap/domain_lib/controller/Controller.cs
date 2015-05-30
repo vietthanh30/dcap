@@ -193,7 +193,7 @@ namespace domain_lib.controller
         private ManagerL1 AddToQl1Tree(AccountPreCalc accountPreCalc)
         {
             // Get level and level_index
-            ManagerL1 lastestChild = m_PersistenceManager.GetQl1LatestChild();
+            var lastestChild = (ManagerL1) m_PersistenceManager.GetQlLatestChild<ManagerL1>();
             
             // Find Parent account
             if (lastestChild == null)
@@ -226,7 +226,7 @@ namespace domain_lib.controller
                 var l1ParentLevel = newLevel - 1;
                 var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3)+1) : (newLevelIndex/3);
 
-                ManagerL1 managerParent = m_PersistenceManager.FindQl1Parent(l1ParentLevel, l1ParentLevelIndex);
+                var managerParent = (ManagerL1) m_PersistenceManager.FindQlByLocation<ManagerL1>(l1ParentLevel, l1ParentLevelIndex);
                 
                 // Insert into QL1 tree
                 var newNode = new ManagerL1
@@ -250,7 +250,7 @@ namespace domain_lib.controller
         {
 
             // Get level and level_index
-            ManagerL2 lastestChild = m_PersistenceManager.GetQl2LatestChild(accountPreCalc.CalcAccountId);
+            var lastestChild = (ManagerL2) m_PersistenceManager.GetQlLatestChild<ManagerL2>();
             
             // Find Parent account
             if (lastestChild == null)
@@ -284,7 +284,7 @@ namespace domain_lib.controller
                 var l1ParentLevel = newLevel - 1;
                 var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3) + 1) : (newLevelIndex/3);
 
-                ManagerL2 managerParent = m_PersistenceManager.FindQl2Parent(l1ParentLevel, l1ParentLevelIndex);
+                var managerParent = (ManagerL2) m_PersistenceManager.FindQlByLocation<ManagerL2>(l1ParentLevel, l1ParentLevelIndex);
 
                 // Insert into QL2 tree
                 var newNode = new ManagerL2
