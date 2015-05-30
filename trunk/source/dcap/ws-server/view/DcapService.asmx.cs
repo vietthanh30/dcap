@@ -34,17 +34,17 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+        public string CreateUser(String parentId, String directParentId, String userName, DateTime ngaySinh, String soCmnd, DateTime ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
-            return controller.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            return controller.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
         [WebMethod]
-        public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+        public string SearchUser(String parentId, String directParentId, String userName, DateTime ngaySinh, String soCmnd, DateTime ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH)
         {
-            return controller.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH);
+            return controller.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
         }
 
         [WebMethod]

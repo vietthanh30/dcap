@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Register.aspx.cs" Inherits="web_app.admin.Register" %>
+<%@ Register Assembly="SlimeeLibrary" Namespace="SlimeeLibrary" TagPrefix="cc1" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
@@ -49,7 +50,8 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="NgaySinh">Ngày sinh</label>
-					<input type="text" class="form-control" id="NgaySinh" runat="server" placeholder="Nhập ngày sinh">
+                    <cc1:datepicker ID="NgaySinh" runat="server" class="form-control" placeholder="Nhập ngày sinh"
+                    BorderColor="#D3D3D3" EnableViewState="true">
 					</div>
 					<div class="col-xs-4">
 					<label for="SoCmnd">Số CMND</label>
@@ -60,7 +62,25 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-8">
+                    <div class="col-xs-4">
+					<label for="NgayCap">Ngày cấp</label>
+                    <cc1:datepicker ID="NgayCap" runat="server" class="form-control" placeholder="Nhập ngày cấp"
+                    BorderColor="#D3D3D3" EnableViewState="true">
+					</div>
+					<div class="col-xs-4">
+					<label for="SoDienThoai">Số điện thoại</label>
+					<input type="text" class="form-control" id="SoDienThoai" runat="server" placeholder="Nhập số điện thoại">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-2">
+					<label for="GioiTinh">Giới tính</label>
+                    <asp:RadioButtonList ID="GioiTinh" runat="server" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" placeholder="Nhập giới tính">
+                        <asp:ListItem Text="Nam" Value="M" />
+                        <asp:ListItem Text="Nữ" Value="F" />
+                    </asp:RadioButtonList>
+					</div>
+					<div class="col-xs-6">
 					<label for="DiaChi">Địa chỉ</label>
 					<input type="text" class="form-control" id="DiaChi" runat="server" placeholder="Nhập địa chỉ">
 					</div>

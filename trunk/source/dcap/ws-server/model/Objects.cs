@@ -10,10 +10,10 @@ namespace ws_server.model
         #region Declarations
 
         // Property variables
-        private int object_ID = -1;
+        private long object_ID = -1;
 
         // Member variables
-        private int parent_ID = -1;
+        private long parent_ID = -1;
 
         private string object_Code = String.Empty;
 
@@ -40,7 +40,7 @@ namespace ws_server.model
         /// <summary>
         /// Object ID
         /// </summary>
-        public virtual int ObjectID
+        public virtual long ObjectID
         {
             get { return object_ID; }
             set { object_ID = value; }
@@ -49,7 +49,7 @@ namespace ws_server.model
         /// <summary>
         /// Parent ID
         /// </summary>
-        public virtual int ParentID
+        public virtual long ParentID
         {
             get { return parent_ID; }
             set { parent_ID = value; }

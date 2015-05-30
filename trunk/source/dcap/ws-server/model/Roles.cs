@@ -10,7 +10,7 @@ namespace ws_server.model
         #region Declarations
 
         // Property variables
-        private int role_ID = -1;
+        private long role_ID = -1;
 
         // Member variables
         private string role_Code = String.Empty;
@@ -34,7 +34,7 @@ namespace ws_server.model
         /// <summary>
         /// Role ID
         /// </summary>
-        public virtual int RoleID
+        public virtual long RoleID
         {
             get { return role_ID; }
             set { role_ID = value; }

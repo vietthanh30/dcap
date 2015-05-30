@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SlimeeLibrary, Version=1.0.2.0, Culture=neutral, PublicKeyToken=0fe47e7133bb7f89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SlimeeLibrary\SlimeeLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -880,9 +884,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <None Include="Service References\DcapServiceReference\DcapService.wsdl" />
-    <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.AccountLog.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\ChangePassword.aspx.cs">

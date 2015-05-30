@@ -239,19 +239,43 @@ namespace ws_server.persistence
             return "0";
         }
 
-        private bool IsExistingAccount(long accountId)
+        private long GetAccountIdBy(string userName)
         {
-            var accounts = RetrieveEquals<Account>("AccountId", accountId);
-            return accounts.Count > 0;
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select a.AccountId from Users u, Account a "
+                    + " where u.UserID = a.UserId and u.UserName = :userName");
+                query.SetParameter("userName", userName.ToUpper());
+
+                // Get the matching objects
+                var accountId = query.UniqueResult();
+
+                // Set return value
+                if (accountId == null)
+                {
+                    return -1;
+                }
+                return Convert.ToInt64(accountId);
+            }
         }
 
-        private int CountAccountByParentId(long parentId)
+        private int CountAccountByParentId(long parentAccountId)
         {
-            var accounts = RetrieveEquals<Account>("ParentId", parentId);
-            return accounts.Count;
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(u.UserName) from Users u, Account a "
+                    + " where u.UserID = a.UserId and a.ParentId = :parentAccountId ");
+                query.SetParameter("parentAccountId", parentAccountId);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+            }
         }
 
-        public string CreateUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+        public string CreateUser(String parentId, String directParentId, String userName, DateTime ngaySinh, String soCmnd, DateTime ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
             if (String.IsNullOrEmpty(userName))
@@ -262,28 +286,26 @@ namespace ws_server.persistence
             {
                 return "-1";
             }
+            long parentIdVal = -1;
+            long directParentIdVal = -1;
             if (!String.IsNullOrEmpty(parentId))
             {
-                long parentIdVal;
-                long.TryParse(parentId, out parentIdVal);
-                if (parentIdVal == -1 || !IsExistingAccount(parentIdVal))
+                parentIdVal = GetAccountIdBy(parentId);
+                if (parentIdVal == -1)
                 {
                     return "-1";
                 }
             }
             if (!String.IsNullOrEmpty(directParentId))
             {
-                long directParentIdVal;
-                long.TryParse(directParentId, out directParentIdVal);
-                if (directParentIdVal == -1 || !IsExistingAccount(directParentIdVal))
+                directParentIdVal = GetAccountIdBy(directParentId);
+                if (directParentIdVal == -1)
                 {
                     return "-1";
                 }
             }
             if (!String.IsNullOrEmpty(parentId))
             {
-                long parentIdVal;
-                long.TryParse(parentId, out parentIdVal);
                 if (parentIdVal == -1 || (CountAccountByParentId(parentIdVal) > 3))
                 {
                     return "-1";
@@ -293,12 +315,22 @@ namespace ws_server.persistence
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count > 0)
             {
-                return CreateAccountForExistingMember(memberInfos[0], parentId, directParentId, photoUrl, createdBy);
+                return CreateAccountForExistingMember(memberInfos[0], parentIdVal, directParentIdVal, photoUrl, createdBy);
             }
-            return CreateAccountForNewMember(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            DateTime? ngaySinhVal = null;
+            DateTime? ngayCapVal = null;
+            if (default(DateTime) != ngaySinh)
+            {
+                ngaySinhVal = ngaySinh;
+            }
+            if (default(DateTime) != ngayCap)
+            {
+                ngayCapVal = ngayCap;
+            }
+            return CreateAccountForNewMember(parentIdVal, directParentIdVal, userName, ngaySinhVal, soCmnd, ngayCapVal, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
-        private string CreateAccountForExistingMember(MemberInfo memberInfo, String parentId, String directParentId, string photoUrl, string createdBy)
+        private string CreateAccountForExistingMember(MemberInfo memberInfo, long parentId, long directParentId, string photoUrl, string createdBy)
         {
             var memberID = memberInfo.MemberID;
             var accountAmount = GetAccountAmountBy(memberID);
@@ -322,14 +354,8 @@ namespace ws_server.persistence
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
             account.MemberId = memberID;
-            if (!String.IsNullOrEmpty(parentId))
-            {
-                account.ParentId = Convert.ToInt64(parentId);
-            }
-            if (!String.IsNullOrEmpty(directParentId))
-            {
-                account.ParentId = Convert.ToInt64(directParentId);
-            }
+            account.ParentId = parentId;
+            account.ParentId = directParentId;
             account.UserId = user.UserID;
             account.ChildIndex = accountAmount;
             account.IsActive = ConstUtil.ACTIVE_STATUS;
@@ -359,7 +385,7 @@ namespace ws_server.persistence
             }
         }
 
-        private string GetTenDangNhapBy(long memberId)
+        private string GetTenDangNhapByMemberId(long memberId)
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
@@ -393,7 +419,7 @@ namespace ws_server.persistence
 
         private string GetNextTenDangNhap(long memberId, int accountAmount)
         {
-            var tenDangNhap = GetTenDangNhapBy(memberId);
+            var tenDangNhap = GetTenDangNhapByMemberId(memberId);
             if (char.IsNumber(tenDangNhap[tenDangNhap.Length-1]))
             {
                 tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 2);
@@ -440,7 +466,7 @@ namespace ws_server.persistence
             return tenDangNhap;
         }
 
-        private string CreateAccountForNewMember(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+        private string CreateAccountForNewMember(long parentId, long directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
             var tenDangNhap = GetValidTenDangNhapBy(userName);
@@ -449,10 +475,12 @@ namespace ws_server.persistence
             var memberInfo = new MemberInfo
                                  {
                                      HoTen = userName,
-                                     NgaySinh = DateUtil.GetDateTime(ngaySinh),
+                                     NgaySinh = ngaySinh,
                                      SoCmnd = soCmnd,
-                                     NgayCap = DateTime.Now,
+                                     NgayCap = ngayCap,
+                                     SoDienThoai = soDienThoai,
                                      DiaChi = diaChi,
+                                     GioiTinh = gioiTinh,
                                      SoTaiKhoan = soTaiKhoan,
                                      ChiNhanhNH = chiNhanhNH,
                                      ImageUrl = photoUrl
@@ -483,14 +511,8 @@ namespace ws_server.persistence
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
             account.MemberId = memberInfo.MemberID;
-            if (!String.IsNullOrEmpty(parentId))
-            {
-                account.ParentId = Convert.ToInt64(parentId);
-            }
-            if (!String.IsNullOrEmpty(directParentId))
-            {
-                account.ParentId = Convert.ToInt64(directParentId);
-            }
+            account.ParentId = parentId;
+            account.ParentId = directParentId;
             account.UserId = user.UserID;
             account.ChildIndex = 0;
             account.IsActive = ConstUtil.ACTIVE_STATUS;
@@ -502,7 +524,7 @@ namespace ws_server.persistence
             return user.UserName;
         }
 
-        public string SearchUser(String parentId, String directParentId, String userName, String ngaySinh, String soCmnd, String diaChi, String soTaiKhoan,
+        public string SearchUser(String parentId, String directParentId, String userName, DateTime ngaySinh, String soCmnd, DateTime ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH)
         {
             if (String.IsNullOrEmpty(userName))

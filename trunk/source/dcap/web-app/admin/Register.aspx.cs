@@ -27,9 +27,12 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = NgaySinh.SelectedDate;
             var soCmnd = SoCmnd.Value.Trim();
+            var ngayCap = NgayCap.SelectedDate;
+            var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
+            var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
             var photoName = soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
@@ -37,7 +40,7 @@ namespace web_app.admin
             SavePhotoToUploadFolder(photoPath);
             var photoUrl = "~/upload/" + photoName;
             var createdBy = User.Identity.Name;
-            var returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            var returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
             if (string.Compare(returnCode, "-1", true) != 0)
             {
                 AccountCode.Text = "Đăng ký thành công mã: " + returnCode;
@@ -55,12 +58,15 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = NgaySinh.SelectedDate;
             var soCmnd = SoCmnd.Value.Trim();
+            var ngayCap = NgayCap.SelectedDate;
+            var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
+            var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, diaChi, soTaiKhoan, chiNhanhNH);
+            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
             if (string.Compare(returnCode, "-1", true) != 0)
             {
                 AccountCode.Text = "Mã đăng nhập hệ thống: " + returnCode;

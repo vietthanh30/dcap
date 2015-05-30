@@ -10,8 +10,8 @@ namespace ws_server.model
         #region Declarations
 
         // Property variables
-        private int role_ID = -1;
-        private int user_ID = -1;
+        private long role_ID = -1;
+        private long user_ID = -1;
 
         // Member variables
         private bool is_Active = true;
@@ -31,7 +31,7 @@ namespace ws_server.model
         /// <summary>
         /// Role ID
         /// </summary>
-        public virtual int RoleID
+        public virtual long RoleID
         {
             get { return role_ID; }
             set { role_ID = value; }
@@ -40,7 +40,7 @@ namespace ws_server.model
         /// <summary>
         /// User ID
         /// </summary>
-        public virtual int UserID
+        public virtual long UserID
         {
             get { return user_ID; }
             set { user_ID = value; }

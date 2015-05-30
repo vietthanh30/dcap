@@ -22,6 +22,8 @@ namespace ws_server.model
 
         private String _diaChi = String.Empty;
 
+        private String _gioiTinh = String.Empty;
+
         private String _soTaiKhoan = String.Empty;
 
         private String _chiNhanhNh = String.Empty;
@@ -105,6 +107,15 @@ namespace ws_server.model
         {
             get { return _diaChi; }
             set { _diaChi = value; }
+        }
+
+        /// <summary>
+        /// Gioi Tinh
+        /// </summary>
+        public virtual String GioiTinh
+        {
+            get { return _gioiTinh; }
+            set { _gioiTinh = value; }
         }
 
         /// <summary>

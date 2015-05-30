@@ -13,7 +13,7 @@ namespace ws_server.model
         #region Declarations
 
         // Property variables
-        private int user_ID = -1;
+        private long user_ID = -1;
 
         // Member variables
         private string user_Name = String.Empty;
@@ -35,7 +35,7 @@ namespace ws_server.model
         /// <summary>
         /// User ID
         /// </summary>
-        public virtual int UserID
+        public virtual long UserID
         {
             get { return user_ID; }
             set { user_ID = value; }

@@ -32,6 +32,10 @@ assembly="ws_server">
       <column name="DIA_CHI" not-null="false" />
     </property>
 
+    <property name="GioiTinh">
+      <column name="GIOI_TINH" not-null="false" />
+    </property>
+
     <property name="SoTaiKhoan">
       <column name="SO_TAI_KHOAN" not-null="false" />
     </property>

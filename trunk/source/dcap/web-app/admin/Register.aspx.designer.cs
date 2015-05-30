@@ -91,7 +91,7 @@ namespace web_app.admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText NgaySinh;
+        protected global::SlimeeLibrary.DatePicker NgaySinh;
         
         /// <summary>
         /// SoCmnd control.
@@ -110,6 +110,33 @@ namespace web_app.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator SoCmndRequired;
+        
+        /// <summary>
+        /// NgayCap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SlimeeLibrary.DatePicker NgayCap;
+        
+        /// <summary>
+        /// SoDienThoai control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText SoDienThoai;
+        
+        /// <summary>
+        /// GioiTinh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList GioiTinh;
         
         /// <summary>
         /// DiaChi control.
