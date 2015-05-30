@@ -113,7 +113,6 @@
     <Compile Include="model\Roles.cs" />
     <Compile Include="model\UserRole.cs" />
     <Compile Include="model\Users.cs" />
-    <Compile Include="persistence\AccountPersistenceManager.cs" />
     <Compile Include="persistence\PersistenceManager.cs" />
     <Compile Include="view\DcapService.asmx.cs">
       <DependentUpon>DcapService.asmx</DependentUpon>
