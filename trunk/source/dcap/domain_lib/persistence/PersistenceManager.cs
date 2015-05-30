@@ -608,12 +608,16 @@ namespace domain_lib.persistence
                 criteria.Add(Expression.Eq("CalcAccountId", calcAccountId));
                 criteria.Add(Expression.Lt("AccountLevel", accountLevel));
 
-                return (long) criteria.UniqueResult();
+                var count = criteria.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
             }
         }
 
-        public long CountLeft(long calcAccountId, int accountLevel, long levelIndex)
+        public int CountLeft(long calcAccountId, int accountLevel, long levelIndex)
         {
+            
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 // Create a criteria object with the specified criteria
@@ -622,7 +626,52 @@ namespace domain_lib.persistence
                 criteria.Add(Expression.Eq("AccountLevel", accountLevel));
                 criteria.Add(Expression.Lt("LevelIndex", levelIndex));
 
-                return (long)criteria.UniqueResult();
+                var count = criteria.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+
+            }
+        }
+
+        public ManagerL1 GetQl1LatestChild(long parentId)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select level, max(level_index) level_index"
+                                                    + " from dbo.MANAGER_L1"
+                                                    + " where PARENT_ID = :parentId"
+                                                     + " and level in ("
+                                                        +" SELECT max(level)"
+                                                        +" FROM dbo.MANAGER_L1"
+                                                        + " WHERE CALC_ACCOUNT_ID = :parentId)"
+                                                    + " group by level");
+                query.SetParameter("parentId", parentId);
+
+                // Get the matching objects
+                IList<ManagerL1> all = query.List<ManagerL1>();
+
+                if (all == null || all.Count == 0)
+                    return null;
+
+                return all[0];
+            }
+        }
+
+        public ManagerL1 FindQl1Parent(long level, long levelIndex)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(ManagerL1));
+                criteria.Add(Expression.Eq("Level", level));
+                criteria.Add(Expression.Lt("LevelIndex", levelIndex));
+
+                var all = criteria.List<ManagerL1>();
+                if (all == null || all.Count == 0)
+                    return null;
+                // Set return value
+                return all[0];
             }
         }
 				
