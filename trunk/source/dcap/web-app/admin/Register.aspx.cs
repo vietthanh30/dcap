@@ -36,7 +36,7 @@ namespace web_app.admin
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
             var photoName = soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
-            var photoPath = Server.MapPath("upload") + "\\" + photoName;
+            var photoPath = Server.MapPath("~/upload") + "\\" + photoName;
             var returnCode = SavePhotoToUploadFolder(photoPath);
             var photoUrl = string.Empty;
             if (string.Compare(returnCode, "-1") != 0)
@@ -108,7 +108,6 @@ namespace web_app.admin
         {
             if ((filePhotoUpload.PostedFile != null) && (filePhotoUpload.PostedFile.ContentLength > 0))
             {
-                string fn = System.IO.Path.GetFileName(filePhotoUpload.PostedFile.FileName);
                 try
                 {
                     filePhotoUpload.PostedFile.SaveAs(saveLocation);

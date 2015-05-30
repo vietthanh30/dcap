@@ -335,7 +335,10 @@ namespace domain_lib.persistence
             var memberID = memberInfo.MemberID;
             var accountAmount = GetAccountAmountBy(memberID);
             var tenDangNhap = GetNextTenDangNhap(memberID, accountAmount);
-            
+            if (String.IsNullOrEmpty(tenDangNhap))
+            {
+                tenDangNhap = GetValidTenDangNhapBy(memberInfo.HoTen); 
+            }
             memberInfo.ImageUrl = photoUrl;
             Save(memberInfo);
 
@@ -421,6 +424,10 @@ namespace domain_lib.persistence
         private string GetNextTenDangNhap(long memberId, int accountAmount)
         {
             var tenDangNhap = GetTenDangNhapByMemberId(memberId);
+            if (String.IsNullOrEmpty(tenDangNhap))
+            {
+                return string.Empty;
+            }
             if (char.IsNumber(tenDangNhap[tenDangNhap.Length-1]))
             {
                 tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 2);
@@ -445,7 +452,9 @@ namespace domain_lib.persistence
         }
         private string GetValidTenDangNhapBy(string fullname)
         {
-            var tenDangNhap = fullname.Replace(" ", "").ToUpper();
+            var tenKhongDau = VnStringHelper.toEnglish(fullname);
+            var tenDangNhap = tenKhongDau.Replace(" ", "").ToUpper();
+
             var count = CountUserNameBy(tenDangNhap);
             if (count == 0)
             {

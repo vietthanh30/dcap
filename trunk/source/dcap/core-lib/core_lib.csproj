@@ -47,6 +47,7 @@
     <Compile Include="common\MD5Util.cs" />
     <Compile Include="common\NgayThang.cs" />
     <Compile Include="common\ParameterUtil.cs" />
+    <Compile Include="common\VnStringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
