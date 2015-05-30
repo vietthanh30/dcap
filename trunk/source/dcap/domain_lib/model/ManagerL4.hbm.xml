@@ -5,9 +5,13 @@ namespace="domain_lib.model"
 assembly="domain_lib">
   <class name="ManagerL4" table="MANAGER_L4" lazy="false">
 
-    <id name="AccountId" column="ACCOUNT_ID" unsaved-value="-1">
+    <id name="Id" column="ID" unsaved-value="-1">
       <generator class="identity" />
     </id>
+
+    <property name="AccountId">
+      <column name="ACCOUNT_ID" not-null="false" />
+    </property>
 
     <property name="ParentId">
       <column name="PARENT_ID" not-null="false" />

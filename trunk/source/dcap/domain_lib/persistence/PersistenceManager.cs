@@ -614,7 +614,19 @@ namespace domain_lib.persistence
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                // Create a criteria object with the specified criteria
+
+                var query = session.CreateQuery("select count(*) from AccountPreCalc a "
+                   + " where a.CalcAccountId = :CalcAccountId and Account_Level < :AccountLevel");
+                query.SetParameter("CalcAccountId", calcAccountId);
+                query.SetParameter("AccountLevel", accountLevel);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+
+                /*// Create a criteria object with the specified criteria
                 ICriteria criteria = session.CreateCriteria(typeof(AccountPreCalc));
                 criteria.Add(Expression.Eq("CalcAccountId", calcAccountId));
                 criteria.Add(Expression.Lt("AccountLevel", accountLevel));
@@ -622,7 +634,7 @@ namespace domain_lib.persistence
                 var count = criteria.UniqueResult();
 
                 // Set return value
-                return Convert.ToInt32(count);
+                return Convert.ToInt32(count);*/
             }
         }
 
@@ -631,7 +643,19 @@ namespace domain_lib.persistence
             
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                // Create a criteria object with the specified criteria
+                var query = session.CreateQuery("select count(*) from AccountPreCalc a "
+                   + " where a.CalcAccountId = :CalcAccountId and Account_Level = :AccountLevel and Level_Index < :LevelIndex");
+                query.SetParameter("CalcAccountId", calcAccountId);
+                query.SetParameter("AccountLevel", accountLevel);
+                query.SetParameter("LevelIndex", levelIndex);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+
+                /*// Create a criteria object with the specified criteria
                 ICriteria criteria = session.CreateCriteria(typeof(AccountPreCalc));
                 criteria.Add(Expression.Eq("CalcAccountId", calcAccountId));
                 criteria.Add(Expression.Eq("AccountLevel", accountLevel));
@@ -640,31 +664,44 @@ namespace domain_lib.persistence
                 var count = criteria.UniqueResult();
 
                 // Set return value
-                return Convert.ToInt32(count);
+                return Convert.ToInt32(count);*/
 
             }
         }
 
-        public ManagerL1 GetQl1LatestChild(long parentId)
+        public AccountPreCalc GetLatestPreCalcQueue(long calcAccountId)
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select level, max(level_index) level_index"
-                                                    + " from dbo.MANAGER_L1"
-                                                    + " where PARENT_ID = :parentId"
-                                                     + " and level in ("
-                                                        +" SELECT max(level)"
-                                                        +" FROM dbo.MANAGER_L1"
-                                                        + " WHERE CALC_ACCOUNT_ID = :parentId)"
-                                                    + " group by level");
-                query.SetParameter("parentId", parentId);
 
-                // Get the matching objects
-                IList<ManagerL1> all = query.List<ManagerL1>();
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(AccountPreCalc));
+                criteria.Add(Expression.Eq("CalcAccountId", calcAccountId));
+                criteria.AddOrder(Order.Desc("AccountLevel")).AddOrder(Order.Desc("LevelIndex"));
+                criteria.SetMaxResults(1);
 
+                var all = criteria.List<AccountPreCalc>();
                 if (all == null || all.Count == 0)
                     return null;
+                // Set return value
+                return all[0];
+            }
+        }
 
+        public ManagerL1 GetQl1LatestChild()
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(ManagerL1));
+                criteria.AddOrder(Order.Desc("Level")).AddOrder(Order.Desc("LevelIndex"));
+                criteria.SetMaxResults(1);
+
+                var all = criteria.List<ManagerL1>();
+                if (all == null || all.Count == 0)
+                    return null;
+                // Set return value
                 return all[0];
             }
         }
@@ -673,22 +710,17 @@ namespace domain_lib.persistence
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select level, max(level_index) level_index"
-                                                    + " from dbo.MANAGER_L2"
-                                                    + " where PARENT_ID = :parentId"
-                                                     + " and level in ("
-                                                        + " SELECT max(level)"
-                                                        + " FROM dbo.MANAGER_L2"
-                                                        + " WHERE CALC_ACCOUNT_ID = :parentId)"
-                                                    + " group by level");
-                query.SetParameter("parentId", parentId);
 
-                // Get the matching objects
-                IList<ManagerL2> all = query.List<ManagerL2>();
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(ManagerL2));
+                criteria.Add(Expression.Eq("ParentId", parentId));
+                criteria.AddOrder(Order.Desc("Level")).AddOrder(Order.Desc("LevelIndex"));
+                criteria.SetMaxResults(1);
 
+                var all = criteria.List<ManagerL2>();
                 if (all == null || all.Count == 0)
                     return null;
-
+                // Set return value
                 return all[0];
             }
         }

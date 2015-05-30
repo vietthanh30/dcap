@@ -10,23 +10,25 @@ namespace domain_lib.model
         #region Declarations
 
         // Member variables
-        protected long account_ID = -1;
+        private long _id = -1;
 
-        protected long parent_ID = -1;
+        private long account_ID = -1;
 
-        protected long child_Index = -1;
+        private long parent_ID = -1;
 
-        protected string all_Child = string.Empty;
+        private long child_Index = -1;
 
-        protected long level = -1;
+        private string all_Child = string.Empty;
 
-        protected long level_Index = -1;
+        private long level = -1;
 
-        protected string is_Active = string.Empty;
+        private long level_Index = -1;
 
-        protected DateTime created_Date = default(DateTime);
+        private string is_Active = string.Empty;
 
-        protected string created_By = string.Empty;
+        private DateTime created_Date = default(DateTime);
+
+        private string created_By = string.Empty;
 
         
         #endregion
@@ -40,6 +42,15 @@ namespace domain_lib.model
     	#endregion
 
         #region Properties
+
+        /// <summary>
+        /// Id
+        /// </summary>
+        public virtual long Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         /// <summary>
         /// Account ID

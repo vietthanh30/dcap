@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using domain_lib.dto;
 using domain_lib.model;
 using domain_lib.persistence;
 
@@ -177,6 +178,7 @@ namespace domain_lib.controller
 
                         //mark calculated
                         accountPreCalc.IsCalculated = "Y";
+                        accountPreCalc.CalculatedDate = DateTime.Now;
                         m_PersistenceManager.Save(accountPreCalc);
                     }
                 }
@@ -191,14 +193,14 @@ namespace domain_lib.controller
         private ManagerL1 AddToQl1Tree(AccountPreCalc accountPreCalc)
         {
             // Get level and level_index
-            ManagerL1 lastestChild = m_PersistenceManager.GetQl1LatestChild(accountPreCalc.CalcAccountId);
+            ManagerL1 lastestChild = m_PersistenceManager.GetQl1LatestChild();
             
             // Find Parent account
             if (lastestChild == null)
             {
                 var root = new ManagerL1
                                {
-                                   AccountId = accountPreCalc.AccountId,
+                                   AccountId = accountPreCalc.CalcAccountId,
                                    ChildIndex = 0,
                                    Level = 0,
                                    LevelIndex = 0,
@@ -229,7 +231,7 @@ namespace domain_lib.controller
                 // Insert into QL1 tree
                 var newNode = new ManagerL1
                 {
-                    AccountId = accountPreCalc.AccountId,
+                    AccountId = accountPreCalc.CalcAccountId,
                     ChildIndex = (newLevelIndex/3)+1,
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
@@ -255,7 +257,7 @@ namespace domain_lib.controller
             {
                 var root = new ManagerL2
                                {
-                                   AccountId = accountPreCalc.AccountId,
+                                   AccountId = accountPreCalc.CalcAccountId,
                                    ChildIndex = 0,
                                    Level = 0,
                                    LevelIndex = 0,
@@ -287,7 +289,7 @@ namespace domain_lib.controller
                 // Insert into QL2 tree
                 var newNode = new ManagerL2
                                   {
-                                      AccountId = accountPreCalc.AccountId,
+                                      AccountId = accountPreCalc.CalcAccountId,
                                       ChildIndex = (newLevelIndex/3) + 1,
                                       Level = newLevel,
                                       LevelIndex = newLevelIndex,
