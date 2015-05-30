@@ -50,8 +50,8 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="NgaySinh">Ngày sinh</label>
-                    <cc1:datepicker ID="NgaySinh" runat="server" class="form-control" placeholder="Nhập ngày sinh"
-                    BorderColor="#D3D3D3" EnableViewState="true">
+                    <cc1:datepicker ID="NgaySinh" runat="server" class="form-control" placeholder="Nhập ngày sinh" Width="270px" PaneWidth="250px" Height="20px"
+                    BorderColor="#D3D3D3" EnableViewState="true" />
 					</div>
 					<div class="col-xs-4">
 					<label for="SoCmnd">Số CMND</label>
@@ -64,8 +64,8 @@
 				<div class="row">
                     <div class="col-xs-4">
 					<label for="NgayCap">Ngày cấp</label>
-                    <cc1:datepicker ID="NgayCap" runat="server" class="form-control" placeholder="Nhập ngày cấp"
-                    BorderColor="#D3D3D3" EnableViewState="true">
+                    <cc1:datepicker ID="NgayCap" runat="server" class="form-control" placeholder="Nhập ngày cấp" Width="270px" PaneWidth="250px" Height="20px"
+                    BorderColor="#D3D3D3" EnableViewState="true" />
 					</div>
 					<div class="col-xs-4">
 					<label for="SoDienThoai">Số điện thoại</label>

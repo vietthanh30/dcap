@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using ws_server.controller;
-using ws_server.model;
+using domain_lib.controller;
 
 namespace ws_server.view
 {

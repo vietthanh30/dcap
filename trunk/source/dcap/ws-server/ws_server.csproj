@@ -33,21 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.DynamicProxy, Version=1.1.5.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\nhibernate\Castle.DynamicProxy.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.0.3, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\nhibernate\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\log4net\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\nhibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -63,25 +51,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="model\Users.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="model\MemberInfo.hbm.xml" />
-    <EmbeddedResource Include="model\Objects.hbm.xml" />
-    <EmbeddedResource Include="model\RoleObject.hbm.xml" />
-    <EmbeddedResource Include="model\Roles.hbm.xml" />
-    <EmbeddedResource Include="model\UserRole.hbm.xml" />
-    <EmbeddedResource Include="model\AccountLog.hbm.xml" />
-    <EmbeddedResource Include="model\AccountBonus.hbm.xml" />
-    <EmbeddedResource Include="model\AccountPreCalc.hbm.xml" />
-    <EmbeddedResource Include="model\Account.hbm.xml" />
-    <EmbeddedResource Include="model\ManagerL6.hbm.xml" />
-    <EmbeddedResource Include="model\ManagerL5.hbm.xml" />
-    <EmbeddedResource Include="model\ManagerL4.hbm.xml" />
-    <EmbeddedResource Include="model\ManagerL3.hbm.xml" />
-    <EmbeddedResource Include="model\ManagerL2.hbm.xml" />
-    <EmbeddedResource Include="model\ManagerL1.hbm.xml" />
-    <EmbeddedResource Include="model\AccountLogHist.hbm.xml" />
     <Content Include="view\DcapService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -94,26 +63,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="controller\Controller.cs" />
-    <Compile Include="model\Account.cs" />
-    <Compile Include="model\AccountLog.cs" />
-    <Compile Include="model\AccountBonus.cs" />
-    <Compile Include="model\AccountPreCalc.cs" />
-    <Compile Include="model\AccountLogHist.cs" />
-    <Compile Include="model\ManagerL6.cs" />
-    <Compile Include="model\ManagerL5.cs" />
-    <Compile Include="model\ManagerL4.cs" />
-    <Compile Include="model\ManagerL3.cs" />
-    <Compile Include="model\ManagerL2.cs" />
-    <Compile Include="model\ManagerL1.cs" />
-    <Compile Include="model\ManagerLevel.cs" />
-    <Compile Include="model\MemberInfo.cs" />
-    <Compile Include="model\Objects.cs" />
-    <Compile Include="model\RoleObject.cs" />
-    <Compile Include="model\Roles.cs" />
-    <Compile Include="model\UserRole.cs" />
-    <Compile Include="model\Users.cs" />
-    <Compile Include="persistence\PersistenceManager.cs" />
     <Compile Include="view\DcapService.asmx.cs">
       <DependentUpon>DcapService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -131,6 +80,10 @@
     <ProjectReference Include="..\core-lib\core_lib.csproj">
       <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
       <Name>core_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\domain_lib\domain_lib.csproj">
+      <Project>{4965CB44-7651-4EF2-B0EB-DF17D8397D78}</Project>
+      <Name>domain_lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
