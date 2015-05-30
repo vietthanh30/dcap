@@ -493,7 +493,9 @@ namespace domain_lib.persistence
                                      GioiTinh = gioiTinh,
                                      SoTaiKhoan = soTaiKhoan,
                                      ChiNhanhNH = chiNhanhNH,
-                                     ImageUrl = photoUrl
+                                     ImageUrl = photoUrl,
+                                     CreatedDate = DateTime.Now,
+                                     CreatedBy = createdBy
                                  };
             // Save memberInfo
             Save(memberInfo);
