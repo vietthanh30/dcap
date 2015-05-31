@@ -348,6 +348,94 @@ namespace domain_lib.persistence
             }
         }
 
+        public string CreateUserAdmin(String userName, String fullName, String roleCode, String createdBy)
+        {
+            if (String.IsNullOrEmpty(userName))
+            {
+                return "-1";
+            }
+            if (String.IsNullOrEmpty(fullName))
+            {
+                return "-1";
+            }
+            if (String.IsNullOrEmpty(roleCode))
+            {
+                return "-1";
+            }
+            var users = RetrieveEquals<Users>("UserName", userName.ToUpper());
+            if (users.Count > 0)
+            {
+                return "-1";
+            }
+            var user = new Users
+                           {
+                               UserName = userName,
+                               FullName = fullName,
+                               Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD)
+                           };
+            Save(user);
+
+            users = RetrieveEquals<Users>("UserName", userName.ToUpper());
+            if (users.Count == 0)
+            {
+                return "-1";
+            }
+            user = users[0];
+
+            var roles = RetrieveEquals<Roles>("RoleCode", roleCode.ToUpper());
+            if (roles.Count == 0)
+            {
+                return "-1";
+            }
+            var role = roles[0];
+
+            var userRole = new UserRole { UserID = user.UserID, RoleID = role.RoleID, IsActive = true };
+            Save(userRole);
+
+            return user.UserName;
+        }
+
+        public string UpdateUser(String userName, String fullName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
+            if (String.IsNullOrEmpty(userName))
+            {
+                return "-1";
+            }
+            if (String.IsNullOrEmpty(soCmnd))
+            {
+                return "-1";
+            }
+            if (default(DateTime).Equals(ngaySinh))
+            {
+                ngaySinh = null;
+            }
+            if (default(DateTime).Equals(ngayCap))
+            {
+                ngayCap = null;
+            }
+            var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
+            if (memberInfos.Count == 0)
+            {
+                return "-1";
+            }
+            var memberInfo = memberInfos[0];
+
+            memberInfo.HoTen = fullName;
+            memberInfo.NgaySinh = ngaySinh;
+            memberInfo.SoCmnd = soCmnd;
+            memberInfo.NgayCap = ngayCap;
+            memberInfo.SoDienThoai = soDienThoai;
+            memberInfo.DiaChi = diaChi;
+            memberInfo.GioiTinh = gioiTinh;
+            memberInfo.SoTaiKhoan = soTaiKhoan;
+            memberInfo.ChiNhanhNH = chiNhanhNH;
+            memberInfo.ImageUrl = photoUrl;
+            Save(memberInfo);
+
+            return "0";
+        }
+
         public string CreateUser(String parentId, String directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
@@ -425,7 +513,14 @@ namespace domain_lib.persistence
             }
             user = users[0];
 
-            var userRole = new UserRole {UserID = user.UserID, RoleID = 3, IsActive = true};
+            var roles = RetrieveEquals<Roles>("RoleCode", ConstUtil.QLTV);
+            if (roles.Count == 0)
+            {
+                return "-1";
+            }
+            var role = roles[0];
+
+            var userRole = new UserRole { UserID = user.UserID, RoleID = role.RoleID, IsActive = true };
             Save(userRole);
 
             var account = new Account();
@@ -547,6 +642,34 @@ namespace domain_lib.persistence
                     tenDangNhap = tenDangNhap + (achar + (count % 26) - 1);
                 }
             }
+            while (true)
+            {
+                count = CountUserNameBy(tenDangNhap);
+                if (count == 0)
+                {
+                    break;
+                }
+                while (count > 0 && tenDangNhap[tenDangNhap.Length - 1] != zchar)
+                {
+                    tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 1) + (tenDangNhap[tenDangNhap.Length - 1] + 1);
+                    count--;
+                }
+                if (count == 0)
+                {
+                    continue;
+                }
+                for (int i = 0; i <= count / 26; i++)
+                {
+                    if (i < count / 26)
+                    {
+                        tenDangNhap = tenDangNhap + zchar;
+                    }
+                    else
+                    {
+                        tenDangNhap = tenDangNhap + (achar + (count % 26) - 1);
+                    }
+                }
+            }
             return tenDangNhap;
         }
 
@@ -594,7 +717,14 @@ namespace domain_lib.persistence
             }
             user = users[0];
 
-            var userRole = new UserRole { UserID = user.UserID, RoleID = 3, IsActive = true };
+            var roles = RetrieveEquals<Roles>("RoleCode", ConstUtil.QLTV);
+            if (roles.Count == 0)
+            {
+                return "-1";
+            }
+            var role = roles[0];
+
+            var userRole = new UserRole { UserID = user.UserID, RoleID = role.RoleID, IsActive = true };
             Save(userRole);
 
             var account = new Account();

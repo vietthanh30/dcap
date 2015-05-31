@@ -35,6 +35,18 @@ namespace web_app.admin
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
+            if (ngaySinh == null)
+            {
+                InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (ngayCap == null)
+            {
+                InvalidCredentialsMessage.Text = "Ngày cấp không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
             var photoName = soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
             var photoPath = Server.MapPath("~/upload") + "\\" + photoName;
             var returnCode = SavePhotoToUploadFolder(photoPath);
@@ -50,7 +62,7 @@ namespace web_app.admin
                 var codes = returnCode.Split(new[] {'|'});
                 var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
                 var tenDangNhap = codes[1];
-                AccountCode.Text = "Id thành viên: " + accountNumber + "; Tên đăng nhập: " + tenDangNhap + "/12345";
+                AccountCode.Text = "Id thành viên: " + accountNumber + "; Tên đăng nhập: " + tenDangNhap + "/" + ConstUtil.DEFAULT_PASSWORD;
                 AccountCode.Visible = true;
             }
             else
@@ -65,7 +77,7 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = DateUtil.GetDateTime(NgaySinh.Value.Trim());
             var soCmnd = SoCmnd.Value.Trim();
             var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
             var soDienThoai = SoDienThoai.Value.Trim();
@@ -73,7 +85,19 @@ namespace web_app.admin
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, DateUtil.GetDateTime(ngaySinh), soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
+            if (ngaySinh == null)
+            {
+                InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (ngayCap == null)
+            {
+                InvalidCredentialsMessage.Text = "Ngày cấp không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
             if (string.Compare(returnCode, "-1", true) != 0)
             {
                 var message = "";

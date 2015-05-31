@@ -118,7 +118,7 @@
 			</nav>
         </header> <!-- /.content-main-header -->
 
-        <asp:ContentPlaceHolder ID="LeftContent" runat="server">
+        <asp:ContentPlaceHolder ID="LeftContentAdmin" runat="server">
              <div class="left-side">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
@@ -131,8 +131,6 @@
                     </div>
                 </div>
                 
-            <asp:LoginView ID="LoginView1" runat="server" EnableViewState="false">
-                <LoggedInTemplate>
               <ul class="sidebar-menu">
                 <li class="header"></li>
                 <li>
@@ -146,6 +144,11 @@
                     <i class="fa fa-edit"></i> <span>Đăng ký thành viên</span>
                   </a>
                 </li>
+                <li>
+                  <a id="A3" href="~/admin/Register2.aspx" runat="server">
+                    <i class="fa fa-edit"></i> <span>Đăng ký quản lý</span>
+                  </a>
+                </li>
 			    <li>
                   <a href="~/main-pages/member-network.aspx" runat="server">
                     <i class="fa fa-calendar"></i> <span>Mạng lưới thành viên</span>
@@ -157,8 +160,75 @@
                   </a>
                 </li>
               </ul>	 
-                </LoggedInTemplate>
-            </asp:LoginView>
+            </section>
+            <!-- /.sidebar --> 
+             </div>  
+        </asp:ContentPlaceHolder>
+       
+        <asp:ContentPlaceHolder ID="LeftContentKT" runat="server">
+             <div class="left-side">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img ID="Img1" src="" runat="server" class="img-circle" alt="User Image" />
+                    </div>
+                    <div class="pull-left info">
+                        <p><asp:Label ID="Label1" runat="server" /></p>
+                    </div>
+                </div>
+                
+              <ul class="sidebar-menu">
+                <li class="header"></li>
+			    <li>
+                  <a id="A4" href="~/main-pages/member-network.aspx" runat="server">
+                    <i class="fa fa-calendar"></i> <span>Mạng lưới thành viên</span>
+                  </a>
+                </li>
+                <li>
+                  <a id="A5" href="~/main-pages/bang-ke-tra-luong.aspx" runat="server">
+                    <i class="fa fa-table"></i> <span>Bảng kê trả lương</span>
+                  </a>
+                </li>
+              </ul>	 
+            </section>
+            <!-- /.sidebar --> 
+             </div>  
+        </asp:ContentPlaceHolder>
+       
+        <asp:ContentPlaceHolder ID="LeftContentTV" runat="server">
+             <div class="left-side">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img ID="Img2" src="" runat="server" class="img-circle" alt="User Image" />
+                    </div>
+                    <div class="pull-left info">
+                        <p><asp:Label ID="Label2" runat="server" /></p>
+                    </div>
+                </div>
+                
+              <ul class="sidebar-menu">
+                <li class="header"></li>
+                <li>
+                  <a id="A2" href="~/main-pages/tong-quan.aspx" runat="server">
+			        <i class="fa fa-files-o"></i>
+                    <span>Tổng quan</span>
+                  </a>
+                </li>
+                <li>
+                  <a id="A6" href="~/members/EditMemberInfo.aspx" runat="server">
+			        <i class="fa fa-files-o"></i>
+                    <span>Sửa thông tin cá nhân</span>
+                  </a>
+                </li>
+			    <li>
+                  <a id="A8" href="~/main-pages/member-network.aspx" runat="server">
+                    <i class="fa fa-calendar"></i> <span>Mạng lưới thành viên</span>
+                  </a>
+                </li>
+              </ul>	 
             </section>
             <!-- /.sidebar --> 
              </div>  

@@ -1,4 +1,5 @@
 ﻿using System;
+using core_lib.common;
 using web_app.DcapServiceReference;
 
 namespace web_app
@@ -13,6 +14,12 @@ namespace web_app
             {
                 UpdateUserInfo(userDto);
             }
+            else
+            {
+                LeftContentAdmin.Visible = false;
+                LeftContentKT.Visible = false;
+                LeftContentTV.Visible = false;
+            }
             HeadLoginImg1.Visible = logged;
             HeadLoginImg2.Visible = logged;
             HeadLoginImg3.Visible = logged;
@@ -26,6 +33,10 @@ namespace web_app
         private void UpdateUserInfo(UserDto userDto)
         {
             var imageUrl = userDto.ImageUrl;
+            if (String.IsNullOrEmpty(imageUrl))
+            {
+                imageUrl = "~/dist/img/avatar5.png";
+            }
             var headLoginName = userDto.FullName;
             string headLoginNameAdmin;
             var roleCode = GetRoleCode(userDto);
@@ -43,6 +54,29 @@ namespace web_app
             HeadLoginName1.Text = headLoginName;
             HeadLoginName2.Text = headLoginNameAdmin;
             HeadLoginName3.Text = headLoginName;
+            UpdateLeftPanel(roleCode);
+        }
+
+        private void UpdateLeftPanel(string roleCode)
+        {
+            if (string.Compare(ConstUtil.QTHT, roleCode, true) == 0)
+            {
+                LeftContentAdmin.Visible = true;
+                LeftContentKT.Visible = false;
+                LeftContentTV.Visible = false;
+            }
+            if (string.Compare(ConstUtil.QLKT, roleCode, true) == 0)
+            {
+                LeftContentAdmin.Visible = false;
+                LeftContentKT.Visible = true;
+                LeftContentTV.Visible = false;
+            }
+            if (string.Compare(ConstUtil.QLTV, roleCode, true) == 0)
+            {
+                LeftContentAdmin.Visible = false;
+                LeftContentKT.Visible = false;
+                LeftContentTV.Visible = true;
+            }
         }
 
         private string GetRoleCode(UserDto userDto)
@@ -50,7 +84,7 @@ namespace web_app
             var allRoles = userDto.AllRoles;
             if (allRoles.Length == 0)
             {
-                return string.Empty;
+                return "QLTV";
             }
             return allRoles[0].RoleCode;
         }

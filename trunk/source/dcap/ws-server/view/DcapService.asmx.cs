@@ -41,6 +41,19 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public string UpdateUser(String userName, String fullName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
+            return controller.UpdateUser(userName, fullName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl);
+        }
+
+        [WebMethod]
+        public string CreateUserAdmin(String userName, String fullName, string roleCode, string createdBy)
+        {
+            return controller.CreateUserAdmin(userName, fullName, roleCode, createdBy);
+        }
+
+        [WebMethod]
         public string SearchUser(String parentId, String directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH)
         {

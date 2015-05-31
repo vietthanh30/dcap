@@ -42,17 +42,17 @@ namespace core_lib.common
             return GetDateTime(dateVal);
         }
 
-        public static string GetDateTimeAsDdmmyyyy(DateTime date)
+        public static string GetDateTimeAsDdmmyyyy(DateTime? date)
         {
-            if (DateTime.MinValue.Equals(date) ||
+            if (date == null || DateTime.MinValue.Equals(date) ||
                 DateTime.MaxValue.Equals(date))
                 return "";
+            DateTime aDate = (DateTime) date;
+            string day = PadValue(aDate.Day);
 
-            string day = PadValue(date.Day);
+            string month = PadValue(aDate.Month);
 
-            string month = PadValue(date.Month);
-
-            return day + SeparateDate + month + SeparateDate + date.Year;
+            return day + SeparateDate + month + SeparateDate + aDate.Year;
         }
 
         public static string GetDateTimeAsMmDdyyyy(DateTime date)

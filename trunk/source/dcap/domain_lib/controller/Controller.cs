@@ -47,6 +47,17 @@ namespace domain_lib.controller
             return m_PersistenceManager.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
+        public string UpdateUser(String userName, String fullName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+            String chiNhanhNH, String photoUrl)
+        {
+            return m_PersistenceManager.UpdateUser(userName, fullName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl);
+        }
+
+        public string CreateUserAdmin(String userName, String fullName, String roleCode, string createdBy)
+        {
+            return m_PersistenceManager.CreateUserAdmin(userName, fullName, roleCode, createdBy);
+        }
+
         public string SearchUser(String parentId, String directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH)
         {

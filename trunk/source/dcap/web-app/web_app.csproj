@@ -53,6 +53,8 @@
     <Content Include="admin\ChangePassword.aspx" />
     <Content Include="admin\ChangePasswordSuccess.aspx" />
     <Content Include="admin\CImage.aspx" />
+    <Content Include="members\EditMemberInfo.aspx" />
+    <Content Include="admin\Register2.aspx" />
     <Content Include="admin\Login.aspx" />
     <Content Include="admin\Register.aspx" />
     <None Include="bootstrap\css\bootstrap.css.map" />
@@ -906,6 +908,20 @@
     <Compile Include="admin\CImage.aspx.designer.cs">
       <DependentUpon>CImage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="members\EditMemberInfo.aspx.cs">
+      <DependentUpon>EditMemberInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="members\EditMemberInfo.aspx.designer.cs">
+      <DependentUpon>EditMemberInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Register2.aspx.cs">
+      <DependentUpon>Register2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Register2.aspx.designer.cs">
+      <DependentUpon>Register2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -969,7 +985,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="members\" />
     <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>

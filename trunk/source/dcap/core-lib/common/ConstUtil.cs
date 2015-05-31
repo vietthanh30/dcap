@@ -16,5 +16,9 @@ namespace core_lib.common
         public const string DEFAULT_PASSWORD = "12345";
         public const string ACTIVE_STATUS = "Y";
         public const string INACTIVE_STATUS = "N";
+
+        public const string QTHT = "QTHT";
+        public const string QLKT = "QLKT";
+        public const string QLTV = "QLTV";
     }
 }

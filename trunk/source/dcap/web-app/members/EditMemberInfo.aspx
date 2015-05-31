@@ -1,5 +1,5 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Register.aspx.cs" Inherits="web_app.admin.Register" %>
+﻿<%@ Page Title="EditMemberInfo" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+    CodeBehind="EditMemberInfo.aspx.cs" Inherits="web_app.members.EditMemberInfo" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
@@ -40,16 +40,6 @@
                 </div>
 				<div class="row">
 					<div class="col-xs-4">
-					<label for="ParentId">Người giới thiệu</label>
-					<input type="text" class="form-control" id="ParentId" runat="server" placeholder="Nhập ID người giới thiệu">
-					</div>
-					<div class="col-xs-4">
-					<label for="DirectParentId">Tuyến trên</label>
-					<input type="text" class="form-control" id="DirectParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-4">
 					<label for="HoTen">Họ tên</label>
 					<input type="text" class="form-control" id="HoTen" runat="server" placeholder="Nhập họ tên">
                     <asp:RequiredFieldValidator ID="HoTenRequired" runat="server" ControlToValidate="HoTen" 
@@ -69,7 +59,7 @@
 					</div>
 					<div class="col-xs-4">
 					<label for="SoCmnd">Số CMND</label>
-					<input type="text" class="form-control" id="SoCmnd" runat="server" placeholder="Nhập số CMND">
+					<input type="text" class="form-control" id="SoCmnd" readonly="true" runat="server" placeholder="Nhập số CMND">
                     <asp:RequiredFieldValidator ID="SoCmndRequired" runat="server" ControlToValidate="SoCmnd" 
                         CssClass="failureNotification" ErrorMessage="Số CMND bắt buộc nhập." ToolTip="Số CMND bắt buộc nhập." 
                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
