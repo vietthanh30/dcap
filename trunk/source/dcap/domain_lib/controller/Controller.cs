@@ -64,6 +64,11 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
         }
 
+        public BangKeDto[] SearchBangKe(DateTime? thangKeKhai)
+        {
+            return m_PersistenceManager.SearchBangKe(thangKeKhai);
+        }
+
 
         public int CalculateAccountLog()
         {

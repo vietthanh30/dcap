@@ -801,6 +801,11 @@ namespace domain_lib.persistence
             return allResults;
         }
 
+        public BangKeDto[] SearchBangKe(DateTime? thangKeKhai)
+        {
+            return new BangKeDto[0];
+        }
+
 				public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
         {
             DateTime now = DateTime.Now;

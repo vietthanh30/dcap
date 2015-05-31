@@ -61,6 +61,12 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public BangKeDto[] SearchBangKe(DateTime? thangKeKhai)
+        {
+            return controller.SearchBangKe(thangKeKhai);
+        }
+
+        [WebMethod]
         public int CalculateAccountLog()
         {
             return controller.CalculateAccountLog();

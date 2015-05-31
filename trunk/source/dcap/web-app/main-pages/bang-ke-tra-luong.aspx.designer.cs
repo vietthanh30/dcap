@@ -13,22 +13,22 @@ namespace web_app.main_pages {
     public partial class bang_ke_tra_luong {
         
         /// <summary>
-        /// BeginDate control.
+        /// i1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText BeginDate;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl i1;
         
         /// <summary>
-        /// EndDate control.
+        /// ReportMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText EndDate;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText ReportMonth;
         
         /// <summary>
         /// SearchButton control.
@@ -38,5 +38,14 @@ namespace web_app.main_pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SearchButton;
+        
+        /// <summary>
+        /// gvBangKe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvBangKe;
     }
 }

@@ -42,5 +42,10 @@ namespace web_app.common
         {
             return dcapService.CreateUserAdmin(userName, fullName, roleCode, createdBy);
         }
+
+        public static BangKeDto[] SearchBangKe(DateTime? thangKeKhai)
+        {
+            return dcapService.SearchBangKe(thangKeKhai);
+        }
     }
 }
