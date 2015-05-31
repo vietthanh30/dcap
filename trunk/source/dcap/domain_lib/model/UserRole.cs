@@ -66,11 +66,11 @@ namespace domain_lib.model
 
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj.GetType().Equals(typeof(UserRole))))
+            var other = obj as UserRole;
+            if (other == null)
             {
                 return false;
             }
-            var other = obj as UserRole;
             return RoleID.Equals(other.RoleID) && UserID.Equals(other.UserID);
         }
 

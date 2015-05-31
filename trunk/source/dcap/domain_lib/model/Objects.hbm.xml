@@ -9,7 +9,7 @@ assembly="domain_lib">
     </id>
 
     <property name="ParentID">
-      <column name="PARENT_ID" not-null="false" />
+      <column name="PARENT_ID" not-null="false"/>
     </property>
 
     <property name="ObjectCode">

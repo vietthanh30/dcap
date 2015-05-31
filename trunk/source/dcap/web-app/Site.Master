@@ -118,7 +118,6 @@
 			</nav>
         </header> <!-- /.content-main-header -->
 
-        <asp:ContentPlaceHolder ID="LeftContentAdmin" runat="server">
              <div class="left-side">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
@@ -131,6 +130,7 @@
                     </div>
                 </div>
                 
+            <asp:ContentPlaceHolder ID="LeftContentAdmin" runat="server">
               <ul class="sidebar-menu">
                 <li class="header"></li>
                 <li>
@@ -160,24 +160,9 @@
                   </a>
                 </li>
               </ul>	 
-            </section>
-            <!-- /.sidebar --> 
-             </div>  
-        </asp:ContentPlaceHolder>
-       
-        <asp:ContentPlaceHolder ID="LeftContentKT" runat="server">
-             <div class="left-side">
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img ID="Img1" src="" runat="server" class="img-circle" alt="User Image" />
-                    </div>
-                    <div class="pull-left info">
-                        <p><asp:Label ID="Label1" runat="server" /></p>
-                    </div>
-                </div>
-                
+            </asp:ContentPlaceHolder>
+
+            <asp:ContentPlaceHolder ID="LeftContentKT" runat="server">
               <ul class="sidebar-menu">
                 <li class="header"></li>
 			    <li>
@@ -190,25 +175,10 @@
                     <i class="fa fa-table"></i> <span>Bảng kê trả lương</span>
                   </a>
                 </li>
-              </ul>	 
-            </section>
-            <!-- /.sidebar --> 
-             </div>  
-        </asp:ContentPlaceHolder>
+              </ul>	  
+            </asp:ContentPlaceHolder>
        
-        <asp:ContentPlaceHolder ID="LeftContentTV" runat="server">
-             <div class="left-side">
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img ID="Img2" src="" runat="server" class="img-circle" alt="User Image" />
-                    </div>
-                    <div class="pull-left info">
-                        <p><asp:Label ID="Label2" runat="server" /></p>
-                    </div>
-                </div>
-                
+            <asp:ContentPlaceHolder ID="LeftContentTV" runat="server">
               <ul class="sidebar-menu">
                 <li class="header"></li>
                 <li>
@@ -229,10 +199,11 @@
                   </a>
                 </li>
               </ul>	 
+            </asp:ContentPlaceHolder>
+       
             </section>
             <!-- /.sidebar --> 
              </div>  
-        </asp:ContentPlaceHolder>
        
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">

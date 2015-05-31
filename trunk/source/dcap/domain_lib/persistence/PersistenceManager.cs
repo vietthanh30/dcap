@@ -169,6 +169,21 @@ namespace domain_lib.persistence
             }
         }
 
+        /// <summary>
+        /// Saves an new object and its persistent children.
+        /// </summary>
+        public void SaveNew<T>(T item)
+        {
+            using (var session = m_SessionFactory.OpenSession())
+            {
+                using (session.BeginTransaction())
+                {
+                    session.Save(item);
+                    session.Transaction.Commit();
+                }
+            }
+        }
+
         public UserDto checkUser(string userName, string password)
         {
             var userDto = new UserDto();
@@ -191,7 +206,7 @@ namespace domain_lib.persistence
             var user = users[0];
             if (string.Compare(MD5Util.EncodeMD5(password), user.Password, true) != 0)
             {
-                userDto.Message = "Mật khẩu xác nhận không khớp. Vui lòng thử lại.";
+                userDto.Message = "Mật khẩu không khớp. Vui lòng thử lại.";
                 return userDto;
             }
             userDto.UserID = user.UserID;
@@ -373,7 +388,7 @@ namespace domain_lib.persistence
                                FullName = fullName,
                                Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD)
                            };
-            Save(user);
+            SaveNew(user);
 
             users = RetrieveEquals<Users>("UserName", userName.ToUpper());
             if (users.Count == 0)
@@ -390,7 +405,7 @@ namespace domain_lib.persistence
             var role = roles[0];
 
             var userRole = new UserRole { UserID = user.UserID, RoleID = role.RoleID, IsActive = true };
-            Save(userRole);
+            SaveNew(userRole);
 
             return user.UserName;
         }
@@ -504,7 +519,7 @@ namespace domain_lib.persistence
             var user = new Users { UserName = tenDangNhap, FullName = memberInfo.HoTen, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
 
             // Save user
-            Save(user);
+            SaveNew(user);
 
             var users = RetrieveEquals<Users>("UserName", tenDangNhap);
             if (users.Count == 0)
@@ -521,7 +536,7 @@ namespace domain_lib.persistence
             var role = roles[0];
 
             var userRole = new UserRole { UserID = user.UserID, RoleID = role.RoleID, IsActive = true };
-            Save(userRole);
+            SaveNew(userRole);
 
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
@@ -534,7 +549,7 @@ namespace domain_lib.persistence
             account.CreatedBy = createdBy;
             account.CreatedDate = DateTime.Now;
 
-            Save(account);
+            SaveNew(account);
 
             return account.AccountNumber + "|" + user.UserName;
         }
@@ -639,7 +654,7 @@ namespace domain_lib.persistence
                 }
                 else
                 {
-                    tenDangNhap = tenDangNhap + (achar + (count % 26) - 1);
+                    tenDangNhap = tenDangNhap + Char.ToString((char)(achar + (count % 26) - 1));
                 }
             }
             while (true)
@@ -651,7 +666,7 @@ namespace domain_lib.persistence
                 }
                 while (count > 0 && tenDangNhap[tenDangNhap.Length - 1] != zchar)
                 {
-                    tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 1) + (tenDangNhap[tenDangNhap.Length - 1] + 1);
+                    tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 1) + Char.ToString((char)(tenDangNhap[tenDangNhap.Length - 1] + 1));
                     count--;
                 }
                 if (count == 0)
@@ -695,7 +710,7 @@ namespace domain_lib.persistence
                                      CreatedBy = createdBy
                                  };
             // Save memberInfo
-            Save(memberInfo);
+            SaveNew(memberInfo);
 
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count == 0)
@@ -708,7 +723,7 @@ namespace domain_lib.persistence
             var user = new Users { UserName = tenDangNhap, FullName = userName, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
 
             // Save user
-            Save(user);
+            SaveNew(user);
 
             var users = RetrieveEquals<Users>("UserName", tenDangNhap);
             if (users.Count == 0)
@@ -725,7 +740,7 @@ namespace domain_lib.persistence
             var role = roles[0];
 
             var userRole = new UserRole { UserID = user.UserID, RoleID = role.RoleID, IsActive = true };
-            Save(userRole);
+            SaveNew(userRole);
 
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
@@ -738,7 +753,7 @@ namespace domain_lib.persistence
             account.CreatedBy = createdBy;
             account.CreatedDate = DateTime.Now;
 
-            Save(account);
+            SaveNew(account);
 
             return account.AccountNumber + "|" + user.UserName;
         }
@@ -798,7 +813,7 @@ namespace domain_lib.persistence
                                 CreatedDate = now
                             };
 
-            Save(bonus);
+            SaveNew(bonus);
             return bonus;
         }
         

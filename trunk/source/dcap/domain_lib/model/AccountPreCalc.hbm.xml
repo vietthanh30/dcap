@@ -9,11 +9,11 @@ assembly="domain_lib">
     </id>
     
     <property name="AccountId">
-      <column name="ACCOUNT_ID" not-null="false" />
+      <column name="ACCOUNT_ID" not-null="false"/>
     </property>
 
     <property name="CalcAccountId">
-      <column name="CALC_ACCOUNT_ID" not-null="false" />
+      <column name="CALC_ACCOUNT_ID" not-null="false"/>
     </property>
     
     <property name="AccountLevel">      

@@ -11,7 +11,10 @@ namespace web_app.members
         protected void Page_Load(object sender, EventArgs e)
         {
             ContinueDestinationPageUrl.Value = Request.QueryString["ReturnUrl"];
-            LoadUserInfo();
+            if (!Page.IsPostBack)
+            {
+                LoadUserInfo();
+            }
         }
 
         private void LoadUserInfo()

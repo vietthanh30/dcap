@@ -9,7 +9,7 @@ namespace web_app
         protected void Page_Load(object sender, EventArgs e)
         {
             var userDto = (UserDto)Session["UserDto"];
-            bool logged = userDto != null;
+            bool logged = userDto != null && Request.IsAuthenticated;
             if (logged)
             {
                 UpdateUserInfo(userDto);

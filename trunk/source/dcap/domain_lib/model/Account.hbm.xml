@@ -9,11 +9,11 @@ assembly="domain_lib">
     </id>
     
     <property name="ParentId">
-      <column name="PARENT_ID" not-null="false" />
+      <column name="PARENT_ID" not-null="false"/>
     </property>
 
     <property name="ParentDirectId">
-      <column name="PARENT_DIRECT_ID" not-null="false" />
+      <column name="PARENT_DIRECT_ID" not-null="false"/>
     </property>
 
     <property name="AccountNumber">
@@ -29,11 +29,11 @@ assembly="domain_lib">
     </property>
 
     <property name="MemberId">
-      <column name="MEMBER_ID" not-null="false" />
+      <column name="MEMBER_ID" not-null="false"/>
     </property>
 
     <property name="UserId">
-      <column name="USER_ID" not-null="false" />
+      <column name="USER_ID" not-null="false"/>
     </property>
 
     <property name="CreatedDate">

@@ -6,10 +6,10 @@ assembly="domain_lib">
   <class name="UserRole" table="USER_ROLE" lazy="false">
     <composite-id>
       <key-property name="UserID">
-        <column name="USER_ID" not-null="true" />
+        <column name="USER_ID" not-null="true"/>
       </key-property>
       <key-property name="RoleID">
-        <column name="ROLE_ID" not-null="true" />
+        <column name="ROLE_ID" not-null="true"/>
       </key-property>
     </composite-id>
 
