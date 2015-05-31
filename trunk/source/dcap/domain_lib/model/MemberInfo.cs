@@ -34,12 +34,32 @@ namespace domain_lib.model
 
         private String _createdBy = String.Empty;
 
+        private long _accountNumber = -1;
+
         #endregion
 
     	#region Constructor
 
         public MemberInfo()
         {
+        }
+
+        public MemberInfo(long accountNumber, string hoTen, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
+                    string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
+        {
+            this._accountNumber = accountNumber;
+            this._hoTen = hoTen;
+            this._ngaySinh = ngaySinh;
+            this._soCmnd = soCmnd;
+            this._ngayCap = ngayCap;
+            this._soDienThoai = soDienThoai;
+            this._diaChi = diaChi;
+            this._gioiTinh = gioiTinh;
+            this._soTaiKhoan = soTaiKhoan;
+            this._chiNhanhNh = chiNhanhNH;
+            this._imageUrl = imageUrl;
+            this._createdDate = createdDate;
+            this._createdBy = createdBy;
         }
 
     	#endregion
@@ -53,6 +73,15 @@ namespace domain_lib.model
         {
             get { return _memberId; }
             set { _memberId = value; }
+        }
+
+        /// <summary>
+        /// Account Number
+        /// </summary>
+        public virtual long AccountNumber
+        {
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
         }
 
         /// <summary>

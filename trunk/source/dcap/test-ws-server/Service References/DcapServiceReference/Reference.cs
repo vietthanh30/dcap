@@ -15,21 +15,58 @@ namespace test_ws_server.DcapServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountLog", Namespace="http://tempuri.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserDto", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
-    public partial class AccountLog : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class UserDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private long IdField;
+        private long UserIDField;
         
-        private long AccountIDField;
+        private long AccountNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FullNameField;
+        
+        private System.Nullable<System.DateTime> NgaySinhField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SoCmndField;
+        
+        private System.Nullable<System.DateTime> NgayCapField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SoDienThoaiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DiaChiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GioiTinhField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SoTaiKhoanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ChiNhanhNHField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImageUrlField;
         
         private System.DateTime CreatedDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DmlField;
+        private string CreatedByField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private test_ws_server.DcapServiceReference.RoleDto[] AllRolesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -42,32 +79,175 @@ namespace test_ws_server.DcapServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long Id {
+        public long UserID {
             get {
-                return this.IdField;
+                return this.UserIDField;
             }
             set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
+                if ((this.UserIDField.Equals(value) != true)) {
+                    this.UserIDField = value;
+                    this.RaisePropertyChanged("UserID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
-        public long AccountID {
+        public long AccountNumber {
             get {
-                return this.AccountIDField;
+                return this.AccountNumberField;
             }
             set {
-                if ((this.AccountIDField.Equals(value) != true)) {
-                    this.AccountIDField = value;
-                    this.RaisePropertyChanged("AccountID");
+                if ((this.AccountNumberField.Equals(value) != true)) {
+                    this.AccountNumberField = value;
+                    this.RaisePropertyChanged("AccountNumber");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string FullName {
+            get {
+                return this.FullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FullNameField, value) != true)) {
+                    this.FullNameField = value;
+                    this.RaisePropertyChanged("FullName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public System.Nullable<System.DateTime> NgaySinh {
+            get {
+                return this.NgaySinhField;
+            }
+            set {
+                if ((this.NgaySinhField.Equals(value) != true)) {
+                    this.NgaySinhField = value;
+                    this.RaisePropertyChanged("NgaySinh");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string SoCmnd {
+            get {
+                return this.SoCmndField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SoCmndField, value) != true)) {
+                    this.SoCmndField = value;
+                    this.RaisePropertyChanged("SoCmnd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public System.Nullable<System.DateTime> NgayCap {
+            get {
+                return this.NgayCapField;
+            }
+            set {
+                if ((this.NgayCapField.Equals(value) != true)) {
+                    this.NgayCapField = value;
+                    this.RaisePropertyChanged("NgayCap");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string SoDienThoai {
+            get {
+                return this.SoDienThoaiField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SoDienThoaiField, value) != true)) {
+                    this.SoDienThoaiField = value;
+                    this.RaisePropertyChanged("SoDienThoai");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string DiaChi {
+            get {
+                return this.DiaChiField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiaChiField, value) != true)) {
+                    this.DiaChiField = value;
+                    this.RaisePropertyChanged("DiaChi");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string GioiTinh {
+            get {
+                return this.GioiTinhField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GioiTinhField, value) != true)) {
+                    this.GioiTinhField = value;
+                    this.RaisePropertyChanged("GioiTinh");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        public string SoTaiKhoan {
+            get {
+                return this.SoTaiKhoanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SoTaiKhoanField, value) != true)) {
+                    this.SoTaiKhoanField = value;
+                    this.RaisePropertyChanged("SoTaiKhoan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        public string ChiNhanhNH {
+            get {
+                return this.ChiNhanhNHField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChiNhanhNHField, value) != true)) {
+                    this.ChiNhanhNHField = value;
+                    this.RaisePropertyChanged("ChiNhanhNH");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        public string ImageUrl {
+            get {
+                return this.ImageUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageUrlField, value) != true)) {
+                    this.ImageUrlField = value;
+                    this.RaisePropertyChanged("ImageUrl");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
         public System.DateTime CreatedDate {
             get {
                 return this.CreatedDateField;
@@ -80,15 +260,132 @@ namespace test_ws_server.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string Dml {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        public string CreatedBy {
             get {
-                return this.DmlField;
+                return this.CreatedByField;
             }
             set {
-                if ((object.ReferenceEquals(this.DmlField, value) != true)) {
-                    this.DmlField = value;
-                    this.RaisePropertyChanged("Dml");
+                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
+                    this.CreatedByField = value;
+                    this.RaisePropertyChanged("CreatedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        public test_ws_server.DcapServiceReference.RoleDto[] AllRoles {
+            get {
+                return this.AllRolesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AllRolesField, value) != true)) {
+                    this.AllRolesField = value;
+                    this.RaisePropertyChanged("AllRoles");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RoleDto", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class RoleDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long RoleIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RoleCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        private int StatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long RoleID {
+            get {
+                return this.RoleIDField;
+            }
+            set {
+                if ((this.RoleIDField.Equals(value) != true)) {
+                    this.RoleIDField = value;
+                    this.RaisePropertyChanged("RoleID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string RoleCode {
+            get {
+                return this.RoleCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RoleCodeField, value) != true)) {
+                    this.RoleCodeField = value;
+                    this.RaisePropertyChanged("RoleCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public int Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
                 }
             }
         }
@@ -115,13 +412,19 @@ namespace test_ws_server.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/changePassword", ReplyAction="*")]
         test_ws_server.DcapServiceReference.changePasswordResponse changePassword(test_ws_server.DcapServiceReference.changePasswordRequest request);
         
-        // CODEGEN: Generating message contract since element name userName from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/createUser", ReplyAction="*")]
-        test_ws_server.DcapServiceReference.createUserResponse createUser(test_ws_server.DcapServiceReference.createUserRequest request);
+        // CODEGEN: Generating message contract since element name parentId from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CreateUser", ReplyAction="*")]
+        test_ws_server.DcapServiceReference.CreateUserResponse CreateUser(test_ws_server.DcapServiceReference.CreateUserRequest request);
         
-        // CODEGEN: Generating message contract since element name CalculateAccountLogResult from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name parentId from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUser", ReplyAction="*")]
+        test_ws_server.DcapServiceReference.SearchUserResponse SearchUser(test_ws_server.DcapServiceReference.SearchUserRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
-        test_ws_server.DcapServiceReference.CalculateAccountLogResponse CalculateAccountLog(test_ws_server.DcapServiceReference.CalculateAccountLogRequest request);
+        int CalculateAccountLog();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateBonusOfAccountTree", ReplyAction="*")]
+        int CalculateBonusOfAccountTree();
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -186,12 +489,12 @@ namespace test_ws_server.DcapServiceReference {
     public partial class loginResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string loginResult;
+        public test_ws_server.DcapServiceReference.UserDto loginResult;
         
         public loginResponseBody() {
         }
         
-        public loginResponseBody(string loginResult) {
+        public loginResponseBody(test_ws_server.DcapServiceReference.UserDto loginResult) {
             this.loginResult = loginResult;
         }
     }
@@ -280,15 +583,15 @@ namespace test_ws_server.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class createUserRequest {
+    public partial class CreateUserRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="createUser", Namespace="http://tempuri.org/", Order=0)]
-        public test_ws_server.DcapServiceReference.createUserRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateUser", Namespace="http://tempuri.org/", Order=0)]
+        public test_ws_server.DcapServiceReference.CreateUserRequestBody Body;
         
-        public createUserRequest() {
+        public CreateUserRequest() {
         }
         
-        public createUserRequest(test_ws_server.DcapServiceReference.createUserRequestBody Body) {
+        public CreateUserRequest(test_ws_server.DcapServiceReference.CreateUserRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -297,24 +600,64 @@ namespace test_ws_server.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class createUserRequestBody {
+    public partial class CreateUserRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string userName;
+        public string parentId;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string password;
+        public string directParentId;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string confirmPassword;
+        public string userName;
         
-        public createUserRequestBody() {
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public System.DateTime ngaySinh;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string soCmnd;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public System.DateTime ngayCap;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string soDienThoai;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string diaChi;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string gioiTinh;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string soTaiKhoan;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        public string chiNhanhNH;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        public string photoUrl;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        public string createdBy;
+        
+        public CreateUserRequestBody() {
         }
         
-        public createUserRequestBody(string userName, string password, string confirmPassword) {
+        public CreateUserRequestBody(string parentId, string directParentId, string userName, System.DateTime ngaySinh, string soCmnd, System.DateTime ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy) {
+            this.parentId = parentId;
+            this.directParentId = directParentId;
             this.userName = userName;
-            this.password = password;
-            this.confirmPassword = confirmPassword;
+            this.ngaySinh = ngaySinh;
+            this.soCmnd = soCmnd;
+            this.ngayCap = ngayCap;
+            this.soDienThoai = soDienThoai;
+            this.diaChi = diaChi;
+            this.gioiTinh = gioiTinh;
+            this.soTaiKhoan = soTaiKhoan;
+            this.chiNhanhNH = chiNhanhNH;
+            this.photoUrl = photoUrl;
+            this.createdBy = createdBy;
         }
     }
     
@@ -322,15 +665,15 @@ namespace test_ws_server.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class createUserResponse {
+    public partial class CreateUserResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="createUserResponse", Namespace="http://tempuri.org/", Order=0)]
-        public test_ws_server.DcapServiceReference.createUserResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateUserResponse", Namespace="http://tempuri.org/", Order=0)]
+        public test_ws_server.DcapServiceReference.CreateUserResponseBody Body;
         
-        public createUserResponse() {
+        public CreateUserResponse() {
         }
         
-        public createUserResponse(test_ws_server.DcapServiceReference.createUserResponseBody Body) {
+        public CreateUserResponse(test_ws_server.DcapServiceReference.CreateUserResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -339,43 +682,16 @@ namespace test_ws_server.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class createUserResponseBody {
+    public partial class CreateUserResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string createUserResult;
+        public string CreateUserResult;
         
-        public createUserResponseBody() {
+        public CreateUserResponseBody() {
         }
         
-        public createUserResponseBody(string createUserResult) {
-            this.createUserResult = createUserResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class CalculateAccountLogRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="CalculateAccountLog", Namespace="http://tempuri.org/", Order=0)]
-        public test_ws_server.DcapServiceReference.CalculateAccountLogRequestBody Body;
-        
-        public CalculateAccountLogRequest() {
-        }
-        
-        public CalculateAccountLogRequest(test_ws_server.DcapServiceReference.CalculateAccountLogRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class CalculateAccountLogRequestBody {
-        
-        public CalculateAccountLogRequestBody() {
+        public CreateUserResponseBody(string CreateUserResult) {
+            this.CreateUserResult = CreateUserResult;
         }
     }
     
@@ -383,15 +699,15 @@ namespace test_ws_server.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class CalculateAccountLogResponse {
+    public partial class SearchUserRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="CalculateAccountLogResponse", Namespace="http://tempuri.org/", Order=0)]
-        public test_ws_server.DcapServiceReference.CalculateAccountLogResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchUser", Namespace="http://tempuri.org/", Order=0)]
+        public test_ws_server.DcapServiceReference.SearchUserRequestBody Body;
         
-        public CalculateAccountLogResponse() {
+        public SearchUserRequest() {
         }
         
-        public CalculateAccountLogResponse(test_ws_server.DcapServiceReference.CalculateAccountLogResponseBody Body) {
+        public SearchUserRequest(test_ws_server.DcapServiceReference.SearchUserRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -400,16 +716,90 @@ namespace test_ws_server.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class CalculateAccountLogResponseBody {
+    public partial class SearchUserRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public test_ws_server.DcapServiceReference.AccountLog[] CalculateAccountLogResult;
+        public string parentId;
         
-        public CalculateAccountLogResponseBody() {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string directParentId;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string userName;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public System.DateTime ngaySinh;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string soCmnd;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public System.DateTime ngayCap;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string soDienThoai;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string diaChi;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string gioiTinh;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string soTaiKhoan;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        public string chiNhanhNH;
+        
+        public SearchUserRequestBody() {
         }
         
-        public CalculateAccountLogResponseBody(test_ws_server.DcapServiceReference.AccountLog[] CalculateAccountLogResult) {
-            this.CalculateAccountLogResult = CalculateAccountLogResult;
+        public SearchUserRequestBody(string parentId, string directParentId, string userName, System.DateTime ngaySinh, string soCmnd, System.DateTime ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH) {
+            this.parentId = parentId;
+            this.directParentId = directParentId;
+            this.userName = userName;
+            this.ngaySinh = ngaySinh;
+            this.soCmnd = soCmnd;
+            this.ngayCap = ngayCap;
+            this.soDienThoai = soDienThoai;
+            this.diaChi = diaChi;
+            this.gioiTinh = gioiTinh;
+            this.soTaiKhoan = soTaiKhoan;
+            this.chiNhanhNH = chiNhanhNH;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchUserResponse", Namespace="http://tempuri.org/", Order=0)]
+        public test_ws_server.DcapServiceReference.SearchUserResponseBody Body;
+        
+        public SearchUserResponse() {
+        }
+        
+        public SearchUserResponse(test_ws_server.DcapServiceReference.SearchUserResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchUserResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SearchUserResult;
+        
+        public SearchUserResponseBody() {
+        }
+        
+        public SearchUserResponseBody(string SearchUserResult) {
+            this.SearchUserResult = SearchUserResult;
         }
     }
     
@@ -445,7 +835,7 @@ namespace test_ws_server.DcapServiceReference {
             return base.Channel.login(request);
         }
         
-        public string login(string userName, string password) {
+        public test_ws_server.DcapServiceReference.UserDto login(string userName, string password) {
             test_ws_server.DcapServiceReference.loginRequest inValue = new test_ws_server.DcapServiceReference.loginRequest();
             inValue.Body = new test_ws_server.DcapServiceReference.loginRequestBody();
             inValue.Body.userName = userName;
@@ -471,30 +861,59 @@ namespace test_ws_server.DcapServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        test_ws_server.DcapServiceReference.createUserResponse test_ws_server.DcapServiceReference.DcapServiceSoap.createUser(test_ws_server.DcapServiceReference.createUserRequest request) {
-            return base.Channel.createUser(request);
+        test_ws_server.DcapServiceReference.CreateUserResponse test_ws_server.DcapServiceReference.DcapServiceSoap.CreateUser(test_ws_server.DcapServiceReference.CreateUserRequest request) {
+            return base.Channel.CreateUser(request);
         }
         
-        public string createUser(string userName, string password, string confirmPassword) {
-            test_ws_server.DcapServiceReference.createUserRequest inValue = new test_ws_server.DcapServiceReference.createUserRequest();
-            inValue.Body = new test_ws_server.DcapServiceReference.createUserRequestBody();
+        public string CreateUser(string parentId, string directParentId, string userName, System.DateTime ngaySinh, string soCmnd, System.DateTime ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy) {
+            test_ws_server.DcapServiceReference.CreateUserRequest inValue = new test_ws_server.DcapServiceReference.CreateUserRequest();
+            inValue.Body = new test_ws_server.DcapServiceReference.CreateUserRequestBody();
+            inValue.Body.parentId = parentId;
+            inValue.Body.directParentId = directParentId;
             inValue.Body.userName = userName;
-            inValue.Body.password = password;
-            inValue.Body.confirmPassword = confirmPassword;
-            test_ws_server.DcapServiceReference.createUserResponse retVal = ((test_ws_server.DcapServiceReference.DcapServiceSoap)(this)).createUser(inValue);
-            return retVal.Body.createUserResult;
+            inValue.Body.ngaySinh = ngaySinh;
+            inValue.Body.soCmnd = soCmnd;
+            inValue.Body.ngayCap = ngayCap;
+            inValue.Body.soDienThoai = soDienThoai;
+            inValue.Body.diaChi = diaChi;
+            inValue.Body.gioiTinh = gioiTinh;
+            inValue.Body.soTaiKhoan = soTaiKhoan;
+            inValue.Body.chiNhanhNH = chiNhanhNH;
+            inValue.Body.photoUrl = photoUrl;
+            inValue.Body.createdBy = createdBy;
+            test_ws_server.DcapServiceReference.CreateUserResponse retVal = ((test_ws_server.DcapServiceReference.DcapServiceSoap)(this)).CreateUser(inValue);
+            return retVal.Body.CreateUserResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        test_ws_server.DcapServiceReference.CalculateAccountLogResponse test_ws_server.DcapServiceReference.DcapServiceSoap.CalculateAccountLog(test_ws_server.DcapServiceReference.CalculateAccountLogRequest request) {
-            return base.Channel.CalculateAccountLog(request);
+        test_ws_server.DcapServiceReference.SearchUserResponse test_ws_server.DcapServiceReference.DcapServiceSoap.SearchUser(test_ws_server.DcapServiceReference.SearchUserRequest request) {
+            return base.Channel.SearchUser(request);
         }
         
-        public test_ws_server.DcapServiceReference.AccountLog[] CalculateAccountLog() {
-            test_ws_server.DcapServiceReference.CalculateAccountLogRequest inValue = new test_ws_server.DcapServiceReference.CalculateAccountLogRequest();
-            inValue.Body = new test_ws_server.DcapServiceReference.CalculateAccountLogRequestBody();
-            test_ws_server.DcapServiceReference.CalculateAccountLogResponse retVal = ((test_ws_server.DcapServiceReference.DcapServiceSoap)(this)).CalculateAccountLog(inValue);
-            return retVal.Body.CalculateAccountLogResult;
+        public string SearchUser(string parentId, string directParentId, string userName, System.DateTime ngaySinh, string soCmnd, System.DateTime ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH) {
+            test_ws_server.DcapServiceReference.SearchUserRequest inValue = new test_ws_server.DcapServiceReference.SearchUserRequest();
+            inValue.Body = new test_ws_server.DcapServiceReference.SearchUserRequestBody();
+            inValue.Body.parentId = parentId;
+            inValue.Body.directParentId = directParentId;
+            inValue.Body.userName = userName;
+            inValue.Body.ngaySinh = ngaySinh;
+            inValue.Body.soCmnd = soCmnd;
+            inValue.Body.ngayCap = ngayCap;
+            inValue.Body.soDienThoai = soDienThoai;
+            inValue.Body.diaChi = diaChi;
+            inValue.Body.gioiTinh = gioiTinh;
+            inValue.Body.soTaiKhoan = soTaiKhoan;
+            inValue.Body.chiNhanhNH = chiNhanhNH;
+            test_ws_server.DcapServiceReference.SearchUserResponse retVal = ((test_ws_server.DcapServiceReference.DcapServiceSoap)(this)).SearchUser(inValue);
+            return retVal.Body.SearchUserResult;
+        }
+        
+        public int CalculateAccountLog() {
+            return base.Channel.CalculateAccountLog();
+        }
+        
+        public int CalculateBonusOfAccountTree() {
+            return base.Channel.CalculateBonusOfAccountTree();
         }
     }
 }

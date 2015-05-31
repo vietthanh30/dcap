@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Web.Security;
+using core_lib.common;
 using web_app.common;
 
 namespace web_app.admin
@@ -27,9 +27,9 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = NgaySinh.SelectedDate;
+            var ngaySinh = DateUtil.GetDateTime(NgaySinh.Value.Trim());
             var soCmnd = SoCmnd.Value.Trim();
-            var ngayCap = NgayCap.SelectedDate;
+            var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
             var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
             var gioiTinh = GioiTinh.SelectedValue.Trim();
@@ -65,15 +65,15 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = NgaySinh.SelectedDate;
+            var ngaySinh = NgaySinh.Value.Trim();
             var soCmnd = SoCmnd.Value.Trim();
-            var ngayCap = NgayCap.SelectedDate;
+            var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
             var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
+            var returnCode = DcapServiceUtil.SearchUser(parentId, directParentId, userName, DateUtil.GetDateTime(ngaySinh), soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH);
             if (string.Compare(returnCode, "-1", true) != 0)
             {
                 var message = "";

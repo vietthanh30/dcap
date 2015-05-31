@@ -27,6 +27,13 @@ namespace domain_lib.model
         {
         }
 
+        public Roles(long roleId, string roleCode, string description)
+        {
+            this.role_ID = roleId;
+            this.role_Code = roleCode;
+            this.description = description;
+        }
+
     	#endregion
 
         #region Properties

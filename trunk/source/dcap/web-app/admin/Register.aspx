@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Register.aspx.cs" Inherits="web_app.admin.Register" %>
-<%@ Register Assembly="SlimeeLibrary" Namespace="SlimeeLibrary" TagPrefix="cc1" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
@@ -61,18 +60,12 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="NgaySinh">Ngày sinh</label>
-                    <cc1:datepicker ID="NgaySinh" runat="server" class="form-control" placeholder="Nhập ngày sinh" Width="270px" PaneWidth="250px" Height="20px"
-                    BorderColor="#D3D3D3" EnableViewState="true" >
-                                <PaneTableStyle BorderColor="#707070" BorderWidth="1px" BorderStyle="Solid" />
-                                <PaneHeaderStyle BackColor="#0099FF" />
-                                <TitleStyle ForeColor="White" Font-Bold="true" />
-                                <NextPrevMonthStyle ForeColor="White" Font-Bold="true" />
-                                <NextPrevYearStyle ForeColor="#E0E0E0" Font-Bold="true" />
-                                <DayHeaderStyle BackColor="#E8E8E8" />
-                                <TodayStyle BackColor="#FFFFCC" ForeColor="#000000" Font-Underline="false" BorderColor="#FFCC99"/>
-                                <AlternateMonthStyle BackColor="#F0F0F0" ForeColor="#707070" Font-Underline="false"/>
-                                <MonthStyle BackColor="" ForeColor="#000000" Font-Underline="false"/>
-                            </cc1:datepicker>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i id="imgNgaySinh" class="fa fa-calendar" runat="server"></i>
+                      </div>
+                      <input type="text" id="NgaySinh" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                    </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoCmnd">Số CMND</label>
@@ -85,18 +78,12 @@
 				<div class="row">
                     <div class="col-xs-4">
 					<label for="NgayCap">Ngày cấp</label>
-                    <cc1:datepicker ID="NgayCap" runat="server" class="form-control" placeholder="Nhập ngày cấp" Width="270px" PaneWidth="250px" Height="20px"
-                    BorderColor="#D3D3D3" EnableViewState="true" >
-                                <PaneTableStyle BorderColor="#707070" BorderWidth="1px" BorderStyle="Solid" />
-                                <PaneHeaderStyle BackColor="#0099FF" />
-                                <TitleStyle ForeColor="White" Font-Bold="true" />
-                                <NextPrevMonthStyle ForeColor="White" Font-Bold="true" />
-                                <NextPrevYearStyle ForeColor="#E0E0E0" Font-Bold="true" />
-                                <DayHeaderStyle BackColor="#E8E8E8" />
-                                <TodayStyle BackColor="#FFFFCC" ForeColor="#000000" Font-Underline="false" BorderColor="#FFCC99"/>
-                                <AlternateMonthStyle BackColor="#F0F0F0" ForeColor="#707070" Font-Underline="false"/>
-                                <MonthStyle BackColor="" ForeColor="#000000" Font-Underline="false"/>
-                            </cc1:datepicker>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i id="i1" class="fa fa-calendar" runat="server"></i>
+                      </div>
+                        <input type="text" ID="NgayCap" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                    </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoDienThoai">Số điện thoại</label>
@@ -110,9 +97,6 @@
                         <asp:ListItem Text="Nam" Value="M" />
                         <asp:ListItem Text="Nữ" Value="F" />
                     </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="GioiTinhRequired" runat="server" ControlToValidate="GioiTinh" 
-                        CssClass="failureNotification" ErrorMessage="Giới tính bắt buộc nhập." ToolTip="Giới tính bắt buộc nhập." 
-                        ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
 					</div>
 					<div class="col-xs-6">
 					<label for="DiaChi">Địa chỉ</label>

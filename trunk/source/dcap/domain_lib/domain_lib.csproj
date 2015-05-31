@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\Controller.cs" />
+    <Compile Include="dto\RoleDto.cs" />
+    <Compile Include="dto\UserDto.cs" />
     <Compile Include="model\Account.cs" />
     <Compile Include="model\AccountBonus.cs" />
     <Compile Include="model\AccountLog.cs" />

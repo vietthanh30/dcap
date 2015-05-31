@@ -3,6 +3,7 @@ using System.Drawing.Imaging;
 using System.Web;
 using System.Web.Security;
 using web_app.common;
+using web_app.DcapServiceReference;
 
 namespace web_app.admin
 {
@@ -18,20 +19,21 @@ namespace web_app.admin
             string confirmCaptcha = this.CaptchaImage.Text;
             if (string.Compare(captchaImageText, confirmCaptcha, true) != 0)
             {
-                InvalidCredentialsMessage.Text = "Captcha is invalid. Please try again.";
+                InvalidCredentialsMessage.Text = "Captcha không khớp. Vui lòng thử lại.";
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
             var userName = this.UserName.Text;
             var password = this.Password.Text;
-            var returnCode = DcapServiceUtil.login(userName, password);
-            if (Convert.ToInt32(returnCode) == 0)
+            var userDto = DcapServiceUtil.login(userName, password);
+            if (String.IsNullOrEmpty(userDto.Message))
             {
+                Session["UserDto"] = userDto;
                 FormsAuthentication.RedirectFromLoginPage(userName.ToUpper(), this.RememberMe.Checked);
             }
             else
             {
-                InvalidCredentialsMessage.Text = "Your username or password is invalid. Please try again.";
+                InvalidCredentialsMessage.Text = userDto.Message;
                 InvalidCredentialsMessage.Visible = true;
             }
         }

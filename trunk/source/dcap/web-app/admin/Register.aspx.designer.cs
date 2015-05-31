@@ -94,13 +94,22 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator HoTenRequired;
         
         /// <summary>
+        /// imgNgaySinh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl imgNgaySinh;
+        
+        /// <summary>
         /// NgaySinh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SlimeeLibrary.DatePicker NgaySinh;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText NgaySinh;
         
         /// <summary>
         /// SoCmnd control.
@@ -121,13 +130,22 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator SoCmndRequired;
         
         /// <summary>
+        /// i1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl i1;
+        
+        /// <summary>
         /// NgayCap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SlimeeLibrary.DatePicker NgayCap;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText NgayCap;
         
         /// <summary>
         /// SoDienThoai control.
@@ -146,15 +164,6 @@ namespace web_app.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList GioiTinh;
-        
-        /// <summary>
-        /// GioiTinhRequired control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator GioiTinhRequired;
         
         /// <summary>
         /// DiaChi control.

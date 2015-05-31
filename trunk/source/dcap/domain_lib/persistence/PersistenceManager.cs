@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using core_lib.common;
+using domain_lib.dto;
 using domain_lib.model;
 using NHibernate;
 using NHibernate.Cfg;
@@ -168,27 +169,99 @@ namespace domain_lib.persistence
             }
         }
 
-        public string checkUser(string userName, string password)
+        public UserDto checkUser(string userName, string password)
         {
+            var userDto = new UserDto();
             if (String.IsNullOrEmpty(userName))
             {
-                return "-1";
+                userDto.Message = "Chưa nhập tên đăng nhập. Vui lòng thử lại.";
+                return userDto;
             }
             if (String.IsNullOrEmpty(password))
             {
-                return "-2";
+                userDto.Message = "Chưa nhập mật khẩu. Vui lòng thử lại.";
+                return userDto;
             }
             var users = RetrieveEquals<Users>("UserName", userName.ToUpper());
             if (users.Count == 0)
             {
-                return "-3";
+                userDto.Message = "Người dùng chưa đăng ký. Vui lòng thử lại.";
+                return userDto;
             }
             var user = users[0];
             if (string.Compare(MD5Util.EncodeMD5(password), user.Password, true) != 0)
             {
-                return "-4";
+                userDto.Message = "Mật khẩu xác nhận không khớp. Vui lòng thử lại.";
+                return userDto;
             }
-            return "0";
+            userDto.UserID = user.UserID;
+            userDto.UserName = user.UserName;
+            userDto.FullName = user.FullName;
+            LoadUserInfo(userDto);
+            LoadUserRole(userDto);
+            return userDto;
+        }
+
+        private void LoadUserInfo(UserDto userDto)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select new MemberInfo(a.AccountNumber, m.HoTen, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+                    + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a "
+                    + " where m.MemberID = a.MemberId and a.UserId = :userId");
+                query.SetParameter("userId", userDto.UserID);
+                query.SetMaxResults(1);
+
+                // Get the matching objects
+                var memberInfo = (MemberInfo) query.UniqueResult();
+
+                // Update userDto
+                if (memberInfo != null)
+                {
+                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.FullName = memberInfo.HoTen;
+                    userDto.NgaySinh = memberInfo.NgaySinh;
+                    userDto.SoCmnd = memberInfo.SoCmnd;
+                    userDto.NgayCap = memberInfo.NgayCap;
+                    userDto.SoDienThoai = memberInfo.SoDienThoai;
+                    userDto.DiaChi = memberInfo.DiaChi;
+                    userDto.GioiTinh = memberInfo.GioiTinh;
+                    userDto.SoTaiKhoan = memberInfo.SoTaiKhoan;
+                    userDto.ChiNhanhNH = memberInfo.ChiNhanhNH;
+                    userDto.ImageUrl = memberInfo.ImageUrl;
+                    userDto.CreatedDate = memberInfo.CreatedDate;
+                    userDto.CreatedBy = memberInfo.CreatedBy;
+                }
+            }
+        }
+
+        private void LoadUserRole(UserDto userDto)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select new Roles(r.RoleID, r.RoleCode, r.Description) from Roles r, UserRole ur "
+                    + " where r.RoleID = ur.RoleID and r.Status = 1 and ur.IsActive = :status and ur.UserID = :userId");
+                query.SetParameter("status", true);
+                query.SetParameter("userId", userDto.UserID);
+
+                // Get the matching objects
+                var allRoleInfos = query.List();
+
+                // Update Role info
+                var listRoleDtos = new List<RoleDto>();
+                foreach (Roles roleInfo in allRoleInfos)
+                {
+
+                    var roleDto = new RoleDto
+                                      {
+                                          RoleID = roleInfo.RoleID,
+                                          RoleCode = roleInfo.RoleCode,
+                                          Description = roleInfo.Description
+                                      };
+                    listRoleDtos.Add(roleDto);
+                }
+                userDto.AllRoles = listRoleDtos.ToArray();
+            }
         }
 
         public string changePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
@@ -275,7 +348,7 @@ namespace domain_lib.persistence
             }
         }
 
-        public string CreateUser(String parentId, String directParentId, String userName, DateTime ngaySinh, String soCmnd, DateTime ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+        public string CreateUser(String parentId, String directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
             if (String.IsNullOrEmpty(userName))
@@ -311,23 +384,21 @@ namespace domain_lib.persistence
                     return "-1";
                 }
             }
+            if (default(DateTime).Equals(ngaySinh))
+            {
+                ngaySinh = null;
+            }
+            if (default(DateTime).Equals(ngayCap))
+            {
+                ngayCap = null;
+            }
 
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count > 0)
             {
                 return CreateAccountForExistingMember(memberInfos[0], parentIdVal, directParentIdVal, photoUrl, createdBy);
             }
-            DateTime? ngaySinhVal = null;
-            DateTime? ngayCapVal = null;
-            if (default(DateTime) != ngaySinh)
-            {
-                ngaySinhVal = ngaySinh;
-            }
-            if (default(DateTime) != ngayCap)
-            {
-                ngayCapVal = ngayCap;
-            }
-            return CreateAccountForNewMember(parentIdVal, directParentIdVal, userName, ngaySinhVal, soCmnd, ngayCapVal, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            return CreateAccountForNewMember(parentIdVal, directParentIdVal, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
         }
 
         private string CreateAccountForExistingMember(MemberInfo memberInfo, long parentId, long directParentId, string photoUrl, string createdBy)
@@ -342,7 +413,7 @@ namespace domain_lib.persistence
             memberInfo.ImageUrl = photoUrl;
             Save(memberInfo);
 
-            var user = new Users { UserName = tenDangNhap, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
+            var user = new Users { UserName = tenDangNhap, FullName = memberInfo.HoTen, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
 
             // Save user
             Save(user);
@@ -353,6 +424,9 @@ namespace domain_lib.persistence
                 return "-1";
             }
             user = users[0];
+
+            var userRole = new UserRole {UserID = user.UserID, RoleID = 3, IsActive = true};
+            Save(userRole);
 
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
@@ -508,7 +582,7 @@ namespace domain_lib.persistence
             memberInfo = memberInfos[0];
 
 
-            var user = new Users { UserName = tenDangNhap, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
+            var user = new Users { UserName = tenDangNhap, FullName = userName, Password = MD5Util.EncodeMD5(ConstUtil.DEFAULT_PASSWORD) };
 
             // Save user
             Save(user);
@@ -519,6 +593,9 @@ namespace domain_lib.persistence
                 return "-1";
             }
             user = users[0];
+
+            var userRole = new UserRole { UserID = user.UserID, RoleID = 3, IsActive = true };
+            Save(userRole);
 
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
@@ -536,7 +613,7 @@ namespace domain_lib.persistence
             return account.AccountNumber + "|" + user.UserName;
         }
 
-        public string SearchUser(String parentId, String directParentId, String userName, DateTime ngaySinh, String soCmnd, DateTime ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
+        public string SearchUser(String parentId, String directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH)
         {
             if (String.IsNullOrEmpty(userName))

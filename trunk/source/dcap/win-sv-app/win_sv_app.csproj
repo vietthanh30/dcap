@@ -66,6 +66,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Service References\DcapServiceReference\DcapService.wsdl" />
+    <None Include="Service References\DcapServiceReference\win_sv_app.DcapServiceReference.UserDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

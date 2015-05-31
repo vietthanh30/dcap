@@ -18,6 +18,8 @@ namespace domain_lib.model
         // Member variables
         private string user_Name = String.Empty;
 
+        private string _fullName = String.Empty;
+
         private string password = String.Empty;
 
         #endregion
@@ -48,6 +50,15 @@ namespace domain_lib.model
         {
             get { return user_Name; }
             set { user_Name = value; }
+        }
+
+        /// <summary>
+        /// Full name.
+        /// </summary>
+        public virtual string FullName
+        {
+            get { return _fullName; }
+            set { _fullName = value; }
         }
 
         /// <summary>
