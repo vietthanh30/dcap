@@ -879,15 +879,15 @@ namespace domain_lib.persistence
             return RetrieveEquals<AccountPreCalc>("IsCalculated", "N");
         }
 
-        public long CountUpLevel(long calcAccountId, int accountLevel)
+        public long CountUpLevel(long calcAccountId, int upAccountLevel)
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
 
                 var query = session.CreateQuery("select count(*) from AccountPreCalc a "
-                   + " where a.CalcAccountId = :CalcAccountId and Account_Level < :AccountLevel");
+                   + " where a.CalcAccountId = :CalcAccountId and Account_Level = :AccountLevel");
                 query.SetParameter("CalcAccountId", calcAccountId);
-                query.SetParameter("AccountLevel", accountLevel);
+                query.SetParameter("AccountLevel", upAccountLevel);
 
                 // Get the matching objects
                 var count = query.UniqueResult();

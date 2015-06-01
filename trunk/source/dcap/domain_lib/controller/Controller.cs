@@ -85,15 +85,16 @@ namespace domain_lib.controller
                     {
                         Account account = m_PersistenceManager.GetAccount(log.AccountId);
                         Account parentAccount = m_PersistenceManager.GetAccount(account.ParentId);
-                        if (parentAccount == null || account.AccountId == parentAccount.AccountId)
-                            continue;
-                        PutToPreCalcQueue(account, parentAccount, 1, account.ChildIndex);
+                        if (parentAccount != null && account.AccountId != parentAccount.AccountId)
+                            PutToPreCalcQueue(account, parentAccount, 1, account.ChildIndex);
+                        
                         var hist = new AccountLogHist
                         {
                             AccountId = log.AccountId,
                             Dml = log.Dml,
                             CreatedDate = DateTime.Now
                         };
+                        
                         m_PersistenceManager.Save(hist);
                         m_PersistenceManager.Delete(log);
                     }
@@ -157,7 +158,9 @@ namespace domain_lib.controller
                 {
                     if (IsCalculated(accountPreCalc))
                     {
-                        // truc tiep
+                        Console.Out.WriteLine("calculate parent: " + accountPreCalc.CalcAccountId + " of " +
+                                              accountPreCalc.AccountId);
+                        // truc tiep);
                         if (accountPreCalc.BonusType == "TT")
                         {
                             CalculateTtBonus(accountPreCalc);
@@ -917,7 +920,7 @@ namespace domain_lib.controller
                 return true;
             if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "LK" && accountPreCalc.LevelIndex > 1)
                 return true;
-            return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel) == Math.Pow(3, accountPreCalc.AccountLevel - 1) && m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1);
+            return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel-1) == Math.Pow(3, accountPreCalc.AccountLevel - 1) && m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1);
         }
         
         #endregion
