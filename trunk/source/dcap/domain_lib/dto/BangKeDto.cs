@@ -15,7 +15,11 @@ namespace domain_lib.dto
         // Member variables
         private string _hoTen = String.Empty;
 
+        private string _gioiTinh = String.Empty;
+
         private string _soCmnd = String.Empty;
+
+        private string _ngayCap = String.Empty;
 
         private string _diaChi = String.Empty;
 
@@ -24,6 +28,10 @@ namespace domain_lib.dto
         private string _chiNhanhNH = String.Empty;
 
         private string _soDienThoai = String.Empty;
+
+        private string _ngayDangKy = String.Empty;
+
+        private string _nguoiBaoTro = String.Empty;
 
         private long _soTien = -1;
 
@@ -60,12 +68,30 @@ namespace domain_lib.dto
         }
 
         /// <summary>
+        /// Gioi Tinh.
+        /// </summary>
+        public virtual string GioiTinh
+        {
+            get { return _gioiTinh; }
+            set { _gioiTinh = value; }
+        }
+
+        /// <summary>
         /// So Cmnd
         /// </summary>
         public virtual string SoCmnd
         {
             get { return _soCmnd; }
             set { _soCmnd = value; }
+        }
+
+        /// <summary>
+        /// Ngay Cap
+        /// </summary>
+        public virtual string NgayCap
+        {
+            get { return _ngayCap; }
+            set { _ngayCap = value; }
         }
 
         /// <summary>
@@ -102,6 +128,24 @@ namespace domain_lib.dto
         {
             get { return _soDienThoai; }
             set { _soDienThoai = value; }
+        }
+
+        /// <summary>
+        /// Ngay Dang Ky
+        /// </summary>
+        public virtual string NgayDangKy
+        {
+            get { return _ngayDangKy; }
+            set { _ngayDangKy = value; }
+        }
+
+        /// <summary>
+        /// Nguoi Bao Tro
+        /// </summary>
+        public virtual string NguoiBaoTro
+        {
+            get { return _nguoiBaoTro; }
+            set { _nguoiBaoTro = value; }
         }
 
         /// <summary>
