@@ -12,12 +12,17 @@ namespace core_lib.common
         private static int _minYear = DateTime.Now.Year - 200;
         private static int _maxYear = DateTime.Now.Year + 50;
 
-        public static string GetDateTimeAsStringWithProvider(DateTime dateTime, string dateFormat, string strProvider)
+        public static string GetDateTimeAsStringWithProvider(DateTime? dateTime, string dateFormat, string strProvider)
         {
+            if (dateTime == null)
+            {
+                return string.Empty;
+            }
+            DateTime aDate = (DateTime) dateTime;
             var provider = new CultureInfo(strProvider);
             try
             {
-                return dateTime.ToString(dateFormat, provider);
+                return aDate.ToString(dateFormat, provider);
             }
             catch (FormatException)
             {
@@ -25,7 +30,7 @@ namespace core_lib.common
             }
         }
 
-        public static string GetDateTimeAsStringWithEnProvider(DateTime dateTime, string dateFormat)
+        public static string GetDateTimeAsStringWithEnProvider(DateTime? dateTime, string dateFormat)
         {
             return GetDateTimeAsStringWithProvider(dateTime, dateFormat, "en-US");
         }

@@ -58,6 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\core-lib\core_lib.csproj">
+      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
+      <Name>core_lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\domain_lib\domain_lib.csproj">
       <Project>{4965CB44-7651-4EF2-B0EB-DF17D8397D78}</Project>
       <Name>domain_lib</Name>

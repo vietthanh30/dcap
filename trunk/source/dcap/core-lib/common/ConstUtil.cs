@@ -20,5 +20,13 @@ namespace core_lib.common
         public const string QTHT = "QTHT";
         public const string QLKT = "QLKT";
         public const string QLTV = "QLTV";
+
+        public const string MONTH_FORMAT = "yyyyMM";
+
+        public const string MA_GT_NAM = "M";
+        public const string MA_GT_NU = "F";
+
+        public const string TEN_GT_NAM = "Nam";
+        public const string TEN_GT_NU = "Nữ";
     }
 }

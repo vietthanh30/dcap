@@ -5,10 +5,10 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
-        Log In
+        Đăng nhập
     </h2>
     <p>
-        Please enter your username and password.
+        Vui lòng nhập tên và mật khẩu.
     </p>
     <p>
         <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification"
@@ -21,16 +21,16 @@
             ValidationGroup="LoginUserValidationGroup"/>
     <div class="accountInfo">
         <fieldset class="login">
-            <legend>Account Information</legend>
+            <legend>Thông tin người dùng</legend>
             <p>
-                <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Username:</asp:Label>
+                <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Tên đăng nhập:</asp:Label>
                 <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" 
                         CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required." 
                         ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
             </p>
             <p>
-                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
+                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Mật khẩu:</asp:Label>
                 <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
                         CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
@@ -44,7 +44,7 @@
             </p>
             <p>
                 <asp:CheckBox ID="RememberMe" runat="server"/>
-                <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
+                <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Giữ luôn đăng nhập</asp:Label>
             </p>
         </fieldset>
         <p class="submitButton">
