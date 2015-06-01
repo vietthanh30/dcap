@@ -27,21 +27,23 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = DateUtil.GetDateTime(NgaySinh.Value.Trim());
+            var sNgaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = DateUtil.GetDateTime(sNgaySinh);
             var soCmnd = SoCmnd.Value.Trim();
-            var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
+            var sNgayCap = NgayCap.Value.Trim();
+            var ngayCap = DateUtil.GetDateTime(sNgayCap);
             var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            if (ngaySinh == null)
+            if (!String.IsNullOrEmpty(sNgaySinh) && ngaySinh == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            if (ngayCap == null)
+            if (!String.IsNullOrEmpty(sNgayCap) && ngayCap == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày cấp không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
@@ -77,21 +79,23 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = DateUtil.GetDateTime(NgaySinh.Value.Trim());
+            var sNgaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = DateUtil.GetDateTime(sNgaySinh);
             var soCmnd = SoCmnd.Value.Trim();
-            var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
+            var sNgayCap = NgayCap.Value.Trim();
+            var ngayCap = DateUtil.GetDateTime(sNgayCap);
             var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            if (ngaySinh == null)
+            if (!String.IsNullOrEmpty(sNgaySinh) && ngaySinh == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            if (ngayCap == null)
+            if (!String.IsNullOrEmpty(sNgayCap) && ngayCap == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày cấp không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
