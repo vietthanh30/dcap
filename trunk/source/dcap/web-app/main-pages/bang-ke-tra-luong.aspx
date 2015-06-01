@@ -53,13 +53,7 @@
                 <asp:BoundField DataField="HoTen" HeaderText="Họ tên" >
                 <ItemStyle HorizontalAlign="Left" />
                 </asp:BoundField>
-                <asp:BoundField DataField="GioiTinh" HeaderText="Giới tính" >
-                <ItemStyle HorizontalAlign="Left" />
-                </asp:BoundField>
                 <asp:BoundField DataField="SoCmnd" HeaderText="Số CMND" >
-                <ItemStyle HorizontalAlign="Center" />
-                </asp:BoundField>
-                <asp:BoundField DataField="NgayCap" HeaderText="Ngày cấp" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="DiaChi" HeaderText="Địa chỉ" >
@@ -73,12 +67,6 @@
                 </asp:BoundField>
                 <asp:BoundField DataField="SoDienThoai" HeaderText="Số ĐT" >
                 <ItemStyle HorizontalAlign="Center" />
-                </asp:BoundField>
-                <asp:BoundField DataField="NgayDangKy" HeaderText="Ngày Đăng Ký" >
-                <ItemStyle HorizontalAlign="Center" />
-                </asp:BoundField>
-                <asp:BoundField DataField="NguoiBaoTro" HeaderText="Người Bảo Trợ" >
-                <ItemStyle HorizontalAlign="Left" />
                 </asp:BoundField>
                 <asp:BoundField DataField="SoTien" HeaderText="Tổng tiền" >
                 <ItemStyle HorizontalAlign="Right" />

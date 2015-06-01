@@ -16,10 +16,15 @@ namespace web_app.main_pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!Page.IsPostBack)
+            {
+                ReportMonth.Value = DateUtil.GetDateTimeAsStringWithEnProvider(DateTime.Now.AddMonths(-1),
+                                                                               "MM/yyyy");
+                OnSearchBangKe();
+            }
         }
 
-        protected void BangKeTraLuong_SearchBangKe(object sender, EventArgs e)
+        private void OnSearchBangKe()
         {
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
@@ -27,13 +32,18 @@ namespace web_app.main_pages
             gvBangKe.DataBind();
         }
 
+        protected void BangKeTraLuong_SearchBangKe(object sender, EventArgs e)
+        {
+            OnSearchBangKe();
+        }
+
         protected void BangKeTraLuong_ExportExcel(object sender, EventArgs e)
         {
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             var fileName = Server.MapPath("~/upload") + "\\" + String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xls";
-            var columnNames = new[] {"stt", "Tên nhân viên", "Giới tính", "Số cmnd", "Ngày cấp", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Ngày Đăng Ký", "Người Bảo Trợ", "Tổng tiền", "Tháng"};
+            var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
+                "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
             var sheetName = "Tra cứu bảng lương";
             var ds = CreateDataSet(sheetName, columnNames, allBangKeDto);
             ExcelUtil.CreateExcel(ds, new[]{ sheetName }, fileName);
@@ -69,15 +79,11 @@ namespace web_app.main_pages
                 int index = 0;
                 dataRow[columnNames[index++]] = bangKeDto.STT;
                 dataRow[columnNames[index++]] = bangKeDto.HoTen;
-                dataRow[columnNames[index++]] = bangKeDto.GioiTinh;
                 dataRow[columnNames[index++]] = bangKeDto.SoCmnd;
-                dataRow[columnNames[index++]] = bangKeDto.NgayCap;
                 dataRow[columnNames[index++]] = bangKeDto.DiaChi;
                 dataRow[columnNames[index++]] = bangKeDto.SoTaiKhoan;
                 dataRow[columnNames[index++]] = bangKeDto.ChiNhanhNH;
                 dataRow[columnNames[index++]] = bangKeDto.SoDienThoai;
-                dataRow[columnNames[index++]] = bangKeDto.NgayDangKy;
-                dataRow[columnNames[index++]] = bangKeDto.NguoiBaoTro;
                 dataRow[columnNames[index++]] = bangKeDto.SoTien;
                 dataRow[columnNames[index]] = bangKeDto.Thang;
                 dataTable.Rows.Add(dataRow);

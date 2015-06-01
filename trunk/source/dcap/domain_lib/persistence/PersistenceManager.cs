@@ -327,13 +327,13 @@ namespace domain_lib.persistence
             return "0";
         }
 
-        private long GetAccountIdBy(string userName)
+        private long GetAccountIdBy(string accountNumber)
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select a.AccountId from Users u, Account a "
-                    + " where u.UserID = a.UserId and u.UserName = :userName");
-                query.SetParameter("userName", userName.ToUpper());
+                var query = session.CreateQuery("select a.AccountId from Account a "
+                    + " where a.AccountNumber = :accountNumber");
+                query.SetParameter("accountNumber", Convert.ToInt64(accountNumber));
 
                 // Get the matching objects
                 var accountId = query.UniqueResult();
@@ -542,9 +542,10 @@ namespace domain_lib.persistence
             account.AccountNumber = GetNextAccountNumber();
             account.MemberId = memberID;
             account.ParentId = parentId;
-            account.ParentId = directParentId;
+            account.ParentDirectId = directParentId;
             account.UserId = user.UserID;
-            account.ChildIndex = accountAmount;
+            var childIndex = GetChildIndexBy(parentId);
+            account.ChildIndex = childIndex;
             account.IsActive = ConstUtil.ACTIVE_STATUS;
             account.CreatedBy = createdBy;
             account.CreatedDate = DateTime.Now;
@@ -602,6 +603,26 @@ namespace domain_lib.persistence
 
                 // Set return value
                 return Convert.ToInt32(count);
+            }
+        }
+
+        private int GetChildIndexBy(long parentId)
+        {
+            if (parentId == -1)
+            {
+                return 0;
+            }
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(a.ParentId) from Account a "
+                    + " where a.ParentId = :parentId");
+                query.SetParameter("parentId", parentId);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count)+1;
             }
         }
 
@@ -735,9 +756,10 @@ namespace domain_lib.persistence
             account.AccountNumber = GetNextAccountNumber();
             account.MemberId = memberInfo.MemberID;
             account.ParentId = parentId;
-            account.ParentId = directParentId;
+            account.ParentDirectId = directParentId;
             account.UserId = user.UserID;
-            account.ChildIndex = 0;
+            var childIndex = GetChildIndexBy(parentId);
+            account.ChildIndex = childIndex;
             account.IsActive = ConstUtil.ACTIVE_STATUS;
             account.CreatedBy = createdBy;
             account.CreatedDate = DateTime.Now;
