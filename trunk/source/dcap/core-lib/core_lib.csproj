@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\BonusType.cs" />
     <Compile Include="common\ConstUtil.cs" />
     <Compile Include="common\DateUtil.cs" />
     <Compile Include="common\ExcelUtil.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using core_lib.common;
 using domain_lib.dto;
 using domain_lib.model;
 using domain_lib.persistence;
@@ -183,13 +184,13 @@ namespace domain_lib.controller
                         // insert into QL1 tree
                         if (accountPreCalc.AccountLevel == 2 && accountPreCalc.LevelIndex == 9)
                         {
-                            AddToQl1Tree(accountPreCalc);
+                            AddToQl1Tree(accountPreCalc.CalcAccountId);
                         }
 
                         // insert into QL2 tree
                         if (accountPreCalc.AccountLevel == 3 && accountPreCalc.LevelIndex == 27)
                         {
-                            AddToQl2Tree(accountPreCalc);
+                            AddToQl2Tree(accountPreCalc.CalcAccountId);
                         }
 
                         //mark calculated
@@ -206,7 +207,317 @@ namespace domain_lib.controller
             }
         }
 
-        private ManagerL1 AddToQl1Tree(AccountPreCalc accountPreCalc)
+        public int ExecuteApprovedManager()
+        {
+            //read approved manager
+            IList<ManagerApproval> approvedList = m_PersistenceManager.GetApprovedManager();
+            foreach (var approvedManager in approvedList)
+            {
+                
+                
+                m_PersistenceManager.Delete(approvedManager);
+            }
+            return 1;
+        }
+
+        public int CalculateBonusOfManagerTree()
+        {
+            try
+            {
+                //read manager level tree log
+                IList<ManagerLevelLog> managerLog = m_PersistenceManager.GetManagerLog();
+
+                if (managerLog == null || managerLog.Count == 0)
+                    return 0;
+
+                foreach (var log in managerLog)
+                {
+                    //calculate QL1
+                    if (log.Level==1)
+                    {
+                        var newManager = (ManagerL1) m_PersistenceManager.GetManagerLevel<ManagerL1>(log.AccountId);
+                        if (newManager.Level != 0)
+                            CalculateBonusOfQl1(newManager);
+                    }
+
+                    //calculate QL2
+                    if (log.Level == 2)
+                    {
+                        var newManager = (ManagerL2)m_PersistenceManager.GetManagerLevel<ManagerL2>(log.AccountId);
+                        if (newManager.Level != 0)
+                            CalculateBonusOfQl2(newManager);
+                    }
+
+                    //calculate QL3
+                    if (log.Level == 3)
+                    {
+                        var newManager = (ManagerL3)m_PersistenceManager.GetManagerLevel<ManagerL3>(log.AccountId);
+                        if (newManager.Level != 0)
+                            CalculateBonusOfQl3(newManager);
+                    }
+
+                    //calculate QL4
+                    if (log.Level == 4)
+                    {
+                        var newManager = (ManagerL4)m_PersistenceManager.GetManagerLevel<ManagerL4>(log.AccountId);
+                        if (newManager.Level != 0)
+                            CalculateBonusOfQl4(newManager);
+                    }
+
+                    //calculate QL5
+                    if (log.Level == 5)
+                    {
+                        var newManager = (ManagerL5)m_PersistenceManager.GetManagerLevel<ManagerL5>(log.AccountId);
+                        if (newManager.Level != 0)
+                            CalculateBonusOfQl5(newManager);
+                    }
+
+                    //calculate QL6
+                    if (log.Level == 6)
+                    {
+                        var newManager = (ManagerL6)m_PersistenceManager.GetManagerLevel<ManagerL6>(log.AccountId);
+                        if (newManager.Level != 0)
+                            CalculateBonusOfQl6(newManager);
+                    }
+
+                    // delete log
+                    m_PersistenceManager.Delete(log);
+                }
+                
+                return 1;
+            }catch(Exception)
+            {
+                return -1;
+            }
+        }
+
+        private void CalculateBonusOfQl1(ManagerL1 newManager)
+        {
+            // Hoa hong quan ly
+            m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_QL1.Amount,
+                                                  ConstUtil.BONUS_TYPE_QL1.Type);
+                        
+            var managerLevel = (ManagerL1) m_PersistenceManager.GetManagerLevel<ManagerL1>(newManager.ParentId);
+            if (managerLevel != null && managerLevel.ParentId !=-1)
+                m_PersistenceManager.SaveAccountBonus(managerLevel.ParentId, ConstUtil.BONUS_TYPE_QL1.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL1.Type);
+            // Can cap
+            if ((newManager.LevelIndex%3)!=1)
+            {
+                m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_CCL1.Amount,
+                                                      ConstUtil.BONUS_TYPE_CCL1.Type);
+                if (managerLevel != null && managerLevel.ParentId != -1)
+                    m_PersistenceManager.SaveAccountBonus(managerLevel.ParentId, ConstUtil.BONUS_TYPE_CCL1.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL1.Type);
+            }
+
+            // move to QL3 approved queue
+            if (newManager.LevelIndex%9==0)
+            {
+                if (managerLevel != null && managerLevel.ParentId != -1)
+                {
+                    InsertToQlApproveQueue(managerLevel.ParentId, 3);
+                }
+            }
+        }
+
+        private void CalculateBonusOfQl3(ManagerL3 newManager)
+        {
+            // Hoa hong quan ly
+            m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_QL3.Amount,
+                                                  ConstUtil.BONUS_TYPE_QL3.Type);
+
+            var managerLevel = (ManagerL3)m_PersistenceManager.GetManagerLevel<ManagerL3>(newManager.ParentId);
+            if (managerLevel != null && managerLevel.ParentId != -1)
+                m_PersistenceManager.SaveAccountBonus(managerLevel.ParentId, ConstUtil.BONUS_TYPE_QL3.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL3.Type);
+            // Can cap
+            if ((newManager.LevelIndex % 3) != 1)
+            {
+                m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_CCL3.Amount,
+                                                      ConstUtil.BONUS_TYPE_CCL3.Type);
+                if (managerLevel != null && managerLevel.ParentId != -1)
+                    m_PersistenceManager.SaveAccountBonus(managerLevel.ParentId, ConstUtil.BONUS_TYPE_CCL3.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL3.Type);
+            }
+
+            // move to QL5 approved queue
+            if (newManager.LevelIndex % 9 == 0)
+            {
+                if (managerLevel != null && managerLevel.ParentId != -1)
+                {
+                    InsertToQlApproveQueue(managerLevel.ParentId, 5);
+                }
+            }
+        }
+
+        private void CalculateBonusOfQl5(ManagerL5 newManager)
+        {
+            // Hoa hong quan ly
+            m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_QL5.Amount,
+                                                  ConstUtil.BONUS_TYPE_QL5.Type);
+
+            var managerLevel = (ManagerL5)m_PersistenceManager.GetManagerLevel<ManagerL5>(newManager.ParentId);
+            if (managerLevel != null && managerLevel.ParentId != -1)
+                m_PersistenceManager.SaveAccountBonus(managerLevel.ParentId, ConstUtil.BONUS_TYPE_QL5.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL5.Type);
+            // Can cap
+            if ((newManager.LevelIndex % 3) != 1)
+            {
+                m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_CCL5.Amount,
+                                                      ConstUtil.BONUS_TYPE_CCL5.Type);
+                if (managerLevel != null && managerLevel.ParentId != -1)
+                    m_PersistenceManager.SaveAccountBonus(managerLevel.ParentId, ConstUtil.BONUS_TYPE_CCL5.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL5.Type);
+            }
+        }
+
+        private void CalculateBonusOfQl2(ManagerL2 newManager)
+        {
+            // Hoa hong quan ly
+            m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_QL2.Amount,
+                                                  ConstUtil.BONUS_TYPE_QL2.Type);
+
+            var firstUpLevel = (ManagerL2)m_PersistenceManager.GetManagerLevel<ManagerL2>(newManager.ParentId);
+            ManagerL2 secondUpLevel = null;
+            if (firstUpLevel != null && firstUpLevel.Level != 0)
+            {
+                m_PersistenceManager.SaveAccountBonus(firstUpLevel.ParentId, ConstUtil.BONUS_TYPE_QL2.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL2.Type);
+                secondUpLevel = (ManagerL2) m_PersistenceManager.GetManagerLevel<ManagerL2>(firstUpLevel.ParentId);
+                if (secondUpLevel != null && secondUpLevel.Level != 0)
+                {
+                    m_PersistenceManager.SaveAccountBonus(secondUpLevel.ParentId, ConstUtil.BONUS_TYPE_QL2.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL2.Type);
+                }
+            }
+                
+            // Can cap
+            if ((newManager.LevelIndex % 3) != 1)
+            {
+                m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_CCL2.Amount,
+                                                      ConstUtil.BONUS_TYPE_CCL2.Type);
+                if (firstUpLevel != null && firstUpLevel.ParentId != -1)
+                {
+                    m_PersistenceManager.SaveAccountBonus(firstUpLevel.ParentId, ConstUtil.BONUS_TYPE_CCL2.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL2.Type);
+                    if (secondUpLevel != null && secondUpLevel.Level != 0)
+                    {
+                        m_PersistenceManager.SaveAccountBonus(secondUpLevel.ParentId, ConstUtil.BONUS_TYPE_CCL2.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL2.Type);
+                    }
+                }
+                    
+            }
+
+            // move to QL4 approved queue
+            if (newManager.LevelIndex % 27 == 0)
+            {
+                if (secondUpLevel != null && secondUpLevel.ParentId != -1)
+                {
+                    InsertToQlApproveQueue(secondUpLevel.ParentId, 4);
+                }
+            }
+        }
+
+        private void CalculateBonusOfQl4(ManagerL4 newManager)
+        {
+            // Hoa hong quan ly
+            m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_QL4.Amount,
+                                                  ConstUtil.BONUS_TYPE_QL4.Type);
+
+            var firstUpLevel = (ManagerL4)m_PersistenceManager.GetManagerLevel<ManagerL4>(newManager.ParentId);
+            ManagerL4 secondUpLevel = null;
+            if (firstUpLevel != null && firstUpLevel.Level != 0)
+            {
+                m_PersistenceManager.SaveAccountBonus(firstUpLevel.ParentId, ConstUtil.BONUS_TYPE_QL4.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL4.Type);
+                secondUpLevel = (ManagerL4)m_PersistenceManager.GetManagerLevel<ManagerL4>(firstUpLevel.ParentId);
+                if (secondUpLevel != null && secondUpLevel.Level != 0)
+                {
+                    m_PersistenceManager.SaveAccountBonus(secondUpLevel.ParentId, ConstUtil.BONUS_TYPE_QL4.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL4.Type);
+                }
+            }
+
+            // Can cap
+            if ((newManager.LevelIndex % 3) != 1)
+            {
+                m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_CCL4.Amount,
+                                                      ConstUtil.BONUS_TYPE_CCL4.Type);
+                if (firstUpLevel != null && firstUpLevel.ParentId != -1)
+                {
+                    m_PersistenceManager.SaveAccountBonus(firstUpLevel.ParentId, ConstUtil.BONUS_TYPE_CCL4.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL4.Type);
+                    if (secondUpLevel != null && secondUpLevel.Level != 0)
+                    {
+                        m_PersistenceManager.SaveAccountBonus(secondUpLevel.ParentId, ConstUtil.BONUS_TYPE_CCL4.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL4.Type);
+                    }
+                }
+            }
+
+            // move to QL6 approved queue
+            if (newManager.LevelIndex % 27 == 0)
+            {
+                if (secondUpLevel != null && secondUpLevel.ParentId != -1)
+                {
+                    InsertToQlApproveQueue(secondUpLevel.ParentId, 6);
+                }
+            }
+        }
+
+        private void CalculateBonusOfQl6(ManagerL6 newManager)
+        {
+            // Hoa hong quan ly
+            m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_QL6.Amount,
+                                                  ConstUtil.BONUS_TYPE_QL6.Type);
+
+            var firstUpLevel = (ManagerL6)m_PersistenceManager.GetManagerLevel<ManagerL6>(newManager.ParentId);
+            ManagerL6 secondUpLevel = null;
+            if (firstUpLevel != null && firstUpLevel.Level != 0)
+            {
+                m_PersistenceManager.SaveAccountBonus(firstUpLevel.ParentId, ConstUtil.BONUS_TYPE_QL6.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL6.Type);
+                secondUpLevel = (ManagerL6)m_PersistenceManager.GetManagerLevel<ManagerL4>(firstUpLevel.ParentId);
+                if (secondUpLevel != null && secondUpLevel.Level != 0)
+                {
+                    m_PersistenceManager.SaveAccountBonus(secondUpLevel.ParentId, ConstUtil.BONUS_TYPE_QL6.Amount,
+                                                      ConstUtil.BONUS_TYPE_QL6.Type);
+                }
+            }
+
+            // Can cap
+            if ((newManager.LevelIndex % 3) != 1)
+            {
+                m_PersistenceManager.SaveAccountBonus(newManager.ParentId, ConstUtil.BONUS_TYPE_CCL6.Amount,
+                                                      ConstUtil.BONUS_TYPE_CCL6.Type);
+                if (firstUpLevel != null && firstUpLevel.ParentId != -1)
+                {
+                    m_PersistenceManager.SaveAccountBonus(firstUpLevel.ParentId, ConstUtil.BONUS_TYPE_CCL6.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL6.Type);
+                    if (secondUpLevel != null && secondUpLevel.Level != 0)
+                    {
+                        m_PersistenceManager.SaveAccountBonus(secondUpLevel.ParentId, ConstUtil.BONUS_TYPE_CCL6.Amount,
+                                                          ConstUtil.BONUS_TYPE_CCL6.Type);
+                    }
+                }
+            }
+        }
+
+        private void InsertToQlApproveQueue(long accountId, int managerLevel)
+        {
+            var approvedQueue = new ManagerApproval()
+                                    {
+                                        AccountId = accountId,
+                                        ManagerLevel = managerLevel,
+                                        IsApproved = "I",
+                                        CreatedDate = DateTime.Now
+                                    };
+            m_PersistenceManager.Save(approvedQueue);
+        }
+
+        private ManagerL1 AddToQl1Tree(long calcAccountId)
         {
             // Get level and level_index
             var lastestChild = (ManagerL1) m_PersistenceManager.GetQlLatestChild<ManagerL1>();
@@ -216,7 +527,7 @@ namespace domain_lib.controller
             {
                 var root = new ManagerL1
                                {
-                                   AccountId = accountPreCalc.CalcAccountId,
+                                   AccountId = calcAccountId,
                                    ChildIndex = 0,
                                    Level = 0,
                                    LevelIndex = 0,
@@ -247,7 +558,7 @@ namespace domain_lib.controller
                 // Insert into QL1 tree
                 var newNode = new ManagerL1
                 {
-                    AccountId = accountPreCalc.CalcAccountId,
+                    AccountId = calcAccountId,
                     ChildIndex = (newLevelIndex/3)+1,
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
@@ -262,7 +573,7 @@ namespace domain_lib.controller
             }
         }
 
-        private ManagerL2 AddToQl2Tree(AccountPreCalc accountPreCalc)
+        private ManagerL2 AddToQl2Tree(long calcAccountId)
         {
 
             // Get level and level_index
@@ -273,7 +584,7 @@ namespace domain_lib.controller
             {
                 var root = new ManagerL2
                                {
-                                   AccountId = accountPreCalc.CalcAccountId,
+                                   AccountId = calcAccountId,
                                    ChildIndex = 0,
                                    Level = 0,
                                    LevelIndex = 0,
@@ -305,7 +616,7 @@ namespace domain_lib.controller
                 // Insert into QL2 tree
                 var newNode = new ManagerL2
                                   {
-                                      AccountId = accountPreCalc.CalcAccountId,
+                                      AccountId = calcAccountId,
                                       ChildIndex = (newLevelIndex/3) + 1,
                                       Level = newLevel,
                                       LevelIndex = newLevelIndex,
@@ -319,6 +630,240 @@ namespace domain_lib.controller
                 return newNode;
             }
         }
+
+        private ManagerL3 AddToQl3Tree(long calcAccountId)
+        {
+
+            // Get level and level_index
+            var lastestChild = (ManagerL3)m_PersistenceManager.GetQlLatestChild<ManagerL3>();
+
+            // Find Parent account
+            if (lastestChild == null)
+            {
+                var root = new ManagerL3
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = 0,
+                    Level = 0,
+                    LevelIndex = 0,
+                    IsActive = "Y",
+                    ParentId = -1,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(root);
+                return root;
+            }
+            else
+            {
+
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
+
+                if (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex)
+                {
+                    newLevel = lastestChild.Level + 1;
+                    newLevelIndex = 1;
+                }
+
+                var parentLevel = newLevel - 1;
+                var parentLevelIndex = (newLevelIndex % 3 > 0) ? ((newLevelIndex / 3) + 1) : (newLevelIndex / 3);
+
+                var managerParent = (ManagerL3)m_PersistenceManager.FindQlByLocation<ManagerL3>(parentLevel, parentLevelIndex);
+
+                // Insert into QL3 tree
+                var newNode = new ManagerL3
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = (newLevelIndex / 3) + 1,
+                    Level = newLevel,
+                    LevelIndex = newLevelIndex,
+                    IsActive = "Y",
+                    ParentId = managerParent.AccountId,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(newNode);
+
+                return newNode;
+            }
+        }
+
+        private ManagerL4 AddToQl4Tree(long calcAccountId)
+        {
+
+            // Get level and level_index
+            var lastestChild = (ManagerL4)m_PersistenceManager.GetQlLatestChild<ManagerL4>();
+
+            // Find Parent account
+            if (lastestChild == null)
+            {
+                var root = new ManagerL4
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = 0,
+                    Level = 0,
+                    LevelIndex = 0,
+                    IsActive = "Y",
+                    ParentId = -1,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(root);
+                return root;
+            }
+            else
+            {
+
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
+
+                if (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex)
+                {
+                    newLevel = lastestChild.Level + 1;
+                    newLevelIndex = 1;
+                }
+
+                var parentLevel = newLevel - 1;
+                var parentLevelIndex = (newLevelIndex % 3 > 0) ? ((newLevelIndex / 3) + 1) : (newLevelIndex / 3);
+
+                var managerParent = (ManagerL4)m_PersistenceManager.FindQlByLocation<ManagerL4>(parentLevel, parentLevelIndex);
+
+                // Insert into QL4 tree
+                var newNode = new ManagerL4
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = (newLevelIndex / 3) + 1,
+                    Level = newLevel,
+                    LevelIndex = newLevelIndex,
+                    IsActive = "Y",
+                    ParentId = managerParent.AccountId,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(newNode);
+
+                return newNode;
+            }
+        }
+
+
+        private ManagerL5 AddToQl5Tree(long calcAccountId)
+        {
+
+            // Get level and level_index
+            var lastestChild = (ManagerL5)m_PersistenceManager.GetQlLatestChild<ManagerL5>();
+
+            // Find Parent account
+            if (lastestChild == null)
+            {
+                var root = new ManagerL5
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = 0,
+                    Level = 0,
+                    LevelIndex = 0,
+                    IsActive = "Y",
+                    ParentId = -1,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(root);
+                return root;
+            }
+            else
+            {
+
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
+
+                if (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex)
+                {
+                    newLevel = lastestChild.Level + 1;
+                    newLevelIndex = 1;
+                }
+
+                var parentLevel = newLevel - 1;
+                var parentLevelIndex = (newLevelIndex % 3 > 0) ? ((newLevelIndex / 3) + 1) : (newLevelIndex / 3);
+
+                var managerParent = (ManagerL5)m_PersistenceManager.FindQlByLocation<ManagerL5>(parentLevel, parentLevelIndex);
+
+                // Insert into QL5 tree
+                var newNode = new ManagerL5
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = (newLevelIndex / 3) + 1,
+                    Level = newLevel,
+                    LevelIndex = newLevelIndex,
+                    IsActive = "Y",
+                    ParentId = managerParent.AccountId,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(newNode);
+
+                return newNode;
+            }
+        }
+
+        private ManagerL6 AddToQl6Tree(long calcAccountId)
+        {
+
+            // Get level and level_index
+            var lastestChild = (ManagerL6)m_PersistenceManager.GetQlLatestChild<ManagerL6>();
+
+            // Find Parent account
+            if (lastestChild == null)
+            {
+                var root = new ManagerL6
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = 0,
+                    Level = 0,
+                    LevelIndex = 0,
+                    IsActive = "Y",
+                    ParentId = -1,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(root);
+                return root;
+            }
+            else
+            {
+
+                var newLevel = lastestChild.Level;
+                var newLevelIndex = lastestChild.LevelIndex + 1;
+
+                if (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex)
+                {
+                    newLevel = lastestChild.Level + 1;
+                    newLevelIndex = 1;
+                }
+
+                var parentLevel = newLevel - 1;
+                var parentLevelIndex = (newLevelIndex % 3 > 0) ? ((newLevelIndex / 3) + 1) : (newLevelIndex / 3);
+
+                var managerParent = (ManagerL6)m_PersistenceManager.FindQlByLocation<ManagerL6>(parentLevel, parentLevelIndex);
+
+                // Insert into QL6 tree
+                var newNode = new ManagerL6
+                {
+                    AccountId = calcAccountId,
+                    ChildIndex = (newLevelIndex / 3) + 1,
+                    Level = newLevel,
+                    LevelIndex = newLevelIndex,
+                    IsActive = "Y",
+                    ParentId = managerParent.AccountId,
+                    CreatedBy = "JOB",
+                    CreatedDate = DateTime.Now
+                };
+                m_PersistenceManager.Save(newNode);
+
+                return newNode;
+            }
+        }
+
 
         private void CalculateHtBonus(AccountPreCalc accountPreCalc)
         {

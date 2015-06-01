@@ -997,6 +997,16 @@ namespace domain_lib.persistence
             return RetrieveAll<AccountLog>(SessionAction.BeginAndEnd);
         }
 
+        public IList<ManagerLevelLog> GetManagerLog()
+        {
+            return RetrieveAll<ManagerLevelLog>(SessionAction.BeginAndEnd);
+        }
+
+        public IList<ManagerApproval> GetApprovedManager()
+        {
+            return RetrieveEquals<ManagerApproval>("IsApproved", "Y");
+        }
+
         public Account GetAccount(long accountId)
         {
             IList<Account> retrieveEquals = RetrieveEquals<Account>("AccountId", accountId);
@@ -1005,9 +1015,9 @@ namespace domain_lib.persistence
             return retrieveEquals[0];
         }
 
-        public ManagerL1 GetManagerL1(long accountId)
+        public Object GetManagerLevel<T>(long accountId)
         {
-            IList<ManagerL1> retrieveEquals = RetrieveEquals<ManagerL1>("AccountId", accountId);
+            IList<T> retrieveEquals = RetrieveEquals<T>("AccountId", accountId);
             if (retrieveEquals == null || retrieveEquals.Count == 0)
                 return null;
             return retrieveEquals[0];

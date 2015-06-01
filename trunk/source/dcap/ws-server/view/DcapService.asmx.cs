@@ -77,5 +77,11 @@ namespace ws_server.view
         {
             return controller.CalculateBonusOfAccountTree();
         }
+
+        [WebMethod]
+        public int ExecuteApprovedManager()
+        {
+            return controller.ExecuteApprovedManager();
+        }
     }
 }
