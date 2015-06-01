@@ -228,7 +228,7 @@ namespace domain_lib.persistence
                 query.SetMaxResults(1);
 
                 // Get the matching objects
-                var memberInfo = (MemberInfo) query.UniqueResult();
+                var memberInfo = (MemberInfo)query.UniqueResult();
 
                 // Update userDto
                 if (memberInfo != null)
@@ -306,7 +306,7 @@ namespace domain_lib.persistence
             {
                 return "-5";
             }
-            if (string.Compare(oldPassword,newPassword, true) == 0)
+            if (string.Compare(oldPassword, newPassword, true) == 0)
             {
                 return "-6";
             }
@@ -314,7 +314,7 @@ namespace domain_lib.persistence
             {
                 return "-7";
             }
-            if (string.Compare(newPassword,confirmPassword,true) != 0)
+            if (string.Compare(newPassword, confirmPassword, true) != 0)
             {
                 return "-8";
             }
@@ -511,7 +511,7 @@ namespace domain_lib.persistence
             var tenDangNhap = GetNextTenDangNhap(memberID, accountAmount);
             if (String.IsNullOrEmpty(tenDangNhap))
             {
-                tenDangNhap = GetValidTenDangNhapBy(memberInfo.HoTen); 
+                tenDangNhap = GetValidTenDangNhapBy(memberInfo.HoTen);
             }
             memberInfo.ImageUrl = photoUrl;
             Save(memberInfo);
@@ -612,7 +612,7 @@ namespace domain_lib.persistence
             {
                 return string.Empty;
             }
-            if (char.IsNumber(tenDangNhap[tenDangNhap.Length-1]))
+            if (char.IsNumber(tenDangNhap[tenDangNhap.Length - 1]))
             {
                 tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 2);
             }
@@ -646,7 +646,7 @@ namespace domain_lib.persistence
             }
             char achar = 'A';
             char zchar = 'Z';
-            for (int i = 0; i <= count/26; i++)
+            for (int i = 0; i <= count / 26; i++)
             {
                 if (i < count / 26)
                 {
@@ -783,12 +783,12 @@ namespace domain_lib.persistence
 
                 foreach (var row in list)
                 {
-                    var values = (Object[]) row;
+                    var values = (Object[])row;
                     var accountNumber = values[0];
                     var tenDangNhap = values[1];
                     if (String.IsNullOrEmpty(allResults))
                     {
-                        allResults = accountNumber + "|" + tenDangNhap;   
+                        allResults = accountNumber + "|" + tenDangNhap;
                     }
                     else
                     {
@@ -807,60 +807,48 @@ namespace domain_lib.persistence
 
             var allResults = new List<BangKeDto>();
 
-            using (ISession session = m_SessionFactory.OpenSession())
+
+            var list = RetrieveEquals<BangKeVW>("Thang", strThang);
+
+            int count = 0;
+            foreach (var row in list)
             {
-                var query = session.CreateQuery("select child.HoTen TenNhanVien, child.GioiTinh, child.SoCmnd"
-                                + " ,child.NgayCap, child.DiaChi, child.SoTaiKhoan, child.ChiNhanhNH"
-                                + " ,child.SoDienThoai, child.CreatedDate NgayDangKy, parent.HoTen NguoiBaoTro"
-                                + " ,sum(ab.BonusAmount)*1000000 Tong, ab.Month Thang"
-                                + " from "
-                                + "    AcountBonus ab"
-                                + "    inner join Account ca"
-                                + "    on ab.AccountId = ca.AccountId"
-                                + "    inner join MemberInfo child"
-                                + "    on ca.MemberId = child.MemberID"
-                                + "    left join Account pa "
-                                + "    on ca.ParentId = pa.AccountId"
-                                + "    left join  MemberInfo parent"
-                                + "    on pa.MemberId = parent.MemberID"
-                                + " where ab.Month = :month"
-                                + " group by child.HoTen , child.GioiTinh, child.SoCmnd"
-                                + " ,child.NgayCap, child.DiaChi,child.SoTaiKhoan, child.ChiNhanhNH"
-                                + " ,child.SoDienThoai, child.CreatedDate, parent.HoTen, ab.Month");
-                query.SetParameter("month", strThang);
 
-                // Get the matching objects
-                var list = query.List();
+                count++;
+                var hoTen = row.HoTen;
+                var maGioiTinh = row.GioiTinh;
+                var soCmnd = row.SoCmnd;
+                var ngayCap = row.NgayCap;
+                var diaChi = row.DiaChi;
+                var soTaiKhoan = row.SoTaiKhoan;
+                var chiNhanhNH = row.ChiNhanhNH;
+                var soDienThoai = row.SoDienThoai;
+                var ngayDangKy = row.NgayDangKy;
+                var nguoiBaoTro = row.NguoiBaoTro;
+                var soTien = row.SoTien;
+                var thang = row.Thang;
 
-                foreach (var row in list)
-                {
-                    var values = (Object[])row;
-                    var i = 0;
-                    var hoTen = values[i++];
-                    var maGioiTinh = values[i++];
-                    var soCmnd = values[i++];
-                    var ngayCap = values[i++];
-                    var diaChi = values[i++];
-                    var soTaiKhoan = values[i++];
-                    var chiNhanhNH = values[i++];
-                    var soDienThoai = values[i++];
-                    var ngayDangKy = values[i++];
-                    var nguoiBaoTro = values[i++];
-                    var soTien = values[i++];
-                    var thang = values[i];
+                var bangKeDto = new BangKeDto();
+                bangKeDto.STT = count;
+                bangKeDto.HoTen = hoTen;
+                bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(maGioiTinh);
+                bangKeDto.SoCmnd = soCmnd;
+                bangKeDto.NgayCap = DateUtil.GetDateTimeAsDdmmyyyy(ngayCap);
+                bangKeDto.DiaChi = diaChi;
+                bangKeDto.SoTaiKhoan = soTaiKhoan;
+                bangKeDto.ChiNhanhNH = chiNhanhNH;
+                bangKeDto.SoDienThoai = soDienThoai;
+                bangKeDto.NgayDangKy = DateUtil.GetDateTimeAsDdmmyyyy(ngayDangKy);
+                bangKeDto.NguoiBaoTro = nguoiBaoTro;
+                bangKeDto.SoTien = soTien;
+                bangKeDto.Thang = thang.Substring(4, 2) + "/" + thang.Substring(0, 4);
 
-                    var bangKeDto = new BangKeDto();
-                    bangKeDto.HoTen = Convert.ToString(hoTen);
-                    bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(Convert.ToString(maGioiTinh));
-                    bangKeDto.SoCmnd = Convert.ToString(soCmnd);
-//                    bangKeDto.NgayCap = DateTime
-                    allResults.Add(bangKeDto);
-                }
+                allResults.Add(bangKeDto);
             }
             return allResults.ToArray();
         }
 
-				public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
+        public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
         {
             DateTime now = DateTime.Now;
             var bonus = new AccountBonus
@@ -875,7 +863,7 @@ namespace domain_lib.persistence
             SaveNew(bonus);
             return bonus;
         }
-        
+
         public ManagerL1 InsertQl1Tree(long accountId)
         {
             throw new NotImplementedException();
@@ -885,7 +873,7 @@ namespace domain_lib.persistence
         {
             throw new NotImplementedException();
         }
-				
+
         public IList<AccountPreCalc> GetPreCalcQueue()
         {
             return RetrieveEquals<AccountPreCalc>("IsCalculated", "N");
@@ -921,7 +909,7 @@ namespace domain_lib.persistence
 
         public int CountLeft(long calcAccountId, int accountLevel, long levelIndex)
         {
-            
+
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery("select count(*) from AccountPreCalc a "
@@ -1003,7 +991,7 @@ namespace domain_lib.persistence
                 return all[0];
             }
         }
-				
+
         public IList<AccountLog> GetAccountLog()
         {
             return RetrieveAll<AccountLog>(SessionAction.BeginAndEnd);

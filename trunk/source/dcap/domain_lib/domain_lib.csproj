@@ -62,6 +62,7 @@
     <Compile Include="model\AccountLog.cs" />
     <Compile Include="model\AccountLogHist.cs" />
     <Compile Include="model\AccountPreCalc.cs" />
+    <Compile Include="model\BangKeVW.cs" />
     <Compile Include="model\ManagerL1.cs" />
     <Compile Include="model\ManagerL2.cs" />
     <Compile Include="model\ManagerL3.cs" />
@@ -136,6 +137,9 @@
       <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
       <Name>core_lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="model\BangKeVW.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+xmlns="urn:nhibernate-mapping-2.2"
+namespace="domain_lib.model"
+assembly="domain_lib">
+  <class name="BangKeVW" table="BANG_KE_VW" lazy="false">
+    <property name="HoTen">
+      <column name="HO_TEN" not-null="false"/>
+    </property>
+
+    <property name="GioiTinh">
+      <column name="GIOI_TINH" not-null="false"/>
+    </property>
+
+    <property name="SoCmnd">
+      <column name="SO_CMND" not-null="false" />
+    </property>
+
+    <property name="NgayCap">
+      <column name="NGAY_CAP" not-null="false" />
+    </property>
+
+    <property name="DiaChi">
+      <column name="DIA_CHI" not-null="false" />
+    </property>
+
+    <property name="SoTaiKhoan">
+      <column name="SO_TAI_KHOAN" not-null="false"/>
+    </property>
+
+    <property name="ChiNhanhNH">
+      <column name="CHI_NHANH_NH" not-null="false"/>
+    </property>
+
+    <property name="SoDienThoai">
+      <column name="SO_DIEN_THOAI" not-null="false"/>
+    </property>
+
+    <property name="NgayDangKy">
+      <column name="NGAY_DANG_KY" not-null="false"/>
+    </property>
+
+    <property name="NguoiBaoTro">
+      <column name="NGUOI_BAO_TRO" not-null="false"/>
+    </property>
+
+    <property name="SoTien">
+      <column name="TONG" not-null="false"/>
+    </property>
+
+    <property name="Thang">
+      <column name="THANG" not-null="false"/>
+    </property>
+    
+  </class>
+</hibernate-mapping>
