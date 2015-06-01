@@ -32,8 +32,10 @@ namespace test_domain_lib
 //            Console.Out.WriteLine("  " + test);
 //            var strThang = DateUtil.GetDateTimeAsStringWithEnProvider(DateTime.Now, ConstUtil.MONTH_FORMAT);
 //            Console.Out.WriteLine("  " + strThang);
-            var result = service.SearchBangKe(DateTime.Now.AddDays(-15));
-            Console.Out.WriteLine("SearchBangKe code: " + result);
+//            var result = service.SearchBangKe(DateTime.Now.AddDays(-15));
+//            Console.Out.WriteLine("SearchBangKe code: " + result);
+            var text = String.Format("{0:yyyyMMddHHmmssfff}", DateTime.Now);
+            Console.Out.WriteLine("  " + text);
         }
     }
 }

@@ -415,7 +415,13 @@ namespace web_app.DcapServiceReference {
         private string HoTenField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GioiTinhField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SoCmndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NgayCapField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DiaChiField;
@@ -428,6 +434,12 @@ namespace web_app.DcapServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SoDienThoaiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NgayDangKyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NguoiBaoTroField;
         
         private long SoTienField;
         
@@ -471,6 +483,19 @@ namespace web_app.DcapServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string GioiTinh {
+            get {
+                return this.GioiTinhField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GioiTinhField, value) != true)) {
+                    this.GioiTinhField = value;
+                    this.RaisePropertyChanged("GioiTinh");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string SoCmnd {
             get {
                 return this.SoCmndField;
@@ -483,7 +508,20 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string NgayCap {
+            get {
+                return this.NgayCapField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NgayCapField, value) != true)) {
+                    this.NgayCapField = value;
+                    this.RaisePropertyChanged("NgayCap");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public string DiaChi {
             get {
                 return this.DiaChiField;
@@ -496,7 +534,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string SoTaiKhoan {
             get {
                 return this.SoTaiKhoanField;
@@ -509,7 +547,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string ChiNhanhNH {
             get {
                 return this.ChiNhanhNHField;
@@ -522,7 +560,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
         public string SoDienThoai {
             get {
                 return this.SoDienThoaiField;
@@ -535,7 +573,33 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string NgayDangKy {
+            get {
+                return this.NgayDangKyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NgayDangKyField, value) != true)) {
+                    this.NgayDangKyField = value;
+                    this.RaisePropertyChanged("NgayDangKy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        public string NguoiBaoTro {
+            get {
+                return this.NguoiBaoTroField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NguoiBaoTroField, value) != true)) {
+                    this.NguoiBaoTroField = value;
+                    this.RaisePropertyChanged("NguoiBaoTro");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
         public long SoTien {
             get {
                 return this.SoTienField;
@@ -548,7 +612,7 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
         public string Thang {
             get {
                 return this.ThangField;

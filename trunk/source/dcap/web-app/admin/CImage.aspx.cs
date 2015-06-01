@@ -42,8 +42,7 @@ namespace web_app.admin
         private string GenerateRandomCode()
         {
             string s = "";
-            for (int i = 0; i < 6; i++)
-                s = String.Concat(s, this.random.Next(10).ToString());
+            s = String.Concat(s, this.random.Next(100000, 999999).ToString());  
             return s;
         }
     }
