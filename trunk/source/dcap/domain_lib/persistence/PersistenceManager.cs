@@ -825,11 +825,9 @@ namespace domain_lib.persistence
 
             var list = RetrieveEquals<BangKeVW>("Thang", strThang);
 
-            int count = 0;
             foreach (var row in list)
             {
-
-                count++;
+                var stt = row.Stt;
                 var hoTen = row.HoTen;
                 var maGioiTinh = row.GioiTinh;
                 var soCmnd = row.SoCmnd;
@@ -844,7 +842,7 @@ namespace domain_lib.persistence
                 var thang = row.Thang;
 
                 var bangKeDto = new BangKeDto();
-                bangKeDto.STT = count;
+                bangKeDto.STT = stt;
                 bangKeDto.HoTen = hoTen;
                 bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(maGioiTinh);
                 bangKeDto.SoCmnd = soCmnd;

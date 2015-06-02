@@ -4,15 +4,16 @@ xmlns="urn:nhibernate-mapping-2.2"
 namespace="domain_lib.model"
 assembly="domain_lib">
   <class name="BangKeVW" table="BANG_KE_VW" lazy="false">
-    <composite-id>
-    <key-property name="SoCmnd">
+    <id name="Stt" column="STT" unsaved-value="-1">
+    </id>
+    
+    <property name="SoCmnd">
       <column name="SO_CMND" not-null="true" />
-    </key-property>
+    </property>
 
-    <key-property name="Thang">
+    <property name="Thang">
       <column name="THANG" not-null="true"/>
-    </key-property>
-    </composite-id>
+    </property>
 
     <property name="HoTen">
       <column name="TEN_NHAN_VIEN" not-null="false"/>

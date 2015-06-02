@@ -10,6 +10,7 @@ namespace domain_lib.model
         #region Declarations
 
         // Property variables
+        private long _stt = -1;
 
         // Member variables
         private string _hoTen = String.Empty;
@@ -47,6 +48,15 @@ namespace domain_lib.model
     	#endregion
 
         #region Properties
+
+        /// <summary>
+        /// Stt.
+        /// </summary>
+        public virtual long Stt
+        {
+            get { return _stt; }
+            set { _stt = value; }
+        }
 
         /// <summary>
         /// Ho Ten.
