@@ -546,8 +546,8 @@ namespace domain_lib.controller
 
                 var newLevel = lastestChild.Level;
                 var newLevelIndex = lastestChild.LevelIndex + 1;
-               
-                if (Math.Pow(3,lastestChild.Level)==lastestChild.LevelIndex)
+
+                if ((lastestChild.Level==0) || (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex))
                 {
                     newLevel = lastestChild.Level + 1;
                     newLevelIndex = 1;
@@ -555,6 +555,12 @@ namespace domain_lib.controller
 
                 var l1ParentLevel = newLevel - 1;
                 var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3)+1) : (newLevelIndex/3);
+                if (newLevel == 1)
+                {
+                    l1ParentLevel = 0;
+                    l1ParentLevelIndex = 0;
+                }
+                
 
                 var managerParent = (ManagerL1) m_PersistenceManager.FindQlByLocation<ManagerL1>(l1ParentLevel, l1ParentLevelIndex);
                 
@@ -605,7 +611,7 @@ namespace domain_lib.controller
                 var newLevel = lastestChild.Level;
                 var newLevelIndex = lastestChild.LevelIndex + 1;
 
-                if (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex)
+                if ((lastestChild.Level == 0) || (Math.Pow(3, lastestChild.Level) == lastestChild.LevelIndex))
                 {
                     newLevel = lastestChild.Level + 1;
                     newLevelIndex = 1;
@@ -613,6 +619,11 @@ namespace domain_lib.controller
 
                 var l1ParentLevel = newLevel - 1;
                 var l1ParentLevelIndex = (newLevelIndex%3 > 0) ? ((newLevelIndex/3) + 1) : (newLevelIndex/3);
+                if (newLevel == 1)
+                {
+                    l1ParentLevel = 0;
+                    l1ParentLevelIndex = 0;
+                }
 
                 var managerParent = (ManagerL2) m_PersistenceManager.FindQlByLocation<ManagerL2>(l1ParentLevel, l1ParentLevelIndex);
 
