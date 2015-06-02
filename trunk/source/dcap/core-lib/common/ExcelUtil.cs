@@ -141,9 +141,17 @@ namespace core_lib.common
                             {
                                 worksheet.Cells[r + 2, i + 1] = String.Format("{0:dd/MM/yyyy}", (DateTime)o);
                             }
-                            else if (o is string && !string.IsNullOrEmpty(o as string))
+                            else if (o is string)
                             {
-                                worksheet.Cells[r + 2, i + 1] = "'" + o;
+                                var s = o as string;
+                                if (!string.IsNullOrEmpty(s) && !char.IsLetter(s[0]))
+                                {
+                                    worksheet.Cells[r + 2, i + 1] = "'" + o;
+                                }
+                                else
+                                {
+                                    worksheet.Cells[r + 2, i + 1] = o;
+                                }
                             }
                             else
                             {

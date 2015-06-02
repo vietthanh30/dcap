@@ -376,16 +376,16 @@ namespace domain_lib.persistence
             }
             if (String.IsNullOrEmpty(fullName))
             {
-                return "-1";
+                return "-2";
             }
             if (String.IsNullOrEmpty(roleCode))
             {
-                return "-1";
+                return "-3";
             }
             var users = RetrieveEquals<Users>("UserName", userName.ToUpper());
             if (users.Count > 0)
             {
-                return "-1";
+                return "-4";
             }
             var user = new Users
                            {
@@ -398,14 +398,14 @@ namespace domain_lib.persistence
             users = RetrieveEquals<Users>("UserName", userName.ToUpper());
             if (users.Count == 0)
             {
-                return "-1";
+                return "-5";
             }
             user = users[0];
 
             var roles = RetrieveEquals<Roles>("RoleCode", roleCode.ToUpper());
             if (roles.Count == 0)
             {
-                return "-1";
+                return "-6";
             }
             var role = roles[0];
 
@@ -424,7 +424,7 @@ namespace domain_lib.persistence
             }
             if (String.IsNullOrEmpty(soCmnd))
             {
-                return "-1";
+                return "-2";
             }
             if (default(DateTime).Equals(ngaySinh))
             {
@@ -437,7 +437,7 @@ namespace domain_lib.persistence
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count == 0)
             {
-                return "-1";
+                return "-3";
             }
             var memberInfo = memberInfos[0];
 
@@ -465,7 +465,7 @@ namespace domain_lib.persistence
             }
             if (String.IsNullOrEmpty(soCmnd))
             {
-                return "-1";
+                return "-2";
             }
             long parentIdVal = -1;
             long directParentIdVal = -1;
@@ -474,7 +474,7 @@ namespace domain_lib.persistence
                 parentIdVal = GetAccountIdBy(parentId);
                 if (parentIdVal == -1)
                 {
-                    return "-1";
+                    return "-3";
                 }
             }
             if (!String.IsNullOrEmpty(directParentId))
@@ -482,14 +482,14 @@ namespace domain_lib.persistence
                 directParentIdVal = GetAccountIdBy(directParentId);
                 if (directParentIdVal == -1)
                 {
-                    return "-1";
+                    return "-4";
                 }
             }
             if (!String.IsNullOrEmpty(parentId))
             {
                 if (parentIdVal == -1 || (CountAccountByParentId(parentIdVal) > 3))
                 {
-                    return "-1";
+                    return "-5";
                 }
             }
             if (default(DateTime).Equals(ngaySinh))
@@ -529,14 +529,14 @@ namespace domain_lib.persistence
             var users = RetrieveEquals<Users>("UserName", tenDangNhap);
             if (users.Count == 0)
             {
-                return "-1";
+                return "-7";
             }
             user = users[0];
 
             var roles = RetrieveEquals<Roles>("RoleCode", ConstUtil.QLTV);
             if (roles.Count == 0)
             {
-                return "-1";
+                return "-8";
             }
             var role = roles[0];
 
@@ -729,7 +729,7 @@ namespace domain_lib.persistence
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count == 0)
             {
-                return "-1";
+                return "-6";
             }
             memberInfo = memberInfos[0];
 
@@ -742,14 +742,14 @@ namespace domain_lib.persistence
             var users = RetrieveEquals<Users>("UserName", tenDangNhap);
             if (users.Count == 0)
             {
-                return "-1";
+                return "-7";
             }
             user = users[0];
 
             var roles = RetrieveEquals<Roles>("RoleCode", ConstUtil.QLTV);
             if (roles.Count == 0)
             {
-                return "-1";
+                return "-8";
             }
             var role = roles[0];
 
