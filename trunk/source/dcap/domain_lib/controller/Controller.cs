@@ -158,8 +158,6 @@ namespace domain_lib.controller
                 {
                     if (IsCalculated(accountPreCalc))
                     {
-                        Console.Out.WriteLine("calculate parent: " + accountPreCalc.CalcAccountId + " of " +
-                                              accountPreCalc.AccountId);
                         // truc tiep);
                         if (accountPreCalc.BonusType == "TT")
                         {
