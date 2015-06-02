@@ -123,7 +123,7 @@ namespace core_lib.common
                     for (int i = 0; i < dt.Columns.Count; i++)
                     {
                         // Add column headings...
-                        excel.Cells[1, i + 1] = dt.Columns[i].ColumnName;
+                        worksheet.Cells[1, i + 1] = dt.Columns[i].ColumnName;
                     }
                     var colStart = "A1";
                     var colEndChar = Char.ToString((char)('A' + dt.Columns.Count - 1));
@@ -139,11 +139,15 @@ namespace core_lib.common
                             object o = dt.Rows[r][i];
                             if (o is DateTime)
                             {
-                                excel.Cells[r + 2, i + 1] = String.Format("{0:yyyyMMdd}", (DateTime)o);
+                                worksheet.Cells[r + 2, i + 1] = String.Format("{0:dd/MM/yyyy}", (DateTime)o);
+                            }
+                            else if (o is string && !string.IsNullOrEmpty(o as string))
+                            {
+                                worksheet.Cells[r + 2, i + 1] = "'" + o;
                             }
                             else
                             {
-                                excel.Cells[r + 2, i + 1] = o.ToString();
+                                worksheet.Cells[r + 2, i + 1] = o;
                             }
                         }
 
@@ -184,7 +188,7 @@ namespace core_lib.common
                     object o = dt.Rows[r][i];
                     if (o is DateTime)
                     {
-                        worksheet.Cells[r + 1, i] = new Cell(String.Format("{0:yyyyMMdd}", (DateTime)o));
+                        worksheet.Cells[r + 1, i] = new Cell(String.Format("{0:dd/MM/yyyy}", (DateTime)o));
                     }
                     else
                     {
