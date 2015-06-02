@@ -442,6 +442,7 @@ namespace domain_lib.persistence
             var memberInfo = memberInfos[0];
 
             memberInfo.HoTen = fullName;
+            memberInfo.HoTenKd = VnStringHelper.toEnglish(fullName);
             memberInfo.NgaySinh = ngaySinh;
             memberInfo.SoCmnd = soCmnd;
             memberInfo.NgayCap = ngayCap;
@@ -711,6 +712,7 @@ namespace domain_lib.persistence
             var memberInfo = new MemberInfo
                                  {
                                      HoTen = userName,
+                                     HoTenKd = VnStringHelper.toEnglish(userName),
                                      NgaySinh = ngaySinh,
                                      SoCmnd = soCmnd,
                                      NgayCap = ngayCap,
