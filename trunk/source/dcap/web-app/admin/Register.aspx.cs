@@ -56,8 +56,8 @@ namespace web_app.admin
                 return;
             }
             var photoName = soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
-            var photoDir = String.Format("_{0:yyyyMMdd}", DateTime.Now);
-            var photoPath = Server.MapPath("~/upload") + "\\" + photoDir + photoDir + "\\" + photoName;
+            var photoDir = String.Format("PHOTO_{0:yyyyMMdd}", DateTime.Now);
+            var photoPath = Server.MapPath("~/upload") + "\\" + photoDir + "\\" + photoName;
             var returnCode = SavePhotoToUploadFolder(photoPath);
             var photoUrl = string.Empty;
             if (string.Compare(returnCode, "-1") != 0)

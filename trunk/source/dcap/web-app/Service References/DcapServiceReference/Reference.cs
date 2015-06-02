@@ -672,6 +672,12 @@ namespace web_app.DcapServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateBonusOfAccountTree", ReplyAction="*")]
         int CalculateBonusOfAccountTree();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ExecuteApprovedManager", ReplyAction="*")]
+        int ExecuteApprovedManager();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateBonusOfManagerTree", ReplyAction="*")]
+        int CalculateBonusOfManagerTree();
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1469,6 +1475,14 @@ namespace web_app.DcapServiceReference {
         
         public int CalculateBonusOfAccountTree() {
             return base.Channel.CalculateBonusOfAccountTree();
+        }
+        
+        public int ExecuteApprovedManager() {
+            return base.Channel.ExecuteApprovedManager();
+        }
+        
+        public int CalculateBonusOfManagerTree() {
+            return base.Channel.CalculateBonusOfManagerTree();
         }
     }
 }

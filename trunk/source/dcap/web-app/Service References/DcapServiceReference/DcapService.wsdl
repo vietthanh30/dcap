@@ -215,6 +215,26 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ExecuteApprovedManager">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExecuteApprovedManagerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExecuteApprovedManagerResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculateBonusOfManagerTree">
+        <s:complexType />
+      </s:element>
+      <s:element name="CalculateBonusOfManagerTreeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CalculateBonusOfManagerTreeResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="loginSoapIn">
@@ -271,6 +291,18 @@
   <wsdl:message name="CalculateBonusOfAccountTreeSoapOut">
     <wsdl:part name="parameters" element="tns:CalculateBonusOfAccountTreeResponse" />
   </wsdl:message>
+  <wsdl:message name="ExecuteApprovedManagerSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteApprovedManager" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteApprovedManagerSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteApprovedManagerResponse" />
+  </wsdl:message>
+  <wsdl:message name="CalculateBonusOfManagerTreeSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateBonusOfManagerTree" />
+  </wsdl:message>
+  <wsdl:message name="CalculateBonusOfManagerTreeSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateBonusOfManagerTreeResponse" />
+  </wsdl:message>
   <wsdl:portType name="DcapServiceSoap">
     <wsdl:operation name="login">
       <wsdl:input message="tns:loginSoapIn" />
@@ -307,6 +339,14 @@
     <wsdl:operation name="CalculateBonusOfAccountTree">
       <wsdl:input message="tns:CalculateBonusOfAccountTreeSoapIn" />
       <wsdl:output message="tns:CalculateBonusOfAccountTreeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteApprovedManager">
+      <wsdl:input message="tns:ExecuteApprovedManagerSoapIn" />
+      <wsdl:output message="tns:ExecuteApprovedManagerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CalculateBonusOfManagerTree">
+      <wsdl:input message="tns:CalculateBonusOfManagerTreeSoapIn" />
+      <wsdl:output message="tns:CalculateBonusOfManagerTreeSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DcapServiceSoap" type="tns:DcapServiceSoap">
@@ -385,6 +425,24 @@
     </wsdl:operation>
     <wsdl:operation name="CalculateBonusOfAccountTree">
       <soap:operation soapAction="http://tempuri.org/CalculateBonusOfAccountTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteApprovedManager">
+      <soap:operation soapAction="http://tempuri.org/ExecuteApprovedManager" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateBonusOfManagerTree">
+      <soap:operation soapAction="http://tempuri.org/CalculateBonusOfManagerTree" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -476,13 +534,31 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ExecuteApprovedManager">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteApprovedManager" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateBonusOfManagerTree">
+      <soap12:operation soapAction="http://tempuri.org/CalculateBonusOfManagerTree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="DcapService">
     <wsdl:port name="DcapServiceSoap" binding="tns:DcapServiceSoap">
-      <soap:address location="http://localhost:33593/view/DcapService.asmx" />
+      <soap:address location="http://localhost:39227/view/DcapService.asmx" />
     </wsdl:port>
     <wsdl:port name="DcapServiceSoap12" binding="tns:DcapServiceSoap12">
-      <soap12:address location="http://localhost:33593/view/DcapService.asmx" />
+      <soap12:address location="http://localhost:39227/view/DcapService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
