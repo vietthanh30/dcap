@@ -125,9 +125,9 @@
                 </div><!-- /.box-body -->
 				  
                 <div class="box-footer">
-                <asp:Button ID="SearchUserButton" runat="server" Text="Tra cứu" 
-                        ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" 
-                    onclick="RegisterUser_SearchUser"/>
+<%--                <asp:Button ID="SearchUserButton" runat="server" Text="Tra cứu" --%>
+<%--                        ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" --%>
+<%--                    onclick="RegisterUser_SearchUser"/>--%>
                 <asp:Button ID="CreateUserButton" runat="server" Text="Cập nhật" 
                         ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" 
                     onclick="RegisterUser_CreatingUser"/>
