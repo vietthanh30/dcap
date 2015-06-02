@@ -5,6 +5,7 @@ namespace="domain_lib.model"
 assembly="domain_lib">
   <class name="BangKeVW" table="BANG_KE_VW" lazy="false">
     <id name="Stt" column="STT" unsaved-value="-1">
+      <generator class="identity" />
     </id>
     
     <property name="SoCmnd">

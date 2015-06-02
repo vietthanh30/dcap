@@ -176,11 +176,11 @@ namespace domain_lib.controller
                             CalculateMrBonus(accountPreCalc);
                         }
 
-                        // he thong
+                        /*// he thong
                         if (accountPreCalc.AccountLevel>1)
                         {
                             CalculateHtBonus(accountPreCalc);
-                        }
+                        }*/
 
                         // insert into QL1 tree
                         if (accountPreCalc.AccountLevel == 2 && accountPreCalc.LevelIndex == 9)

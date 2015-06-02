@@ -175,24 +175,6 @@ namespace domain_lib.model
             return _hoTen;
         }
 
-        public override bool Equals(object obj)
-        {
-            var other = obj as BangKeVW;
-            if (other == null)
-            {
-                return false;
-            }
-            return SoCmnd.Equals(other.SoCmnd) && Thang.Equals(other.Thang);
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = 13;
-            hashCode = (hashCode * 7) + SoCmnd.GetHashCode();
-            hashCode = (hashCode * 7) + Thang.GetHashCode();
-            return hashCode;
-        }
-
         #endregion
     }
 }
