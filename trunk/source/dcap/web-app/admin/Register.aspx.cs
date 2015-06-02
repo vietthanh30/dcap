@@ -66,7 +66,9 @@ namespace web_app.admin
             }
             var createdBy = User.Identity.Name;
             returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
-            if (string.Compare(returnCode, "-1", true) != 0)
+            int code;
+            var error = int.TryParse(returnCode, out code);
+            if (!error)
             {
                 var codes = returnCode.Split(new[] {'|'});
                 var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
@@ -76,7 +78,36 @@ namespace web_app.admin
             }
             else
             {
-                InvalidCredentialsMessage.Text = "Đăng ký không thành công.";
+                switch (code)
+                {
+                    case -1:
+                        InvalidCredentialsMessage.Text = "Chưa nhập họ tên.";
+                        break;
+                    case -2:
+                        InvalidCredentialsMessage.Text = "Chưa nhập số CMND.";
+                        break;
+                    case -3:
+                        InvalidCredentialsMessage.Text = "Người giới thiệu không tồn tại.";
+                        break;
+                    case -4:
+                        InvalidCredentialsMessage.Text = "Tuyến trên không tồn tại.";
+                        break;
+                    case -5:
+                        InvalidCredentialsMessage.Text = "Người giới thiệu đã giới thiệu đủ 3 thành viên.";
+                        break;
+                    case -6:
+                        InvalidCredentialsMessage.Text = "Đăng ký thành viên không thành công.";
+                        break;
+                    case -7:
+                        InvalidCredentialsMessage.Text = "Đăng ký người dùng không thành công.";
+                        break;
+                    case -8:
+                        InvalidCredentialsMessage.Text = "Đăng ký quyền người dùng không thành công.";
+                        break;
+                    default:
+                        InvalidCredentialsMessage.Text = "Đăng ký không thành công.";
+                        break;
+                }
                 InvalidCredentialsMessage.Visible = true;
             }
         }

@@ -85,7 +85,9 @@ namespace web_app.members
             }
             var userName = User.Identity.Name;
             returnCode = DcapServiceUtil.UpdateUser(userName, fullName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl);
-            if (string.Compare(returnCode, "-1", true) != 0)
+            int code;
+            var status = int.TryParse(returnCode, out code);
+            if (status && code == 0)
             {
                 UpdateUserInfo(fullName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan,
                                chiNhanhNH, photoUrl);
@@ -94,7 +96,21 @@ namespace web_app.members
             }
             else
             {
-                InvalidCredentialsMessage.Text = "Cập nhật không thành công.";
+                switch (code)
+                {
+                    case -1:
+                        InvalidCredentialsMessage.Text = "Chưa nhập họ tên.";
+                        break;
+                    case -2:
+                        InvalidCredentialsMessage.Text = "Chưa nhập số CMND.";
+                        break;
+                    case -3:
+                        InvalidCredentialsMessage.Text = "Thành viên không tồn tại.";
+                        break;
+                    default:
+                        InvalidCredentialsMessage.Text = "Cập nhật không thành công.";
+                        break;
+                }
                 InvalidCredentialsMessage.Visible = true;
             }
         }

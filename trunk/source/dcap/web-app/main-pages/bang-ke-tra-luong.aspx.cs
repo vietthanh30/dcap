@@ -57,9 +57,8 @@ namespace web_app.main_pages
             {
                 return;
             }
-            var dir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
-            var filePath = Server.MapPath("~/upload") + "\\" + dir + "\\" + fileName;
+            var filePath = Server.MapPath("~/upload") + "\\" + fileName;
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
             {
@@ -67,10 +66,26 @@ namespace web_app.main_pages
             }
             var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
                 "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
-            var sheetName = "BANG_KE_VW";
-            var dt = CreateDataTable(sheetName, columnNames, allBangKeDto);
-
-            ExcelUtil.ExportToExcel(dt, filePath);
+            var tableName = "BANG_KE_VW";
+            var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
+            try
+            {
+                ExcelUtil.ExportToExcel(dt, filePath);
+            }
+            catch (Exception)
+            {
+                StringWriter stringWriter = new StringWriter();
+                HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWriter);
+                DataGrid dataGrd = new DataGrid();
+                dataGrd.DataSource = dt;
+                dataGrd.DataBind();
+                dataGrd.RenderControl(htmlWrite);
+                StreamWriter vw = new StreamWriter(filePath, true, Encoding.UTF8);
+                stringWriter.ToString().Normalize();
+                vw.Write(stringWriter.ToString());
+                vw.Flush();
+                vw.Close();
+            }
 
             FileInfo file = new FileInfo(filePath);
             Response.Clear();

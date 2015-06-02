@@ -29,14 +29,39 @@ namespace web_app.admin
             var roleCode = UserRole.SelectedValue.Trim();
             var createdBy = User.Identity.Name;
             var returnCode = DcapServiceUtil.CreateUserAdmin(userName, fullName, roleCode, createdBy);
-            if (string.Compare(returnCode, "-1", true) != 0)
+            int code;
+            var error = int.TryParse(returnCode, out code);
+            if (!error)
             {
                 AccountCode.Text = "Tên đăng nhập: " + returnCode + "/" + ConstUtil.DEFAULT_PASSWORD;
                 AccountCode.Visible = true;
             }
             else
             {
-                InvalidCredentialsMessage.Text = "Đăng ký không thành công.";
+                switch (code)
+                {
+                    case -1:
+                        InvalidCredentialsMessage.Text = "Chưa nhập tên đăng nhập.";
+                        break;
+                    case -2:
+                        InvalidCredentialsMessage.Text = "Chưa nhập tên đầy đủ.";
+                        break;
+                    case -3:
+                        InvalidCredentialsMessage.Text = "Chưa chọn quyền người dùng.";
+                        break;
+                    case -4:
+                        InvalidCredentialsMessage.Text = "Người dùng đã tồn tại.";
+                        break;
+                    case -5:
+                        InvalidCredentialsMessage.Text = "Đăng ký người dùng không thành công.";
+                        break;
+                    case -6:
+                        InvalidCredentialsMessage.Text = "Đăng ký quyền người dùng không thành công.";
+                        break;
+                    default:
+                        InvalidCredentialsMessage.Text = "Đăng ký không thành công.";
+                        break;
+                }
                 InvalidCredentialsMessage.Visible = true;
             }
         }
