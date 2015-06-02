@@ -63,8 +63,8 @@
     <Compile Include="model\AccountLogHist.cs" />
     <Compile Include="model\AccountPreCalc.cs" />
     <Compile Include="model\BangKeVW.cs" />
-    <Compile Include="model\ManagerLevelLog.cs" />
     <Compile Include="model\ManagerApproval.cs" />
+    <Compile Include="model\ManagerLevelLog.cs" />
     <Compile Include="model\ManagerL1.cs" />
     <Compile Include="model\ManagerL2.cs" />
     <Compile Include="model\ManagerL3.cs" />
@@ -146,10 +146,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="model\ManagerApproval.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerLevelLog.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="model\ManagerLevelLog.hbm.xml" />
+    <EmbeddedResource Include="model\ManagerApproval.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

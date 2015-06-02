@@ -51,15 +51,6 @@ namespace domain_lib.model
         }
 
         /// <summary>
-        /// Created Date.
-        /// </summary>
-        public virtual DateTime CreatedDate
-        {
-            get { return _createdDate; }
-            set { _createdDate = value; }
-        }
-
-        /// <summary>
         /// Dml.
         /// </summary>
         public virtual string Dml
@@ -67,7 +58,7 @@ namespace domain_lib.model
             get { return _dml; }
             set { _dml = value; }
         }
-        
+
         /// <summary>
         /// Level.
         /// </summary>
@@ -77,6 +68,17 @@ namespace domain_lib.model
             set { _level = value; }
         }
 
+
+        /// <summary>
+        /// Created Date.
+        /// </summary>
+        public virtual DateTime CreatedDate
+        {
+            get { return _createdDate; }
+            set { _createdDate = value; }
+        }
+
+        
         #endregion
 
         #region Method Overrides
