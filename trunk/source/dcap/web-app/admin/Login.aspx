@@ -22,30 +22,44 @@
     <div class="accountInfo">
         <fieldset class="login">
             <legend>Thông tin người dùng</legend>
-            <p>
+            <div class="box box-primary">
+                <div class="box-body">   
+                <div class="row">
+					<div class="col-xs-3">
                 <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Tên đăng nhập:</asp:Label>
-                <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
+                <asp:TextBox ID="UserName" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" 
                         CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required." 
                         ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
-            </p>
-            <p>
+                    </div>
+                </div>          
+                <div class="row">
+					<div class="col-xs-3">
                 <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Mật khẩu:</asp:Label>
-                <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="Password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
                         CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
                         ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
-            </p>
-            <p>
+                    </div>
+                </div>          
+                <div class="row">
+					<div class="col-xs-3">
                 <asp:Image ID="lblCaptchaImage" ImageUrl="~/admin/CImage.aspx" runat="server"></asp:Image>
-            </p>
-            <p>
-                <asp:TextBox ID="CaptchaImage" runat="server" CssClass="textEntry"></asp:TextBox>
-            </p>
-            <p>
+                    </div>
+                </div>          
+                <div class="row">
+					<div class="col-xs-3">
+                <asp:TextBox ID="CaptchaImage" runat="server" CssClass="form-control"></asp:TextBox>
+                    </div>
+                </div>          
+                <div class="row">
+					<div class="col-xs-3">
                 <asp:CheckBox ID="RememberMe" runat="server"/>
                 <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Giữ luôn đăng nhập</asp:Label>
-            </p>
+                    </div>
+                </div> 
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
         </fieldset>
         <p class="submitButton">
             <asp:Button ID="LoginButton" runat="server" Text="Log In" 

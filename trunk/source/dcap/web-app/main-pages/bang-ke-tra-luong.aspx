@@ -85,7 +85,7 @@
 	<div class="box-footer">
 	<asp:Button runat="server" class="btn btn-primary" Text="Xuất Excel file" 
             onclick="BangKeTraLuong_ExportExcel" />
-    <asp:Button runat="server" class="btn btn-primary" Text="Xuất PDF file" 
+    <asp:Button runat="server" class="btn btn-primary" Text="Xuất Word file" 
             onclick="BangKeTraLuong_ExportPDF" />
     </div>
 </asp:Content>

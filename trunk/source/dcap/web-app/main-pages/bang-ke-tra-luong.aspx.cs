@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -57,29 +58,19 @@ namespace web_app.main_pages
                 return;
             }
             var dir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
-            var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xls";
+            var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
             var filePath = Server.MapPath("~/upload") + "\\" + dir + "\\" + fileName;
-            var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
-            var sheetName = "Tra cứu bảng lương";
-            var ds = CreateDataSet(sheetName, columnNames, allBangKeDto);
-
-            StringWriter stringWriter = new StringWriter();
-            HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWriter);
-            DataGrid dataGrd = new DataGrid();
-            dataGrd.DataSource = ds;
-            dataGrd.DataBind();
-            dataGrd.RenderControl(htmlWrite);
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }
-            StreamWriter vw = new StreamWriter(filePath, true, Encoding.UTF8);
-            stringWriter.ToString().Normalize();
-            vw.Write(stringWriter.ToString());
-            vw.Flush();
-            vw.Close();
+            var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
+                "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
+            var sheetName = "BANG_KE_VW";
+            var dt = CreateDataTable(sheetName, columnNames, allBangKeDto);
+
+            ExcelUtil.ExportToExcel(dt, filePath);
 
             FileInfo file = new FileInfo(filePath);
             Response.Clear();
@@ -100,10 +91,9 @@ namespace web_app.main_pages
             file.Delete();
         }
 
-        private DataSet CreateDataSet(String sheetName, String[] columnNames, BangKeDto[] allBangKeDto)
+        private DataTable CreateDataTable(String tableName, String[] columnNames, BangKeDto[] allBangKeDto)
         {
-            var ds = new DataSet(sheetName);
-            var dataTable = new DataTable(sheetName);
+            var dataTable = new DataTable(tableName);
             foreach (var columnName in columnNames)
             {
                 dataTable.Columns.Add(columnName);
@@ -123,8 +113,7 @@ namespace web_app.main_pages
                 dataRow[columnNames[index]] = bangKeDto.Thang;
                 dataTable.Rows.Add(dataRow);
             }
-            ds.Tables.Add(dataTable);
-            return ds;
+            return dataTable;
         }
 
         protected void BangKeTraLuong_ExportPDF(object sender, EventArgs e)
