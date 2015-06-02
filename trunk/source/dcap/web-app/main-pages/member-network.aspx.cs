@@ -16,7 +16,11 @@ namespace web_app.main_pages
 
         protected void MemberNetwork_SearchNetwork(object sender, EventArgs e)
         {
-
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
         }
     }
 }

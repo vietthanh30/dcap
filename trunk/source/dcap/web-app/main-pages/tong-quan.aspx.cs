@@ -11,7 +11,11 @@ namespace web_app.main_pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,7 +19,7 @@ namespace web_app.main_pages
         {
             if(!Page.IsPostBack)
             {
-                ReportMonth.Value = DateUtil.GetDateTimeAsStringWithEnProvider(DateTime.Now.AddMonths(-1),
+                ReportMonth.Value = DateUtil.GetDateTimeAsStringWithEnProvider(DateTime.Now,
                                                                                "MM/yyyy");
                 OnSearchBangKe();
             }
@@ -26,6 +27,11 @@ namespace web_app.main_pages
 
         private void OnSearchBangKe()
         {
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             gvBangKe.DataSource = allBangKeDto;
@@ -39,16 +45,43 @@ namespace web_app.main_pages
 
         protected void BangKeTraLuong_ExportExcel(object sender, EventArgs e)
         {
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
-            var fileName = Server.MapPath("~/upload") + "\\" + String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xls";
+            if (allBangKeDto.Length == 0)
+            {
+                return;
+            }
+            var dir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
+            var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xls";
+            var filePath = Server.MapPath("~/upload") + "\\" + dir + "\\" + fileName;
             var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
                 "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
             var sheetName = "Tra cứu bảng lương";
             var ds = CreateDataSet(sheetName, columnNames, allBangKeDto);
-            ExcelUtil.CreateExcel(ds, new[]{ sheetName }, fileName);
 
-            FileInfo file = new FileInfo(fileName);
+            StringWriter stringWriter = new StringWriter();
+            HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWriter);
+            DataGrid dataGrd = new DataGrid();
+            dataGrd.DataSource = ds;
+            dataGrd.DataBind();
+            dataGrd.RenderControl(htmlWrite);
+            string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            StreamWriter vw = new StreamWriter(filePath, true, Encoding.UTF8);
+            stringWriter.ToString().Normalize();
+            vw.Write(stringWriter.ToString());
+            vw.Flush();
+            vw.Close();
+
+            FileInfo file = new FileInfo(filePath);
             Response.Clear();
             Response.Charset = "UTF-8";
             Response.ContentEncoding = System.Text.Encoding.UTF8;
@@ -58,11 +91,13 @@ namespace web_app.main_pages
             //Add header, set file size to enable browser display download progress
             Response.AddHeader("Content-Length", file.Length.ToString());
             //Set the return string is unavailable reading for client, and must be downloaded
-            Response.ContentType = "application/ms-excel";
+            Response.ContentType = "application/vnd.ms-excel";
             //Send file string to client 
             Response.WriteFile(file.FullName);
             //Stop execute  
             Response.End();
+            // Cleanup
+            file.Delete();
         }
 
         private DataSet CreateDataSet(String sheetName, String[] columnNames, BangKeDto[] allBangKeDto)
@@ -94,7 +129,11 @@ namespace web_app.main_pages
 
         protected void BangKeTraLuong_ExportPDF(object sender, EventArgs e)
         {
-
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
         }
 
         protected void gvBangKe_RowCommand(object sender, GridViewCommandEventArgs e)

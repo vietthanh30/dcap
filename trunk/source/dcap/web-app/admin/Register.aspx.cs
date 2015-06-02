@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using core_lib.common;
 using web_app.common;
 
@@ -24,6 +25,11 @@ namespace web_app.admin
 
         protected void RegisterUser_CreatingUser(object sender, EventArgs e)
         {
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
@@ -50,12 +56,13 @@ namespace web_app.admin
                 return;
             }
             var photoName = soCmnd + String.Format("_{0:yyyyMMddHHmmss}", DateTime.Now) + ".jpg";
-            var photoPath = Server.MapPath("~/upload") + "\\" + photoName;
+            var photoDir = String.Format("_{0:yyyyMMdd}", DateTime.Now);
+            var photoPath = Server.MapPath("~/upload") + "\\" + photoDir + photoDir + "\\" + photoName;
             var returnCode = SavePhotoToUploadFolder(photoPath);
             var photoUrl = string.Empty;
             if (string.Compare(returnCode, "-1") != 0)
             {
-                photoUrl = "~/upload/" + photoName;
+                photoUrl = "~/upload/" + photoDir + "/" + photoName;
             }
             var createdBy = User.Identity.Name;
             returnCode = DcapServiceUtil.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
@@ -76,6 +83,11 @@ namespace web_app.admin
 
         protected void RegisterUser_SearchUser(object sender, EventArgs e)
         {
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
@@ -145,6 +157,11 @@ namespace web_app.admin
             {
                 try
                 {
+                    string directory = saveLocation.Substring(0, saveLocation.LastIndexOf("\\"));// GetDirectory(Path);
+                    if (!Directory.Exists(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                    }
                     filePhotoUpload.PostedFile.SaveAs(saveLocation);
                     return "0";
                 }
