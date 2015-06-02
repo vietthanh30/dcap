@@ -329,11 +329,16 @@ namespace domain_lib.persistence
 
         private long GetAccountIdBy(string accountNumber)
         {
+            long accountNumberVal;
+            if (!long.TryParse(accountNumber, out accountNumberVal))
+            {
+                return -1;
+            }
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery("select a.AccountId from Account a "
                     + " where a.AccountNumber = :accountNumber");
-                query.SetParameter("accountNumber", Convert.ToInt64(accountNumber));
+                query.SetParameter("accountNumber", accountNumberVal);
 
                 // Get the matching objects
                 var accountId = query.UniqueResult();
@@ -633,26 +638,28 @@ namespace domain_lib.persistence
             {
                 return string.Empty;
             }
-            if (char.IsNumber(tenDangNhap[tenDangNhap.Length - 1]))
+            int index = tenDangNhap.Length - 1;
+            while (char.IsNumber(tenDangNhap[index]))
             {
-                tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 2);
+                index--;
             }
-            return tenDangNhap + string.Format("{0:00}", accountAmount);
+            return tenDangNhap.Substring(0, index+1) + string.Format("{0:0}", accountAmount);
         }
 
-        private int CountUserNameBy(string username)
+        private IList<string> GetAllUserNameBy(string username)
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select count(u.UserName) from Users u "
-                    + " where u.UserName like :userName");
-                query.SetParameter("userName", username + "%");
+                var query = session.CreateQuery("select u.UserName from Users u "
+                    + " where u.UserName = :userName1 or u.UserName like :userName2");
+                query.SetParameter("userName1", username);
+                query.SetParameter("userName2", username + "_%");
 
                 // Get the matching objects
-                var count = query.UniqueResult();
+                var list = (IList<string>) query.List();
 
                 // Set return value
-                return Convert.ToInt32(count);
+                return list;
             }
         }
         private string GetValidTenDangNhapBy(string fullname)
@@ -660,50 +667,36 @@ namespace domain_lib.persistence
             var tenKhongDau = VnStringHelper.toEnglish(fullname);
             var tenDangNhap = tenKhongDau.Replace(" ", "").ToUpper();
 
-            var count = CountUserNameBy(tenDangNhap);
-            if (count == 0)
+            var list = GetAllUserNameBy(tenDangNhap);
+            if (list.Count == 0)
             {
                 return tenDangNhap;
             }
             char achar = 'A';
             char zchar = 'Z';
-            for (int i = 0; i <= count / 26; i++)
+            var latestUserName = tenDangNhap;
+            foreach (var oneName in list)
             {
-                if (i < count / 26)
+                if (latestUserName.Length < oneName.Length 
+                    || (latestUserName.Length == oneName.Length && string.Compare(latestUserName, oneName) < 0))
                 {
-                    tenDangNhap = tenDangNhap + zchar;
+                    latestUserName = oneName;
+                }
+            }
+            if (string.Compare(tenDangNhap, latestUserName) == 0)
+            {
+                tenDangNhap = latestUserName + "_" + Char.ToString(achar);
+            }
+            else
+            {
+                if (latestUserName[latestUserName.Length-1] == zchar)
+                {
+                    tenDangNhap = latestUserName + Char.ToString(achar);
                 }
                 else
                 {
-                    tenDangNhap = tenDangNhap + Char.ToString((char)(achar + (count % 26) - 1));
-                }
-            }
-            while (true)
-            {
-                count = CountUserNameBy(tenDangNhap);
-                if (count == 0)
-                {
-                    break;
-                }
-                while (count > 0 && tenDangNhap[tenDangNhap.Length - 1] != zchar)
-                {
-                    tenDangNhap = tenDangNhap.Substring(0, tenDangNhap.Length - 1) + Char.ToString((char)(tenDangNhap[tenDangNhap.Length - 1] + 1));
-                    count--;
-                }
-                if (count == 0)
-                {
-                    continue;
-                }
-                for (int i = 0; i <= count / 26; i++)
-                {
-                    if (i < count / 26)
-                    {
-                        tenDangNhap = tenDangNhap + zchar;
-                    }
-                    else
-                    {
-                        tenDangNhap = tenDangNhap + (achar + (count % 26) - 1);
-                    }
+                    tenDangNhap = latestUserName.Substring(0, latestUserName.Length - 1)
+                                  + Char.ToString((char)(latestUserName[latestUserName.Length - 1] + 1));
                 }
             }
             return tenDangNhap;

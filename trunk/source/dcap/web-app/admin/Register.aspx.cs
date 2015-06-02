@@ -27,21 +27,23 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = DateUtil.GetDateTime(NgaySinh.Value.Trim());
+            var sNgaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = DateUtil.GetDateTime(sNgaySinh);
             var soCmnd = SoCmnd.Value.Trim();
-            var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
+            var sNgayCap = NgayCap.Value.Trim();
+            var ngayCap = DateUtil.GetDateTime(sNgayCap);
             var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            if (ngaySinh == null)
+            if (!string.IsNullOrEmpty(sNgaySinh) && ngaySinh == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            if (ngayCap == null)
+            if (!string.IsNullOrEmpty(sNgayCap) && ngayCap == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày cấp không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
@@ -77,21 +79,23 @@ namespace web_app.admin
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
-            var ngaySinh = DateUtil.GetDateTime(NgaySinh.Value.Trim());
+            var sNgaySinh = NgaySinh.Value.Trim();
+            var ngaySinh = DateUtil.GetDateTime(sNgaySinh);
             var soCmnd = SoCmnd.Value.Trim();
-            var ngayCap = DateUtil.GetDateTime(NgayCap.Value.Trim());
+            var sNgayCap = NgayCap.Value.Trim();
+            var ngayCap = DateUtil.GetDateTime(sNgayCap);
             var soDienThoai = SoDienThoai.Value.Trim();
             var diaChi = DiaChi.Value.Trim();
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
-            if (ngaySinh == null)
+            if (!string.IsNullOrEmpty(sNgaySinh) && ngaySinh == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            if (ngayCap == null)
+            if (!string.IsNullOrEmpty(sNgayCap) && ngayCap == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày cấp không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage.Visible = true;
@@ -101,22 +105,29 @@ namespace web_app.admin
             if (string.Compare(returnCode, "-1", true) != 0)
             {
                 var message = "";
-                var records = returnCode.Split(new[] { ';' });
-                int count = 0;
-                foreach (var record in records)
+                if (string.IsNullOrEmpty(returnCode))
                 {
-                    var codes = record.Split(new[] { '|' });
-                    var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
-                    var tenDangNhap = codes[1];
-                    if (count == 0)
+                    message = "Không có thành viên nào thỏa mãn";
+                }
+                else
+                {
+                    var records = returnCode.Split(new[] { ';' });
+                    int count = 0;
+                    foreach (var record in records)
                     {
-                        message = "(Id thành viên, Tên đăng nhập): (" + accountNumber + ", " + tenDangNhap + ")";
+                        var codes = record.Split(new[] { '|' });
+                        var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
+                        var tenDangNhap = codes[1];
+                        if (count == 0)
+                        {
+                            message = "(Id thành viên, Tên đăng nhập): (" + accountNumber + ", " + tenDangNhap + ")";
+                        }
+                        else
+                        {
+                            message += "; (" + accountNumber + ", " + tenDangNhap + ")";
+                        }
+                        count++;
                     }
-                    else
-                    {
-                        message += "; (" + accountNumber + ", " + tenDangNhap + ")";
-                    }
-                    count++;
                 }
                 AccountCode.Text = message;
                 AccountCode.Visible = true;
