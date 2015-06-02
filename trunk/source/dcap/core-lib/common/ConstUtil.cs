@@ -56,7 +56,7 @@ namespace core_lib.common
                                                             };
         public static BonusType BONUS_TYPE_CCL1 = new BonusType
         {
-            Type = "CCL1",
+            Type = "CC1",
             Amount = 1
 
         };
@@ -70,7 +70,7 @@ namespace core_lib.common
 
         public static BonusType BONUS_TYPE_CCL2 = new BonusType
         {
-            Type = "CCL2",
+            Type = "CC2",
             Amount = 1
         };
 
@@ -82,7 +82,7 @@ namespace core_lib.common
 
         public static BonusType BONUS_TYPE_CCL3 = new BonusType
         {
-            Type = "CCL3",
+            Type = "CC3",
             Amount = 1
         };
 
@@ -93,7 +93,7 @@ namespace core_lib.common
                                                           };
         public static BonusType BONUS_TYPE_CCL4 = new BonusType
         {
-            Type = "CCL4",
+            Type = "CC4",
             Amount = 1
         };
 
@@ -105,7 +105,7 @@ namespace core_lib.common
 
         public static BonusType BONUS_TYPE_CCL5 = new BonusType
         {
-            Type = "CCL5",
+            Type = "CC5",
             Amount = 1
         };
 
@@ -117,7 +117,7 @@ namespace core_lib.common
 
         public static BonusType BONUS_TYPE_CCL6 = new BonusType
         {
-            Type = "CCL6",
+            Type = "CC6",
             Amount = 1
         };
 

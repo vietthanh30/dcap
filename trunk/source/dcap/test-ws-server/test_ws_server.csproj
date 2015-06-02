@@ -57,6 +57,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Service References\DcapServiceReference\DcapService.wsdl" />
+    <None Include="Service References\DcapServiceReference\test_ws_server.DcapServiceReference.BangKeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DcapServiceReference\test_ws_server.DcapServiceReference.UserDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
