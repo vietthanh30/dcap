@@ -905,10 +905,11 @@ namespace domain_lib.persistence
                 }
 
                 // Get the matching objects
-                var list = (IList<MemberInfo>) query.List();
+                var list = query.List();
 
-                foreach (var memberInfo in list)
+                foreach (var oneRow in list)
                 {
+                    var memberInfo = oneRow as MemberInfo;
                     var userDto = new UserDto();
                     userDto.AccountNumber = memberInfo.AccountNumber;
                     userDto.FullName = memberInfo.HoTen;
