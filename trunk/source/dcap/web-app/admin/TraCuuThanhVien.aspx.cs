@@ -17,7 +17,6 @@ namespace web_app.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            OnSearchThanhVien();
         }
 
         protected void TraCuuThanhVien_Search(object sender, EventArgs e)
