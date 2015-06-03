@@ -35,12 +35,12 @@ namespace web_app.admin
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
-//            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
-//            {
-//                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-//                InvalidCredentialsMessage.Visible = true;
-//                return;
-//            }
+            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+            {
+                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
             var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length > 0)
             {
@@ -69,12 +69,12 @@ namespace web_app.admin
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
-//            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
-//            {
-//                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-//                InvalidCredentialsMessage.Visible = true;
-//                return;
-//            }
+            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+            {
+                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
             var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length == 0)
             {
@@ -152,12 +152,12 @@ namespace web_app.admin
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
-//            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
-//            {
-//                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-//                InvalidCredentialsMessage.Visible = true;
-//                return;
-//            }
+            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+            {
+                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
             var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length == 0)
             {
