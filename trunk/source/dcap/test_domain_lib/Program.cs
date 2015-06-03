@@ -37,12 +37,15 @@ namespace test_domain_lib
 //            Console.Out.WriteLine("SearchBangKe code: " + result);
 //            var text = String.Format("{0:yyyyMMddHHmmssfff}", DateTime.Now);
 //            Console.Out.WriteLine("  " + text);
-            var allMemberInfos = service.RetrieveAll<MemberInfo>();
-            foreach (var memberInfo in allMemberInfos)
-            {
-                memberInfo.HoTenKd = VnStringHelper.toEnglish(memberInfo.HoTen);
-                service.Save(memberInfo);
-            }
+//            var allMemberInfos = service.RetrieveAll<MemberInfo>();
+//            foreach (var memberInfo in allMemberInfos)
+//            {
+//                memberInfo.HoTenKd = VnStringHelper.toEnglish(memberInfo.HoTen);
+//                service.Save(memberInfo);
+//            }
+            var returnCode = service.CreateUser("", "", "Trần Thị Hương", null, "011405181", null, "", "", "", "", "",
+                                                "", "NGUYENBH");
+            Console.Out.WriteLine("CreateUser code: " + returnCode);
         }
     }
 }

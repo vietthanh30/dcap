@@ -667,6 +667,10 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKe", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeResponse SearchBangKe(web_app.DcapServiceReference.SearchBangKeRequest request);
         
+        // CODEGEN: Generating message contract since element name soCmnd from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUserInfo", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchUserInfoResponse SearchUserInfo(web_app.DcapServiceReference.SearchUserInfoRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
         int CalculateAccountLog();
         
@@ -1312,6 +1316,82 @@ namespace web_app.DcapServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchUserInfoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchUserInfo", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchUserInfoRequestBody Body;
+        
+        public SearchUserInfoRequest() {
+        }
+        
+        public SearchUserInfoRequest(web_app.DcapServiceReference.SearchUserInfoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchUserInfoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string soCmnd;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string idThanhVien;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string hoTen;
+        
+        public SearchUserInfoRequestBody() {
+        }
+        
+        public SearchUserInfoRequestBody(string soCmnd, string idThanhVien, string hoTen) {
+            this.soCmnd = soCmnd;
+            this.idThanhVien = idThanhVien;
+            this.hoTen = hoTen;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchUserInfoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchUserInfoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchUserInfoResponseBody Body;
+        
+        public SearchUserInfoResponse() {
+        }
+        
+        public SearchUserInfoResponse(web_app.DcapServiceReference.SearchUserInfoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchUserInfoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.UserDto[] SearchUserInfoResult;
+        
+        public SearchUserInfoResponseBody() {
+        }
+        
+        public SearchUserInfoResponseBody(web_app.DcapServiceReference.UserDto[] SearchUserInfoResult) {
+            this.SearchUserInfoResult = SearchUserInfoResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface DcapServiceSoapChannel : web_app.DcapServiceReference.DcapServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -1467,6 +1547,21 @@ namespace web_app.DcapServiceReference {
             inValue.Body.thangKeKhai = thangKeKhai;
             web_app.DcapServiceReference.SearchBangKeResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchBangKe(inValue);
             return retVal.Body.SearchBangKeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchUserInfoResponse web_app.DcapServiceReference.DcapServiceSoap.SearchUserInfo(web_app.DcapServiceReference.SearchUserInfoRequest request) {
+            return base.Channel.SearchUserInfo(request);
+        }
+        
+        public web_app.DcapServiceReference.UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen) {
+            web_app.DcapServiceReference.SearchUserInfoRequest inValue = new web_app.DcapServiceReference.SearchUserInfoRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchUserInfoRequestBody();
+            inValue.Body.soCmnd = soCmnd;
+            inValue.Body.idThanhVien = idThanhVien;
+            inValue.Body.hoTen = hoTen;
+            web_app.DcapServiceReference.SearchUserInfoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchUserInfo(inValue);
+            return retVal.Body.SearchUserInfoResult;
         }
         
         public int CalculateAccountLog() {

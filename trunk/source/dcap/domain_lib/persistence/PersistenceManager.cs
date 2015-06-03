@@ -655,7 +655,7 @@ namespace domain_lib.persistence
                 var query = session.CreateQuery("select u.UserName from Users u "
                     + " where u.UserName = :userName1 or u.UserName like :userName2");
                 query.SetParameter("userName1", username);
-                query.SetParameter("userName2", username + "_%");
+                query.SetParameter("userName2", username + "[_]%");
 
                 // Get the matching objects
                 var list = query.List<string>();
@@ -679,7 +679,7 @@ namespace domain_lib.persistence
             var latestUserName = tenDangNhap;
             foreach (var oneName in list)
             {
-                if (latestUserName.Length < oneName.Length 
+                if ((latestUserName.Length < oneName.Length && !Char.IsNumber(oneName[oneName.Length-1]))
                     || (latestUserName.Length == oneName.Length && string.Compare(latestUserName, oneName) < 0))
                 {
                     latestUserName = oneName;
@@ -687,7 +687,7 @@ namespace domain_lib.persistence
             }
             if (string.Compare(tenDangNhap, latestUserName) == 0)
             {
-                tenDangNhap = latestUserName + "_" + Char.ToString(achar);
+                tenDangNhap = tenDangNhap + "_" + Char.ToString(achar);
             }
             else
             {

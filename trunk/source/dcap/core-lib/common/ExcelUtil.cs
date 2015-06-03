@@ -109,7 +109,7 @@ namespace core_lib.common
             //Stop execute  
             //            Response.End();
         }
-
+/*
         public static void ExportToExcel(DataTable dt, string filePath)
         {
             Microsoft.Office.Interop.Excel.ApplicationClass excel = null;
@@ -182,7 +182,7 @@ namespace core_lib.common
                 }
             }
         }
-
+*/
         private static void fillSheetContent(Worksheet worksheet, DataTable dt)
         {
             for (int i = 0; i < dt.Columns.Count; i++)
