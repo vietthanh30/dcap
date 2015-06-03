@@ -66,9 +66,10 @@ namespace web_app.main_pages
             {
                 Directory.CreateDirectory(directory);
             }
+            var tableName = "BANG_KE_VW";
+            var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
             ExcelHelper excelFacade = new ExcelHelper();
-            excelFacade.Create(filePath,
-                            allBangKeDto.ToList(), "BANG_KE_VW", columnNames.ToList());
+            excelFacade.Create(filePath, dt);
 
             FileInfo file = new FileInfo(filePath);
             Response.Clear();
@@ -89,8 +90,6 @@ namespace web_app.main_pages
             file.Delete();
 
 /*
-            var tableName = "BANG_KE_VW";
-            var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
             CreateExcelFile.CreateExcelDocument(dt, fileName, Response);
 
