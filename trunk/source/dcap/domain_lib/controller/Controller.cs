@@ -32,6 +32,16 @@ namespace domain_lib.controller
 
         #region Public Methods
 
+        public IList<T> RetrieveAll<T>()
+        {
+            return m_PersistenceManager.RetrieveAll<T>(SessionAction.BeginAndEnd);
+        }
+
+        public void Save<T>(T item)
+        {
+            m_PersistenceManager.Save(item);
+        }
+
         public UserDto login(string userName, string password)
         {
             return m_PersistenceManager.checkUser(userName, password);
@@ -68,6 +78,11 @@ namespace domain_lib.controller
         public BangKeDto[] SearchBangKe(DateTime? thangKeKhai)
         {
             return m_PersistenceManager.SearchBangKe(thangKeKhai);
+        }
+
+        public UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
+        {
+            return m_PersistenceManager.SearchUserInfo(soCmnd, idThanhVien, hoTen);
         }
 
 

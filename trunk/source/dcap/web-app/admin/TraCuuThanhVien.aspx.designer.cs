@@ -13,22 +13,31 @@ namespace web_app.admin {
     public partial class TraCuuThanhVien {
         
         /// <summary>
-        /// i1 control.
+        /// SoCmndSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl i1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText SoCmndSearch;
         
         /// <summary>
-        /// ReportMonth control.
+        /// IdThanhVienSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ReportMonth;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText IdThanhVienSearch;
+        
+        /// <summary>
+        /// HoTenSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText HoTenSearch;
         
         /// <summary>
         /// SearchButton control.
@@ -40,30 +49,30 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// gvBangKe control.
+        /// ContinueDestinationPageUrl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvBangKe;
+        protected global::System.Web.UI.WebControls.HiddenField ContinueDestinationPageUrl;
         
         /// <summary>
-        /// Button1 control.
+        /// InvalidCredentialsMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
         
         /// <summary>
-        /// Button2 control.
+        /// gvMemberInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.GridView gvMemberInfo;
     }
 }

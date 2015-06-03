@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using core_lib.common;
 using domain_lib.dto;
@@ -861,6 +862,73 @@ namespace domain_lib.persistence
                 allResults.Add(bangKeDto);
             }
             return allResults.ToArray();
+        }
+
+        public UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
+        {
+            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+                    + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a, Users u "+
+                    " where m.MemberID = a.MemberId and a.UserId = u.UserID";
+            var sqlParams = new Hashtable();
+            if (!string.IsNullOrEmpty(soCmnd))
+            {
+                sqlStr += " and m.SoCmnd = :soCmnd";
+                sqlParams.Add("soCmnd", soCmnd);
+            }
+            if (!string.IsNullOrEmpty(idThanhVien))
+            {
+                long idThanhVienVal;
+                var status = long.TryParse(idThanhVien, out idThanhVienVal);
+                if (status)
+                {
+                    sqlStr += " and a.AccountNumber = :accountNumber";
+                    sqlParams.Add("accountNumber", idThanhVienVal);
+                }
+                else
+                {
+                    sqlStr += " and 1=0";
+                }
+            }
+            if (!string.IsNullOrEmpty(hoTen))
+            {
+                sqlStr += " and m.HoTenKd = :hoTenKd";
+                sqlParams.Add("hoTenKd", VnStringHelper.toEnglish(hoTen));
+            }
+
+            var allUserDto = new List<UserDto>();
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
+
+                // Get the matching objects
+                var list = (IList<MemberInfo>) query.List();
+
+                foreach (var memberInfo in list)
+                {
+                    var userDto = new UserDto();
+                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.FullName = memberInfo.HoTen;
+                    userDto.UserName = memberInfo.UserName;
+                    userDto.NgaySinh = memberInfo.NgaySinh;
+                    userDto.SoCmnd = memberInfo.SoCmnd;
+                    userDto.NgayCap = memberInfo.NgayCap;
+                    userDto.SoDienThoai = memberInfo.SoDienThoai;
+                    userDto.DiaChi = memberInfo.DiaChi;
+                    userDto.GioiTinh = memberInfo.GioiTinh;
+                    userDto.SoTaiKhoan = memberInfo.SoTaiKhoan;
+                    userDto.ChiNhanhNH = memberInfo.ChiNhanhNH;
+                    userDto.ImageUrl = memberInfo.ImageUrl;
+                    userDto.CreatedDate = memberInfo.CreatedDate;
+                    userDto.CreatedBy = memberInfo.CreatedBy;
+                    allUserDto.Add(userDto);
+                }
+            }
+
+            return allUserDto.ToArray();
         }
 
         public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)

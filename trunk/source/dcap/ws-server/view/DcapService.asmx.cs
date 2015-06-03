@@ -67,6 +67,12 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
+        {
+            return controller.SearchUserInfo(soCmnd, idThanhVien, hoTen);
+        }
+
+        [WebMethod]
         public int CalculateAccountLog()
         {
             return controller.CalculateAccountLog();
