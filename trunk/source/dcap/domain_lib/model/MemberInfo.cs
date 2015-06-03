@@ -12,6 +12,8 @@ namespace domain_lib.model
         // Member variables
         private string _hoTen = String.Empty;
 
+        private string _hoTenKd = String.Empty;
+
         private DateTime? _ngaySinh;
 
         private String _soCmnd = String.Empty;
@@ -36,6 +38,8 @@ namespace domain_lib.model
 
         private long _accountNumber = -1;
 
+        private string _userName = string.Empty;
+
         #endregion
 
     	#region Constructor
@@ -49,6 +53,25 @@ namespace domain_lib.model
         {
             this._accountNumber = accountNumber;
             this._hoTen = hoTen;
+            this._ngaySinh = ngaySinh;
+            this._soCmnd = soCmnd;
+            this._ngayCap = ngayCap;
+            this._soDienThoai = soDienThoai;
+            this._diaChi = diaChi;
+            this._gioiTinh = gioiTinh;
+            this._soTaiKhoan = soTaiKhoan;
+            this._chiNhanhNh = chiNhanhNH;
+            this._imageUrl = imageUrl;
+            this._createdDate = createdDate;
+            this._createdBy = createdBy;
+        }
+
+        public MemberInfo(long accountNumber, string hoTen, string userName, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
+                    string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
+        {
+            this._accountNumber = accountNumber;
+            this._hoTen = hoTen;
+            this._userName = userName;
             this._ngaySinh = ngaySinh;
             this._soCmnd = soCmnd;
             this._ngayCap = ngayCap;
@@ -91,6 +114,24 @@ namespace domain_lib.model
         {
             get { return _hoTen; }
             set { _hoTen = value; }
+        }
+
+        /// <summary>
+        /// Ho Ten Kd.
+        /// </summary>
+        public virtual string HoTenKd
+        {
+            get { return _hoTenKd; }
+            set { _hoTenKd = value; }
+        }
+
+        /// <summary>
+        /// UserName.
+        /// </summary>
+        public virtual string UserName
+        {
+            get { return _userName; }
+            set { _userName = value; }
         }
 
         /// <summary>

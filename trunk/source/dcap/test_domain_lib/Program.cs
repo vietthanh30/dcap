@@ -5,6 +5,7 @@ using System.Text;
 using core_lib.common;
 using domain_lib.controller;
 using domain_lib.dto;
+using domain_lib.model;
 
 namespace test_domain_lib
 {
@@ -34,8 +35,14 @@ namespace test_domain_lib
 //            Console.Out.WriteLine("  " + strThang);
 //            var result = service.SearchBangKe(DateTime.Now.AddDays(-15));
 //            Console.Out.WriteLine("SearchBangKe code: " + result);
-            var text = String.Format("{0:yyyyMMddHHmmssfff}", DateTime.Now);
-            Console.Out.WriteLine("  " + text);
+//            var text = String.Format("{0:yyyyMMddHHmmssfff}", DateTime.Now);
+//            Console.Out.WriteLine("  " + text);
+            var allMemberInfos = service.RetrieveAll<MemberInfo>();
+            foreach (var memberInfo in allMemberInfos)
+            {
+                memberInfo.HoTenKd = VnStringHelper.toEnglish(memberInfo.HoTen);
+                service.Save(memberInfo);
+            }
         }
     }
 }

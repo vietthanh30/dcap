@@ -75,6 +75,7 @@ namespace web_app.admin
                 var tenDangNhap = codes[1];
                 AccountCode.Text = "Id thành viên: " + accountNumber + "; Tên đăng nhập: " + tenDangNhap + "/" + ConstUtil.DEFAULT_PASSWORD;
                 AccountCode.Visible = true;
+                ResetAccountInfo();
             }
             else
             {
@@ -110,6 +111,21 @@ namespace web_app.admin
                 }
                 InvalidCredentialsMessage.Visible = true;
             }
+        }
+
+        private void ResetAccountInfo()
+        {
+            ParentId.Value = string.Empty;
+            DirectParentId.Value = string.Empty;
+            HoTen.Value = string.Empty;
+            NgaySinh.Value = string.Empty;
+            SoCmnd.Value = string.Empty;
+            NgayCap.Value = string.Empty;
+            SoDienThoai.Value = string.Empty;
+            DiaChi.Value = string.Empty;
+            GioiTinh.SelectedValue = string.Empty;
+            SoTaiKhoan.Value = string.Empty;
+            ChiNhanhNH.Value = string.Empty;
         }
 
         protected void RegisterUser_SearchUser(object sender, EventArgs e)

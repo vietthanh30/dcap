@@ -12,6 +12,10 @@ assembly="domain_lib">
       <column name="HO_TEN" not-null="true" />
     </property>
 
+    <property name="HoTenKd">
+      <column name="HO_TEN_KD" not-null="false" />
+    </property>
+
     <property name="NgaySinh">
       <column name="NGAY_SINH" not-null="false" />
     </property>

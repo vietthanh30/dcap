@@ -47,5 +47,10 @@ namespace web_app.common
         {
             return dcapService.SearchBangKe(thangKeKhai);
         }
+
+        public static UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
+        {
+            return dcapService.SearchUserInfo(soCmnd, idThanhVien, hoTen);
+        }
     }
 }

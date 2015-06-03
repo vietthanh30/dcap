@@ -145,6 +145,11 @@
                   </a>
                 </li>
                 <li>
+                  <a id="A7" href="~/admin/TraCuuThanhVien.aspx" runat="server">
+                    <i class="fa fa-edit"></i> <span>Tra cứu thành viên</span>
+                  </a>
+                </li>
+                <li>
                   <a id="A3" href="~/admin/Register2.aspx" runat="server">
                     <i class="fa fa-edit"></i> <span>Đăng ký quản lý</span>
                   </a>
