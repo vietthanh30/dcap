@@ -62,7 +62,7 @@
             </div><!-- /.box -->
         </fieldset>
         <p class="submitButton">
-            <asp:Button ID="LoginButton" runat="server" Text="Log In" 
+            <asp:Button ID="LoginButton" runat="server" Text="Đăng nhập" 
                 ValidationGroup="LoginUserValidationGroup" onclick="ValidateUser"/>
         </p>
     </div>
