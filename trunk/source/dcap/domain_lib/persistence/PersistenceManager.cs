@@ -489,7 +489,7 @@ namespace domain_lib.persistence
             }
             if (!String.IsNullOrEmpty(parentId))
             {
-                if (parentIdVal == -1 || (CountAccountByParentId(parentIdVal) > 3))
+                if (parentIdVal == -1 || (CountAccountByParentId(parentIdVal) >= 3))
                 {
                     return "-5";
                 }
