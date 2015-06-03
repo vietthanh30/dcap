@@ -58,6 +58,7 @@
     <Content Include="admin\ChangePassword.aspx" />
     <Content Include="admin\ChangePasswordSuccess.aspx" />
     <Content Include="admin\CImage.aspx" />
+    <Content Include="admin\TraCuuThanhVien.aspx" />
     <Content Include="members\EditMemberInfo.aspx" />
     <Content Include="admin\Register2.aspx" />
     <Content Include="admin\Login.aspx" />
@@ -915,6 +916,13 @@
     </Compile>
     <Compile Include="admin\CImage.aspx.designer.cs">
       <DependentUpon>CImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\TraCuuThanhVien.aspx.cs">
+      <DependentUpon>TraCuuThanhVien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\TraCuuThanhVien.aspx.designer.cs">
+      <DependentUpon>TraCuuThanhVien.aspx</DependentUpon>
     </Compile>
     <Compile Include="common\ExcelHelper.cs" />
     <Compile Include="common\CustomColumn.cs" />

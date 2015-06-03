@@ -17,10 +17,15 @@ namespace web_app.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            OnSearchThanhVien();
         }
 
         protected void TraCuuThanhVien_Search(object sender, EventArgs e)
+        {
+            OnSearchThanhVien();
+        }
+
+        private void OnSearchThanhVien()
         {
             if (!Request.IsAuthenticated)
             {
@@ -30,12 +35,12 @@ namespace web_app.admin
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
-            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
-            {
-                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-                InvalidCredentialsMessage.Visible = true;
-                return;
-            }
+//            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+//            {
+//                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
+//                InvalidCredentialsMessage.Visible = true;
+//                return;
+//            }
             var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length > 0)
             {
@@ -47,20 +52,11 @@ namespace web_app.admin
                 InvalidCredentialsMessage.Visible = true;
             }
         }
-        
+
         private void LoadUserInfo(UserDto[] userDtos)
         {
             gvMemberInfo.DataSource = userDtos;
             gvMemberInfo.DataBind();
-        }
-
-        protected void TraCuuThanhVien_Save(object sender, EventArgs e)
-        {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
         }
 
         protected void TraCuuThanhVien_ExportToWord(object sender, EventArgs e)
@@ -73,12 +69,12 @@ namespace web_app.admin
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
-            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
-            {
-                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-                InvalidCredentialsMessage.Visible = true;
-                return;
-            }
+//            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+//            {
+//                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
+//                InvalidCredentialsMessage.Visible = true;
+//                return;
+//            }
             var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length == 0)
             {
@@ -144,6 +140,61 @@ namespace web_app.admin
                 dataTable.Rows.Add(dataRow);
             }
             return dataTable;
+        }
+
+        protected void TraCuuThanhVien_ExportToExcel(object sender, EventArgs e)
+        {
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            var soCmnd = SoCmndSearch.Value.Trim();
+            var idThanhVien = IdThanhVienSearch.Value.Trim();
+            var hoTen = HoTenSearch.Value.Trim();
+//            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+//            {
+//                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
+//                InvalidCredentialsMessage.Visible = true;
+//                return;
+//            }
+            var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
+            if (userDtos.Length == 0)
+            {
+                return;
+            }
+            var columnNames = new[] { "Họ tên", "Số cmnd", "Id thành viên", "Tên đăng nhập" };
+            var tableName = "MEMBERr_INFO";
+            var dt = CreateDataTable(tableName, columnNames, userDtos);
+            string filePath;
+            var fileName = String.Format("TCTV_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
+            filePath = Server.MapPath("~/upload") + "\\" + fileName;
+            string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            ExcelHelper excelFacade = new ExcelHelper();
+            excelFacade.Create(filePath, dt);
+
+            FileInfo file = new FileInfo(filePath);
+            Response.Clear();
+            Response.Charset = "UTF-8";
+            Response.ContentEncoding = System.Text.Encoding.UTF8;
+            //Add header, give a default file name for "File Download/Store as"
+            Response.AddHeader("Content-Disposition", "attachment; filename="
+                + Server.UrlEncode(file.Name));
+            //Add header, set file size to enable browser display download progress
+            Response.AddHeader("Content-Length", file.Length.ToString());
+            //Set the return string is unavailable reading for client, and must be downloaded
+            Response.ContentType = "application/vnd.ms-excel";
+            //Send file string to client 
+            Response.WriteFile(file.FullName);
+            //Stop execute  
+            Response.End();
+            // Cleanup
+            file.Delete();
         }
 
     }

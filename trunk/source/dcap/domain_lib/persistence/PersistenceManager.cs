@@ -489,7 +489,7 @@ namespace domain_lib.persistence
             }
             if (!String.IsNullOrEmpty(parentId))
             {
-                if (parentIdVal == -1 || (CountAccountByParentId(parentIdVal) > 3))
+                if (parentIdVal == -1 || (CountAccountByParentId(parentIdVal) >= 3))
                 {
                     return "-5";
                 }
@@ -655,7 +655,7 @@ namespace domain_lib.persistence
                 var query = session.CreateQuery("select u.UserName from Users u "
                     + " where u.UserName = :userName1 or u.UserName like :userName2");
                 query.SetParameter("userName1", username);
-                query.SetParameter("userName2", username + "[_]%");
+                query.SetParameter("userName2", username + "[_]%[^0-9]");
 
                 // Get the matching objects
                 var list = query.List<string>();
