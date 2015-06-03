@@ -176,14 +176,14 @@ namespace domain_lib.controller
 
                 foreach (var accountPreCalc in preCalcQueue)
                 {
+                    // truc tiep);
+                    if (accountPreCalc.BonusType == "TT")
+                    {
+                        CalculateTtBonus(accountPreCalc);
+                    }
+
                     if (IsCalculated(accountPreCalc))
                     {
-                        // truc tiep);
-                        if (accountPreCalc.BonusType == "TT")
-                        {
-                            CalculateTtBonus(accountPreCalc);
-                        }
-
                         // can cap
                         if ((accountPreCalc.LevelIndex % 3)!=1)
                         {
@@ -203,15 +203,9 @@ namespace domain_lib.controller
                         }*/
 
                         // insert into QL1 tree
-                        if (accountPreCalc.AccountLevel == 2 && accountPreCalc.LevelIndex == 9)
-                        {
-                            AddToQl1Tree(accountPreCalc.CalcAccountId);
-                        }
-
-                        // insert into QL2 tree
                         if (accountPreCalc.AccountLevel == 3 && accountPreCalc.LevelIndex == 27)
                         {
-                            AddToQl2Tree(accountPreCalc.CalcAccountId);
+                            AddToQl1Tree(accountPreCalc.CalcAccountId);
                         }
 
                         //mark calculated
@@ -332,12 +326,12 @@ namespace domain_lib.controller
                                                           ConstUtil.BONUS_TYPE_CCL1.Type);
             }
 
-            // move to QL3 approved queue
+            // move to QL2 approved queue
             if (newManager.LevelIndex%9==0)
             {
                 if (managerLevel != null && managerLevel.ParentId != -1)
                 {
-                    InsertToQlApproveQueue(managerLevel.ParentId, 3);
+                    InsertToQlApproveQueue(managerLevel.ParentId, 2);
                 }
             }
         }
@@ -362,12 +356,12 @@ namespace domain_lib.controller
                                                           ConstUtil.BONUS_TYPE_CCL3.Type);
             }
 
-            // move to QL5 approved queue
+            // move to QL4 approved queue
             if (newManager.LevelIndex % 9 == 0)
             {
                 if (managerLevel != null && managerLevel.ParentId != -1)
                 {
-                    InsertToQlApproveQueue(managerLevel.ParentId, 5);
+                    InsertToQlApproveQueue(managerLevel.ParentId, 4);
                 }
             }
         }
@@ -390,6 +384,15 @@ namespace domain_lib.controller
                 if (managerLevel != null && managerLevel.ParentId != -1)
                     m_PersistenceManager.SaveAccountBonus(managerLevel.ParentId, ConstUtil.BONUS_TYPE_CCL5.Amount,
                                                           ConstUtil.BONUS_TYPE_CCL5.Type);
+            }
+
+            // move to QL6 approved queue
+            if (newManager.LevelIndex % 9 == 0)
+            {
+                if (managerLevel != null && managerLevel.ParentId != -1)
+                {
+                    InsertToQlApproveQueue(managerLevel.ParentId, 6);
+                }
             }
         }
 
@@ -431,12 +434,12 @@ namespace domain_lib.controller
                     
             }
 
-            // move to QL4 approved queue
+            // move to QL3 approved queue
             if (newManager.LevelIndex % 27 == 0)
             {
                 if (secondUpLevel != null && secondUpLevel.ParentId != -1)
                 {
-                    InsertToQlApproveQueue(secondUpLevel.ParentId, 4);
+                    InsertToQlApproveQueue(secondUpLevel.ParentId, 3);
                 }
             }
         }
@@ -478,12 +481,12 @@ namespace domain_lib.controller
                 }
             }
 
-            // move to QL6 approved queue
+            // move to QL5 approved queue
             if (newManager.LevelIndex % 27 == 0)
             {
                 if (secondUpLevel != null && secondUpLevel.ParentId != -1)
                 {
-                    InsertToQlApproveQueue(secondUpLevel.ParentId, 6);
+                    InsertToQlApproveQueue(secondUpLevel.ParentId, 5);
                 }
             }
         }
@@ -949,7 +952,7 @@ namespace domain_lib.controller
                 return true;
             if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "LK" && accountPreCalc.LevelIndex > 1)
                 return true;
-            return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel-1) == Math.Pow(3, accountPreCalc.AccountLevel - 1) && m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1);
+            return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel - 1) == Math.Pow(3, accountPreCalc.AccountLevel - 1) /*&& m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1)s*/;
         }
         
         #endregion
