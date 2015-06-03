@@ -83,9 +83,9 @@ namespace web_app.admin
             var columnNames = new[] {"Họ tên", "Số cmnd", "Id thành viên", "Tên đăng nhập"};
             var tableName = "MEMBERr_INFO";
             var dt = CreateDataTable(tableName, columnNames, userDtos);
-            string filePath;
             var fileName = String.Format("TCTV_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";
-            filePath = Server.MapPath("~/upload") + "\\" + fileName;
+            var fileDir = String.Format("TCTV_{0:yyyyMMdd}", DateTime.Now);
+            var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
             {
@@ -166,9 +166,9 @@ namespace web_app.admin
             var columnNames = new[] { "Họ tên", "Số cmnd", "Id thành viên", "Tên đăng nhập" };
             var tableName = "MEMBERr_INFO";
             var dt = CreateDataTable(tableName, columnNames, userDtos);
-            string filePath;
             var fileName = String.Format("TCTV_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
-            filePath = Server.MapPath("~/upload") + "\\" + fileName;
+            var fileDir = String.Format("TCTV_{0:yyyyMMdd}", DateTime.Now);
+            var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
             {

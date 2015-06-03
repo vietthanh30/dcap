@@ -85,6 +85,11 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchUserInfo(soCmnd, idThanhVien, hoTen);
         }
 
+        public MemberNodeDto[] SearchMemberNodeDto(string idMember, string soCmnd)
+        {
+            return m_PersistenceManager.SearchMemberNodeDto(idMember, soCmnd);
+        }
+
 
         public int CalculateAccountLog()
         {

@@ -635,6 +635,81 @@ namespace web_app.DcapServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MemberNodeDto", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class MemberNodeDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long AccountIdField;
+        
+        private long ParentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long AccountId {
+            get {
+                return this.AccountIdField;
+            }
+            set {
+                if ((this.AccountIdField.Equals(value) != true)) {
+                    this.AccountIdField = value;
+                    this.RaisePropertyChanged("AccountId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long ParentId {
+            get {
+                return this.ParentIdField;
+            }
+            set {
+                if ((this.ParentIdField.Equals(value) != true)) {
+                    this.ParentIdField = value;
+                    this.RaisePropertyChanged("ParentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DcapServiceReference.DcapServiceSoap")]
     public interface DcapServiceSoap {
@@ -670,6 +745,10 @@ namespace web_app.DcapServiceReference {
         // CODEGEN: Generating message contract since element name soCmnd from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUserInfo", ReplyAction="*")]
         web_app.DcapServiceReference.SearchUserInfoResponse SearchUserInfo(web_app.DcapServiceReference.SearchUserInfoRequest request);
+        
+        // CODEGEN: Generating message contract since element name idMember from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchMemberNodeDto", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchMemberNodeDtoResponse SearchMemberNodeDto(web_app.DcapServiceReference.SearchMemberNodeDtoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
         int CalculateAccountLog();
@@ -1392,6 +1471,78 @@ namespace web_app.DcapServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchMemberNodeDtoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchMemberNodeDto", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchMemberNodeDtoRequestBody Body;
+        
+        public SearchMemberNodeDtoRequest() {
+        }
+        
+        public SearchMemberNodeDtoRequest(web_app.DcapServiceReference.SearchMemberNodeDtoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchMemberNodeDtoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string idMember;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string soCmnd;
+        
+        public SearchMemberNodeDtoRequestBody() {
+        }
+        
+        public SearchMemberNodeDtoRequestBody(string idMember, string soCmnd) {
+            this.idMember = idMember;
+            this.soCmnd = soCmnd;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchMemberNodeDtoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchMemberNodeDtoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchMemberNodeDtoResponseBody Body;
+        
+        public SearchMemberNodeDtoResponse() {
+        }
+        
+        public SearchMemberNodeDtoResponse(web_app.DcapServiceReference.SearchMemberNodeDtoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchMemberNodeDtoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDtoResult;
+        
+        public SearchMemberNodeDtoResponseBody() {
+        }
+        
+        public SearchMemberNodeDtoResponseBody(web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDtoResult) {
+            this.SearchMemberNodeDtoResult = SearchMemberNodeDtoResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface DcapServiceSoapChannel : web_app.DcapServiceReference.DcapServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -1562,6 +1713,20 @@ namespace web_app.DcapServiceReference {
             inValue.Body.hoTen = hoTen;
             web_app.DcapServiceReference.SearchUserInfoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchUserInfo(inValue);
             return retVal.Body.SearchUserInfoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchMemberNodeDtoResponse web_app.DcapServiceReference.DcapServiceSoap.SearchMemberNodeDto(web_app.DcapServiceReference.SearchMemberNodeDtoRequest request) {
+            return base.Channel.SearchMemberNodeDto(request);
+        }
+        
+        public web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDto(string idMember, string soCmnd) {
+            web_app.DcapServiceReference.SearchMemberNodeDtoRequest inValue = new web_app.DcapServiceReference.SearchMemberNodeDtoRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchMemberNodeDtoRequestBody();
+            inValue.Body.idMember = idMember;
+            inValue.Body.soCmnd = soCmnd;
+            web_app.DcapServiceReference.SearchMemberNodeDtoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchMemberNodeDto(inValue);
+            return retVal.Body.SearchMemberNodeDtoResult;
         }
         
         public int CalculateAccountLog() {

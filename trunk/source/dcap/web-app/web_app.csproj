@@ -891,6 +891,9 @@
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.BangKeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.MemberNodeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.UserDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -927,6 +930,7 @@
     <Compile Include="common\ExcelHelper.cs" />
     <Compile Include="common\CustomColumn.cs" />
     <Compile Include="common\CustomStylesheet.cs" />
+    <Compile Include="common\HierarchicalDataSet.cs" />
     <Compile Include="common\TextCell.cs" />
     <Compile Include="members\EditMemberInfo.aspx.cs">
       <DependentUpon>EditMemberInfo.aspx</DependentUpon>

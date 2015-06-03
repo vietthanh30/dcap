@@ -52,5 +52,10 @@ namespace web_app.common
         {
             return dcapService.SearchUserInfo(soCmnd, idThanhVien, hoTen);
         }
+
+        public static MemberNodeDto[] SearchMemberNodeDto(string idMember, string soCmnd)
+        {
+            return dcapService.SearchMemberNodeDto(idMember, soCmnd);
+        }
     }
 }

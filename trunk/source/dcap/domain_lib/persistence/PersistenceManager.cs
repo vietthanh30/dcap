@@ -936,6 +936,61 @@ namespace domain_lib.persistence
             return allUserDto.ToArray();
         }
 
+        public MemberNodeDto[] SearchMemberNodeDto(string idMember, string soCmnd)
+        {
+            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
+                    " where m.MemberID = a.MemberId and a.UserId = u.UserID";
+            var sqlParams = new Hashtable();
+            if (!string.IsNullOrEmpty(idMember))
+            {
+                long idMemberVal;
+                var status = long.TryParse(idMember, out idMemberVal);
+                if (status)
+                {
+                    sqlStr += " and a.AccountNumber = :accountNumber";
+                    sqlParams.Add("accountNumber", idMemberVal);
+                }
+                else
+                {
+                    sqlStr += " and 1=0";
+                }
+            }
+            if (!string.IsNullOrEmpty(soCmnd))
+            {
+                sqlStr += " and m.SoCmnd = :soCmnd";
+                sqlParams.Add("soCmnd", soCmnd);
+            }
+
+            var allMemberNodeDto = new List<MemberNodeDto>();
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
+
+                // Get the matching objects
+                var list = query.List();
+
+                foreach (var oneRow in list)
+                {
+                    var memberInfo = oneRow as MemberInfo;
+                    if (memberInfo == null)
+                    {
+                        continue;
+                    }
+                    var memberNodeDto = new MemberNodeDto();
+                    memberNodeDto.AccountId = memberInfo.AccountNumber;
+                    memberNodeDto.ParentId = memberInfo.ParentId;
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    allMemberNodeDto.Add(memberNodeDto);
+                }
+            }
+
+            return allMemberNodeDto.ToArray();
+        }
+
         public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
         {
             DateTime now = DateTime.Now;

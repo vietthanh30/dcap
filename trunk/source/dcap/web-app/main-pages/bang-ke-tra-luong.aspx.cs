@@ -60,7 +60,8 @@ namespace web_app.main_pages
             var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
                 "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
-            var filePath = Server.MapPath("~/upload") + "\\" + fileName;
+            var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
+            var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
             {
@@ -137,9 +138,9 @@ namespace web_app.main_pages
                 "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
             var tableName = "BANG_KE_VW";
             var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
-            string filePath;
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";
-            filePath = Server.MapPath("~/upload") + "\\" + fileName;
+            var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
+            var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
             {

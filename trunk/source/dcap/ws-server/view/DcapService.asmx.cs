@@ -73,6 +73,12 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public MemberNodeDto[] SearchMemberNodeDto(string idMember, string soCmnd)
+        {
+            return controller.SearchMemberNodeDto(idMember, soCmnd);
+        }
+
+        [WebMethod]
         public int CalculateAccountLog()
         {
             return controller.CalculateAccountLog();

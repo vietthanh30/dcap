@@ -36,6 +36,10 @@ namespace domain_lib.model
 
         private String _createdBy = String.Empty;
 
+        private long _accountId = -1;
+
+        private long _parentId = -1;
+
         private long _accountNumber = -1;
 
         private string _userName = string.Empty;
@@ -85,6 +89,15 @@ namespace domain_lib.model
             this._createdBy = createdBy;
         }
 
+        public MemberInfo(long accountId, long parentId, long accountNumber, string hoTen, string userName)
+        {
+            this._accountId = accountId;
+            this._parentId = parentId;
+            this._accountNumber = accountNumber;
+            this._hoTen = hoTen;
+            this._userName = userName;
+        }
+
     	#endregion
 
         #region Properties
@@ -105,6 +118,24 @@ namespace domain_lib.model
         {
             get { return _accountNumber; }
             set { _accountNumber = value; }
+        }
+
+        /// <summary>
+        /// Account Id
+        /// </summary>
+        public virtual long AccountId
+        {
+            get { return _accountId; }
+            set { _accountId = value; }
+        }
+
+        /// <summary>
+        /// ParentId
+        /// </summary>
+        public virtual long ParentId
+        {
+            get { return _parentId; }
+            set { _parentId = value; }
         }
 
         /// <summary>
