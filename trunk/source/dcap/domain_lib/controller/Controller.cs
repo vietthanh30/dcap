@@ -193,7 +193,7 @@ namespace domain_lib.controller
                         // ma roi
                         if (accountPreCalc.AccountLevel>1)
                         {
-                            CalculateMrBonus(accountPreCalc);
+                            CalculateHtBonus(accountPreCalc);
                         }
 
                         /*// he thong
