@@ -126,7 +126,6 @@ namespace web_app.admin
             GioiTinh.SelectedValue = string.Empty;
             SoTaiKhoan.Value = string.Empty;
             ChiNhanhNH.Value = string.Empty;
-            filePhotoUpload.Value = string.Empty;
         }
 
         protected void RegisterUser_SearchUser(object sender, EventArgs e)

@@ -658,7 +658,7 @@ namespace domain_lib.persistence
                 query.SetParameter("userName2", username + "_%");
 
                 // Get the matching objects
-                var list = (IList<string>) query.List();
+                var list = query.List<string>();
 
                 // Set return value
                 return list;
@@ -910,6 +910,10 @@ namespace domain_lib.persistence
                 foreach (var oneRow in list)
                 {
                     var memberInfo = oneRow as MemberInfo;
+                    if (memberInfo == null)
+                    {
+                        continue;
+                    }
                     var userDto = new UserDto();
                     userDto.AccountNumber = memberInfo.AccountNumber;
                     userDto.FullName = memberInfo.HoTen;

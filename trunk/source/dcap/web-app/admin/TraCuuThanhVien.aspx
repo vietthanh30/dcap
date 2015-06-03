@@ -79,4 +79,9 @@
         </div><!-- /.box -->
     </div><!-- /.col -->
     </div><!-- /.row -->
+	<div class="box-footer">
+    <asp:Button ID="BtnExport" runat="server" class="btn btn-primary" 
+            Text="Xuất Word file" onclick="TraCuuThanhVien_ExportToWord" 
+            />
+    </div>
 </asp:Content>
