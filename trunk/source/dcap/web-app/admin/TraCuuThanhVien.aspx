@@ -80,7 +80,10 @@
     </div><!-- /.col -->
     </div><!-- /.row -->
 	<div class="box-footer">
-    <asp:Button ID="BtnExport" runat="server" class="btn btn-primary" 
+    <asp:Button ID="BtnExportExcel" runat="server" class="btn btn-primary" 
+            Text="Xuất Excel file" onclick="TraCuuThanhVien_ExportToExcel" 
+            />
+    <asp:Button ID="BtnExportDoc" runat="server" class="btn btn-primary" 
             Text="Xuất Word file" onclick="TraCuuThanhVien_ExportToWord" 
             />
     </div>
