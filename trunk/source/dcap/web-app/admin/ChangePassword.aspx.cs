@@ -1,5 +1,6 @@
 ﻿using System;
 using web_app.common;
+using web_app.DcapServiceReference;
 
 namespace web_app.admin
 {
@@ -7,6 +8,12 @@ namespace web_app.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             ChangeUserPassword.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
         }
 

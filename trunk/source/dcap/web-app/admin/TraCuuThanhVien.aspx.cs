@@ -17,6 +17,12 @@ namespace web_app.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
         }
 
         protected void TraCuuThanhVien_Search(object sender, EventArgs e)
@@ -26,11 +32,6 @@ namespace web_app.admin
 
         private void OnSearchThanhVien()
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
@@ -60,11 +61,6 @@ namespace web_app.admin
 
         protected void TraCuuThanhVien_ExportToWord(object sender, EventArgs e)
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
@@ -143,11 +139,6 @@ namespace web_app.admin
 
         protected void TraCuuThanhVien_ExportToExcel(object sender, EventArgs e)
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var soCmnd = SoCmndSearch.Value.Trim();
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var hoTen = HoTenSearch.Value.Trim();
@@ -194,6 +185,22 @@ namespace web_app.admin
             Response.End();
             // Cleanup
             file.Delete();
+        }
+
+        int _stt = 1;
+
+        public string GetStt()
+        {
+            return Convert.ToString(_stt++);
+        }
+
+        protected void gvMemberInfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvMemberInfo.PageIndex = e.NewPageIndex;
+            int pageIndex = e.NewPageIndex;
+            int rowCount = gvMemberInfo.PageSize;
+            _stt = pageIndex * rowCount + 1;
+            OnSearchThanhVien();
         }
 
     }

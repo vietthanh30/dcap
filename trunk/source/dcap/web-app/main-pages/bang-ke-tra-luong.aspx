@@ -10,7 +10,7 @@
     </ol>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-	<div class="row">
+    <div class="row">
     <!-- left column -->
     <div class="col-xs-12">
         <!-- general form elements -->
@@ -45,11 +45,12 @@
         <div class="box-body">
             <asp:GridView ID="gvBangKe" runat="server" AutoGenerateColumns="false" 
                 EnableModelValidation="true" class="table table-bordered table-striped" 
-                onrowcommand="gvBangKe_RowCommand" BorderColor="#CCCCCC" >
+                BorderColor="#CCCCCC" AllowPaging="True" 
+                onpageindexchanging="gvBangKe_PageIndexChanging" PageSize="15" >
                 <Columns>
-                <asp:BoundField DataField="STT" HeaderText="STT" >
-                <ItemStyle HorizontalAlign="Center" />
-                </asp:BoundField>
+                <asp:TemplateField HeaderText="STT">
+                <ItemTemplate><%#GetStt() %></ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="HoTen" HeaderText="Họ tên" >
                 <ItemStyle HorizontalAlign="Left" />
                 </asp:BoundField>
@@ -76,6 +77,9 @@
                 </asp:BoundField>
                 </Columns>
                 <HeaderStyle BackColor="#CCCCCC" Font-Names="Arial" Font-Size="Small" HorizontalAlign="Center" />
+                <PagerSettings Mode="NextPrevious" 
+                    NextPageText="&amp;nbsp;&amp;nbsp;&amp;nbsp;Next" PageButtonCount="6" 
+                    PreviousPageText="Previous" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->

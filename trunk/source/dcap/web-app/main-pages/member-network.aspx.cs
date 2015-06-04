@@ -14,7 +14,16 @@ namespace web_app.main_pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            OnSearchNetwork();
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            if (!IsPostBack)
+            {
+                OnSearchNetwork();
+            }
         }
 
         protected void MemberNetwork_SearchNetwork(object sender, EventArgs e)
@@ -24,11 +33,6 @@ namespace web_app.main_pages
 
         private void OnSearchNetwork()
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var idMember = IdMember.Value.Trim();
             var allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
             var headerNames = new[] { "AccountId", "ParentId", "Description" };
@@ -37,6 +41,7 @@ namespace web_app.main_pages
             long parentId = DcapServiceUtil.GetParentIdBy(idMember);
             TreeThanhVien.DataSource = new HierarchicalDataSet(ds, "AccountId", "ParentId", parentId);
             TreeThanhVien.DataBind();
+            TreeThanhVien.CollapseAll();
         }
 
         private DataSet CreateMemberNodeDataSet(MemberNodeDto[] allMemberNodeDto, string[] headerNames, Type[] columnTypes)
