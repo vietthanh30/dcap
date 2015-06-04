@@ -1,6 +1,6 @@
-﻿namespace wsv_dcap
+﻿namespace win_sv_app.service
 {
-    partial class DcapService
+    partial class DcapWinService
     {
         /// <summary> 
         /// Required designer variable.

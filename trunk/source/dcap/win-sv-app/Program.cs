@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using win_sv_app;
+using win_sv_app.service;
 
 namespace wsv_dcap
 {
@@ -16,7 +18,7 @@ namespace wsv_dcap
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new DcapService() 
+				new DcapWinService() 
 			};
             ServiceBase.Run(ServicesToRun);
         }

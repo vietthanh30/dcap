@@ -78,8 +78,8 @@
                 </Columns>
                 <HeaderStyle BackColor="#CCCCCC" Font-Names="Arial" Font-Size="Small" HorizontalAlign="Center" />
                 <PagerSettings Mode="NextPrevious" 
-                    NextPageText="&amp;nbsp;&amp;nbsp;&amp;nbsp;Next" PageButtonCount="6" 
-                    PreviousPageText="Previous" />
+                    NextPageText="&amp;nbsp;&amp;nbsp;&amp;nbsp;Tiếp theo" PageButtonCount="6" 
+                    PreviousPageText="Quay lại" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->
