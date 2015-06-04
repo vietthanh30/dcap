@@ -58,15 +58,6 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.Label AccountCode;
         
         /// <summary>
-        /// ParentId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ParentId;
-        
-        /// <summary>
         /// DirectParentId control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace web_app.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText DirectParentId;
+        
+        /// <summary>
+        /// ParentId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText ParentId;
         
         /// <summary>
         /// HoTen control.

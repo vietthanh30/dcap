@@ -40,12 +40,12 @@
                 </div>
 				<div class="row">
 					<div class="col-xs-4">
-					<label for="ParentId">Người giới thiệu</label>
-					<input type="text" class="form-control" id="ParentId" runat="server" placeholder="Nhập ID người giới thiệu">
+					<label for="DirectParentId">Người giới thiệu</label>
+					<input type="text" class="form-control" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
 					</div>
 					<div class="col-xs-4">
-					<label for="DirectParentId">Tuyến trên</label>
-					<input type="text" class="form-control" id="DirectParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
+					<label for="ParentId">Tuyến trên</label>
+					<input type="text" class="form-control" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
 					</div>
 				</div>
 				<div class="row">

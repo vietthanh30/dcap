@@ -891,8 +891,8 @@ namespace domain_lib.persistence
             }
             if (!string.IsNullOrEmpty(hoTen))
             {
-                sqlStr += " and m.HoTenKd = :hoTenKd";
-                sqlParams.Add("hoTenKd", VnStringHelper.toEnglish(hoTen));
+                sqlStr += " and m.HoTenKd like :hoTenKd";
+                sqlParams.Add("hoTenKd", "%" + VnStringHelper.normalizeTen(hoTen, true).Replace(" ", "%") + "%");
             }
 
             var allUserDto = new List<UserDto>();
