@@ -750,6 +750,10 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchMemberNodeDto", ReplyAction="*")]
         web_app.DcapServiceReference.SearchMemberNodeDtoResponse SearchMemberNodeDto(web_app.DcapServiceReference.SearchMemberNodeDtoRequest request);
         
+        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetParentIdBy", ReplyAction="*")]
+        web_app.DcapServiceReference.GetParentIdByResponse GetParentIdBy(web_app.DcapServiceReference.GetParentIdByRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
         int CalculateAccountLog();
         
@@ -1497,15 +1501,11 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string idMember;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string soCmnd;
-        
         public SearchMemberNodeDtoRequestBody() {
         }
         
-        public SearchMemberNodeDtoRequestBody(string idMember, string soCmnd) {
+        public SearchMemberNodeDtoRequestBody(string idMember) {
             this.idMember = idMember;
-            this.soCmnd = soCmnd;
         }
     }
     
@@ -1540,6 +1540,74 @@ namespace web_app.DcapServiceReference {
         
         public SearchMemberNodeDtoResponseBody(web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDtoResult) {
             this.SearchMemberNodeDtoResult = SearchMemberNodeDtoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetParentIdByRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetParentIdBy", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetParentIdByRequestBody Body;
+        
+        public GetParentIdByRequest() {
+        }
+        
+        public GetParentIdByRequest(web_app.DcapServiceReference.GetParentIdByRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetParentIdByRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string accountNumber;
+        
+        public GetParentIdByRequestBody() {
+        }
+        
+        public GetParentIdByRequestBody(string accountNumber) {
+            this.accountNumber = accountNumber;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetParentIdByResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetParentIdByResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetParentIdByResponseBody Body;
+        
+        public GetParentIdByResponse() {
+        }
+        
+        public GetParentIdByResponse(web_app.DcapServiceReference.GetParentIdByResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetParentIdByResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public long GetParentIdByResult;
+        
+        public GetParentIdByResponseBody() {
+        }
+        
+        public GetParentIdByResponseBody(long GetParentIdByResult) {
+            this.GetParentIdByResult = GetParentIdByResult;
         }
     }
     
@@ -1720,13 +1788,25 @@ namespace web_app.DcapServiceReference {
             return base.Channel.SearchMemberNodeDto(request);
         }
         
-        public web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDto(string idMember, string soCmnd) {
+        public web_app.DcapServiceReference.MemberNodeDto[] SearchMemberNodeDto(string idMember) {
             web_app.DcapServiceReference.SearchMemberNodeDtoRequest inValue = new web_app.DcapServiceReference.SearchMemberNodeDtoRequest();
             inValue.Body = new web_app.DcapServiceReference.SearchMemberNodeDtoRequestBody();
             inValue.Body.idMember = idMember;
-            inValue.Body.soCmnd = soCmnd;
             web_app.DcapServiceReference.SearchMemberNodeDtoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchMemberNodeDto(inValue);
             return retVal.Body.SearchMemberNodeDtoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.GetParentIdByResponse web_app.DcapServiceReference.DcapServiceSoap.GetParentIdBy(web_app.DcapServiceReference.GetParentIdByRequest request) {
+            return base.Channel.GetParentIdBy(request);
+        }
+        
+        public long GetParentIdBy(string accountNumber) {
+            web_app.DcapServiceReference.GetParentIdByRequest inValue = new web_app.DcapServiceReference.GetParentIdByRequest();
+            inValue.Body = new web_app.DcapServiceReference.GetParentIdByRequestBody();
+            inValue.Body.accountNumber = accountNumber;
+            web_app.DcapServiceReference.GetParentIdByResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetParentIdBy(inValue);
+            return retVal.Body.GetParentIdByResult;
         }
         
         public int CalculateAccountLog() {
