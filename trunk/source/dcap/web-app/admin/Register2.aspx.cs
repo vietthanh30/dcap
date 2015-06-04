@@ -42,6 +42,7 @@ namespace web_app.admin
             {
                 AccountCode.Text = "Tên đăng nhập: " + returnCode + "/" + ConstUtil.DEFAULT_PASSWORD;
                 AccountCode.Visible = true;
+                ResetAccountInfo();
             }
             else
             {
@@ -71,6 +72,14 @@ namespace web_app.admin
                 }
                 InvalidCredentialsMessage.Visible = true;
             }
+        }
+
+        private void ResetAccountInfo()
+        {
+            HoTen.Value = string.Empty;
+            TenDangNhap.Value = string.Empty;
+            UserRole.ClearSelection();
+            InvalidCredentialsMessage.Visible = false;
         }
     }
 }

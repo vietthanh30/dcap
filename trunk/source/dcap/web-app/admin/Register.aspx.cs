@@ -125,9 +125,10 @@ namespace web_app.admin
             NgayCap.Value = string.Empty;
             SoDienThoai.Value = string.Empty;
             DiaChi.Value = string.Empty;
-            GioiTinh.SelectedValue = string.Empty;
+            GioiTinh.ClearSelection();
             SoTaiKhoan.Value = string.Empty;
             ChiNhanhNH.Value = string.Empty;
+            InvalidCredentialsMessage.Visible = false;
         }
 
         protected void RegisterUser_SearchUser(object sender, EventArgs e)
