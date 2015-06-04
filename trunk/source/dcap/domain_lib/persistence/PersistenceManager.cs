@@ -936,32 +936,34 @@ namespace domain_lib.persistence
             return allUserDto.ToArray();
         }
 
-        public MemberNodeDto[] SearchMemberNodeDto(string idMember, string soCmnd)
+        public MemberNodeDto[] SearchMemberNodeDto(string accountNumber)
         {
+            var allMemberNodeDto = new List<MemberNodeDto>();
+            var parentId = GetAccountIdBy(accountNumber);
+            if (parentId != -1)
+            {
+                MemberNodeDto rootDto = GetRootMemberNodeDto(accountNumber);
+                if (rootDto == null)
+                {
+                    return allMemberNodeDto.ToArray();
+                }
+                allMemberNodeDto.Add(rootDto);
+            }
+            var allDto = SearchMemberNodeDtoLoop(parentId);
+            allMemberNodeDto.AddRange(allDto);
+
+            return allMemberNodeDto.ToArray();
+        }
+
+        private IEnumerable<MemberNodeDto> SearchMemberNodeDtoLoop(long parentId)
+        {
+            var allMemberNodeDto = new List<MemberNodeDto>();
             var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID";
             var sqlParams = new Hashtable();
-            if (!string.IsNullOrEmpty(idMember))
-            {
-                long idMemberVal;
-                var status = long.TryParse(idMember, out idMemberVal);
-                if (status)
-                {
-                    sqlStr += " and a.AccountNumber = :accountNumber";
-                    sqlParams.Add("accountNumber", idMemberVal);
-                }
-                else
-                {
-                    sqlStr += " and 1=0";
-                }
-            }
-            if (!string.IsNullOrEmpty(soCmnd))
-            {
-                sqlStr += " and m.SoCmnd = :soCmnd";
-                sqlParams.Add("soCmnd", soCmnd);
-            }
+            sqlStr += " and a.ParentId = :parentId";
+            sqlParams.Add("parentId", parentId);
 
-            var allMemberNodeDto = new List<MemberNodeDto>();
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery(sqlStr);
@@ -985,10 +987,81 @@ namespace domain_lib.persistence
                     memberNodeDto.ParentId = memberInfo.ParentId;
                     memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
                     allMemberNodeDto.Add(memberNodeDto);
+                    var allDto = SearchMemberNodeDtoLoop(memberInfo.AccountId);
+                    allMemberNodeDto.AddRange(allDto);
+                }
+            }
+            return allMemberNodeDto;
+        }
+
+        private MemberNodeDto GetRootMemberNodeDto(string accountNumber)
+        {
+            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
+                    " where m.MemberID = a.MemberId and a.UserId = u.UserID";
+            var sqlParams = new Hashtable();
+            if (!string.IsNullOrEmpty(accountNumber))
+            {
+                long accountNumberVal;
+                var status = long.TryParse(accountNumber, out accountNumberVal);
+                if (status)
+                {
+                    sqlStr += " and a.AccountNumber = :accountNumber";
+                    sqlParams.Add("accountNumber", accountNumberVal);
+                }
+                else
+                {
+                    sqlStr += " and 1=0";
+                }
+            }
+            else
+            {
+                sqlStr += " and 1=0";
+            }
+
+            MemberNodeDto memberNodeDto = null;
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
+
+                // Get the matching objects
+                MemberInfo memberInfo = (MemberInfo)query.UniqueResult();
+
+                if (memberInfo != null)
+                {
+                    memberNodeDto = new MemberNodeDto();
+                    memberNodeDto.AccountId = memberInfo.AccountNumber;
+                    memberNodeDto.ParentId = memberInfo.ParentId;
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
                 }
             }
 
-            return allMemberNodeDto.ToArray();
+            return memberNodeDto;
+        }
+
+        public long GetParentIdBy(string accountNumber)
+        {
+            long accountNumberVal;
+            if (!long.TryParse(accountNumber, out accountNumberVal))
+            {
+                return -1;
+            }
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select a.ParentId from Account a "
+                    + " where a.AccountNumber = :accountNumber");
+                query.SetParameter("accountNumber", accountNumberVal);
+
+                // Get the matching objects
+                var parentId = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt64(parentId);
+            }
         }
 
         public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)

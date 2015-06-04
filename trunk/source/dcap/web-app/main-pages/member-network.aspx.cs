@@ -14,9 +14,15 @@ namespace web_app.main_pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            OnSearchNetwork();
         }
 
         protected void MemberNetwork_SearchNetwork(object sender, EventArgs e)
+        {
+            OnSearchNetwork();
+        }
+
+        private void OnSearchNetwork()
         {
             if (!Request.IsAuthenticated)
             {
@@ -24,19 +30,19 @@ namespace web_app.main_pages
                 return;
             }
             var idMember = IdMember.Value.Trim();
-            var soCmnd = SoCmnd.Value.Trim();
-            var allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember, soCmnd);
+            var allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
             var headerNames = new[] { "AccountId", "ParentId", "Description" };
             var columnTypes = new[] {typeof (long), typeof (long), typeof (string)};
             var ds = CreateMemberNodeDataSet(allMemberNodeDto, headerNames, columnTypes);
-            TreeThanhVien.DataSource = new HierarchicalDataSet(ds, "AccountId", "ParentId");
+            long parentId = DcapServiceUtil.GetParentIdBy(idMember);
+            TreeThanhVien.DataSource = new HierarchicalDataSet(ds, "AccountId", "ParentId", parentId);
             TreeThanhVien.DataBind();
         }
 
         private DataSet CreateMemberNodeDataSet(MemberNodeDto[] allMemberNodeDto, string[] headerNames, Type[] columnTypes)
         {
             var dataSet = new DataSet();
-            dataSet.Tables.Add("Table");
+            dataSet.Tables.Add("MEMBER_NODES");
             for (int i = 0; i < headerNames.Length; i++)
             {
                 dataSet.Tables[0].Columns.Add(headerNames[i], columnTypes[i]);

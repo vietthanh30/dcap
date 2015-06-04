@@ -22,12 +22,6 @@
 				<input type="text" class="form-control" id="IdMember" runat="server" placeholder="Nhập ID thành viên">
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-4">
-				<label for="SoCmnd">Số CMND</label>
-				<input type="text" class="form-control" id="SoCmnd" runat="server" placeholder="Nhập số CMND">
-				</div>
-			</div>
             </div><!-- /.box-body -->
 				  
             <div class="box-footer">            
