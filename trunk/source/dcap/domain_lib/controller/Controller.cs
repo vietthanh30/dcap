@@ -190,22 +190,16 @@ namespace domain_lib.controller
                     if (IsCalculated(accountPreCalc))
                     {
                         // can cap
-                        if ((accountPreCalc.LevelIndex % 3)!=1)
+                        if (((accountPreCalc.LevelIndex % 3) != 1) && (accountPreCalc.AccountLevel < 4))
                         {
                             CalculateCcBonus(accountPreCalc);
                         }
 
                         // ma roi
-                        if (accountPreCalc.AccountLevel>1)
-                        {
-                            CalculateMrBonus(accountPreCalc);
-                        }
-
-                        /*// he thong
-                        if (accountPreCalc.AccountLevel>1)
+                        if (accountPreCalc.AccountLevel>1 )
                         {
                             CalculateHtBonus(accountPreCalc);
-                        }*/
+                        }
 
                         // insert into QL1 tree
                         if (accountPreCalc.AccountLevel == 3 && accountPreCalc.LevelIndex == 27)
