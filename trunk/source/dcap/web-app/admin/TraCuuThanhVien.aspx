@@ -229,13 +229,23 @@
         <PopupWindow>
         <ASPP:PopupWindow ID="DeletePopupWindow" runat="server">
         <asp:Panel ID="DeleteMemberPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
-        <asp:Label ID="DeleteMemberLabel" runat="server"></asp:Label>
-        <asp:Button ID="AcceptDelButton" runat="server" Text="Đồng ý" 
+        <div class="box-body">   
+        <div class="row">
+			<div class="col-xs-8">
+            <asp:Label ID="DeleteMemberLabel" runat="server"></asp:Label>
+				</div>
+		</div>
+                    
+        </div><!-- /.box-body -->
+				  
+        <div class="box-footer">
+            <asp:Button ID="AcceptDelButton" runat="server" Text="Đồng ý" 
                         class="btn btn-primary" 
                     onclick="TraCuuThanhVien_DeleteUser" />
-        <asp:Button ID="CancelDelButton" runat="server" Text="Hủy bỏ" 
+            <asp:Button ID="CancelDelButton" runat="server" Text="Hủy bỏ" 
                         class="btn btn-primary" 
                     onclick="OnClosePopupWindow" />
+        </div> 
         </asp:Panel>
         </ASPP:PopupWindow>
         </PopupWindow>

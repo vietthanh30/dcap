@@ -62,6 +62,8 @@
     <Content Include="admin\ChangePasswordSuccess.aspx" />
     <Content Include="admin\CImage.aspx" />
     <Content Include="admin\TraCuuThanhVien.aspx" />
+    <Content Include="dist\img\delete-icon.png" />
+    <Content Include="dist\img\edit-icon.png" />
     <Content Include="members\EditMemberInfo.aspx" />
     <Content Include="admin\Register2.aspx" />
     <Content Include="admin\Login.aspx" />

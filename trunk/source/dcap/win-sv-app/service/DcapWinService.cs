@@ -14,7 +14,6 @@ namespace win_sv_app.service
         public DcapWinService()
         {
             InitializeComponent();
-            this.service = new DcapServiceSoapClient();
         }
 
         protected override void OnStart(string[] args)
@@ -22,6 +21,7 @@ namespace win_sv_app.service
             timer1 = new Timer();
             this.timer1.Interval = 30000; //every 30 secs
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
+            this.service = new DcapServiceSoapClient();
             timer1.Enabled = true;
             Library.WriteErrorLog("DCAP window service started");
         }
