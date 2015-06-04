@@ -37,6 +37,7 @@ namespace web_app.main_pages
             long parentId = DcapServiceUtil.GetParentIdBy(idMember);
             TreeThanhVien.DataSource = new HierarchicalDataSet(ds, "AccountId", "ParentId", parentId);
             TreeThanhVien.DataBind();
+            TreeThanhVien.CollapseAll();
         }
 
         private DataSet CreateMemberNodeDataSet(MemberNodeDto[] allMemberNodeDto, string[] headerNames, Type[] columnTypes)

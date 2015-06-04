@@ -12,6 +12,10 @@ assembly="domain_lib">
       <column name="USER_NAME" not-null="true" />
     </property>
 
+    <property name="FullName">
+      <column name="FULL_NAME" not-null="false" />
+    </property>
+
     <property name="Password">
       <column name="PASSWORD" not-null="true" />
     </property>
