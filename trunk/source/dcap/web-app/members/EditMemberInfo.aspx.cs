@@ -10,6 +10,12 @@ namespace web_app.members
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             ContinueDestinationPageUrl.Value = Request.QueryString["ReturnUrl"];
             if (!Page.IsPostBack)
             {
@@ -43,7 +49,7 @@ namespace web_app.members
             }
             Response.Redirect(continueUrl);
         }
-
+/*
         protected void RegisterUser_CreatingUser(object sender, EventArgs e)
         {
             var fullName = HoTen.Value.Trim();
@@ -93,6 +99,7 @@ namespace web_app.members
                                chiNhanhNH, photoUrl);
                 AccountCode.Text = "Cập nhật thông tin thành viên thành công.";
                 AccountCode.Visible = true;
+                InvalidCredentialsMessage.Visible = false;
             }
             else
             {
@@ -149,5 +156,6 @@ namespace web_app.members
             }
             return "-1";
         }
+*/
     }
 }

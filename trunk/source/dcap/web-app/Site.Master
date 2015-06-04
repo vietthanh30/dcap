@@ -195,7 +195,7 @@
                 <li>
                   <a id="A6" href="~/members/EditMemberInfo.aspx" runat="server">
 			        <i class="fa fa-files-o"></i>
-                    <span>Sửa thông tin cá nhân</span>
+                    <span>Thông tin cá nhân</span>
                   </a>
                 </li>
 			    <li>

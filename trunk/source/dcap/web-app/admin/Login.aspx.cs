@@ -21,6 +21,7 @@ namespace web_app.admin
             {
                 InvalidCredentialsMessage.Text = "Captcha không khớp. Vui lòng thử lại.";
                 InvalidCredentialsMessage.Visible = true;
+                CaptchaImage.Text = string.Empty;
                 return;
             }
             var userName = this.UserName.Text;

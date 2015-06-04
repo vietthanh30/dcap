@@ -60,9 +60,9 @@
             </div><!-- /.box -->
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"/>&nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Hủy bỏ"/>&nbsp;&nbsp;&nbsp;
                     <asp:Button ID="ChangePasswordPushButton" runat="server" 
-                        Text="Change Password" ValidationGroup="ChangeUserPasswordValidationGroup" 
+                        Text="Đổi mật khẩu" ValidationGroup="ChangeUserPasswordValidationGroup" 
                         onclick="ChangeUserPassword_ChangingPassword"/>
                 </p>
             </div>
