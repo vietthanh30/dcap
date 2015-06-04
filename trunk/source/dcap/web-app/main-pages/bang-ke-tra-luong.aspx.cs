@@ -18,6 +18,12 @@ namespace web_app.main_pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             if(!Page.IsPostBack)
             {
                 ReportMonth.Value = DateUtil.GetDateTimeAsStringWithEnProvider(DateTime.Now,
@@ -28,11 +34,6 @@ namespace web_app.main_pages
 
         private void OnSearchBangKe()
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             gvBangKe.DataSource = allBangKeDto;
@@ -46,11 +47,6 @@ namespace web_app.main_pages
 
         protected void BangKeTraLuong_ExportExcel(object sender, EventArgs e)
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             if (allBangKeDto.Length == 0)
@@ -118,16 +114,6 @@ namespace web_app.main_pages
 
         protected void BangKeTraLuong_ExportDOC(object sender, EventArgs e)
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             if (allBangKeDto.Length == 0)
@@ -176,9 +162,21 @@ namespace web_app.main_pages
             // Cleanup
             file.Delete();
         }
-
-        protected void gvBangKe_RowCommand(object sender, GridViewCommandEventArgs e)
+        
+        private int _stt = 1;
+        
+        public string GetStt()
         {
+            return Convert.ToString(_stt++);
+        }
+
+        protected void gvBangKe_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvBangKe.PageIndex = e.NewPageIndex;
+            int pageIndex = e.NewPageIndex;
+            int rowCount = gvBangKe.PageSize;
+            _stt = pageIndex * rowCount + 1;
+            OnSearchBangKe();
         }
     }
 }

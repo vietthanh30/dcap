@@ -46,7 +46,7 @@
     <asp:HiddenField ID="ContinueDestinationPageUrl" runat="server" />  
     <div class="row">
 		<div class="col-xs-8">
-        <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification"
+        <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification" ForeColor="Blue"
             Text="" Visible="False"></asp:Label>
             </div>
     </div>   
@@ -57,8 +57,12 @@
         <div class="box-body">
             <asp:GridView ID="gvMemberInfo" runat="server" AutoGenerateColumns="false" 
                 EnableModelValidation="true" class="table table-bordered table-striped" 
-                BorderColor="#CCCCCC" >
+                BorderColor="#CCCCCC" AllowPaging="True" 
+                onpageindexchanging="gvMemberInfo_PageIndexChanging" PageSize="15" >
                 <Columns>
+                <asp:TemplateField HeaderText="STT">
+                <ItemTemplate><%#GetStt() %></ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="FullName" HeaderText="Họ tên" >
                 <ItemStyle HorizontalAlign="Left" />
                 </asp:BoundField>
@@ -73,6 +77,9 @@
                 </asp:BoundField>
                 </Columns>
                 <HeaderStyle BackColor="#CCCCCC" Font-Names="Arial" Font-Size="Small" HorizontalAlign="Center" />
+                <PagerSettings Mode="NextPrevious" 
+                    NextPageText="&amp;nbsp;&amp;nbsp;&amp;nbsp;Next" PageButtonCount="6" 
+                    PreviousPageText="Previous" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->

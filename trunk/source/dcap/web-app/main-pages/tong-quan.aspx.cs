@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using web_app.DcapServiceReference;
 
 namespace web_app.main_pages
 {
@@ -11,7 +12,8 @@ namespace web_app.main_pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Request.IsAuthenticated)
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
             {
                 Response.Redirect("~/admin/Login.aspx");
                 return;

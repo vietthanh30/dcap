@@ -2,6 +2,7 @@
 using System.IO;
 using core_lib.common;
 using web_app.common;
+using web_app.DcapServiceReference;
 
 namespace web_app.admin
 {
@@ -10,6 +11,12 @@ namespace web_app.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
             ContinueDestinationPageUrl.Value = Request.QueryString["ReturnUrl"];
         }
 
@@ -25,11 +32,6 @@ namespace web_app.admin
 
         protected void RegisterUser_CreatingUser(object sender, EventArgs e)
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
@@ -130,11 +132,6 @@ namespace web_app.admin
 
         protected void RegisterUser_SearchUser(object sender, EventArgs e)
         {
-            if (!Request.IsAuthenticated)
-            {
-                Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
             var parentId = ParentId.Value.Trim();
             var directParentId = DirectParentId.Value.Trim();
             var userName = HoTen.Value.Trim();
