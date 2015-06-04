@@ -126,7 +126,7 @@ namespace domain_lib.model
 
         public override string ToString()
         {
-            return _calcAccountId + ":" + _accountId;
+            return _calcAccountId + ":" + _accountId + ":" + _accountLevel + ":" + _levelIndex;
         }
 
         #endregion

@@ -588,7 +588,7 @@ namespace domain_lib.controller
                 var newNode = new ManagerL1
                 {
                     AccountId = calcAccountId,
-                    ChildIndex = (newLevelIndex/3)+1,
+                    ChildIndex = (newLevelIndex % 3) == 0 ? 3 : newLevelIndex % 3,
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
                     IsActive = "Y",
@@ -651,7 +651,7 @@ namespace domain_lib.controller
                 var newNode = new ManagerL2
                                   {
                                       AccountId = calcAccountId,
-                                      ChildIndex = (newLevelIndex/3) + 1,
+                                      ChildIndex = (newLevelIndex % 3) == 0 ? 3 : newLevelIndex % 3,
                                       Level = newLevel,
                                       LevelIndex = newLevelIndex,
                                       IsActive = "Y",
@@ -709,7 +709,7 @@ namespace domain_lib.controller
                 var newNode = new ManagerL3
                 {
                     AccountId = calcAccountId,
-                    ChildIndex = (newLevelIndex / 3) + 1,
+                    ChildIndex = (newLevelIndex % 3) == 0 ? 3 : newLevelIndex % 3,
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
                     IsActive = "Y",
@@ -767,7 +767,7 @@ namespace domain_lib.controller
                 var newNode = new ManagerL4
                 {
                     AccountId = calcAccountId,
-                    ChildIndex = (newLevelIndex / 3) + 1,
+                    ChildIndex = (newLevelIndex % 3) == 0 ? 3 : newLevelIndex % 3,
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
                     IsActive = "Y",
@@ -826,7 +826,7 @@ namespace domain_lib.controller
                 var newNode = new ManagerL5
                 {
                     AccountId = calcAccountId,
-                    ChildIndex = (newLevelIndex / 3) + 1,
+                    ChildIndex = (newLevelIndex % 3) == 0 ? 3 : newLevelIndex % 3,
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
                     IsActive = "Y",
@@ -884,7 +884,7 @@ namespace domain_lib.controller
                 var newNode = new ManagerL6
                 {
                     AccountId = calcAccountId,
-                    ChildIndex = (newLevelIndex / 3) + 1,
+                    ChildIndex = (newLevelIndex % 3) == 0 ? 3 : newLevelIndex % 3,
                     Level = newLevel,
                     LevelIndex = newLevelIndex,
                     IsActive = "Y",
