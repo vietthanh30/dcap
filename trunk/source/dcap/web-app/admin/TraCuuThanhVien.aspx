@@ -85,13 +85,13 @@
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center" Width="20px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Xóa">
-                    <ItemTemplate>
-                        <asp:ImageButton ID="imgBtnDeleteUser" runat="server" ImageUrl="~/dist/img/delete-icon.png"
-                            OnClick="imgBtnDeleteUser_Click" CausesValidation="False" />
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" Width="20px" />
-                </asp:TemplateField>
+<%--                <asp:TemplateField HeaderText="Xóa">--%>
+<%--                    <ItemTemplate>--%>
+<%--                        <asp:ImageButton ID="imgBtnDeleteUser" runat="server" ImageUrl="~/dist/img/delete-icon.png"--%>
+<%--                            OnClick="imgBtnDeleteUser_Click" CausesValidation="False" />--%>
+<%--                    </ItemTemplate>--%>
+<%--                    <ItemStyle HorizontalAlign="Center" Width="20px" />--%>
+<%--                </asp:TemplateField>--%>
                 </Columns>
                 <HeaderStyle BackColor="#CCCCCC" Font-Names="Arial" Font-Size="Small" HorizontalAlign="Center" />
                 <PagerSettings Mode="NextPrevious" 
