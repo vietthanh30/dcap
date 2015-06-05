@@ -58,9 +58,9 @@ namespace web_app.common
             return dcapService.SearchMemberNodeDto(idMember);
         }
 
-        public static long GetParentIdBy(string accountNumber)
+        public static MemberNodeDto GetParentNodeByChildNo(string accountNumber)
         {
-            return dcapService.GetParentIdBy(accountNumber);
+            return dcapService.GetParentNodeByChildNo(accountNumber);
         }
     }
 }

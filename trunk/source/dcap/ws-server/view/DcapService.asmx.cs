@@ -79,9 +79,9 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public long GetParentIdBy(string accountNumber)
+        public MemberNodeDto GetParentNodeByChildNo(string accountNumber)
         {
-            return controller.GetParentIdBy(accountNumber);
+            return controller.GetParentNodeByChildNo(accountNumber);
         }
 
         [WebMethod]

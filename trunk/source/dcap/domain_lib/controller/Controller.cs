@@ -90,9 +90,9 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchMemberNodeDto(idMember);
         }
 
-        public long GetParentIdBy(string accountNumber)
+        public MemberNodeDto GetParentNodeByChildNo(string accountNumber)
         {
-            return m_PersistenceManager.GetParentIdBy(accountNumber);
+            return m_PersistenceManager.GetParentNodeByChildNo(accountNumber);
         }
 
 

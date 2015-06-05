@@ -41,6 +41,9 @@
         <div class="box">
         <div class="box-body">
 		    <div class="dTree">
+            <asp:Label ID="ParentInfo" runat="server"></asp:Label>
+		    </div>
+		    <div class="dTree">
                 <asp:TreeView ID="TreeThanhVien" runat="server" >
                 <DataBindings>
                     <asp:TreeNodeBinding DataMember="System.Data.DataRowView" TextField="Description" ValueField="AccountId" />

@@ -18,11 +18,6 @@ namespace web_app.main_pages
             if (userDto == null)
             {
                 Response.Redirect("~/admin/Login.aspx");
-                return;
-            }
-            if (!IsPostBack)
-            {
-                OnSearchNetwork();
             }
         }
 
@@ -38,7 +33,17 @@ namespace web_app.main_pages
             var headerNames = new[] { "AccountId", "ParentId", "Description" };
             var columnTypes = new[] {typeof (long), typeof (long), typeof (string)};
             var ds = CreateMemberNodeDataSet(allMemberNodeDto, headerNames, columnTypes);
-            long parentId = DcapServiceUtil.GetParentIdBy(idMember);
+            var parentNodeDto = DcapServiceUtil.GetParentNodeByChildNo(idMember);
+            long parentId;
+            if (parentNodeDto == null)
+            {
+                parentId = -1;
+                ParentInfo.Text = "";
+            } else
+            {
+                parentId = parentNodeDto.AccountId;
+                ParentInfo.Text = "Tuyến trên: " + parentNodeDto.Description;
+            }
             TreeThanhVien.DataSource = new HierarchicalDataSet(ds, "AccountId", "ParentId", parentId);
             TreeThanhVien.DataBind();
             TreeThanhVien.CollapseAll();

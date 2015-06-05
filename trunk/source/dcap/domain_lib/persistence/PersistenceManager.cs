@@ -825,42 +825,52 @@ namespace domain_lib.persistence
 
             var allResults = new List<BangKeDto>();
 
-
-            var list = RetrieveEquals<BangKeVW>("Thang", strThang);
-
-            foreach (var row in list)
+            using (ISession session = m_SessionFactory.OpenSession())
             {
-                var stt = row.Stt;
-                var hoTen = row.HoTen;
-                var maGioiTinh = row.GioiTinh;
-                var soCmnd = row.SoCmnd;
-                var ngayCap = row.NgayCap;
-                var diaChi = row.DiaChi;
-                var soTaiKhoan = row.SoTaiKhoan;
-                var chiNhanhNH = row.ChiNhanhNH;
-                var soDienThoai = row.SoDienThoai;
-                var ngayDangKy = row.NgayDangKy;
-                var nguoiBaoTro = row.NguoiBaoTro;
-                var soTien = row.SoTien;
-                var thang = row.Thang;
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(BangKeVW));
+                criteria.Add(Expression.Eq("Thang", strThang));
+                criteria.AddOrder(Order.Desc("SoTien"));
 
-                var bangKeDto = new BangKeDto();
-                bangKeDto.STT = stt;
-                bangKeDto.HoTen = hoTen;
-                bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(maGioiTinh);
-                bangKeDto.SoCmnd = soCmnd;
-                bangKeDto.NgayCap = DateUtil.GetDateTimeAsDdmmyyyy(ngayCap);
-                bangKeDto.DiaChi = diaChi;
-                bangKeDto.SoTaiKhoan = soTaiKhoan;
-                bangKeDto.ChiNhanhNH = chiNhanhNH;
-                bangKeDto.SoDienThoai = soDienThoai;
-                bangKeDto.NgayDangKy = DateUtil.GetDateTimeAsDdmmyyyy(ngayDangKy);
-                bangKeDto.NguoiBaoTro = nguoiBaoTro;
-                bangKeDto.SoTien = soTien;
-                bangKeDto.Thang = thang.Substring(4, 2) + "/" + thang.Substring(0, 4);
+                // Get the matching objects
+                IList<BangKeVW> list = criteria.List<BangKeVW>();
 
-                allResults.Add(bangKeDto);
+                // Set return value
+                foreach (var row in list)
+                {
+                    var stt = row.Stt;
+                    var hoTen = row.HoTen;
+                    var maGioiTinh = row.GioiTinh;
+                    var soCmnd = row.SoCmnd;
+                    var ngayCap = row.NgayCap;
+                    var diaChi = row.DiaChi;
+                    var soTaiKhoan = row.SoTaiKhoan;
+                    var chiNhanhNH = row.ChiNhanhNH;
+                    var soDienThoai = row.SoDienThoai;
+                    var ngayDangKy = row.NgayDangKy;
+                    var nguoiBaoTro = row.NguoiBaoTro;
+                    var soTien = row.SoTien;
+                    var thang = row.Thang;
+
+                    var bangKeDto = new BangKeDto();
+                    bangKeDto.STT = stt;
+                    bangKeDto.HoTen = hoTen;
+                    bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(maGioiTinh);
+                    bangKeDto.SoCmnd = soCmnd;
+                    bangKeDto.NgayCap = DateUtil.GetDateTimeAsDdmmyyyy(ngayCap);
+                    bangKeDto.DiaChi = diaChi;
+                    bangKeDto.SoTaiKhoan = soTaiKhoan;
+                    bangKeDto.ChiNhanhNH = chiNhanhNH;
+                    bangKeDto.SoDienThoai = soDienThoai;
+                    bangKeDto.NgayDangKy = DateUtil.GetDateTimeAsDdmmyyyy(ngayDangKy);
+                    bangKeDto.NguoiBaoTro = nguoiBaoTro;
+                    bangKeDto.SoTien = soTien;
+                    bangKeDto.Thang = thang.Substring(4, 2) + "/" + thang.Substring(0, 4);
+
+                    allResults.Add(bangKeDto);
+                }
             }
+
             return allResults.ToArray();
         }
 
@@ -1043,25 +1053,53 @@ namespace domain_lib.persistence
             return memberNodeDto;
         }
 
-        public long GetParentIdBy(string accountNumber)
+        public MemberNodeDto GetParentNodeByChildNo(string accountNumber)
         {
-            long accountNumberVal;
-            if (!long.TryParse(accountNumber, out accountNumberVal))
+            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u, Account a2 " +
+                    " where m.MemberID = a.MemberId and a.UserId = u.UserID and a.AccountId = a2.ParentId";
+            var sqlParams = new Hashtable();
+            if (!string.IsNullOrEmpty(accountNumber))
             {
-                return -1;
+                long accountNumberVal;
+                var status = long.TryParse(accountNumber, out accountNumberVal);
+                if (status)
+                {
+                    sqlStr += " and a2.AccountNumber = :accountNumber";
+                    sqlParams.Add("accountNumber", accountNumberVal);
+                }
+                else
+                {
+                    sqlStr += " and 1=0";
+                }
             }
+            else
+            {
+                sqlStr += " and 1=0";
+            }
+
+            MemberNodeDto memberNodeDto = null;
+
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select a.ParentId from Account a "
-                    + " where a.AccountNumber = :accountNumber");
-                query.SetParameter("accountNumber", accountNumberVal);
+                var query = session.CreateQuery(sqlStr);
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
 
                 // Get the matching objects
-                var parentId = query.UniqueResult();
+                MemberInfo memberInfo = (MemberInfo)query.UniqueResult();
 
-                // Set return value
-                return Convert.ToInt64(parentId);
+                if (memberInfo != null)
+                {
+                    memberNodeDto = new MemberNodeDto();
+                    memberNodeDto.AccountId = memberInfo.AccountNumber;
+                    memberNodeDto.ParentId = memberInfo.ParentId;
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                }
             }
+
+            return memberNodeDto;
         }
 
         public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
