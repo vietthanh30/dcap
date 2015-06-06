@@ -948,60 +948,89 @@ namespace domain_lib.persistence
 
         public MemberNodeDto[] SearchMemberNodeDto(string accountNumber)
         {
-            var allMemberNodeDto = new List<MemberNodeDto>();
-            var parentId = GetAccountIdBy(accountNumber);
-            if (parentId != -1)
+            var memberNodeDtos = new List<MemberNodeDto>();
+            var rootId = GetAccountIdBy(accountNumber);
+            var childNumber = CountAccountByParentId(rootId);
+            if (childNumber == 0)
             {
                 MemberNodeDto rootDto = GetRootMemberNodeDto(accountNumber);
                 if (rootDto == null)
                 {
-                    return allMemberNodeDto.ToArray();
+                    return memberNodeDtos.ToArray();
                 }
-                allMemberNodeDto.Add(rootDto);
+                memberNodeDtos.Add(rootDto);
             }
-            var allDto = SearchMemberNodeDtoLoop(parentId);
-            allMemberNodeDto.AddRange(allDto);
+            else
+            {
+                var mapDtoNode = GetMapMemberNodeDto();
+                var mapParentNode = new Hashtable();
+                foreach (DictionaryEntry entry in mapDtoNode)
+                {
+                    MemberNodeDto dto = (MemberNodeDto) entry.Value;
+                    var accountId = dto.AccountId;
+                    var parentId = dto.ParentId;
+                    if (mapParentNode.ContainsKey(parentId))
+                    {
+                        var allChild = (HashSet<long>) mapParentNode[parentId];
+                        allChild.Add(accountId);
+                    }
+                    else
+                    {
+                        var allChild = new HashSet<long>();
+                        allChild.Add(accountId);
+                        mapParentNode.Add(parentId, allChild);
+                    }
+                }
+                memberNodeDtos = GetMemberNodeDtoLoop(rootId, mapDtoNode, mapParentNode);
+            }
 
-            return allMemberNodeDto.ToArray();
+            return memberNodeDtos.ToArray();
         }
 
-        private IEnumerable<MemberNodeDto> SearchMemberNodeDtoLoop(long parentId)
+        private List<MemberNodeDto> GetMemberNodeDtoLoop(long rootId, Hashtable mapDtoNode, Hashtable mapParentNode)
         {
-            var allMemberNodeDto = new List<MemberNodeDto>();
+            var listMemberNodeDto = new List<MemberNodeDto>();
+            var rootDto = (MemberNodeDto)mapDtoNode[rootId];
+            if (rootDto != null)
+            {
+                listMemberNodeDto.Add(rootDto);
+            }
+            if (mapParentNode.ContainsKey(rootId))
+            {
+                var setDto = (HashSet<long>)mapParentNode[rootId];
+                foreach (var childId in setDto)
+                {
+                    listMemberNodeDto.AddRange(GetMemberNodeDtoLoop(childId, mapDtoNode, mapParentNode));
+                } 
+            }
+            return listMemberNodeDto;
+        }
+
+        private Hashtable GetMapMemberNodeDto()
+        {
             var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID";
-            var sqlParams = new Hashtable();
-            sqlStr += " and a.ParentId = :parentId";
-            sqlParams.Add("parentId", parentId);
+
+            var mapMemberNodeDto = new Hashtable();
 
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery(sqlStr);
-                foreach (var key in sqlParams.Keys)
-                {
-                    query.SetParameter(key.ToString(), sqlParams[key]);
-                }
 
                 // Get the matching objects
-                var list = query.List();
+                var allMemberInfo = query.List<MemberInfo>();
 
-                foreach (var oneRow in list)
+                foreach (var memberInfo in allMemberInfo)
                 {
-                    var memberInfo = oneRow as MemberInfo;
-                    if (memberInfo == null)
-                    {
-                        continue;
-                    }
                     var memberNodeDto = new MemberNodeDto();
-                    memberNodeDto.AccountId = memberInfo.AccountNumber;
+                    memberNodeDto.AccountId = memberInfo.AccountId;
                     memberNodeDto.ParentId = memberInfo.ParentId;
                     memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
-                    allMemberNodeDto.Add(memberNodeDto);
-                    var allDto = SearchMemberNodeDtoLoop(memberInfo.AccountId);
-                    allMemberNodeDto.AddRange(allDto);
+                    mapMemberNodeDto.Add(memberNodeDto.AccountId, memberNodeDto);
                 }
             }
-            return allMemberNodeDto;
+
+            return mapMemberNodeDto;
         }
 
         private MemberNodeDto GetRootMemberNodeDto(string accountNumber)

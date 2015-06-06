@@ -43,9 +43,11 @@ namespace test_domain_lib
 //                memberInfo.HoTenKd = VnStringHelper.toEnglish(memberInfo.HoTen);
 //                service.Save(memberInfo);
 //            }
-            var returnCode = service.CreateUser("", "", "Trần Thị Hương", null, "011405182", null, "", "", "", "", "",
-                                                "", "NGUYENBH");
-            Console.Out.WriteLine("CreateUser code: " + returnCode);
+//            var returnCode = service.CreateUser("", "", "Trần Thị Hương", null, "011405182", null, "", "", "", "", "",
+//                                                "", "NGUYENBH");
+//            Console.Out.WriteLine("CreateUser code: " + returnCode);
+            var result = service.SearchMemberNodeDto("");
+            Console.Out.WriteLine("SearchBangKe code: " + result);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace web_app.main_pages
             {
                 ReportMonth.Value = DateUtil.GetDateTimeAsStringWithEnProvider(DateTime.Now,
                                                                                "MM/yyyy");
-//                OnSearchBangKe();
+                OnSearchBangKe();
             }
         }
 

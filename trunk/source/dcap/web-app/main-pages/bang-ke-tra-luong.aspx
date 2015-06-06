@@ -77,9 +77,10 @@
                 </asp:BoundField>
                 </Columns>
                 <HeaderStyle BackColor="#CCCCCC" Font-Names="Arial" Font-Size="Small" HorizontalAlign="Center" />
-                <PagerSettings Mode="NextPrevious" 
-                    NextPageText="&amp;nbsp;&amp;nbsp;&amp;nbsp;Tiếp theo" PageButtonCount="6" 
-                    PreviousPageText="Quay lại" />
+                <PagerSettings Mode="NumericFirstLast" 
+                    NextPageText="" PageButtonCount="5" 
+                    PreviousPageText="" FirstPageText="Đầu" LastPageText="Cuối" />
+                <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->
