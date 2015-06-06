@@ -54,6 +54,9 @@
                 <asp:BoundField DataField="HoTen" HeaderText="Họ tên" >
                 <ItemStyle HorizontalAlign="Left" />
                 </asp:BoundField>
+                <asp:BoundField DataField="UserName" HeaderText="Tên đăng nhập" >
+                <ItemStyle HorizontalAlign="Left" />
+                </asp:BoundField>
                 <asp:BoundField DataField="SoCmnd" HeaderText="Số CMND" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>

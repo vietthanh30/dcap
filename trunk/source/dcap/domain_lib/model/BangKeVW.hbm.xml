@@ -20,6 +20,10 @@ assembly="domain_lib">
       <column name="TEN_NHAN_VIEN" not-null="false"/>
     </property>
 
+    <property name="UserName">
+      <column name="USER_NAME" not-null="false" />
+    </property>
+
     <property name="GioiTinh">
       <column name="GIOI_TINH" not-null="false"/>
     </property>

@@ -15,6 +15,8 @@ namespace domain_lib.dto
         // Member variables
         private string _hoTen = String.Empty;
 
+        private string user_Name = String.Empty;
+
         private string _gioiTinh = String.Empty;
 
         private string _soCmnd = String.Empty;
@@ -65,6 +67,15 @@ namespace domain_lib.dto
         {
             get { return _hoTen; }
             set { _hoTen = value; }
+        }
+
+        /// <summary>
+        /// User name.
+        /// </summary>
+        public virtual string UserName
+        {
+            get { return user_Name; }
+            set { user_Name = value; }
         }
 
         /// <summary>

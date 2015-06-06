@@ -840,6 +840,7 @@ namespace domain_lib.persistence
                 {
                     var stt = row.Stt;
                     var hoTen = row.HoTen;
+                    var userName = row.UserName;
                     var maGioiTinh = row.GioiTinh;
                     var soCmnd = row.SoCmnd;
                     var ngayCap = row.NgayCap;
@@ -855,6 +856,7 @@ namespace domain_lib.persistence
                     var bangKeDto = new BangKeDto();
                     bangKeDto.STT = stt;
                     bangKeDto.HoTen = hoTen;
+                    bangKeDto.UserName = userName;
                     bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(maGioiTinh);
                     bangKeDto.SoCmnd = soCmnd;
                     bangKeDto.NgayCap = DateUtil.GetDateTimeAsDdmmyyyy(ngayCap);

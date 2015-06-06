@@ -53,7 +53,7 @@ namespace web_app.main_pages
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
+            var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
                 "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
             var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
@@ -100,6 +100,7 @@ namespace web_app.main_pages
                 int index = 0;
                 dataRow[columnNames[index++]] = bangKeDto.STT;
                 dataRow[columnNames[index++]] = bangKeDto.HoTen;
+                dataRow[columnNames[index++]] = bangKeDto.UserName;
                 dataRow[columnNames[index++]] = bangKeDto.SoCmnd;
                 dataRow[columnNames[index++]] = bangKeDto.DiaChi;
                 dataRow[columnNames[index++]] = bangKeDto.SoTaiKhoan;
@@ -120,7 +121,7 @@ namespace web_app.main_pages
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Tên nhân viên", "Số cmnd", "Địa chỉ", "Số TK", 
+            var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
                 "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
             var tableName = "BANG_KE_VW";
             var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
