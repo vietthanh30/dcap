@@ -52,6 +52,7 @@ namespace web_app.admin
             {
                 InvalidCredentialsMessage.Text = "Không tìm thấy thành viên thỏa mãn";
                 InvalidCredentialsMessage.Visible = true;
+                ResetGvMemberInfo();
             }
         }
 
