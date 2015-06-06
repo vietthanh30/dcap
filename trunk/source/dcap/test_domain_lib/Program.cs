@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using core_lib.common;
 using domain_lib.controller;
 using domain_lib.dto;
@@ -46,8 +47,14 @@ namespace test_domain_lib
 //            var returnCode = service.CreateUser("", "", "Trần Thị Hương", null, "011405182", null, "", "", "", "", "",
 //                                                "", "NGUYENBH");
 //            Console.Out.WriteLine("CreateUser code: " + returnCode);
-            var result = service.SearchMemberNodeDto("");
-            Console.Out.WriteLine("SearchBangKe code: " + result);
+//            var result = service.SearchMemberNodeDto("");
+//            Console.Out.WriteLine("SearchBangKe code: " + result);
+
+            service.CalculateAccountLog();
+            service.CalculateBonusOfAccountTree();
+            service.CalculateBonusOfManagerTree();
+            Thread.Sleep(30000);
+            Console.Out.Write(".");
         }
     }
 }

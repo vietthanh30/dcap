@@ -60,9 +60,18 @@
     <None Include="Service References\DcapServiceReference\test_ws_server.DcapServiceReference.BangKeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DcapServiceReference\test_ws_server.DcapServiceReference.MemberNodeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DcapServiceReference\test_ws_server.DcapServiceReference.UserDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\core-lib\core_lib.csproj">
+      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
+      <Name>core_lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DcapServiceReference\" />
@@ -81,12 +90,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\core-lib\core_lib.csproj">
-      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
-      <Name>core_lib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

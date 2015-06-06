@@ -140,9 +140,9 @@ namespace domain_lib.controller
                 return 1;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return -1;
+                throw new Exception("CalculateAccountLog Error: " + ex.Message);
             }
         }
 
@@ -157,10 +157,26 @@ namespace domain_lib.controller
                                   IsCalculated = "N",
                                   LevelIndex = levelIndex,
                                   CreatedDate = DateTime.Now,
-                                  BonusType = account.ParentDirectId == calculatedAccount.AccountId ? "TT" : "LK"
+                                  BonusType = (account.ParentId == account.ParentDirectId && account.ParentDirectId == calculatedAccount.AccountId) ? "TT" : "LK"
                               };
 
             m_PersistenceManager.Save(preCalc);
+
+            if (account.ParentDirectId == calculatedAccount.AccountId && account.ParentId != account.ParentDirectId)
+            {
+                preCalc = new AccountPreCalc
+                {
+                    AccountId = account.AccountId,
+                    CalcAccountId = calculatedAccount.AccountId,
+                    AccountLevel = -1,
+                    IsCalculated = "N",
+                    LevelIndex = -1,
+                    CreatedDate = DateTime.Now,
+                    BonusType = "TT"
+                };
+
+                m_PersistenceManager.Save(preCalc);
+            }
 
             // calculate next level
             Account nextLevelAccount = m_PersistenceManager.GetAccount(calculatedAccount.ParentId);
@@ -206,18 +222,18 @@ namespace domain_lib.controller
                         {
                             AddToQl1Tree(accountPreCalc.CalcAccountId);
                         }
-
-                        //mark calculated
-                        accountPreCalc.IsCalculated = "Y";
-                        accountPreCalc.CalculatedDate = DateTime.Now;
-                        m_PersistenceManager.Save(accountPreCalc);
                     }
+
+                    //mark calculated
+                    accountPreCalc.IsCalculated = "Y";
+                    accountPreCalc.CalculatedDate = DateTime.Now;
+                    m_PersistenceManager.Save(accountPreCalc);
                 }
                 return 1;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return -1;
+                throw new Exception("CalculateBonusOfAccountTree Error: " + ex.Message);
             }
         }
 
@@ -299,9 +315,9 @@ namespace domain_lib.controller
                 }
                 
                 return 1;
-            }catch(Exception)
+            }catch(Exception ex)
             {
-                return -1;
+                throw new Exception("CalculateBonusOfManagerTree Error: " + ex.Message);
             }
         }
 
@@ -947,6 +963,8 @@ namespace domain_lib.controller
 
         private bool IsCalculated(AccountPreCalc accountPreCalc)
         {
+            if (accountPreCalc.AccountLevel == -1)
+                return false;
             if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "TT")
                 return true;
             if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "LK" && accountPreCalc.LevelIndex > 1)
