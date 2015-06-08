@@ -85,15 +85,6 @@ namespace web_app.members {
         protected global::System.Web.UI.HtmlControls.HtmlInputText HoTen;
         
         /// <summary>
-        /// HoTenRequired control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator HoTenRequired;
-        
-        /// <summary>
         /// imgNgaySinh control.
         /// </summary>
         /// <remarks>
@@ -119,15 +110,6 @@ namespace web_app.members {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText SoCmnd;
-        
-        /// <summary>
-        /// SoCmndRequired control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator SoCmndRequired;
         
         /// <summary>
         /// i1 control.

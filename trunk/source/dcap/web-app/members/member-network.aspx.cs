@@ -36,9 +36,12 @@ namespace web_app.members
                 idMember = rootNumber.ToString();
             }
             MemberNodeDto[] allMemberNodeDto;
+            long parentId = -1;
             if (!DcapServiceUtil.IsContainMemberNode(rootNumber, idMember))
             {
                 allMemberNodeDto = new MemberNodeDto[0];
+                ParentInfo.Text = "";
+                ParentDirectInfo.Text = "";
                 InvalidCredentialsMessage.Text = "Id không thuộc quản lý của thành viên.";
                 InvalidCredentialsMessage.Visible = true;
             }
@@ -53,31 +56,30 @@ namespace web_app.members
                 else
                 {
                     InvalidCredentialsMessage.Visible = false;
+                    MemberNodeDto parentDirectNodeDto = DcapServiceUtil.GetParentDirectNodeByChildNo(idMember);
+                    if (parentDirectNodeDto == null)
+                    {
+                        ParentDirectInfo.Text = "";
+                    }
+                    else
+                    {
+                        ParentDirectInfo.Text = "Người giới thiệu: " + parentDirectNodeDto.Description;
+                    }
+                    var parentNodeDto = DcapServiceUtil.GetParentNodeByChildNo(idMember);
+                    if (parentNodeDto == null)
+                    {
+                        ParentInfo.Text = "";
+                    }
+                    else
+                    {
+                        parentId = parentNodeDto.AccountId;
+                        ParentInfo.Text = "Tuyến trên: " + parentNodeDto.Description;
+                    }
                 }
             }
             var headerNames = new[] { "AccountId", "ParentId", "Description" };
             var columnTypes = new[] {typeof (long), typeof (long), typeof (string)};
             var ds = CreateMemberNodeDataSet(allMemberNodeDto, headerNames, columnTypes);
-            var parentDirectNodeDto = DcapServiceUtil.GetParentDirectNodeByChildNo(idMember);
-            if (parentDirectNodeDto == null)
-            {
-                ParentDirectInfo.Text = "";
-            }
-            else
-            {
-                ParentDirectInfo.Text = "Người giới thiệu: " + parentDirectNodeDto.Description;
-            }
-            var parentNodeDto = DcapServiceUtil.GetParentNodeByChildNo(idMember);
-            long parentId;
-            if (parentNodeDto == null)
-            {
-                parentId = -1;
-                ParentInfo.Text = "";
-            } else
-            {
-                parentId = parentNodeDto.AccountId;
-                ParentInfo.Text = "Tuyến trên: " + parentNodeDto.Description;
-            }
             TreeThanhVien.DataSource = new HierarchicalDataSet(ds, "AccountId", "ParentId", parentId);
             TreeThanhVien.DataBind();
             TreeThanhVien.CollapseAll();

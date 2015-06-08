@@ -41,20 +41,17 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="DirectParentId">Người giới thiệu</label>
-					<input type="text" class="form-control" readonly="true" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
+					<input type="text" class="form-control" readonly="true" id="DirectParentId" runat="server">
 					</div>
 					<div class="col-xs-4">
 					<label for="ParentId">Tuyến trên</label>
-					<input type="text" class="form-control" readonly="true" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
+					<input type="text" class="form-control" readonly="true" id="ParentId" runat="server">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="HoTen">Họ tên</label>
-					<input type="text" class="form-control" readonly="true" id="HoTen" runat="server" placeholder="Nhập họ tên">
-                    <asp:RequiredFieldValidator ID="HoTenRequired" runat="server" ControlToValidate="HoTen" 
-                        CssClass="failureNotification" ErrorMessage="Họ tên bắt buộc nhập." ToolTip="Họ tên bắt buộc nhập." 
-                        ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+					<input type="text" class="form-control" readonly="true" id="HoTen" runat="server">
 					</div>
 				</div>
 				<div class="row">
@@ -64,15 +61,12 @@
                       <div class="input-group-addon">
                         <i id="imgNgaySinh" class="fa fa-calendar" runat="server"></i>
                       </div>
-                      <input type="text" id="NgaySinh" readonly="true" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                      <input type="text" id="NgaySinh" readonly="true" runat="server" class="form-control" >
                     </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoCmnd">Số CMND</label>
-					<input type="text" class="form-control" id="SoCmnd" readonly="true" runat="server" placeholder="Nhập số CMND">
-                    <asp:RequiredFieldValidator ID="SoCmndRequired" runat="server" ControlToValidate="SoCmnd" 
-                        CssClass="failureNotification" ErrorMessage="Số CMND bắt buộc nhập." ToolTip="Số CMND bắt buộc nhập." 
-                        ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+					<input type="text" class="form-control" id="SoCmnd" readonly="true" runat="server">
 					</div>
 				</div>
 				<div class="row">
@@ -82,35 +76,35 @@
                       <div class="input-group-addon">
                         <i id="i1" class="fa fa-calendar" runat="server"></i>
                       </div>
-                        <input type="text" ID="NgayCap" readonly="true" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                        <input type="text" ID="NgayCap" readonly="true" runat="server" class="form-control" >
                     </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoDienThoai">Số điện thoại</label>
-					<input type="text" class="form-control" id="SoDienThoai" readonly="true" runat="server" placeholder="Nhập số điện thoại">
+					<input type="text" class="form-control" id="SoDienThoai" readonly="true" runat="server">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-2">
 					<label for="GioiTinh">Giới tính</label>
-                    <asp:RadioButtonList ID="GioiTinh" runat="server" Enabled="false" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" ToolTip="Nhập giới tính">
+                    <asp:RadioButtonList ID="GioiTinh" runat="server" Enabled="false" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table">
                         <asp:ListItem Text="Nam" Value="M" />
                         <asp:ListItem Text="Nữ" Value="F" />
                     </asp:RadioButtonList>
 					</div>
 					<div class="col-xs-6">
 					<label for="DiaChi">Địa chỉ</label>
-					<input type="text" class="form-control" readonly="true" id="DiaChi" runat="server" placeholder="Nhập địa chỉ">
+					<input type="text" class="form-control" readonly="true" id="DiaChi" runat="server">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-2">
 					<label for="SoTaiKhoan">Số tài khoản</label>
-					<input type="text" class="form-control" readonly="true" id="SoTaiKhoan" runat="server" placeholder="Nhập số TK">
+					<input type="text" class="form-control" readonly="true" id="SoTaiKhoan" runat="server">
 					</div>
 					<div class="col-xs-6">
 					<label for="ChiNhanhNH">Ngân hàng</label>
-					<input type="text" class="form-control" readonly="true" id="ChiNhanhNH" runat="server" placeholder="Nhập thông tin ngân hàng">
+					<input type="text" class="form-control" readonly="true" id="ChiNhanhNH" runat="server">
 					</div>
 				</div>
 <%--					--%>
