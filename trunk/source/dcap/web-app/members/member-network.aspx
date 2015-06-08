@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="member-network.aspx.cs" Inherits="web_app.main_pages.member_network" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="member-network.aspx.cs" Inherits="web_app.members.member_network_ext" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
@@ -39,7 +39,7 @@
     <div class="row">
     <div class="col-xs-12">
         <div class="box">
-        <div class="box-body"> 
+        <div class="box-body">
             <div class="dTree">
                 <asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" class="failureNotification"
                     Text="" Visible="False"></asp:Label>

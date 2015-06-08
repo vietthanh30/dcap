@@ -132,7 +132,7 @@ namespace web_app.admin
                         InvalidCredentialsMessage.Text = "Tuyến trên không tồn tại.";
                         break;
                     case -5:
-                        InvalidCredentialsMessage.Text = "Người giới thiệu đã giới thiệu đủ 3 thành viên.";
+                        InvalidCredentialsMessage.Text = "Tuyến trên đã có đủ 3 thành viên.";
                         break;
                     case -6:
                         InvalidCredentialsMessage.Text = "Đăng ký thành viên không thành công.";
@@ -142,6 +142,9 @@ namespace web_app.admin
                         break;
                     case -8:
                         InvalidCredentialsMessage.Text = "Đăng ký quyền người dùng không thành công.";
+                        break;
+                    case -9:
+                        InvalidCredentialsMessage.Text = "Thành viên đã đăng ký đủ 40 tài khoản.";
                         break;
                     default:
                         InvalidCredentialsMessage.Text = "Đăng ký không thành công.";

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using web_app.common;
 using web_app.DcapServiceReference;
 
-namespace web_app.main_pages
+namespace web_app.members
 {
-    public partial class member_network : System.Web.UI.Page
+    public partial class member_network_ext : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,16 +23,33 @@ namespace web_app.main_pages
 
         private void OnSearchNetwork()
         {
-            var idMember = IdMember.Value.Trim();
-            var allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
-            if (allMemberNodeDto.Length == 0)
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
             {
-                InvalidCredentialsMessage.Text = "Không tồn tại cây thành viên " + idMember;
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            var rootNumber = userDto.AccountNumber;
+            var idMember = IdMember.Value.Trim();
+            MemberNodeDto[] allMemberNodeDto;
+            if (!DcapServiceUtil.IsContainMemberNode(rootNumber, idMember))
+            {
+                allMemberNodeDto = new MemberNodeDto[0];
+                InvalidCredentialsMessage.Text = "Id không thuộc quản lý của thành viên.";
                 InvalidCredentialsMessage.Visible = true;
             }
             else
             {
-                InvalidCredentialsMessage.Visible = false;
+                allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
+                if (allMemberNodeDto.Length == 0)
+                {
+                    InvalidCredentialsMessage.Text = "Không tồn tại cây thành viên " + idMember;
+                    InvalidCredentialsMessage.Visible = true;
+                }
+                else
+                {
+                    InvalidCredentialsMessage.Visible = false;
+                }
             }
             var headerNames = new[] { "AccountId", "ParentId", "Description" };
             var columnTypes = new[] {typeof (long), typeof (long), typeof (string)};

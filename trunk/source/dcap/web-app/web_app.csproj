@@ -64,6 +64,7 @@
     <Content Include="admin\TraCuuThanhVien.aspx" />
     <Content Include="dist\img\delete-icon.png" />
     <Content Include="dist\img\edit-icon.png" />
+    <Content Include="members\bang-ke-tra-luong.aspx" />
     <Content Include="members\EditMemberInfo.aspx" />
     <Content Include="admin\Register2.aspx" />
     <Content Include="admin\Login.aspx" />
@@ -165,6 +166,7 @@
     <Content Include="dist\js\demo.js" />
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
+    <Content Include="members\member-network.aspx" />
     <Content Include="pages\calendar.html" />
     <Content Include="pages\charts\chartjs.html" />
     <Content Include="pages\charts\flot.html" />
@@ -943,6 +945,13 @@
     <Compile Include="common\CustomStylesheet.cs" />
     <Compile Include="common\HierarchicalDataSet.cs" />
     <Compile Include="common\TextCell.cs" />
+    <Compile Include="members\bang-ke-tra-luong.aspx.cs">
+      <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="members\bang-ke-tra-luong.aspx.designer.cs">
+      <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
+    </Compile>
     <Compile Include="members\EditMemberInfo.aspx.cs">
       <DependentUpon>EditMemberInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1003,6 +1012,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="members\member-network.aspx.cs">
+      <DependentUpon>member-network.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="members\member-network.aspx.designer.cs">
+      <DependentUpon>member-network.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DcapServiceReference\Reference.cs">

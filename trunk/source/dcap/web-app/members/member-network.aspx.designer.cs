@@ -7,28 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace web_app.main {
+namespace web_app.members {
     
     
-    public partial class bang_ke_tra_luong {
+    public partial class member_network_ext {
         
         /// <summary>
-        /// i1 control.
+        /// IdMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl i1;
-        
-        /// <summary>
-        /// ReportMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ReportMonth;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText IdMember;
         
         /// <summary>
         /// SearchButton control.
@@ -40,12 +31,39 @@ namespace web_app.main {
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// gvBangKe control.
+        /// InvalidCredentialsMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvBangKe;
+        protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
+        
+        /// <summary>
+        /// ParentDirectInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ParentDirectInfo;
+        
+        /// <summary>
+        /// ParentInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ParentInfo;
+        
+        /// <summary>
+        /// TreeThanhVien control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TreeView TreeThanhVien;
     }
 }

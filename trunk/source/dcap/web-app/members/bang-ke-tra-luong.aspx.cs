@@ -8,9 +8,9 @@ using core_lib.common;
 using web_app.common;
 using web_app.DcapServiceReference;
 
-namespace web_app.main
+namespace web_app.members
 {
-    public partial class bang_ke_tra_luong : System.Web.UI.Page
+    public partial class bang_ke_tra_luong_ext : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

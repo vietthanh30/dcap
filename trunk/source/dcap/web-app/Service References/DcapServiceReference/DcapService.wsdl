@@ -245,6 +245,21 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="IsContainMemberNode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rootNumber" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsContainMemberNodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsContainMemberNodeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetNodeDto">
         <s:complexType>
           <s:sequence>
@@ -263,6 +278,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parentField" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -369,6 +385,12 @@
   <wsdl:message name="SearchMemberNodeDtoSoapOut">
     <wsdl:part name="parameters" element="tns:SearchMemberNodeDtoResponse" />
   </wsdl:message>
+  <wsdl:message name="IsContainMemberNodeSoapIn">
+    <wsdl:part name="parameters" element="tns:IsContainMemberNode" />
+  </wsdl:message>
+  <wsdl:message name="IsContainMemberNodeSoapOut">
+    <wsdl:part name="parameters" element="tns:IsContainMemberNodeResponse" />
+  </wsdl:message>
   <wsdl:message name="GetNodeDtoSoapIn">
     <wsdl:part name="parameters" element="tns:GetNodeDto" />
   </wsdl:message>
@@ -441,6 +463,10 @@
     <wsdl:operation name="SearchMemberNodeDto">
       <wsdl:input message="tns:SearchMemberNodeDtoSoapIn" />
       <wsdl:output message="tns:SearchMemberNodeDtoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsContainMemberNode">
+      <wsdl:input message="tns:IsContainMemberNodeSoapIn" />
+      <wsdl:output message="tns:IsContainMemberNodeSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetNodeDto">
       <wsdl:input message="tns:GetNodeDtoSoapIn" />
@@ -543,6 +569,15 @@
     </wsdl:operation>
     <wsdl:operation name="SearchMemberNodeDto">
       <soap:operation soapAction="http://tempuri.org/SearchMemberNodeDto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsContainMemberNode">
+      <soap:operation soapAction="http://tempuri.org/IsContainMemberNode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -681,6 +716,15 @@
     </wsdl:operation>
     <wsdl:operation name="SearchMemberNodeDto">
       <soap12:operation soapAction="http://tempuri.org/SearchMemberNodeDto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsContainMemberNode">
+      <soap12:operation soapAction="http://tempuri.org/IsContainMemberNode" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

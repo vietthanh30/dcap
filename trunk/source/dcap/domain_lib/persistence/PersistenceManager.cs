@@ -388,9 +388,25 @@ namespace domain_lib.persistence
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select count(u.UserName) from Users u, Account a "
-                    + " where u.UserID = a.UserId and a.ParentId = :parentAccountId ");
+                var query = session.CreateQuery("select count(a.AccountId) from Account a "
+                    + " where a.ParentId = :parentAccountId ");
                 query.SetParameter("parentAccountId", parentAccountId);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+            }
+        }
+
+        private int CountAccountBySoCmnd(string soCmnd)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(a.AccountId) from MemberInfo m, Account a "
+                    + " where m.MemberID = a.MemberId and m.SoCmnd = :soCmnd ");
+                query.SetParameter("soCmnd", soCmnd);
 
                 // Get the matching objects
                 var count = query.UniqueResult();
@@ -518,6 +534,10 @@ namespace domain_lib.persistence
                 {
                     return "-5";
                 }
+            }
+            if (!String.IsNullOrEmpty(soCmnd) && CountAccountBySoCmnd(soCmnd) >= 40)
+            {
+                return "-9";
             }
             var dateNgaySinh = DateUtil.GetDateTime(ngaySinh);
             var dateNgayCap = DateUtil.GetDateTime(ngayCap);
@@ -664,7 +684,7 @@ namespace domain_lib.persistence
             {
                 index--;
             }
-            return tenDangNhap.Substring(0, index+1) + string.Format("{0:0}", accountAmount);
+            return tenDangNhap.Substring(0, index + 1) + accountAmount;
         }
 
         private IList<string> GetAllUserNameBy(string username)
@@ -698,8 +718,8 @@ namespace domain_lib.persistence
             var latestUserName = tenDangNhap;
             foreach (var oneName in list)
             {
-                if ((latestUserName.Length < oneName.Length && !Char.IsNumber(oneName[oneName.Length-1]))
-                    || (latestUserName.Length == oneName.Length && string.Compare(latestUserName, oneName) < 0))
+                if (!Char.IsNumber(oneName[oneName.Length - 1]) && (latestUserName.Length < oneName.Length
+                    || (latestUserName.Length == oneName.Length && string.Compare(latestUserName, oneName) < 0)))
                 {
                     latestUserName = oneName;
                 }
@@ -1007,28 +1027,68 @@ namespace domain_lib.persistence
             else
             {
                 var mapDtoNode = GetMapMemberNodeDto();
-                var mapParentNode = new Hashtable();
-                foreach (DictionaryEntry entry in mapDtoNode)
-                {
-                    MemberNodeDto dto = (MemberNodeDto) entry.Value;
-                    var accountId = dto.AccountId;
-                    var parentId = dto.ParentId;
-                    if (mapParentNode.ContainsKey(parentId))
-                    {
-                        var allChild = (HashSet<long>) mapParentNode[parentId];
-                        allChild.Add(accountId);
-                    }
-                    else
-                    {
-                        var allChild = new HashSet<long>();
-                        allChild.Add(accountId);
-                        mapParentNode.Add(parentId, allChild);
-                    }
-                }
+                Hashtable mapParentNode = GetMapParentNode(mapDtoNode);
                 memberNodeDtos = GetMemberNodeDtoLoop(rootId, mapDtoNode, mapParentNode);
             }
 
             return memberNodeDtos.ToArray();
+        }
+
+        private Hashtable GetMapParentNode(Hashtable mapDtoNode)
+        {
+            var mapParentNode = new Hashtable();
+            foreach (DictionaryEntry entry in mapDtoNode)
+            {
+                MemberNodeDto dto = (MemberNodeDto) entry.Value;
+                var accountId = dto.AccountId;
+                var parentId = dto.ParentId;
+                if (mapParentNode.ContainsKey(parentId))
+                {
+                    var allChild = (HashSet<long>) mapParentNode[parentId];
+                    allChild.Add(accountId);
+                }
+                else
+                {
+                    var allChild = new HashSet<long>();
+                    allChild.Add(accountId);
+                    mapParentNode.Add(parentId, allChild);
+                }
+            }
+            return mapParentNode;
+        }
+
+        public bool IsContainMemberNode(long rootNumber, string accountNumber)
+        {
+            var rootId = GetAccountIdBy(rootNumber.ToString());
+            var accountId = GetAccountIdBy(accountNumber);
+            var childNumber = CountAccountByParentId(rootId);
+            if (childNumber == 0)
+            {
+                return false;
+            }
+            else
+            {
+                var mapDtoNode = GetMapMemberNodeDto();
+                Hashtable mapParentNode = GetMapParentNode(mapDtoNode);
+                return IsContainMemberNodeLoop(rootId, accountId, mapParentNode);
+            }
+        }
+
+        private bool IsContainMemberNodeLoop(long rootId, long accountId, Hashtable mapParentNode)
+        {
+            HashSet<long> setChildIds = mapParentNode[rootId] as HashSet<long>;
+            if (setChildIds != null && setChildIds.Contains(accountId))
+            {
+                return true;
+            }
+            foreach (var childId in setChildIds)
+            {
+                if (IsContainMemberNodeLoop(childId, accountId, mapParentNode))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private List<MemberNodeDto> GetMemberNodeDtoLoop(long rootId, Hashtable mapDtoNode, Hashtable mapParentNode)
@@ -1126,10 +1186,10 @@ namespace domain_lib.persistence
             return memberNodeDto;
         }
 
-        public MemberNodeDto GetParentNodeByChildNo(string accountNumber)
+        public MemberNodeDto GetParentNodeByChildNo(string accountNumber, string parentField)
         {
             var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u, Account a2 " +
-                    " where m.MemberID = a.MemberId and a.UserId = u.UserID and a.AccountId = a2.ParentId";
+                    " where m.MemberID = a.MemberId and a.UserId = u.UserID and a.AccountId = a2." + parentField;
             var sqlParams = new Hashtable();
             if (!string.IsNullOrEmpty(accountNumber))
             {

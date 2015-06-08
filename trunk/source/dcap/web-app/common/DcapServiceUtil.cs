@@ -58,6 +58,11 @@ namespace web_app.common
             return dcapService.SearchMemberNodeDto(accountNumber);
         }
 
+        public static bool IsContainMemberNode(long rootNumber, string accountNumber)
+        {
+            return dcapService.IsContainMemberNode(rootNumber, accountNumber);
+        }
+
         public static MemberNodeDto GetNodeDto(string accountNumber)
         {
             return dcapService.GetNodeDto(accountNumber);
@@ -65,7 +70,12 @@ namespace web_app.common
 
         public static MemberNodeDto GetParentNodeByChildNo(string accountNumber)
         {
-            return dcapService.GetParentNodeByChildNo(accountNumber);
+            return dcapService.GetParentNodeByChildNo(accountNumber, "ParentId");
+        }
+
+        public static MemberNodeDto GetParentDirectNodeByChildNo(string accountNumber)
+        {
+            return dcapService.GetParentNodeByChildNo(accountNumber, "ParentDirectId");
         }
     }
 }

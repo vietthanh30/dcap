@@ -90,14 +90,19 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchMemberNodeDto(accountNumber);
         }
 
+        public bool IsContainMemberNode(long rootNumber, string accountNumber)
+        {
+            return m_PersistenceManager.IsContainMemberNode(rootNumber, accountNumber);
+        }
+
         public MemberNodeDto GetNodeDto(string accountNumber)
         {
             return m_PersistenceManager.GetNodeDto(accountNumber);
         }
 
-        public MemberNodeDto GetParentNodeByChildNo(string accountNumber)
+        public MemberNodeDto GetParentNodeByChildNo(string accountNumber, string parentField)
         {
-            return m_PersistenceManager.GetParentNodeByChildNo(accountNumber);
+            return m_PersistenceManager.GetParentNodeByChildNo(accountNumber, parentField);
         }
 
 

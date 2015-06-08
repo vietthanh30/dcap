@@ -9,7 +9,7 @@ namespace core_lib.common
     public class DateUtil
     {
         public static string SeparateDate = "/";
-        private static int _minYear = DateTime.MinValue.Year;
+        private static int _minYear = DateTime.Now.Year - 200;
         private static int _maxYear = DateTime.Now.Year + 50;
 
         public static string GetDateTimeAsStringWithProvider(DateTime? dateTime, string dateFormat, string strProvider)

@@ -797,6 +797,10 @@ namespace web_app.DcapServiceReference {
         web_app.DcapServiceReference.SearchMemberNodeDtoResponse SearchMemberNodeDto(web_app.DcapServiceReference.SearchMemberNodeDtoRequest request);
         
         // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsContainMemberNode", ReplyAction="*")]
+        web_app.DcapServiceReference.IsContainMemberNodeResponse IsContainMemberNode(web_app.DcapServiceReference.IsContainMemberNodeRequest request);
+        
+        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetNodeDto", ReplyAction="*")]
         web_app.DcapServiceReference.GetNodeDtoResponse GetNodeDto(web_app.DcapServiceReference.GetNodeDtoRequest request);
         
@@ -1597,6 +1601,78 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class IsContainMemberNodeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsContainMemberNode", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.IsContainMemberNodeRequestBody Body;
+        
+        public IsContainMemberNodeRequest() {
+        }
+        
+        public IsContainMemberNodeRequest(web_app.DcapServiceReference.IsContainMemberNodeRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class IsContainMemberNodeRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public long rootNumber;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string accountNumber;
+        
+        public IsContainMemberNodeRequestBody() {
+        }
+        
+        public IsContainMemberNodeRequestBody(long rootNumber, string accountNumber) {
+            this.rootNumber = rootNumber;
+            this.accountNumber = accountNumber;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class IsContainMemberNodeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsContainMemberNodeResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.IsContainMemberNodeResponseBody Body;
+        
+        public IsContainMemberNodeResponse() {
+        }
+        
+        public IsContainMemberNodeResponse(web_app.DcapServiceReference.IsContainMemberNodeResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class IsContainMemberNodeResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool IsContainMemberNodeResult;
+        
+        public IsContainMemberNodeResponseBody() {
+        }
+        
+        public IsContainMemberNodeResponseBody(bool IsContainMemberNodeResult) {
+            this.IsContainMemberNodeResult = IsContainMemberNodeResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetNodeDtoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNodeDto", Namespace="http://tempuri.org/", Order=0)]
@@ -1687,11 +1763,15 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string accountNumber;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string parentField;
+        
         public GetParentNodeByChildNoRequestBody() {
         }
         
-        public GetParentNodeByChildNoRequestBody(string accountNumber) {
+        public GetParentNodeByChildNoRequestBody(string accountNumber, string parentField) {
             this.accountNumber = accountNumber;
+            this.parentField = parentField;
         }
     }
     
@@ -1915,6 +1995,20 @@ namespace web_app.DcapServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.IsContainMemberNodeResponse web_app.DcapServiceReference.DcapServiceSoap.IsContainMemberNode(web_app.DcapServiceReference.IsContainMemberNodeRequest request) {
+            return base.Channel.IsContainMemberNode(request);
+        }
+        
+        public bool IsContainMemberNode(long rootNumber, string accountNumber) {
+            web_app.DcapServiceReference.IsContainMemberNodeRequest inValue = new web_app.DcapServiceReference.IsContainMemberNodeRequest();
+            inValue.Body = new web_app.DcapServiceReference.IsContainMemberNodeRequestBody();
+            inValue.Body.rootNumber = rootNumber;
+            inValue.Body.accountNumber = accountNumber;
+            web_app.DcapServiceReference.IsContainMemberNodeResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).IsContainMemberNode(inValue);
+            return retVal.Body.IsContainMemberNodeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         web_app.DcapServiceReference.GetNodeDtoResponse web_app.DcapServiceReference.DcapServiceSoap.GetNodeDto(web_app.DcapServiceReference.GetNodeDtoRequest request) {
             return base.Channel.GetNodeDto(request);
         }
@@ -1932,10 +2026,11 @@ namespace web_app.DcapServiceReference {
             return base.Channel.GetParentNodeByChildNo(request);
         }
         
-        public web_app.DcapServiceReference.MemberNodeDto GetParentNodeByChildNo(string accountNumber) {
+        public web_app.DcapServiceReference.MemberNodeDto GetParentNodeByChildNo(string accountNumber, string parentField) {
             web_app.DcapServiceReference.GetParentNodeByChildNoRequest inValue = new web_app.DcapServiceReference.GetParentNodeByChildNoRequest();
             inValue.Body = new web_app.DcapServiceReference.GetParentNodeByChildNoRequestBody();
             inValue.Body.accountNumber = accountNumber;
+            inValue.Body.parentField = parentField;
             web_app.DcapServiceReference.GetParentNodeByChildNoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetParentNodeByChildNo(inValue);
             return retVal.Body.GetParentNodeByChildNoResult;
         }

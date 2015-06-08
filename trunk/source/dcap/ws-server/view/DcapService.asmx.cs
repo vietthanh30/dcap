@@ -79,15 +79,21 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public bool IsContainMemberNode(long rootNumber, string accountNumber)
+        {
+            return controller.IsContainMemberNode(rootNumber, accountNumber);
+        }
+
+        [WebMethod]
         public MemberNodeDto GetNodeDto(string accountNumber)
         {
             return controller.GetNodeDto(accountNumber);
         }
 
         [WebMethod]
-        public MemberNodeDto GetParentNodeByChildNo(string accountNumber)
+        public MemberNodeDto GetParentNodeByChildNo(string accountNumber, string parentField)
         {
-            return controller.GetParentNodeByChildNo(accountNumber);
+            return controller.GetParentNodeByChildNo(accountNumber, parentField);
         }
 
         [WebMethod]

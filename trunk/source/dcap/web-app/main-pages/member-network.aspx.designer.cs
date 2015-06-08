@@ -31,6 +31,24 @@ namespace web_app.main_pages {
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
+        /// InvalidCredentialsMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
+        
+        /// <summary>
+        /// ParentDirectInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ParentDirectInfo;
+        
+        /// <summary>
         /// ParentInfo control.
         /// </summary>
         /// <remarks>
