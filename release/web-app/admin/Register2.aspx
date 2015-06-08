@@ -20,7 +20,7 @@
                 <div class="box-body">   
                 <div class="row">
 					<div class="col-xs-8">
-                    <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification"
+                    <asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" class="failureNotification"
                      Text="" Visible="False"></asp:Label>
                      </div>
                 </div>          
@@ -39,7 +39,7 @@
                     </div>
                 </div>
 				<div class="row">
-					<div class="col-xs-8">
+					<div class="col-xs-4">
 					<label for="UserRole">Quyền người dùng</label>
                     <asp:RadioButtonList ID="UserRole" runat="server" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" ToolTip="Nhập quyền người dùng">
                         <asp:ListItem Text="Quản trị hệ thống" Value="QTHT" />
@@ -53,7 +53,7 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="HoTen">Họ tên</label>
-					<input type="text" class="form-control" id="HoTen" runat="server" placeholder="Nhập họ tên">
+					<input type="text" class="form-control" maxlength="100" id="HoTen" runat="server" placeholder="Nhập họ tên">
                     <asp:RequiredFieldValidator ID="HoTenRequired" runat="server" ControlToValidate="HoTen" 
                         CssClass="failureNotification" ErrorMessage="Họ tên bắt buộc nhập." ToolTip="Họ tên bắt buộc nhập." 
                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -62,7 +62,7 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="TenDangNhap">Tên đăng nhập</label>
-					<input type="text" class="form-control" id="TenDangNhap" runat="server" placeholder="Nhập tên đăng nhập">
+					<input type="text" class="form-control" maxlength="50" id="TenDangNhap" runat="server" placeholder="Nhập tên đăng nhập">
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TenDangNhap" 
                         CssClass="failureNotification" ErrorMessage="Tên đăng nhập bắt buộc nhập." ToolTip="Tên đăng nhập bắt buộc nhập." 
                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>

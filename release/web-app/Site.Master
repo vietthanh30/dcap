@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
-    <title>DCAP | Dashboard</title>
+    <title>HITECH | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -21,6 +21,9 @@
     
     <!-- date picker -->
     <link href="plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+
+    <!-- GridPager -->
+    <link href="Styles/GridPager.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,7 +69,7 @@
 			  <!-- mini logo for sidebar mini 50x50 pixels -->
 			  <span class="logo-mini"><b>A</b>LT</span>
 			  <!-- logo for regular state and mobile devices -->
-			  <span class="logo-lg"><b>DCAP</b></span>
+			  <span class="logo-lg"><b>HITECH</b></span>
 			</a>
             
 			<!-- Header Navbar: style can be found in header.less -->
@@ -145,6 +148,11 @@
                   </a>
                 </li>
                 <li>
+                  <a id="A7" href="~/admin/TraCuuThanhVien.aspx" runat="server">
+                    <i class="fa fa-edit"></i> <span>Tra cứu thành viên</span>
+                  </a>
+                </li>
+                <li>
                   <a id="A3" href="~/admin/Register2.aspx" runat="server">
                     <i class="fa fa-edit"></i> <span>Đăng ký quản lý</span>
                   </a>
@@ -190,7 +198,7 @@
                 <li>
                   <a id="A6" href="~/members/EditMemberInfo.aspx" runat="server">
 			        <i class="fa fa-files-o"></i>
-                    <span>Sửa thông tin cá nhân</span>
+                    <span>Thông tin cá nhân</span>
                   </a>
                 </li>
 			    <li>

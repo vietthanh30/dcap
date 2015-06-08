@@ -20,7 +20,7 @@
                 <div class="box-body">   
                 <div class="row">
 					<div class="col-xs-8">
-                    <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification"
+                    <asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" class="failureNotification"
                      Text="" Visible="False"></asp:Label>
                      </div>
                 </div>          
@@ -40,18 +40,18 @@
                 </div>
 				<div class="row">
 					<div class="col-xs-4">
-					<label for="ParentId">Người giới thiệu</label>
-					<input type="text" class="form-control" id="ParentId" runat="server" placeholder="Nhập ID người giới thiệu">
+					<label for="DirectParentId">Người giới thiệu</label>
+					<input type="text" class="form-control" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
 					</div>
 					<div class="col-xs-4">
-					<label for="DirectParentId">Tuyến trên</label>
-					<input type="text" class="form-control" id="DirectParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
+					<label for="ParentId">Tuyến trên</label>
+					<input type="text" class="form-control" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="HoTen">Họ tên</label>
-					<input type="text" class="form-control" id="HoTen" runat="server" placeholder="Nhập họ tên">
+					<input type="text" class="form-control" id="HoTen" maxlength="100" runat="server" placeholder="Nhập họ tên">
                     <asp:RequiredFieldValidator ID="HoTenRequired" runat="server" ControlToValidate="HoTen" 
                         CssClass="failureNotification" ErrorMessage="Họ tên bắt buộc nhập." ToolTip="Họ tên bắt buộc nhập." 
                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -64,12 +64,12 @@
                       <div class="input-group-addon">
                         <i id="imgNgaySinh" class="fa fa-calendar" runat="server"></i>
                       </div>
-                      <input type="text" id="NgaySinh" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                      <input type="text" id="NgaySinh" runat="server" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" >
                     </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoCmnd">Số CMND</label>
-					<input type="text" class="form-control" id="SoCmnd" runat="server" placeholder="Nhập số CMND">
+					<input type="text" class="form-control" id="SoCmnd" maxlength="15" runat="server" placeholder="Nhập số CMND">
                     <asp:RequiredFieldValidator ID="SoCmndRequired" runat="server" ControlToValidate="SoCmnd" 
                         CssClass="failureNotification" ErrorMessage="Số CMND bắt buộc nhập." ToolTip="Số CMND bắt buộc nhập." 
                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -82,12 +82,12 @@
                       <div class="input-group-addon">
                         <i id="i1" class="fa fa-calendar" runat="server"></i>
                       </div>
-                        <input type="text" ID="NgayCap" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                        <input type="text" ID="NgayCap" runat="server" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" >
                     </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoDienThoai">Số điện thoại</label>
-					<input type="text" class="form-control" id="SoDienThoai" runat="server" placeholder="Nhập số điện thoại">
+					<input type="text" class="form-control" id="SoDienThoai" maxlength="15" runat="server" placeholder="Nhập số điện thoại">
 					</div>
 				</div>
 				<div class="row">
@@ -100,17 +100,17 @@
 					</div>
 					<div class="col-xs-6">
 					<label for="DiaChi">Địa chỉ</label>
-					<input type="text" class="form-control" id="DiaChi" runat="server" placeholder="Nhập địa chỉ">
+					<input type="text" class="form-control" id="DiaChi" maxlength="500" runat="server" placeholder="Nhập địa chỉ">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-2">
 					<label for="SoTaiKhoan">Số tài khoản</label>
-					<input type="text" class="form-control" id="SoTaiKhoan" runat="server" placeholder="Nhập số TK">
+					<input type="text" class="form-control" id="SoTaiKhoan" maxlength="50" runat="server" placeholder="Nhập số TK">
 					</div>
 					<div class="col-xs-6">
 					<label for="ChiNhanhNH">Ngân hàng</label>
-					<input type="text" class="form-control" id="ChiNhanhNH" runat="server" placeholder="Nhập thông tin ngân hàng">
+					<input type="text" class="form-control" id="ChiNhanhNH" maxlength="100" runat="server" placeholder="Nhập thông tin ngân hàng">
 					</div>
 				</div>
 					
@@ -125,9 +125,9 @@
                 </div><!-- /.box-body -->
 				  
                 <div class="box-footer">
-                <asp:Button ID="SearchUserButton" runat="server" Text="Tra cứu" 
-                        ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" 
-                    onclick="RegisterUser_SearchUser"/>
+<%--                <asp:Button ID="SearchUserButton" runat="server" Text="Tra cứu" --%>
+<%--                        ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" --%>
+<%--                    onclick="RegisterUser_SearchUser"/>--%>
                 <asp:Button ID="CreateUserButton" runat="server" Text="Cập nhật" 
                         ValidationGroup="RegisterUserValidationGroup" class="btn btn-primary" 
                     onclick="RegisterUser_CreatingUser"/>

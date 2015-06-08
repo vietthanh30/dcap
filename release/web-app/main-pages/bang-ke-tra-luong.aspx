@@ -10,20 +10,21 @@
     </ol>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-	<div class="row">
+    <div class="row">
     <!-- left column -->
     <div class="col-xs-12">
         <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-body">
 			<div class="row">
-				<div class="col-xs-4">
-					<label for="BeginDate">Từ ngày</label>
-					<input type="text" class="form-control" runat="server" id="BeginDate" placeholder="Nhập ngày bắt đầu">
-				</div>
-				<div class="col-xs-4">
-					<label for="exampleInputPassword1">Đến ngày</label>
-					<input type="text" class="form-control" runat="server" id="EndDate" placeholder="Nhập kết thúc">
+				<div class="col-xs-8">
+					<label for="BeginDate">Tháng kê khai</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i id="i1" class="fa fa-calendar" runat="server"></i>
+                      </div>
+					  <input type="text" class="form-control" runat="server" id="ReportMonth" placeholder="mm/yyyy">
+                    </div><!-- /.input group -->
 				</div>
 			</div>
             </div><!-- /.box-body -->
@@ -42,388 +43,49 @@
         <div class="box">
                 
         <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                <th>STT</th>
-                <th>Họ tên</th>
-                <th>Số CMND</th>
-                <th>Địa chỉ</th>
-                <th>Số TK</th>
-				<th>Ngân hàng</th>
-				<th>Số ĐT</th>
-				<th>Số tiền</th>
-				<th>Tháng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>1</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-                <tr>
-                <td>2</td>
-                <td>Đường Ngọc Lan</td>
-                <td>012018991</td>
-                <td>Hà Nội</td>
-                <td>011567283940</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>3</td>
-                <td>Nguyễn Lê Thắng</td>
-                <td>012018992</td>
-                <td>Hà Nội</td>
-                <td>011567283941</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>4</td>
-                <td>Trần Ngọc Linh</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>5</td>
-                <td>Đỗ Đình Cường</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>6</td>
-                <td>Đường Quốc Cường</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>7</td>
-                <td>Hồ Ngọc Hà</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>8</td>
-                <td>Phạm Mỹ Linh</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>9</td>
-                <td>Hà Thanh Sơn</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>10</td>
-                <td>Hà Hải Yến</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>11</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>12</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>13</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>14</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>15</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>16</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>17</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>18</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>19</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>20</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>21</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>22</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>23</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>24</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>25</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>26</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>27</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>28</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>29</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>30</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>31</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-				<tr>
-                <td>32</td>
-                <td>Phạm Hoàng Long</td>
-                <td>012018990</td>
-                <td>Hà Nội</td>
-                <td>011567283939</td>
-				<td>Agribank - Nam Hà Nội</td>
-				<td>0915678345</td>
-				<td>10.000.000</td>
-				<td>Tháng 5/2015</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                <th>STT</th>
-                <th>Họ tên</th>
-                <th>Số CMND</th>
-                <th>Địa chỉ</th>
-                <th>Số TK</th>
-				<th>Ngân hàng</th>
-				<th>Số ĐT</th>
-				<th>Số tiền</th>
-				<th>Tháng</th>
-                </tr>
-            </tfoot>
-            </table>
+            <asp:GridView ID="gvBangKe" runat="server" AutoGenerateColumns="false" 
+                EnableModelValidation="true" class="table table-bordered table-striped" 
+                BorderColor="#CCCCCC" AllowPaging="True" 
+                onpageindexchanging="gvBangKe_PageIndexChanging" PageSize="15" >
+                <Columns>
+                <asp:TemplateField HeaderText="STT">
+                <ItemTemplate><%#GetStt() %></ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="HoTen" HeaderText="Họ tên" >
+                <ItemStyle HorizontalAlign="Left" />
+                </asp:BoundField>
+                <asp:BoundField DataField="UserName" HeaderText="Tên đăng nhập" >
+                <ItemStyle HorizontalAlign="Left" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SoCmnd" HeaderText="Số CMND" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="DiaChi" HeaderText="Địa chỉ" >
+                <ItemStyle HorizontalAlign="Left" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SoTaiKhoan" HeaderText="Số TK" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="ChiNhanhNH" HeaderText="Ngân hàng" >
+                <ItemStyle HorizontalAlign="Left" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SoDienThoai" HeaderText="Số ĐT" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SoTien" HeaderText="Tổng điểm" >
+                <ItemStyle HorizontalAlign="Right" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Thang" HeaderText="Tháng" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                </Columns>
+                <HeaderStyle BackColor="#CCCCCC" Font-Names="Arial" Font-Size="Small" HorizontalAlign="Center" />
+                <PagerSettings Mode="NumericFirstLast" 
+                    NextPageText="" PageButtonCount="5" 
+                    PreviousPageText="" FirstPageText="Đầu" LastPageText="Cuối" />
+                <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
+                <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
+            </asp:GridView>
         </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div><!-- /.col -->
@@ -431,7 +93,7 @@
 	<div class="box-footer">
 	<asp:Button runat="server" class="btn btn-primary" Text="Xuất Excel file" 
             onclick="BangKeTraLuong_ExportExcel" />
-    <asp:Button runat="server" class="btn btn-primary" Text="Xuất PDF file" 
-            onclick="BangKeTraLuong_ExportPDF" />
+    <asp:Button runat="server" class="btn btn-primary" Text="Xuất Word file" 
+            onclick="BangKeTraLuong_ExportDOC" />
     </div>
 </asp:Content>
