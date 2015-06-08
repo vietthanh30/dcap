@@ -9,7 +9,7 @@ namespace core_lib.common
     public class DateUtil
     {
         public static string SeparateDate = "/";
-        private static int _minYear = DateTime.Now.Year - 200;
+        private static int _minYear = DateTime.MinValue.Year;
         private static int _maxYear = DateTime.Now.Year + 50;
 
         public static string GetDateTimeAsStringWithProvider(DateTime? dateTime, string dateFormat, string strProvider)
@@ -199,9 +199,9 @@ namespace core_lib.common
                     return shortedFormat;
                 }
                 int year = Convert.ToInt32(shortedFormat.Substring(4, 4));
-                if (year < _minYear || year > _maxYear)
+                if (year <= _minYear || year >= _maxYear)
                 {
-                    return shortedFormat;
+                    return "";
                 }
                 tmp = tmp.Insert(2, "/");
                 tmp = tmp.Insert(5, "/");
@@ -223,9 +223,9 @@ namespace core_lib.common
                     else
                         strYear = "19" + year;
 
-                    if (Convert.ToInt32(strYear) < _minYear || Convert.ToInt32(strYear) > _maxYear)
+                    if (Convert.ToInt32(strYear) <= _minYear || Convert.ToInt32(strYear) >= _maxYear)
                     {
-                        return shortedFormat;
+                        return "";
                     }
 
                     tmp = shortedFormat.Substring(0, 4) + strYear;
@@ -236,9 +236,9 @@ namespace core_lib.common
                 if (month == 19 || month == 20)
                 {
                     strYear = month + "" + year;
-                    if (Convert.ToInt32(strYear) < _minYear || Convert.ToInt32(strYear) > _maxYear)
+                    if (Convert.ToInt32(strYear) <= _minYear || Convert.ToInt32(strYear) >= _maxYear)
                     {
-                        return shortedFormat;
+                        return "";
                     }
                     tmp = shortedFormat.Substring(0, 2) + strYear;
                     tmp = tmp.Insert(2, "/");
@@ -296,7 +296,7 @@ namespace core_lib.common
                     else
                         strYear = "19" + year;
 
-                    if (Convert.ToInt32(strYear) < _minYear || Convert.ToInt32(strYear) > _maxYear)
+                    if (Convert.ToInt32(strYear) <= _minYear || Convert.ToInt32(strYear) >= _maxYear)
                     {
                         return false;
                     }
@@ -306,7 +306,7 @@ namespace core_lib.common
                 if (month == 19 || month == 20)
                 {
                     strYear = month + "" + year;
-                    if (Convert.ToInt32(strYear) < _minYear || Convert.ToInt32(strYear) > _maxYear)
+                    if (Convert.ToInt32(strYear) <= _minYear || Convert.ToInt32(strYear) >= _maxYear)
                     {
                         return false;
                     }

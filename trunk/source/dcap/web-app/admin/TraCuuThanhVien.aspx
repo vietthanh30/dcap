@@ -163,12 +163,12 @@
                       <div class="input-group-addon">
                         <i id="imgNgaySinh" class="fa fa-calendar" runat="server"></i>
                       </div>
-                      <input type="text" id="NgaySinh" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                      <input type="text" id="NgaySinh" runat="server" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" >
                     </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoCmnd">Số CMND</label>
-					<input type="text" class="form-control" readonly="true" id="SoCmnd" runat="server" placeholder="Nhập số CMND">
+					<input type="text" class="form-control" readonly="true" id="SoCmnd" maxlength="15" runat="server" placeholder="Nhập số CMND">
                     <asp:RequiredFieldValidator ID="SoCmndRequired" runat="server" ControlToValidate="SoCmnd" 
                         CssClass="failureNotification" ErrorMessage="Số CMND bắt buộc nhập." ToolTip="Số CMND bắt buộc nhập." 
                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -181,12 +181,12 @@
                       <div class="input-group-addon">
                         <i id="i1" class="fa fa-calendar" runat="server"></i>
                       </div>
-                        <input type="text" ID="NgayCap" runat="server" class="form-control" placeholder="dd/mm/yyyy" >
+                        <input type="text" ID="NgayCap" runat="server" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" >
                     </div><!-- /.input group -->
 					</div>
 					<div class="col-xs-4">
 					<label for="SoDienThoai">Số điện thoại</label>
-					<input type="text" class="form-control" id="SoDienThoai" runat="server" placeholder="Nhập số điện thoại">
+					<input type="text" class="form-control" id="SoDienThoai" maxlength="15" runat="server" placeholder="Nhập số điện thoại">
 					</div>
 				</div>
 				<div class="row">
@@ -199,17 +199,17 @@
 					</div>
 					<div class="col-xs-6">
 					<label for="DiaChi">Địa chỉ</label>
-					<input type="text" class="form-control" id="DiaChi" runat="server" placeholder="Nhập địa chỉ">
+					<input type="text" class="form-control" id="DiaChi" maxlength="500" runat="server" placeholder="Nhập địa chỉ">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-2">
 					<label for="SoTaiKhoan">Số tài khoản</label>
-					<input type="text" class="form-control" id="SoTaiKhoan" runat="server" placeholder="Nhập số TK">
+					<input type="text" class="form-control" id="SoTaiKhoan" maxlength="50" runat="server" placeholder="Nhập số TK">
 					</div>
 					<div class="col-xs-6">
 					<label for="ChiNhanhNH">Ngân hàng</label>
-					<input type="text" class="form-control" id="ChiNhanhNH" runat="server" placeholder="Nhập thông tin ngân hàng">
+					<input type="text" class="form-control" id="ChiNhanhNH" maxlength="100" runat="server" placeholder="Nhập thông tin ngân hàng">
 					</div>
 				</div>
 					
