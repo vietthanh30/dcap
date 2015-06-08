@@ -12,10 +12,12 @@
     </p>
     <p>
         Mật khẩu mới cần phải được tối thiểu là <%= Membership.MinRequiredPasswordLength %> ký tự.
-    </p>
+    </p> 
+    <asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" class="failureNotification"
+        Text="" Visible="False"></asp:Label>
     <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="~/" EnableViewState="false" RenderOuterTable="false" 
          SuccessPageUrl="ChangePasswordSuccess.aspx">
-        <ChangePasswordTemplate>
+        <ChangePasswordTemplate> 
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
             </span>
@@ -31,7 +33,7 @@
                         <asp:Label ID="CurrentPasswordLabel" runat="server" AssociatedControlID="CurrentPassword">Mật khẩu cũ:</asp:Label>
                         <asp:TextBox ID="CurrentPassword" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="CurrentPasswordRequired" runat="server" ControlToValidate="CurrentPassword" 
-                             CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Old Password is required." 
+                             CssClass="failureNotification" ErrorMessage="Mật khẩu cũ là bắt buộc." ToolTip="Mật khẩu cũ là bắt buộc." 
                              ValidationGroup="ChangeUserPasswordValidationGroup">*</asp:RequiredFieldValidator>
                     </div>
                 </div>          
@@ -40,7 +42,7 @@
                         <asp:Label ID="NewPasswordLabel" runat="server" AssociatedControlID="NewPassword">Mật khẩu mới:</asp:Label>
                         <asp:TextBox ID="NewPassword" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="NewPasswordRequired" runat="server" ControlToValidate="NewPassword" 
-                             CssClass="failureNotification" ErrorMessage="New Password is required." ToolTip="New Password is required." 
+                             CssClass="failureNotification" ErrorMessage="Mật khẩu mới là bắt buộc." ToolTip="Mật khẩu mới là bắt buộc." 
                              ValidationGroup="ChangeUserPasswordValidationGroup">*</asp:RequiredFieldValidator>
                     </div>
                 </div>          
@@ -49,10 +51,10 @@
                         <asp:Label ID="ConfirmNewPasswordLabel" runat="server" AssociatedControlID="ConfirmNewPassword">Xác nhận mật khẩu Mới:</asp:Label>
                         <asp:TextBox ID="ConfirmNewPassword" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="ConfirmNewPasswordRequired" runat="server" ControlToValidate="ConfirmNewPassword" 
-                             CssClass="failureNotification" Display="Dynamic" ErrorMessage="Confirm New Password is required."
-                             ToolTip="Confirm New Password is required." ValidationGroup="ChangeUserPasswordValidationGroup">*</asp:RequiredFieldValidator>
+                             CssClass="failureNotification" Display="Dynamic" ErrorMessage="Xác nhận mật khẩu mới là bắt buộc."
+                             ToolTip="Xác nhận mật khẩu mới là bắt buộc." ValidationGroup="ChangeUserPasswordValidationGroup">*</asp:RequiredFieldValidator>
                         <asp:CompareValidator ID="NewPasswordCompare" runat="server" ControlToCompare="NewPassword" ControlToValidate="ConfirmNewPassword" 
-                             CssClass="failureNotification" Display="Dynamic" ErrorMessage="The Confirm New Password must match the New Password entry."
+                             CssClass="failureNotification" Display="Dynamic" ErrorMessage="Mật khẩu mới không trùng mật khẩu xác nhận."
                              ValidationGroup="ChangeUserPasswordValidationGroup">*</asp:CompareValidator>
                     </div>
                 </div>    
