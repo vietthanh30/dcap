@@ -198,6 +198,39 @@
           <s:element minOccurs="0" maxOccurs="1" name="Thang" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="SearchBangKeHoaHong">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="accountNumber" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="thangKeKhai" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchBangKeHoaHongResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchBangKeHoaHongResult" type="tns:ArrayOfHoaHongMemberDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfHoaHongMemberDto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HoaHongMemberDto" nillable="true" type="tns:HoaHongMemberDto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HoaHongMemberDto">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="STT" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TrucTiep" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanCap" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HeThong" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuanLy" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThuongThem" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tong" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Thang" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="SearchUserInfo">
         <s:complexType>
           <s:sequence>
@@ -373,6 +406,12 @@
   <wsdl:message name="SearchBangKeSoapOut">
     <wsdl:part name="parameters" element="tns:SearchBangKeResponse" />
   </wsdl:message>
+  <wsdl:message name="SearchBangKeHoaHongSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchBangKeHoaHong" />
+  </wsdl:message>
+  <wsdl:message name="SearchBangKeHoaHongSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchBangKeHoaHongResponse" />
+  </wsdl:message>
   <wsdl:message name="SearchUserInfoSoapIn">
     <wsdl:part name="parameters" element="tns:SearchUserInfo" />
   </wsdl:message>
@@ -455,6 +494,10 @@
     <wsdl:operation name="SearchBangKe">
       <wsdl:input message="tns:SearchBangKeSoapIn" />
       <wsdl:output message="tns:SearchBangKeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBangKeHoaHong">
+      <wsdl:input message="tns:SearchBangKeHoaHongSoapIn" />
+      <wsdl:output message="tns:SearchBangKeHoaHongSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SearchUserInfo">
       <wsdl:input message="tns:SearchUserInfoSoapIn" />
@@ -551,6 +594,15 @@
     </wsdl:operation>
     <wsdl:operation name="SearchBangKe">
       <soap:operation soapAction="http://tempuri.org/SearchBangKe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBangKeHoaHong">
+      <soap:operation soapAction="http://tempuri.org/SearchBangKeHoaHong" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -698,6 +750,15 @@
     </wsdl:operation>
     <wsdl:operation name="SearchBangKe">
       <soap12:operation soapAction="http://tempuri.org/SearchBangKe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBangKeHoaHong">
+      <soap12:operation soapAction="http://tempuri.org/SearchBangKeHoaHong" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

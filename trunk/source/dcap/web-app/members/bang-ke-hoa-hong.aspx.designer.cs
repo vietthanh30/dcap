@@ -10,7 +10,7 @@
 namespace web_app.members {
     
     
-    public partial class bang_ke_tra_luong_ext {
+    public partial class bang_ke_hoa_hong {
         
         /// <summary>
         /// i1 control.

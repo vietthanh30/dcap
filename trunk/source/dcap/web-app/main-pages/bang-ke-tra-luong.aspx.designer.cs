@@ -7,7 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace web_app.main {
+namespace web_app.main_pages
+{
     
     
     public partial class bang_ke_tra_luong {

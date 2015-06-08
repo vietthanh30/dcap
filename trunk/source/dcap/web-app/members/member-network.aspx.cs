@@ -31,6 +31,10 @@ namespace web_app.members
             }
             var rootNumber = userDto.AccountNumber;
             var idMember = IdMember.Value.Trim();
+            if (string.IsNullOrEmpty(idMember))
+            {
+                idMember = rootNumber.ToString();
+            }
             MemberNodeDto[] allMemberNodeDto;
             if (!DcapServiceUtil.IsContainMemberNode(rootNumber, idMember))
             {

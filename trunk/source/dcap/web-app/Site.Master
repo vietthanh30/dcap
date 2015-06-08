@@ -192,7 +192,7 @@
                 <li>
                   <a id="A2" href="~/main-pages/tong-quan.aspx" runat="server">
 			        <i class="fa fa-files-o"></i>
-                    <span>Tổng quan</span>
+                    <span>Trang chủ</span>
                   </a>
                 </li>
                 <li>
@@ -204,6 +204,11 @@
 			    <li>
                   <a id="A8" href="~/members/member-network.aspx" runat="server">
                     <i class="fa fa-calendar"></i> <span>Mạng lưới thành viên</span>
+                  </a>
+                </li>
+                <li>
+                  <a id="A9" href="~/members/bang-ke-hoa-hong.aspx" runat="server">
+                    <i class="fa fa-table"></i> <span>Tra cứu bảng lương</span>
                   </a>
                 </li>
               </ul>	 

@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\Controller.cs" />
+    <Compile Include="dto\HoaHongMemberDto.cs" />
     <Compile Include="dto\MemberNodeDto.cs" />
     <Compile Include="dto\BangKeDto.cs" />
     <Compile Include="dto\RoleDto.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="model\AccountLogHist.cs" />
     <Compile Include="model\AccountPreCalc.cs" />
     <Compile Include="model\BangKeVW.cs" />
+    <Compile Include="model\HoaHongMemberVW.cs" />
     <Compile Include="model\ManagerApproval.cs" />
     <Compile Include="model\ManagerLevelLog.cs" />
     <Compile Include="model\ManagerL1.cs" />
@@ -151,6 +153,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="model\ManagerApproval.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="model\HoaHongMemberVW.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

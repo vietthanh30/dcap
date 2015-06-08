@@ -683,6 +683,171 @@ namespace web_app.DcapServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="HoaHongMemberDto", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class HoaHongMemberDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long STTField;
+        
+        private long AccountIdField;
+        
+        private double TrucTiepField;
+        
+        private double CanCapField;
+        
+        private double HeThongField;
+        
+        private double QuanLyField;
+        
+        private double ThuongThemField;
+        
+        private double TongField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ThangField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long STT {
+            get {
+                return this.STTField;
+            }
+            set {
+                if ((this.STTField.Equals(value) != true)) {
+                    this.STTField = value;
+                    this.RaisePropertyChanged("STT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public long AccountId {
+            get {
+                return this.AccountIdField;
+            }
+            set {
+                if ((this.AccountIdField.Equals(value) != true)) {
+                    this.AccountIdField = value;
+                    this.RaisePropertyChanged("AccountId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public double TrucTiep {
+            get {
+                return this.TrucTiepField;
+            }
+            set {
+                if ((this.TrucTiepField.Equals(value) != true)) {
+                    this.TrucTiepField = value;
+                    this.RaisePropertyChanged("TrucTiep");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public double CanCap {
+            get {
+                return this.CanCapField;
+            }
+            set {
+                if ((this.CanCapField.Equals(value) != true)) {
+                    this.CanCapField = value;
+                    this.RaisePropertyChanged("CanCap");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public double HeThong {
+            get {
+                return this.HeThongField;
+            }
+            set {
+                if ((this.HeThongField.Equals(value) != true)) {
+                    this.HeThongField = value;
+                    this.RaisePropertyChanged("HeThong");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public double QuanLy {
+            get {
+                return this.QuanLyField;
+            }
+            set {
+                if ((this.QuanLyField.Equals(value) != true)) {
+                    this.QuanLyField = value;
+                    this.RaisePropertyChanged("QuanLy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public double ThuongThem {
+            get {
+                return this.ThuongThemField;
+            }
+            set {
+                if ((this.ThuongThemField.Equals(value) != true)) {
+                    this.ThuongThemField = value;
+                    this.RaisePropertyChanged("ThuongThem");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public double Tong {
+            get {
+                return this.TongField;
+            }
+            set {
+                if ((this.TongField.Equals(value) != true)) {
+                    this.TongField = value;
+                    this.RaisePropertyChanged("Tong");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string Thang {
+            get {
+                return this.ThangField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ThangField, value) != true)) {
+                    this.ThangField = value;
+                    this.RaisePropertyChanged("Thang");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MemberNodeDto", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class MemberNodeDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -787,6 +952,10 @@ namespace web_app.DcapServiceReference {
         // CODEGEN: Generating message contract since element name SearchBangKeResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKe", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeResponse SearchBangKe(web_app.DcapServiceReference.SearchBangKeRequest request);
+        
+        // CODEGEN: Generating message contract since element name SearchBangKeHoaHongResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKeHoaHong", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchBangKeHoaHongResponse SearchBangKeHoaHong(web_app.DcapServiceReference.SearchBangKeHoaHongRequest request);
         
         // CODEGEN: Generating message contract since element name soCmnd from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUserInfo", ReplyAction="*")]
@@ -1457,6 +1626,78 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchBangKeHoaHongRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchBangKeHoaHong", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchBangKeHoaHongRequestBody Body;
+        
+        public SearchBangKeHoaHongRequest() {
+        }
+        
+        public SearchBangKeHoaHongRequest(web_app.DcapServiceReference.SearchBangKeHoaHongRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchBangKeHoaHongRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public long accountNumber;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.Nullable<System.DateTime> thangKeKhai;
+        
+        public SearchBangKeHoaHongRequestBody() {
+        }
+        
+        public SearchBangKeHoaHongRequestBody(long accountNumber, System.Nullable<System.DateTime> thangKeKhai) {
+            this.accountNumber = accountNumber;
+            this.thangKeKhai = thangKeKhai;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchBangKeHoaHongResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchBangKeHoaHongResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchBangKeHoaHongResponseBody Body;
+        
+        public SearchBangKeHoaHongResponse() {
+        }
+        
+        public SearchBangKeHoaHongResponse(web_app.DcapServiceReference.SearchBangKeHoaHongResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchBangKeHoaHongResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.HoaHongMemberDto[] SearchBangKeHoaHongResult;
+        
+        public SearchBangKeHoaHongResponseBody() {
+        }
+        
+        public SearchBangKeHoaHongResponseBody(web_app.DcapServiceReference.HoaHongMemberDto[] SearchBangKeHoaHongResult) {
+            this.SearchBangKeHoaHongResult = SearchBangKeHoaHongResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class SearchUserInfoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchUserInfo", Namespace="http://tempuri.org/", Order=0)]
@@ -1964,6 +2205,20 @@ namespace web_app.DcapServiceReference {
             inValue.Body.thangKeKhai = thangKeKhai;
             web_app.DcapServiceReference.SearchBangKeResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchBangKe(inValue);
             return retVal.Body.SearchBangKeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchBangKeHoaHongResponse web_app.DcapServiceReference.DcapServiceSoap.SearchBangKeHoaHong(web_app.DcapServiceReference.SearchBangKeHoaHongRequest request) {
+            return base.Channel.SearchBangKeHoaHong(request);
+        }
+        
+        public web_app.DcapServiceReference.HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, System.Nullable<System.DateTime> thangKeKhai) {
+            web_app.DcapServiceReference.SearchBangKeHoaHongRequest inValue = new web_app.DcapServiceReference.SearchBangKeHoaHongRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchBangKeHoaHongRequestBody();
+            inValue.Body.accountNumber = accountNumber;
+            inValue.Body.thangKeKhai = thangKeKhai;
+            web_app.DcapServiceReference.SearchBangKeHoaHongResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchBangKeHoaHong(inValue);
+            return retVal.Body.SearchBangKeHoaHongResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

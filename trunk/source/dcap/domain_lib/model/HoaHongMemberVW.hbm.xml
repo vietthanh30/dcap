@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+xmlns="urn:nhibernate-mapping-2.2"
+namespace="domain_lib.model"
+assembly="domain_lib">
+  <class name="HoaHongMemberVW" table="HOA_HONG_MEMBER_VW" lazy="false">
+    <id name="Stt" column="STT" unsaved-value="-1">
+      <generator class="native" />
+    </id>
+    
+    <property name="AccountId">
+      <column name="ACCOUNT_ID" not-null="true" />
+    </property>
+
+    <property name="Thang">
+      <column name="THANG" not-null="true"/>
+    </property>
+
+    <property name="BonusType">
+      <column name="BONUS_TYPE" not-null="false"/>
+    </property>
+
+    <property name="Tong">
+      <column name="TONG" not-null="false"/>
+    </property>
+
+  </class>
+</hibernate-mapping>

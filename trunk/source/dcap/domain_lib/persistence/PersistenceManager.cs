@@ -889,7 +889,6 @@ namespace domain_lib.persistence
                     var chiNhanhNH = row.ChiNhanhNH;
                     var soDienThoai = row.SoDienThoai;
                     var ngayDangKy = row.NgayDangKy;
-                    var nguoiBaoTro = row.NguoiBaoTro;
                     var soTien = row.SoTien;
                     var thang = row.Thang;
 
@@ -905,11 +904,78 @@ namespace domain_lib.persistence
                     bangKeDto.ChiNhanhNH = chiNhanhNH;
                     bangKeDto.SoDienThoai = soDienThoai;
                     bangKeDto.NgayDangKy = DateUtil.GetDateTimeAsDdmmyyyy(ngayDangKy);
-                    bangKeDto.NguoiBaoTro = nguoiBaoTro;
                     bangKeDto.SoTien = soTien;
                     bangKeDto.Thang = thang.Substring(4, 2) + "/" + thang.Substring(0, 4);
 
                     allResults.Add(bangKeDto);
+                }
+            }
+
+            return allResults.ToArray();
+        }
+
+        public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        {
+            var strThang = DateUtil.GetDateTimeAsStringWithEnProvider(thangKeKhai, ConstUtil.MONTH_FORMAT);
+            var accountId = GetAccountIdBy(accountNumber.ToString());
+
+            var allResults = new List<HoaHongMemberDto>();
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(HoaHongMemberVW));
+                criteria.Add(Expression.Eq("Thang", strThang));
+                criteria.Add(Expression.Eq("AccountId", accountId));
+
+                // Get the matching objects
+                IList<HoaHongMemberVW> list = criteria.List<HoaHongMemberVW>();
+                
+                // Set return value
+                double trucTiep = 0;
+                double canCap = 0;
+                double heThong = 0;
+                double quanLy = 0;
+                double thuongThem = 0;
+                double tong = 0;
+                foreach (var row in list)
+                {
+                    if (string.Compare(row.BonusType, "TT", true) == 0)
+                    {
+                        trucTiep += row.Tong;
+                    }
+                    if (string.Compare(row.BonusType, "CC", true) == 0)
+                    {
+                        canCap += row.Tong;
+                    }
+                    if (string.Compare(row.BonusType, "HT", true) == 0)
+                    {
+                        heThong = row.Tong;
+                    }
+                    if ((string.Compare(row.BonusType, "CC1", true) == 0)
+                        || (string.Compare(row.BonusType, "QL1", true) == 0))
+                    {
+                        quanLy = row.Tong;
+                    }
+                    if (string.Compare(row.BonusType, "ADD", true) == 0)
+                    {
+                        thuongThem = row.Tong;
+                    }
+                }
+                tong = trucTiep + canCap + heThong + quanLy + thuongThem;
+                if (tong != 0)
+                {
+                    var dto = new HoaHongMemberDto();
+                    dto.STT = 1;
+                    dto.AccountId = accountId;
+                    dto.Thang = DateUtil.GetDateTimeAsStringWithEnProvider(thangKeKhai, "MM/yyyy");
+                    dto.TrucTiep = trucTiep;
+                    dto.CanCap = canCap;
+                    dto.HeThong = heThong;
+                    dto.QuanLy = quanLy;
+                    dto.ThuongThem = thuongThem;
+                    dto.Tong = tong;
+                    allResults.Add(dto);
                 }
             }
 
@@ -1059,6 +1125,10 @@ namespace domain_lib.persistence
 
         public bool IsContainMemberNode(long rootNumber, string accountNumber)
         {
+            if (string.IsNullOrEmpty(accountNumber) || string.Compare(rootNumber.ToString(), accountNumber) == 0)
+            {
+                return true;
+            }
             var rootId = GetAccountIdBy(rootNumber.ToString());
             var accountId = GetAccountIdBy(accountNumber);
             var childNumber = CountAccountByParentId(rootId);
@@ -1080,6 +1150,10 @@ namespace domain_lib.persistence
             if (setChildIds != null && setChildIds.Contains(accountId))
             {
                 return true;
+            }
+            if (setChildIds == null)
+            {
+                return false;
             }
             foreach (var childId in setChildIds)
             {

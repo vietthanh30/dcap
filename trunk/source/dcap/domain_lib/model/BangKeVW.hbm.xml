@@ -52,10 +52,6 @@ assembly="domain_lib">
       <column name="NGAY_DANG_KY" not-null="false"/>
     </property>
 
-    <property name="NguoiBaoTro">
-      <column name="NGUOI_BAO_TRO" not-null="false"/>
-    </property>
-
     <property name="SoTien">
       <column name="TONG" not-null="false"/>
     </property>

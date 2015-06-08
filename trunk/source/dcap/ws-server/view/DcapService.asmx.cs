@@ -67,6 +67,12 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        {
+            return controller.SearchBangKeHoaHong(accountNumber, thangKeKhai);
+        }
+
+        [WebMethod]
         public UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
         {
             return controller.SearchUserInfo(soCmnd, idThanhVien, hoTen);

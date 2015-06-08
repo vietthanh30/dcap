@@ -48,6 +48,11 @@ namespace web_app.common
             return dcapService.SearchBangKe(thangKeKhai);
         }
 
+        public static HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        {
+            return dcapService.SearchBangKeHoaHong(accountNumber, thangKeKhai);
+        }
+
         public static UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
         {
             return dcapService.SearchUserInfo(soCmnd, idThanhVien, hoTen);

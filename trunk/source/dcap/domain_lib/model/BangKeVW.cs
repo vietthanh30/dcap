@@ -33,8 +33,6 @@ namespace domain_lib.model
 
         private DateTime? _ngayDangKy;
 
-        private string _nguoiBaoTro = String.Empty;
-
         private double _soTien = -1.0;
 
         private string _thang = String.Empty;
@@ -148,15 +146,6 @@ namespace domain_lib.model
         {
             get { return _ngayDangKy; }
             set { _ngayDangKy = value; }
-        }
-
-        /// <summary>
-        /// Nguoi Bao Tro
-        /// </summary>
-        public virtual string NguoiBaoTro
-        {
-            get { return _nguoiBaoTro; }
-            set { _nguoiBaoTro = value; }
         }
 
         /// <summary>

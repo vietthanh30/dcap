@@ -8,7 +8,7 @@ using core_lib.common;
 using web_app.common;
 using web_app.DcapServiceReference;
 
-namespace web_app.main
+namespace web_app.main_pages
 {
     public partial class bang_ke_tra_luong : System.Web.UI.Page
     {

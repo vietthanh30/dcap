@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="bang-ke-tra-luong.aspx.cs" Inherits="web_app.members.bang_ke_tra_luong_ext" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="bang-ke-hoa-hong.aspx.cs" Inherits="web_app.members.bang_ke_hoa_hong" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
-    Bảng kê trả lương
+    Tra cứu bảng lương
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active">Bảng kê</li>
+    <li class="active">Bảng lương</li>
     </ol>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -31,7 +31,7 @@
 				  
             <div class="box-footer">        
                 <asp:Button ID="SearchButton" runat="server" Text="Tra cứu" class="btn btn-primary" 
-                    onclick="BangKeTraLuong_SearchBangKe"/>
+                    onclick="BangKeHoaHong_SearchBangKe"/>
             </div>
         </div><!-- /.box -->
 
@@ -51,31 +51,28 @@
                 <asp:TemplateField HeaderText="STT">
                 <ItemTemplate><%#GetStt() %></ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="HoTen" HeaderText="Họ tên" >
-                <ItemStyle HorizontalAlign="Left" />
-                </asp:BoundField>
-                <asp:BoundField DataField="UserName" HeaderText="Tên đăng nhập" >
-                <ItemStyle HorizontalAlign="Left" />
-                </asp:BoundField>
-                <asp:BoundField DataField="SoCmnd" HeaderText="Số CMND" >
+                <asp:BoundField DataField="AccountId" HeaderText="Id thành viên" DataFormatString="{0:0000000}" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="DiaChi" HeaderText="Địa chỉ" >
-                <ItemStyle HorizontalAlign="Left" />
-                </asp:BoundField>
-                <asp:BoundField DataField="SoTaiKhoan" HeaderText="Số TK" >
+                <asp:BoundField DataField="TrucTiep" HeaderText="Trực tiếp" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="ChiNhanhNH" HeaderText="Ngân hàng" >
-                <ItemStyle HorizontalAlign="Left" />
-                </asp:BoundField>
-                <asp:BoundField DataField="SoDienThoai" HeaderText="Số ĐT" >
+                <asp:BoundField DataField="CanCap" HeaderText="Cân cặp" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="SoTien" HeaderText="Tổng điểm" >
-                <ItemStyle HorizontalAlign="Right" />
+                <asp:BoundField DataField="HeThong" HeaderText="Hệ thống" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="QuanLy" HeaderText="Quản lý" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="ThuongThem" HeaderText="Thưởng thêm" >
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Thang" HeaderText="Tháng" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Tong" HeaderText="Tổng" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 </Columns>

@@ -80,6 +80,11 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchBangKe(thangKeKhai);
         }
 
+        public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        {
+            return m_PersistenceManager.SearchBangKeHoaHong(accountNumber, thangKeKhai);
+        }
+
         public UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
         {
             return m_PersistenceManager.SearchUserInfo(soCmnd, idThanhVien, hoTen);

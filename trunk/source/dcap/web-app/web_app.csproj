@@ -64,7 +64,7 @@
     <Content Include="admin\TraCuuThanhVien.aspx" />
     <Content Include="dist\img\delete-icon.png" />
     <Content Include="dist\img\edit-icon.png" />
-    <Content Include="members\bang-ke-tra-luong.aspx" />
+    <Content Include="members\bang-ke-hoa-hong.aspx" />
     <Content Include="members\EditMemberInfo.aspx" />
     <Content Include="admin\Register2.aspx" />
     <Content Include="admin\Login.aspx" />
@@ -904,6 +904,9 @@
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.BangKeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.HoaHongMemberDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.MemberNodeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -945,12 +948,12 @@
     <Compile Include="common\CustomStylesheet.cs" />
     <Compile Include="common\HierarchicalDataSet.cs" />
     <Compile Include="common\TextCell.cs" />
-    <Compile Include="members\bang-ke-tra-luong.aspx.cs">
-      <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
+    <Compile Include="members\bang-ke-hoa-hong.aspx.cs">
+      <DependentUpon>bang-ke-hoa-hong.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="members\bang-ke-tra-luong.aspx.designer.cs">
-      <DependentUpon>bang-ke-tra-luong.aspx</DependentUpon>
+    <Compile Include="members\bang-ke-hoa-hong.aspx.designer.cs">
+      <DependentUpon>bang-ke-hoa-hong.aspx</DependentUpon>
     </Compile>
     <Compile Include="members\EditMemberInfo.aspx.cs">
       <DependentUpon>EditMemberInfo.aspx</DependentUpon>

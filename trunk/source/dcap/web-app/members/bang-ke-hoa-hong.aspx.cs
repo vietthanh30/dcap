@@ -10,7 +10,7 @@ using web_app.DcapServiceReference;
 
 namespace web_app.members
 {
-    public partial class bang_ke_tra_luong_ext : System.Web.UI.Page
+    public partial class bang_ke_hoa_hong : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,36 +30,50 @@ namespace web_app.members
 
         private void OnSearchBangKe()
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            var accountNumber = userDto.AccountNumber;
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
-            var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
+            var allBangKeDto = DcapServiceUtil.SearchBangKeHoaHong(accountNumber, thangKeKhai);
             gvBangKe.DataSource = allBangKeDto;
             gvBangKe.DataBind();
         }
 
-        protected void BangKeTraLuong_SearchBangKe(object sender, EventArgs e)
+        protected void BangKeHoaHong_SearchBangKe(object sender, EventArgs e)
         {
             OnSearchBangKe();
         }
 
         protected void BangKeTraLuong_ExportExcel(object sender, EventArgs e)
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            var accountNumber = userDto.AccountNumber;
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
-            var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
+            var allBangKeDto = DcapServiceUtil.SearchBangKeHoaHong(accountNumber, thangKeKhai);
             if (allBangKeDto.Length == 0)
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
-            var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
-            var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
+            var columnNames = new[] {"stt", "Id thành viên", "Trực tiếp", "Cân cặp", "Hệ thống", "Quản lý", 
+                "Thưởng thêm", "Tháng", "Tổng"};
+            var fileName = String.Format("BKHH_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
+            var fileDir = String.Format("BKHH_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }
-            var tableName = "BANG_KE_VW";
+            var tableName = "HOA_HONG_MEMBER_VW";
             var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
             ExcelHelper excelFacade = new ExcelHelper();
             excelFacade.Create(filePath, dt);
@@ -83,7 +97,7 @@ namespace web_app.members
             file.Delete();
         }
 
-        private DataTable CreateDataTable(String tableName, String[] columnNames, BangKeDto[] allBangKeDto)
+        private DataTable CreateDataTable(String tableName, String[] columnNames, HoaHongMemberDto[] allBangKeDto)
         {
             var dataTable = new DataTable(tableName);
             foreach (var columnName in columnNames)
@@ -95,15 +109,14 @@ namespace web_app.members
                 var dataRow = dataTable.NewRow();
                 int index = 0;
                 dataRow[columnNames[index++]] = bangKeDto.STT;
-                dataRow[columnNames[index++]] = bangKeDto.HoTen;
-                dataRow[columnNames[index++]] = bangKeDto.UserName;
-                dataRow[columnNames[index++]] = bangKeDto.SoCmnd;
-                dataRow[columnNames[index++]] = bangKeDto.DiaChi;
-                dataRow[columnNames[index++]] = bangKeDto.SoTaiKhoan;
-                dataRow[columnNames[index++]] = bangKeDto.ChiNhanhNH;
-                dataRow[columnNames[index++]] = bangKeDto.SoDienThoai;
-                dataRow[columnNames[index++]] = bangKeDto.SoTien*1000000;
-                dataRow[columnNames[index]] = bangKeDto.Thang;
+                dataRow[columnNames[index++]] = string.Format("{0:0000000}", bangKeDto.AccountId);
+                dataRow[columnNames[index++]] = bangKeDto.TrucTiep * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.CanCap * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.HeThong * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.QuanLy * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.ThuongThem * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.Thang;
+                dataRow[columnNames[index]] = bangKeDto.Tong * 1000000;
                 dataTable.Rows.Add(dataRow);
             }
             return dataTable;
@@ -111,18 +124,25 @@ namespace web_app.members
 
         protected void BangKeTraLuong_ExportDOC(object sender, EventArgs e)
         {
+            var userDto = (UserDto)Session["UserDto"];
+            if (userDto == null)
+            {
+                Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            var accountNumber = userDto.AccountNumber;
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
-            var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
+            var allBangKeDto = DcapServiceUtil.SearchBangKeHoaHong(accountNumber, thangKeKhai);
             if (allBangKeDto.Length == 0)
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
-            var tableName = "BANG_KE_VW";
+            var columnNames = new[] {"stt", "Id thành viên", "Trực tiếp", "Cân cặp", "Hệ thống", "Quản lý", 
+                "Thưởng thêm", "Tháng", "Tổng"};
+            var tableName = "HOA_HONG_MEMBER_VW";
             var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
-            var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";
-            var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
+            var fileName = String.Format("BKHH_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";
+            var fileDir = String.Format("BKHH_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
             string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));// GetDirectory(Path);
             if (!Directory.Exists(directory))
