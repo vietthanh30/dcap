@@ -25,7 +25,7 @@ namespace web_app.admin
             }
             if (!UserUtil.IsQthtRole(userDto) && !UserUtil.IsQlktRole(userDto))
             {
-                Response.Redirect("~/admin/Default.aspx");
+                Response.Redirect("~/Default.aspx");
                 return;
             }
         }

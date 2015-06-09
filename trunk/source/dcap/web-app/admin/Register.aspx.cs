@@ -19,7 +19,7 @@ namespace web_app.admin
             }
             if (!UserUtil.IsQthtRole(userDto))
             {
-                Response.Redirect("~/admin/Default.aspx");
+                Response.Redirect("~/Default.aspx");
                 return;
             }
             ContinueDestinationPageUrl.Value = Request.QueryString["ReturnUrl"];

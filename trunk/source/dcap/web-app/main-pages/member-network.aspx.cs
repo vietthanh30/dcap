@@ -22,7 +22,7 @@ namespace web_app.main_pages
             }
             if (!UserUtil.IsQthtRole(userDto) && !UserUtil.IsQlktRole(userDto))
             {
-                Response.Redirect("~/admin/Default.aspx");
+                Response.Redirect("~/Default.aspx");
                 return;
             }
         }
