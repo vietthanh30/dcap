@@ -23,6 +23,11 @@ namespace web_app.admin
                 Response.Redirect("~/admin/Login.aspx");
                 return;
             }
+            if (!UserUtil.IsQthtRole(userDto) && !UserUtil.IsQlktRole(userDto))
+            {
+                Response.Redirect("~/admin/Default.aspx");
+                return;
+            }
         }
 
         protected void TraCuuThanhVien_Search(object sender, EventArgs e)

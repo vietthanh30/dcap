@@ -1,5 +1,6 @@
 ﻿using System;
 using core_lib.common;
+using web_app.common;
 using web_app.DcapServiceReference;
 
 namespace web_app
@@ -39,7 +40,7 @@ namespace web_app
             }
             var headLoginName = userDto.FullName;
             string headLoginNameAdmin;
-            var roleCode = GetRoleCode(userDto);
+            var roleCode = UserUtil.GetRoleCode(userDto);
             if (String.IsNullOrEmpty(roleCode))
             {
                 headLoginNameAdmin = userDto.FullName;
@@ -77,16 +78,6 @@ namespace web_app
                 LeftContentKT.Visible = false;
                 LeftContentTV.Visible = true;
             }
-        }
-
-        private string GetRoleCode(UserDto userDto)
-        {
-            var allRoles = userDto.AllRoles;
-            if (allRoles.Length == 0)
-            {
-                return "QLTV";
-            }
-            return allRoles[0].RoleCode;
         }
     }
 }

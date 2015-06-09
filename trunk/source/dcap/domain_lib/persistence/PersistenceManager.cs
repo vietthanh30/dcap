@@ -937,7 +937,7 @@ namespace domain_lib.persistence
                 double heThong = 0;
                 double quanLy = 0;
                 double thuongThem = 0;
-                double tong = 0;
+                double tong;
                 foreach (var row in list)
                 {
                     if (string.Compare(row.BonusType, "TT", true) == 0)
@@ -950,16 +950,16 @@ namespace domain_lib.persistence
                     }
                     if (string.Compare(row.BonusType, "HT", true) == 0)
                     {
-                        heThong = row.Tong;
+                        heThong += row.Tong;
                     }
                     if ((string.Compare(row.BonusType, "CC1", true) == 0)
                         || (string.Compare(row.BonusType, "QL1", true) == 0))
                     {
-                        quanLy = row.Tong;
+                        quanLy += row.Tong;
                     }
                     if (string.Compare(row.BonusType, "ADD", true) == 0)
                     {
-                        thuongThem = row.Tong;
+                        thuongThem += row.Tong;
                     }
                 }
                 tong = trucTiep + canCap + heThong + quanLy + thuongThem;

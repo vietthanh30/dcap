@@ -21,6 +21,11 @@ namespace web_app
                 Response.Redirect("~/admin/Login.aspx");
                 return;
             }
+            if (!UserUtil.IsQthtRole(userDto) && !UserUtil.IsQlktRole(userDto))
+            {
+                Response.Redirect("~/admin/Default.aspx");
+                return;
+            }
             UpdateUserInfo(userDto);
             if (!IsPostBack)
             {
@@ -37,7 +42,7 @@ namespace web_app
             }
             var headLoginName = userDto.FullName;
             string headLoginNameAdmin;
-            var roleCode = GetRoleCode(userDto);
+            var roleCode = UserUtil.GetRoleCode(userDto);
             if (String.IsNullOrEmpty(roleCode))
             {
                 headLoginNameAdmin = userDto.FullName;
@@ -75,16 +80,6 @@ namespace web_app
                 LeftContentKT.Visible = false;
                 LeftContentTV.Visible = true;
             }
-        }
-
-        private string GetRoleCode(UserDto userDto)
-        {
-            var allRoles = userDto.AllRoles;
-            if (allRoles.Length == 0)
-            {
-                return "QLTV";
-            }
-            return allRoles[0].RoleCode;
         }
 
         protected void MemberNetwork_SearchNetwork(object sender, EventArgs e)

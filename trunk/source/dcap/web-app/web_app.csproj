@@ -948,6 +948,7 @@
     <Compile Include="common\CustomStylesheet.cs" />
     <Compile Include="common\HierarchicalDataSet.cs" />
     <Compile Include="common\TextCell.cs" />
+    <Compile Include="common\UserUtil.cs" />
     <Compile Include="members\bang-ke-hoa-hong.aspx.cs">
       <DependentUpon>bang-ke-hoa-hong.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -20,6 +20,11 @@ namespace web_app.main_pages
                 Response.Redirect("~/admin/Login.aspx");
                 return;
             }
+            if (!UserUtil.IsQthtRole(userDto) && !UserUtil.IsQlktRole(userDto))
+            {
+                Response.Redirect("~/admin/Default.aspx");
+                return;
+            }
             if(!Page.IsPostBack)
             {
                 ReportMonth.Value = DateUtil.GetDateTimeAsStringWithEnProvider(DateTime.Now,

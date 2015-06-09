@@ -18,6 +18,12 @@ namespace web_app.main_pages
             if (userDto == null)
             {
                 Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            if (!UserUtil.IsQthtRole(userDto) && !UserUtil.IsQlktRole(userDto))
+            {
+                Response.Redirect("~/admin/Default.aspx");
+                return;
             }
         }
 
