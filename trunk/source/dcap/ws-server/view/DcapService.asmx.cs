@@ -126,5 +126,53 @@ namespace ws_server.view
             return controller.CalculateBonusOfManagerTree();
         }
 
+        [WebMethod]
+        public long GetMemberAmount()
+        {
+            return controller.GetMemberAmount();
+        }
+
+        [WebMethod]
+        public long GetAccountAmount()
+        {
+            return controller.GetAccountAmount();
+        }
+
+        [WebMethod]
+        public long GetManagerAmount()
+        {
+            return controller.GetManagerAmount();
+        }
+
+        [WebMethod]
+        public long GetManagerL6Amount()
+        {
+            return controller.GetManagerL6Amount();
+        }
+
+        [WebMethod]
+        public UserDto[] GetNewMemberList()
+        {
+            return controller.GetNewMemberList();
+        }
+
+        [WebMethod]
+        public UserDto[] GetNewManagerList()
+        {
+            return controller.GetNewManagerList();
+        }
+
+        [WebMethod]
+        public int GetReportYear()
+        {
+            return controller.GetReportYear();
+        }
+
+        [WebMethod]
+        public AccountBonusDto[] GetAcountBonusList()
+        {
+            return controller.GetAcountBonusList();
+        }
+
     }
 }

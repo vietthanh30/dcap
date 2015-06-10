@@ -16,6 +16,11 @@ namespace web_app.members
                 Response.Redirect("~/admin/Login.aspx");
                 return;
             }
+            if (!UserUtil.IsQltvRole(userDto))
+            {
+                Response.Redirect("~/Default.aspx");
+                return;
+            }
             ContinueDestinationPageUrl.Value = Request.QueryString["ReturnUrl"];
             if (!Page.IsPostBack)
             {

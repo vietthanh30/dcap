@@ -988,7 +988,53 @@ namespace domain_lib.controller
             return m_PersistenceManager.CountUpLevel(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel - 1) == Math.Pow(3, accountPreCalc.AccountLevel - 1) 
                 /*&& m_PersistenceManager.CountLeft(accountPreCalc.CalcAccountId, accountPreCalc.AccountLevel, accountPreCalc.LevelIndex) == (accountPreCalc.LevelIndex - 1)s*/;
         }
-        
+
+        public long GetMemberAmount()
+        {
+            return m_PersistenceManager.GetRowCount("MemberInfo");
+        }
+
+        public long GetAccountAmount()
+        {
+            return m_PersistenceManager.GetRowCount("Account");
+        }
+
+        public long GetManagerAmount()
+        {
+            var managerL1 = m_PersistenceManager.GetRowCount("ManagerL1");
+            var managerL2 = m_PersistenceManager.GetRowCount("ManagerL2");
+            var managerL3 = m_PersistenceManager.GetRowCount("ManagerL3");
+            var managerL4 = m_PersistenceManager.GetRowCount("ManagerL4");
+            var managerL5 = m_PersistenceManager.GetRowCount("ManagerL5");
+            var managerL6 = m_PersistenceManager.GetRowCount("ManagerL6");
+            return managerL1 + managerL2 + managerL3 + managerL4 + managerL5 + managerL6;
+        }
+
+        public long GetManagerL6Amount()
+        {
+            return m_PersistenceManager.GetRowCount("ManagerL6");
+        }
+
+        public UserDto[] GetNewMemberList()
+        {
+            return m_PersistenceManager.GetNewMemberList();
+        }
+
+        public UserDto[] GetNewManagerList()
+        {
+            return m_PersistenceManager.GetNewManagerList();
+        }
+
+        public int GetReportYear()
+        {
+            return m_PersistenceManager.GetReportYear();
+        }
+
+        public AccountBonusDto[] GetAcountBonusList()
+        {
+            return m_PersistenceManager.GetAcountBonusList();
+        }
+
         #endregion
     }
 }

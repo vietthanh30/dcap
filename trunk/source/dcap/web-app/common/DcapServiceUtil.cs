@@ -82,5 +82,45 @@ namespace web_app.common
         {
             return dcapService.GetParentNodeByChildNo(accountNumber, "ParentDirectId");
         }
+
+        public static long GetMemberAmount()
+        {
+            return dcapService.GetMemberAmount();
+        }
+
+        public static long GetAccountAmount()
+        {
+            return dcapService.GetAccountAmount();
+        }
+
+        public static long GetManagerAmount()
+        {
+            return dcapService.GetManagerAmount();
+        }
+
+        public static long GetManagerL6Amount()
+        {
+            return dcapService.GetManagerL6Amount();
+        }
+
+        public static UserDto[] GetNewMemberList()
+        {
+            return dcapService.GetNewMemberList();
+        }
+
+        public static UserDto[] GetNewManagerList()
+        {
+            return dcapService.GetNewManagerList();
+        }
+
+        public static int GetReportYear()
+        {
+            return dcapService.GetReportYear();
+        }
+
+        public static AccountBonusDto[] GetAcountBonusList()
+        {
+            return dcapService.GetAcountBonusList();
+        }
     }
 }

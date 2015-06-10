@@ -13,6 +13,12 @@ namespace web_app.members
             if (userDto == null)
             {
                 Response.Redirect("~/admin/Login.aspx");
+                return;
+            }
+            if (!UserUtil.IsQltvRole(userDto))
+            {
+                Response.Redirect("~/Default.aspx");
+                return;
             }
         }
 

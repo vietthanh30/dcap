@@ -1503,6 +1503,149 @@ namespace domain_lib.persistence
             return retrieveEquals[0];
         }
 
+        public long GetRowCount(string tableName)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(*) from " + tableName);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt64(count);
+            }
+        }
+
+        public UserDto[] GetNewMemberList()
+        {
+            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+                    + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a, Users u " +
+                    " where m.MemberID = a.MemberId and a.UserId = u.UserID order by m.CreatedDate desc";
+
+            var allUserDto = new List<UserDto>();
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                query.SetMaxResults(8);
+
+                // Get the matching objects
+                var list = query.List();
+
+                foreach (var oneRow in list)
+                {
+                    var memberInfo = oneRow as MemberInfo;
+                    if (memberInfo == null)
+                    {
+                        continue;
+                    }
+                    var userDto = new UserDto();
+                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.FullName = memberInfo.HoTen;
+                    userDto.UserName = memberInfo.UserName;
+                    userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
+                    userDto.ParentDirectId = GetAccountNumberBy(memberInfo.ParentDirectId);
+                    userDto.NgaySinh = memberInfo.NgaySinh;
+                    userDto.SoCmnd = memberInfo.SoCmnd;
+                    userDto.NgayCap = memberInfo.NgayCap;
+                    userDto.SoDienThoai = memberInfo.SoDienThoai;
+                    userDto.DiaChi = memberInfo.DiaChi;
+                    userDto.GioiTinh = memberInfo.GioiTinh;
+                    userDto.SoTaiKhoan = memberInfo.SoTaiKhoan;
+                    userDto.ChiNhanhNH = memberInfo.ChiNhanhNH;
+                    userDto.ImageUrl = memberInfo.ImageUrl;
+                    userDto.CreatedDate = memberInfo.CreatedDate;
+                    userDto.CreatedBy = memberInfo.CreatedBy;
+                    allUserDto.Add(userDto);
+                }
+            }
+
+            return allUserDto.ToArray();
+        }
+
+        public UserDto[] GetNewManagerList()
+        {
+            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+                    + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a, Users u, ManagerL1 m1 " +
+                    " where m.MemberID = a.MemberId and a.UserId = u.UserID and a.AccountId = m1.AccountId order by m.CreatedDate desc";
+
+            var allUserDto = new List<UserDto>();
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                query.SetMaxResults(8);
+
+                // Get the matching objects
+                var list = query.List();
+
+                foreach (var oneRow in list)
+                {
+                    var memberInfo = oneRow as MemberInfo;
+                    if (memberInfo == null)
+                    {
+                        continue;
+                    }
+                    var userDto = new UserDto();
+                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.FullName = memberInfo.HoTen;
+                    userDto.UserName = memberInfo.UserName;
+                    userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
+                    userDto.ParentDirectId = GetAccountNumberBy(memberInfo.ParentDirectId);
+                    userDto.NgaySinh = memberInfo.NgaySinh;
+                    userDto.SoCmnd = memberInfo.SoCmnd;
+                    userDto.NgayCap = memberInfo.NgayCap;
+                    userDto.SoDienThoai = memberInfo.SoDienThoai;
+                    userDto.DiaChi = memberInfo.DiaChi;
+                    userDto.GioiTinh = memberInfo.GioiTinh;
+                    userDto.SoTaiKhoan = memberInfo.SoTaiKhoan;
+                    userDto.ChiNhanhNH = memberInfo.ChiNhanhNH;
+                    userDto.ImageUrl = memberInfo.ImageUrl;
+                    userDto.CreatedDate = memberInfo.CreatedDate;
+                    userDto.CreatedBy = memberInfo.CreatedBy;
+                    allUserDto.Add(userDto);
+                }
+            }
+
+            return allUserDto.ToArray();
+        }
+
+        public int GetReportYear()
+        {
+            return DateTime.Now.Year;
+        }
+
+        public AccountBonusDto[] GetAcountBonusList()
+        {
+            var sqlStr = "select new AccountBonus(a.IsPaid, sum(a.BonusAmount), a.Month) from AccountBonus a " +
+                    " group by a.IsPaid, a.Month order by a.IsPaid asc, a.Month desc";
+
+            var allAccountBonusDto = new List<AccountBonusDto>();
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                query.SetMaxResults(8);
+
+                // Get the matching objects
+                var list = query.List();
+
+                foreach (var oneRow in list)
+                {
+                    var accountBonus = oneRow as AccountBonus;
+                    if (accountBonus == null)
+                    {
+                        continue;
+                    }
+                    var accountBonusDto = new AccountBonusDto();
+                    accountBonusDto.IsPaid = accountBonus.IsPaid;
+                    accountBonusDto.Thang = accountBonus.Month.Substring(4, 2) + "/" + accountBonus.Month.Substring(0, 4); ;
+                    accountBonusDto.Tong = accountBonus.BonusAmount;
+                    allAccountBonusDto.Add(accountBonusDto);
+                }
+            }
+
+            return allAccountBonusDto.ToArray();
+        }
+
         #endregion
 
         #region Private Methods

@@ -362,6 +362,99 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetMemberAmount">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMemberAmountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMemberAmountResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountAmount">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAccountAmountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetAccountAmountResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagerAmount">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetManagerAmountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetManagerAmountResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagerL6Amount">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetManagerL6AmountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetManagerL6AmountResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewMemberList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetNewMemberListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewMemberListResult" type="tns:ArrayOfUserDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewManagerList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetNewManagerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewManagerListResult" type="tns:ArrayOfUserDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReportYear">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetReportYearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetReportYearResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAcountBonusList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAcountBonusListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAcountBonusListResult" type="tns:ArrayOfAccountBonusDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAccountBonusDto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountBonusDto" nillable="true" type="tns:AccountBonusDto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountBonusDto">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tong" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Thang" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="loginSoapIn">
@@ -466,6 +559,54 @@
   <wsdl:message name="CalculateBonusOfManagerTreeSoapOut">
     <wsdl:part name="parameters" element="tns:CalculateBonusOfManagerTreeResponse" />
   </wsdl:message>
+  <wsdl:message name="GetMemberAmountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberAmount" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberAmountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountAmountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountAmount" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountAmountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerAmountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManagerAmount" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerAmountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManagerAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerL6AmountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManagerL6Amount" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerL6AmountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManagerL6AmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewMemberListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewMemberList" />
+  </wsdl:message>
+  <wsdl:message name="GetNewMemberListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewMemberListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewManagerListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewManagerList" />
+  </wsdl:message>
+  <wsdl:message name="GetNewManagerListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewManagerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReportYearSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReportYear" />
+  </wsdl:message>
+  <wsdl:message name="GetReportYearSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReportYearResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAcountBonusListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAcountBonusList" />
+  </wsdl:message>
+  <wsdl:message name="GetAcountBonusListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAcountBonusListResponse" />
+  </wsdl:message>
   <wsdl:portType name="DcapServiceSoap">
     <wsdl:operation name="login">
       <wsdl:input message="tns:loginSoapIn" />
@@ -534,6 +675,38 @@
     <wsdl:operation name="CalculateBonusOfManagerTree">
       <wsdl:input message="tns:CalculateBonusOfManagerTreeSoapIn" />
       <wsdl:output message="tns:CalculateBonusOfManagerTreeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberAmount">
+      <wsdl:input message="tns:GetMemberAmountSoapIn" />
+      <wsdl:output message="tns:GetMemberAmountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountAmount">
+      <wsdl:input message="tns:GetAccountAmountSoapIn" />
+      <wsdl:output message="tns:GetAccountAmountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerAmount">
+      <wsdl:input message="tns:GetManagerAmountSoapIn" />
+      <wsdl:output message="tns:GetManagerAmountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerL6Amount">
+      <wsdl:input message="tns:GetManagerL6AmountSoapIn" />
+      <wsdl:output message="tns:GetManagerL6AmountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewMemberList">
+      <wsdl:input message="tns:GetNewMemberListSoapIn" />
+      <wsdl:output message="tns:GetNewMemberListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewManagerList">
+      <wsdl:input message="tns:GetNewManagerListSoapIn" />
+      <wsdl:output message="tns:GetNewManagerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportYear">
+      <wsdl:input message="tns:GetReportYearSoapIn" />
+      <wsdl:output message="tns:GetReportYearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAcountBonusList">
+      <wsdl:input message="tns:GetAcountBonusListSoapIn" />
+      <wsdl:output message="tns:GetAcountBonusListSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DcapServiceSoap" type="tns:DcapServiceSoap">
@@ -691,6 +864,78 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetMemberAmount">
+      <soap:operation soapAction="http://tempuri.org/GetMemberAmount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountAmount">
+      <soap:operation soapAction="http://tempuri.org/GetAccountAmount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerAmount">
+      <soap:operation soapAction="http://tempuri.org/GetManagerAmount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerL6Amount">
+      <soap:operation soapAction="http://tempuri.org/GetManagerL6Amount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewMemberList">
+      <soap:operation soapAction="http://tempuri.org/GetNewMemberList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewManagerList">
+      <soap:operation soapAction="http://tempuri.org/GetNewManagerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportYear">
+      <soap:operation soapAction="http://tempuri.org/GetReportYear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAcountBonusList">
+      <soap:operation soapAction="http://tempuri.org/GetAcountBonusList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="DcapServiceSoap12" type="tns:DcapServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -840,6 +1085,78 @@
     </wsdl:operation>
     <wsdl:operation name="CalculateBonusOfManagerTree">
       <soap12:operation soapAction="http://tempuri.org/CalculateBonusOfManagerTree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberAmount">
+      <soap12:operation soapAction="http://tempuri.org/GetMemberAmount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountAmount">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountAmount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerAmount">
+      <soap12:operation soapAction="http://tempuri.org/GetManagerAmount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerL6Amount">
+      <soap12:operation soapAction="http://tempuri.org/GetManagerL6Amount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewMemberList">
+      <soap12:operation soapAction="http://tempuri.org/GetNewMemberList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewManagerList">
+      <soap12:operation soapAction="http://tempuri.org/GetNewManagerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportYear">
+      <soap12:operation soapAction="http://tempuri.org/GetReportYear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAcountBonusList">
+      <soap12:operation soapAction="http://tempuri.org/GetAcountBonusList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

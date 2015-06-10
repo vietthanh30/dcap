@@ -32,6 +32,13 @@ namespace domain_lib.model
         {
         }
 
+        public AccountBonus(long isPaid, double bonusAmount, string month)
+        {
+            this._isPaid = isPaid;
+            this._bonusAmount = bonusAmount;
+            this._month = month;
+        }
+
     	#endregion
 
         #region Properties

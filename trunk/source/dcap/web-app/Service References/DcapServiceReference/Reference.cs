@@ -921,6 +921,97 @@ namespace web_app.DcapServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountBonusDto", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class AccountBonusDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long IdField;
+        
+        private double TongField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ThangField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public double Tong {
+            get {
+                return this.TongField;
+            }
+            set {
+                if ((this.TongField.Equals(value) != true)) {
+                    this.TongField = value;
+                    this.RaisePropertyChanged("Tong");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Thang {
+            get {
+                return this.ThangField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ThangField, value) != true)) {
+                    this.ThangField = value;
+                    this.RaisePropertyChanged("Thang");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DcapServiceReference.DcapServiceSoap")]
     public interface DcapServiceSoap {
@@ -988,6 +1079,33 @@ namespace web_app.DcapServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateBonusOfManagerTree", ReplyAction="*")]
         int CalculateBonusOfManagerTree();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMemberAmount", ReplyAction="*")]
+        long GetMemberAmount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccountAmount", ReplyAction="*")]
+        long GetAccountAmount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManagerAmount", ReplyAction="*")]
+        long GetManagerAmount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManagerL6Amount", ReplyAction="*")]
+        long GetManagerL6Amount();
+        
+        // CODEGEN: Generating message contract since element name GetNewMemberListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetNewMemberList", ReplyAction="*")]
+        web_app.DcapServiceReference.GetNewMemberListResponse GetNewMemberList(web_app.DcapServiceReference.GetNewMemberListRequest request);
+        
+        // CODEGEN: Generating message contract since element name GetNewManagerListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetNewManagerList", ReplyAction="*")]
+        web_app.DcapServiceReference.GetNewManagerListResponse GetNewManagerList(web_app.DcapServiceReference.GetNewManagerListRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetReportYear", ReplyAction="*")]
+        int GetReportYear();
+        
+        // CODEGEN: Generating message contract since element name GetAcountBonusListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAcountBonusList", ReplyAction="*")]
+        web_app.DcapServiceReference.GetAcountBonusListResponse GetAcountBonusList(web_app.DcapServiceReference.GetAcountBonusListRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2050,6 +2168,189 @@ namespace web_app.DcapServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetNewMemberListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNewMemberList", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetNewMemberListRequestBody Body;
+        
+        public GetNewMemberListRequest() {
+        }
+        
+        public GetNewMemberListRequest(web_app.DcapServiceReference.GetNewMemberListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetNewMemberListRequestBody {
+        
+        public GetNewMemberListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetNewMemberListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNewMemberListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetNewMemberListResponseBody Body;
+        
+        public GetNewMemberListResponse() {
+        }
+        
+        public GetNewMemberListResponse(web_app.DcapServiceReference.GetNewMemberListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetNewMemberListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.UserDto[] GetNewMemberListResult;
+        
+        public GetNewMemberListResponseBody() {
+        }
+        
+        public GetNewMemberListResponseBody(web_app.DcapServiceReference.UserDto[] GetNewMemberListResult) {
+            this.GetNewMemberListResult = GetNewMemberListResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetNewManagerListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNewManagerList", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetNewManagerListRequestBody Body;
+        
+        public GetNewManagerListRequest() {
+        }
+        
+        public GetNewManagerListRequest(web_app.DcapServiceReference.GetNewManagerListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetNewManagerListRequestBody {
+        
+        public GetNewManagerListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetNewManagerListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNewManagerListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetNewManagerListResponseBody Body;
+        
+        public GetNewManagerListResponse() {
+        }
+        
+        public GetNewManagerListResponse(web_app.DcapServiceReference.GetNewManagerListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetNewManagerListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.UserDto[] GetNewManagerListResult;
+        
+        public GetNewManagerListResponseBody() {
+        }
+        
+        public GetNewManagerListResponseBody(web_app.DcapServiceReference.UserDto[] GetNewManagerListResult) {
+            this.GetNewManagerListResult = GetNewManagerListResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetAcountBonusListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAcountBonusList", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetAcountBonusListRequestBody Body;
+        
+        public GetAcountBonusListRequest() {
+        }
+        
+        public GetAcountBonusListRequest(web_app.DcapServiceReference.GetAcountBonusListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetAcountBonusListRequestBody {
+        
+        public GetAcountBonusListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetAcountBonusListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAcountBonusListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetAcountBonusListResponseBody Body;
+        
+        public GetAcountBonusListResponse() {
+        }
+        
+        public GetAcountBonusListResponse(web_app.DcapServiceReference.GetAcountBonusListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetAcountBonusListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.AccountBonusDto[] GetAcountBonusListResult;
+        
+        public GetAcountBonusListResponseBody() {
+        }
+        
+        public GetAcountBonusListResponseBody(web_app.DcapServiceReference.AccountBonusDto[] GetAcountBonusListResult) {
+            this.GetAcountBonusListResult = GetAcountBonusListResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface DcapServiceSoapChannel : web_app.DcapServiceReference.DcapServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -2304,6 +2605,62 @@ namespace web_app.DcapServiceReference {
         
         public int CalculateBonusOfManagerTree() {
             return base.Channel.CalculateBonusOfManagerTree();
+        }
+        
+        public long GetMemberAmount() {
+            return base.Channel.GetMemberAmount();
+        }
+        
+        public long GetAccountAmount() {
+            return base.Channel.GetAccountAmount();
+        }
+        
+        public long GetManagerAmount() {
+            return base.Channel.GetManagerAmount();
+        }
+        
+        public long GetManagerL6Amount() {
+            return base.Channel.GetManagerL6Amount();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.GetNewMemberListResponse web_app.DcapServiceReference.DcapServiceSoap.GetNewMemberList(web_app.DcapServiceReference.GetNewMemberListRequest request) {
+            return base.Channel.GetNewMemberList(request);
+        }
+        
+        public web_app.DcapServiceReference.UserDto[] GetNewMemberList() {
+            web_app.DcapServiceReference.GetNewMemberListRequest inValue = new web_app.DcapServiceReference.GetNewMemberListRequest();
+            inValue.Body = new web_app.DcapServiceReference.GetNewMemberListRequestBody();
+            web_app.DcapServiceReference.GetNewMemberListResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetNewMemberList(inValue);
+            return retVal.Body.GetNewMemberListResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.GetNewManagerListResponse web_app.DcapServiceReference.DcapServiceSoap.GetNewManagerList(web_app.DcapServiceReference.GetNewManagerListRequest request) {
+            return base.Channel.GetNewManagerList(request);
+        }
+        
+        public web_app.DcapServiceReference.UserDto[] GetNewManagerList() {
+            web_app.DcapServiceReference.GetNewManagerListRequest inValue = new web_app.DcapServiceReference.GetNewManagerListRequest();
+            inValue.Body = new web_app.DcapServiceReference.GetNewManagerListRequestBody();
+            web_app.DcapServiceReference.GetNewManagerListResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetNewManagerList(inValue);
+            return retVal.Body.GetNewManagerListResult;
+        }
+        
+        public int GetReportYear() {
+            return base.Channel.GetReportYear();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.GetAcountBonusListResponse web_app.DcapServiceReference.DcapServiceSoap.GetAcountBonusList(web_app.DcapServiceReference.GetAcountBonusListRequest request) {
+            return base.Channel.GetAcountBonusList(request);
+        }
+        
+        public web_app.DcapServiceReference.AccountBonusDto[] GetAcountBonusList() {
+            web_app.DcapServiceReference.GetAcountBonusListRequest inValue = new web_app.DcapServiceReference.GetAcountBonusListRequest();
+            inValue.Body = new web_app.DcapServiceReference.GetAcountBonusListRequestBody();
+            web_app.DcapServiceReference.GetAcountBonusListResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetAcountBonusList(inValue);
+            return retVal.Body.GetAcountBonusListResult;
         }
     }
 }
