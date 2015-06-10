@@ -1617,12 +1617,17 @@ namespace domain_lib.persistence
         public AccountBonusDto[] GetAcountBonusList()
         {
             var sqlStr = "select new AccountBonus(a.IsPaid, sum(a.BonusAmount), a.Month) from AccountBonus a " +
-                    " group by a.IsPaid, a.Month order by a.IsPaid asc, a.Month desc";
+                    " group by a.IsPaid, a.Month "
+                    + " where a.Month >= :monthBegin and a.Month <= :monthEnd "
+                    + " order by a.IsPaid asc, a.Month desc";
 
             var allAccountBonusDto = new List<AccountBonusDto>();
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery(sqlStr);
+                var reportYear = GetReportYear();
+                query.SetParameter("monthBegin", reportYear + "01");
+                query.SetParameter("monthEnd", reportYear + "12");
                 query.SetMaxResults(8);
 
                 // Get the matching objects

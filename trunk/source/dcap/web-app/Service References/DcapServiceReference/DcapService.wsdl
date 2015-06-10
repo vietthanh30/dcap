@@ -452,7 +452,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
           <s:element minOccurs="1" maxOccurs="1" name="Tong" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Thang" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPaid" type="s:long" />
         </s:sequence>
       </s:complexType>
     </s:schema>

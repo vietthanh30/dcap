@@ -937,8 +937,7 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ThangField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusField;
+        private long IsPaidField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -989,15 +988,15 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string Status {
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public long IsPaid {
             get {
-                return this.StatusField;
+                return this.IsPaidField;
             }
             set {
-                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
+                if ((this.IsPaidField.Equals(value) != true)) {
+                    this.IsPaidField = value;
+                    this.RaisePropertyChanged("IsPaid");
                 }
             }
         }

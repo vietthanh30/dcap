@@ -13,147 +13,93 @@ namespace web_app {
     public partial class _Default {
         
         /// <summary>
-        /// Img1 control.
+        /// MemberAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
+        protected global::System.Web.UI.WebControls.Label MemberAmount;
         
         /// <summary>
-        /// Img2 control.
+        /// AccountAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img2;
+        protected global::System.Web.UI.WebControls.Label AccountAmount;
         
         /// <summary>
-        /// Img3 control.
+        /// ManagerAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img3;
+        protected global::System.Web.UI.WebControls.Label ManagerAmount;
         
         /// <summary>
-        /// Img4 control.
+        /// ManagerL6Amount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img4;
+        protected global::System.Web.UI.WebControls.Label ManagerL6Amount;
         
         /// <summary>
-        /// Img5 control.
+        /// NewMemberAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img5;
+        protected global::System.Web.UI.WebControls.Label NewMemberAmount;
         
         /// <summary>
-        /// Img6 control.
+        /// NewMemberList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img6;
+        protected global::System.Web.UI.WebControls.Literal NewMemberList;
         
         /// <summary>
-        /// Img7 control.
+        /// NewManagerAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img7;
+        protected global::System.Web.UI.WebControls.Label NewManagerAmount;
         
         /// <summary>
-        /// Img8 control.
+        /// NewManagerList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img8;
+        protected global::System.Web.UI.WebControls.Literal NewManagerList;
         
         /// <summary>
-        /// Img9 control.
+        /// ReportYearLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img9;
+        protected global::System.Web.UI.WebControls.Label ReportYearLabel;
         
         /// <summary>
-        /// Img10 control.
+        /// AccountBonusTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img10;
-        
-        /// <summary>
-        /// Img11 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img11;
-        
-        /// <summary>
-        /// Img12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img12;
-        
-        /// <summary>
-        /// Img13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img13;
-        
-        /// <summary>
-        /// Img14 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img14;
-        
-        /// <summary>
-        /// Img15 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img15;
-        
-        /// <summary>
-        /// Img16 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img16;
+        protected global::System.Web.UI.WebControls.Label AccountBonusTable;
     }
 }

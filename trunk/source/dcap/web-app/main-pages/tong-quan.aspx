@@ -70,48 +70,6 @@
 			</div><!-- /.box-header -->
 			<div class="box-body no-padding">
                 <asp:Literal ID="NewMemberList" runat="server"></asp:Literal>
-<%--                <ul class="users-list clearfix">--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user1-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Alexander Pierce</a>--%>
-<%--                    <span class="users-list-date">Today</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user8-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Norman</a>--%>
-<%--                    <span class="users-list-date">Yesterday</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user7-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Jane</a>--%>
-<%--                    <span class="users-list-date">12 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user6-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">John</a>--%>
-<%--                    <span class="users-list-date">12 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user2-160x160.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Alexander</a>--%>
-<%--                    <span class="users-list-date">13 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user5-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Sarah</a>--%>
-<%--                    <span class="users-list-date">14 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user4-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Nora</a>--%>
-<%--                    <span class="users-list-date">15 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user3-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Nadia</a>--%>
-<%--                    <span class="users-list-date">15 Jan</span>--%>
-<%--                </li>--%>
-<%--                </ul><!-- /.users-list -->--%>
             </div><!-- /.box-body -->
 		</div>
 	</div>
@@ -130,48 +88,6 @@
             </div><!-- /.box-header -->
             <div class="box-body no-padding">
                 <asp:Literal ID="NewManagerList" runat="server"></asp:Literal>
-<%--                <ul class="users-list clearfix">--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user1-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Alexander Pierce</a>--%>
-<%--                    <span class="users-list-date">Today</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user8-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Norman</a>--%>
-<%--                    <span class="users-list-date">Yesterday</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user7-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Jane</a>--%>
-<%--                    <span class="users-list-date">12 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user6-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">John</a>--%>
-<%--                    <span class="users-list-date">12 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user2-160x160.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Alexander</a>--%>
-<%--                    <span class="users-list-date">13 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user5-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Sarah</a>--%>
-<%--                    <span class="users-list-date">14 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user4-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Nora</a>--%>
-<%--                    <span class="users-list-date">15 Jan</span>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <img src="~/dist/img/user3-128x128.jpg" runat="server" alt="User Image"/>--%>
-<%--                    <a class="users-list-name" href="#">Nadia</a>--%>
-<%--                    <span class="users-list-date">15 Jan</span>--%>
-<%--                </li>--%>
-<%--                </ul><!-- /.users-list -->--%>
             </div><!-- /.box-body -->
         </div><!--/.box -->
     </div><!-- /.col -->
@@ -188,49 +104,7 @@
     </div><!-- /.box-header -->
     <div class="box-body">
         <div class="table-responsive">
-        <asp:Panel ID="AccountBonusTable" runat="server"></asp:Panel>
-<%--        <table class="table no-margin">--%>
-<%--            <thead>--%>
-<%--            <tr>--%>
-<%--                <th>Tháng</th>--%>
-<%--                <th>Tổng số</th>--%>
-<%--                <th>Trạng Thái</th> --%>
-<%--            </tr>--%>
-<%--            </thead>--%>
-<%--            <tbody>--%>
-<%--            <tr>--%>
-<%--                <td><a href="#">Tháng 6</a></td>--%>
-<%--                <td>10.000</td>--%>
-<%--                <td><span class="label label-warning">Chưa trả thưởng</span></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td><a href="#">Tháng 5</a></td>--%>
-<%--                <td>8000</td>--%>
-<%--                <td><span class="label label-warning">Đang xét duyệt</span></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td><a href="#">Tháng 4</a></td>--%>
-<%--                <td>5000</td>--%>
-<%--                <td><span class="label label-success">Đã trả thưởng</span></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td><a href="#">Tháng 3</a></td>--%>
-<%--                <td>5000</td>--%>
-<%--                <td><span class="label label-success">Đã trả thưởng</span></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td><a href="#">Tháng 2</a></td>--%>
-<%--                <td>2000</td>--%>
-<%--                <td><span class="label label-success">Đã trả thưởng</span></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td><a href="#">Tháng 1</a></td>--%>
-<%--                <td>1000</td>--%>
-<%--                <td><span class="label label-success">Đã trả thưởng</span></td>--%>
-<%--            </tr>--%>
-<%--                        --%>
-<%--            </tbody>--%>
-<%--        </table>--%>
+            <asp:Label ID="AccountBonusTable" runat="server"></asp:Label>
         </div><!-- /.table-responsive -->
     </div><!-- /.box-body -->
 </div><!-- /.box -->
