@@ -130,7 +130,7 @@
                     onclick="BangKeTraLuong_UpdatePaid" />
             <asp:Button ID="CancelUpdateButton" runat="server" Text="Hủy bỏ" 
                         class="btn btn-primary" 
-                    onclick="OnClosePopupWindow" />
+                    onclick="BangKeTraLuong_CancelUpdatePaid" />
         </div> 
         </asp:Panel>
         </ASPP:PopupWindow>

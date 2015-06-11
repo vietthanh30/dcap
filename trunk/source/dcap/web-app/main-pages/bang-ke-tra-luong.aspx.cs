@@ -224,6 +224,12 @@ namespace web_app.main_pages
             UpdatePaidPopup.ShowPopupWindow();
         }
 
+        protected void BangKeTraLuong_CancelUpdatePaid(object sender, EventArgs e)
+        {
+            OnSearchBangKe();
+            UpdatePaidPopup.HidePopupWindow();
+        }
+
         protected void OnClosePopupWindow(object sender, EventArgs e)
         {
             UpdatePaidPopup.HidePopupWindow();
