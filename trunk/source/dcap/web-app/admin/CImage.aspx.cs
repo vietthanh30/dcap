@@ -16,7 +16,8 @@ namespace web_app.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+			string captchaImageText = Convert.ToString(Session["CaptchaImageText"]);
+            if (!this.IsPostBack || string.IsNullOrEmpty(captchaImageText))
                 this.Session["CaptchaImageText"] = GenerateRandomCode();
 
             // Create a CAPTCHA image using the text stored in the Session object.

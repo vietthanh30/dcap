@@ -46,13 +46,13 @@
     </div><!--/.col (left) -->
     </div>
 		  
-    <asp:HiddenField ID="ContinueDestinationPageUrl" runat="server" />  
+    <asp:HiddenField ID="ContinueDestinationPageUrl" runat="server" /> 
     <div class="row">
 		<div class="col-xs-8">
         <asp:Label ID="InvalidCredentialsMessage" runat="server" class="failureNotification" ForeColor="Blue"
             Text="" Visible="False"></asp:Label>
             </div>
-    </div>   
+    </div>
     <div class="row">
     <div class="col-xs-12">
         <div class="box">

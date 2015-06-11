@@ -479,6 +479,8 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ThangField;
         
+        private long IsPaidField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -667,6 +669,19 @@ namespace web_app.DcapServiceReference {
                 if ((object.ReferenceEquals(this.ThangField, value) != true)) {
                     this.ThangField = value;
                     this.RaisePropertyChanged("Thang");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=14)]
+        public long IsPaid {
+            get {
+                return this.IsPaidField;
+            }
+            set {
+                if ((this.IsPaidField.Equals(value) != true)) {
+                    this.IsPaidField = value;
+                    this.RaisePropertyChanged("IsPaid");
                 }
             }
         }
@@ -1066,6 +1081,10 @@ namespace web_app.DcapServiceReference {
         // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetParentNodeByChildNo", ReplyAction="*")]
         web_app.DcapServiceReference.GetParentNodeByChildNoResponse GetParentNodeByChildNo(web_app.DcapServiceReference.GetParentNodeByChildNoRequest request);
+        
+        // CODEGEN: Generating message contract since element name bangKeDtos from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePaid", ReplyAction="*")]
+        web_app.DcapServiceReference.UpdatePaidResponse UpdatePaid(web_app.DcapServiceReference.UpdatePaidRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
         int CalculateAccountLog();
@@ -2171,6 +2190,74 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdatePaidRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdatePaid", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.UpdatePaidRequestBody Body;
+        
+        public UpdatePaidRequest() {
+        }
+        
+        public UpdatePaidRequest(web_app.DcapServiceReference.UpdatePaidRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class UpdatePaidRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.BangKeDto[] bangKeDtos;
+        
+        public UpdatePaidRequestBody() {
+        }
+        
+        public UpdatePaidRequestBody(web_app.DcapServiceReference.BangKeDto[] bangKeDtos) {
+            this.bangKeDtos = bangKeDtos;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdatePaidResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdatePaidResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.UpdatePaidResponseBody Body;
+        
+        public UpdatePaidResponse() {
+        }
+        
+        public UpdatePaidResponse(web_app.DcapServiceReference.UpdatePaidResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class UpdatePaidResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string UpdatePaidResult;
+        
+        public UpdatePaidResponseBody() {
+        }
+        
+        public UpdatePaidResponseBody(string UpdatePaidResult) {
+            this.UpdatePaidResult = UpdatePaidResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetNewMemberListRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNewMemberList", Namespace="http://tempuri.org/", Order=0)]
@@ -2588,6 +2675,19 @@ namespace web_app.DcapServiceReference {
             inValue.Body.parentField = parentField;
             web_app.DcapServiceReference.GetParentNodeByChildNoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetParentNodeByChildNo(inValue);
             return retVal.Body.GetParentNodeByChildNoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.UpdatePaidResponse web_app.DcapServiceReference.DcapServiceSoap.UpdatePaid(web_app.DcapServiceReference.UpdatePaidRequest request) {
+            return base.Channel.UpdatePaid(request);
+        }
+        
+        public string UpdatePaid(web_app.DcapServiceReference.BangKeDto[] bangKeDtos) {
+            web_app.DcapServiceReference.UpdatePaidRequest inValue = new web_app.DcapServiceReference.UpdatePaidRequest();
+            inValue.Body = new web_app.DcapServiceReference.UpdatePaidRequestBody();
+            inValue.Body.bangKeDtos = bangKeDtos;
+            web_app.DcapServiceReference.UpdatePaidResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).UpdatePaid(inValue);
+            return retVal.Body.UpdatePaidResult;
         }
         
         public int CalculateAccountLog() {

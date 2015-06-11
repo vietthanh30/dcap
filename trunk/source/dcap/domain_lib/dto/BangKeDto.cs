@@ -39,6 +39,8 @@ namespace domain_lib.dto
 
         private string _thang = String.Empty;
 
+        private long _isPaid = -1;
+
         #endregion
 
     	#region Constructor
@@ -175,6 +177,15 @@ namespace domain_lib.dto
         {
             get { return _thang; }
             set { _thang = value; }
+        }
+
+        /// <summary>
+        /// Status
+        /// </summary>
+        public virtual long IsPaid
+        {
+            get { return _isPaid; }
+            set { _isPaid = value; }
         }
 
         #endregion

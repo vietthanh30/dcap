@@ -110,6 +110,10 @@ namespace domain_lib.controller
             return m_PersistenceManager.GetParentNodeByChildNo(accountNumber, parentField);
         }
 
+        public string UpdatePaid(BangKeDto[] bangKeDtos)
+        {
+            return m_PersistenceManager.UpdatePaid(bangKeDtos);
+        }
 
         public int CalculateAccountLog()
         {

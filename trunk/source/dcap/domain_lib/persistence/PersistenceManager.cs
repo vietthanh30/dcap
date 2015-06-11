@@ -136,6 +136,31 @@ namespace domain_lib.persistence
         /// Retrieves objects of a specified type where a specified property equals a specified value.
         /// </summary>
         /// <typeparam name="T">The type of the objects to be retrieved.</typeparam>
+        /// <param name="mapParams">The map of the property to be tested.</param>
+        /// <returns>A list of all objects meeting the specified criteria.</returns>
+        public IList<T> RetrieveEquals<T>(Hashtable mapParams)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(T));
+                foreach (DictionaryEntry entry in mapParams)
+                {
+                    criteria.Add(Expression.Eq(entry.Key.ToString(), entry.Value));
+                }
+
+                // Get the matching objects
+                IList<T> matchingObjects = criteria.List<T>();
+
+                // Set return value
+                return matchingObjects;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves objects of a specified type where a specified property equals a specified value.
+        /// </summary>
+        /// <typeparam name="T">The type of the objects to be retrieved.</typeparam>
         /// <param name="propertyName">The name of the property to be tested.</param>
         /// <param name="propertyValue">The value that the named property must hold.</param>
         /// <returns>A list of all objects meeting the specified criteria.</returns>
@@ -381,6 +406,50 @@ namespace domain_lib.persistence
                     return -1;
                 }
                 return Convert.ToInt64(accountId);
+            }
+        }
+
+        private Hashtable GetMapAccountIdBy(string[] userNames)
+        {
+            var result = new Hashtable();
+            if (userNames.Length == 0)
+            {
+                return result;
+            }
+            var strSql = "select u.UserName, a.AccountId from Account a, Users u "
+                         + " where a.UserId = u.UserID and u.UserName in (";
+            var mapParams = new Hashtable();
+            for (int i = 0; i < userNames.Length; i++)
+            {
+                if (i > 0)
+                {
+                    strSql += ",";
+                }
+                var paramKey = "userName" + (i + 1);
+                strSql += ":" + paramKey;
+                mapParams.Add(paramKey, userNames[i]);
+            }
+            strSql += ")";
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(strSql);
+                foreach (DictionaryEntry param in mapParams)
+                {
+                    query.SetParameter(param.Key.ToString(), param.Value);
+                }
+
+                // Get the matching objects
+                var list = query.List();
+
+                foreach (object[] aRow in list)
+                {
+                    var userName = aRow[0].ToString();
+                    var accountId = long.Parse(aRow[1].ToString());
+                    result.Add(userName, accountId);
+                }
+
+                // Return
+                return result;
             }
         }
 
@@ -910,8 +979,45 @@ namespace domain_lib.persistence
                     allResults.Add(bangKeDto);
                 }
             }
-
+            UpdatePaidStatus(allResults);
             return allResults.ToArray();
+        }
+
+        private void UpdatePaidStatus(List<BangKeDto> allResults)
+        {
+            var userNames = new List<string>();
+            foreach (var bangKeDto in allResults)
+            {
+                userNames.Add(bangKeDto.UserName);
+            }
+            var accountIds = GetMapAccountIdBy(userNames.ToArray());
+            foreach (BangKeDto bangKeDto in allResults)
+            {
+                var mapParams = new Hashtable();
+                mapParams.Add("AccountId", accountIds[bangKeDto.UserName]);
+                var month = DateUtil.GetDateTimeAsStringWithEnProvider(DateUtil.GetDateTime(bangKeDto.Thang),
+                                                                       ConstUtil.MONTH_FORMAT);
+                mapParams.Add("Month", month);
+                bangKeDto.IsPaid = IsAccountPaidBy(mapParams);
+            }
+        }
+
+        private long IsAccountPaidBy(Hashtable mapParams)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(*) from AccountBonus a "
+                   + " where a.AccountId = :AccountId and a.Month = :Month and a.IsPaid = :IsPaid");
+                query.SetParameter("AccountId", mapParams["AccountId"]);
+                query.SetParameter("Month", mapParams["Month"]);
+                query.SetParameter("IsPaid", 1);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count) > 0 ? 1 : -1;
+            }
         }
 
         public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
@@ -1307,6 +1413,42 @@ namespace domain_lib.persistence
             }
 
             return memberNodeDto;
+        }
+
+        public string UpdatePaid(BangKeDto[] bangKeDtos)
+        {
+            var userNames = new List<string>();
+            foreach (BangKeDto bangKeDto in bangKeDtos)
+            {
+                userNames.Add(bangKeDto.UserName);
+            }
+            var mapAccountIds = GetMapAccountIdBy(userNames.ToArray());
+            if (mapAccountIds.Count == 0)
+            {
+                return "-1";
+            }
+            var allAccountBonus = new List<AccountBonus>();
+            // List all AccountBonus
+            foreach (BangKeDto bangKeDto in bangKeDtos)
+            {
+                var mapParams = new Hashtable();
+                mapParams.Add("AccountId", mapAccountIds[bangKeDto.UserName]);
+                var month = DateUtil.GetDateTimeAsStringWithEnProvider(DateUtil.GetDateTime(bangKeDto.Thang),
+                                                                       ConstUtil.MONTH_FORMAT);
+                mapParams.Add("Month", month);
+                var listAccountBonus = RetrieveEquals<AccountBonus>(mapParams);
+                foreach (AccountBonus accountBonus in listAccountBonus)
+                {
+                    accountBonus.IsPaid = bangKeDto.IsPaid;
+                }
+                allAccountBonus.AddRange(listAccountBonus);
+            }
+            // Save AccountBonus
+            foreach (AccountBonus accountBonus in allAccountBonus)
+            {
+                Save(accountBonus);
+            }
+            return "0";
         }
 
         public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)

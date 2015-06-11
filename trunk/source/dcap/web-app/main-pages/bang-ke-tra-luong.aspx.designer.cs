@@ -7,8 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace web_app.main_pages
-{
+namespace web_app.main_pages {
     
     
     public partial class bang_ke_tra_luong {
@@ -41,6 +40,24 @@ namespace web_app.main_pages
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
+        /// CapNhatButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CapNhatButton;
+        
+        /// <summary>
+        /// InvalidCredentialsMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
+        
+        /// <summary>
         /// gvBangKe control.
         /// </summary>
         /// <remarks>
@@ -48,5 +65,59 @@ namespace web_app.main_pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvBangKe;
+        
+        /// <summary>
+        /// UpdatePaidPopup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ASP.Web.UI.PopupControl.PopupPanel UpdatePaidPopup;
+        
+        /// <summary>
+        /// UpdatePaidWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ASP.Web.UI.PopupControl.PopupWindow UpdatePaidWindow;
+        
+        /// <summary>
+        /// UpdatePaidPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel UpdatePaidPanel;
+        
+        /// <summary>
+        /// UpdatePaidLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UpdatePaidLabel;
+        
+        /// <summary>
+        /// AcceptUpdateButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AcceptUpdateButton;
+        
+        /// <summary>
+        /// CancelUpdateButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CancelUpdateButton;
     }
 }

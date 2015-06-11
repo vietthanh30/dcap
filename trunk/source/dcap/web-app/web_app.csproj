@@ -61,6 +61,7 @@
     <Content Include="admin\ChangePassword.aspx" />
     <Content Include="admin\ChangePasswordSuccess.aspx" />
     <Content Include="admin\CImage.aspx" />
+    <Content Include="admin\DuyetCapQuanLy.aspx" />
     <Content Include="admin\TraCuuThanhVien.aspx" />
     <Content Include="dist\img\delete-icon.png" />
     <Content Include="dist\img\edit-icon.png" />
@@ -872,6 +873,9 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Scripts\excanvas.js" />
+    <Content Include="Scripts\jit.js" />
+    <Content Include="Scripts\jquery.spacetree.js" />
     <None Include="Service References\DcapServiceReference\DcapService.disco" />
     <None Include="Service References\DcapServiceReference\configuration91.svcinfo" />
     <None Include="Service References\DcapServiceReference\configuration.svcinfo" />
@@ -879,9 +883,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Scripts\excanvas.js" />
-    <Content Include="Scripts\jit.js" />
-    <Content Include="Scripts\jquery.spacetree.js" />
     <Content Include="Styles\GridPager.css" />
     <Content Include="Styles\jquery.spacetree.css" />
     <Content Include="Styles\Site.css" />
@@ -938,6 +939,13 @@
     </Compile>
     <Compile Include="admin\CImage.aspx.designer.cs">
       <DependentUpon>CImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\DuyetCapQuanLy.aspx.cs">
+      <DependentUpon>DuyetCapQuanLy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\DuyetCapQuanLy.aspx.designer.cs">
+      <DependentUpon>DuyetCapQuanLy.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\TraCuuThanhVien.aspx.cs">
       <DependentUpon>TraCuuThanhVien.aspx</DependentUpon>

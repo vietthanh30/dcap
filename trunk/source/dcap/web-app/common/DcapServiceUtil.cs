@@ -122,5 +122,10 @@ namespace web_app.common
         {
             return dcapService.GetAcountBonusList();
         }
+
+        public static string UpdatePaid(BangKeDto[] bangKeDtos)
+        {
+            return dcapService.UpdatePaid(bangKeDtos);
+        }
     }
 }

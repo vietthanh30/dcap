@@ -103,6 +103,12 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public string UpdatePaid(BangKeDto[] bangKeDtos)
+        {
+            return controller.UpdatePaid(bangKeDtos);
+        }
+
+        [WebMethod]
         public int CalculateAccountLog()
         {
             return controller.CalculateAccountLog();

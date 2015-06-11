@@ -157,6 +157,11 @@
                     <i class="fa fa-edit"></i> <span>Đăng ký quản lý</span>
                   </a>
                 </li>
+                <li>
+                  <a id="A10" href="~/admin/DuyetCapQuanLy.aspx" runat="server">
+                    <i class="fa fa-edit"></i> <span>Duyệt cấp quản lý</span>
+                  </a>
+                </li>
 			    <li>
                   <a href="~/main-pages/member-network.aspx" runat="server">
                     <i class="fa fa-calendar"></i> <span>Mạng lưới thành viên</span>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -35,10 +37,38 @@ namespace web_app.main_pages
 
         private void OnSearchBangKe()
         {
+            InvalidCredentialsMessage.Visible = false;
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             gvBangKe.DataSource = allBangKeDto;
             gvBangKe.DataBind();
+            Hashtable mapPaidUserName = CreateMapPaidUserName(allBangKeDto);
+            UpdateKyNhanStatus(mapPaidUserName);
+        }
+
+        private Hashtable CreateMapPaidUserName(BangKeDto[] allBangKeDto)
+        {
+            Hashtable map = new Hashtable();
+            foreach (BangKeDto dto in allBangKeDto)
+            {
+                map.Add(dto.UserName, dto.IsPaid);
+            }
+            return map;
+        }
+
+        private void UpdateKyNhanStatus(Hashtable mapPaidUserName)
+        {
+            for (int i = 0; i < gvBangKe.Rows.Count; i++)
+            {
+                GridViewRow row = gvBangKe.Rows[i];
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chkRow = (row.Cells[0].FindControl("chkRow") as CheckBox);
+                    var userName = row.Cells[3].Text;
+                    var isPaid = mapPaidUserName[userName];
+                    chkRow.Checked = isPaid != null & int.Parse(isPaid.ToString()) == 1;
+                }
+            }
         }
 
         protected void BangKeTraLuong_SearchBangKe(object sender, EventArgs e)
@@ -48,6 +78,7 @@ namespace web_app.main_pages
 
         protected void BangKeTraLuong_ExportExcel(object sender, EventArgs e)
         {
+            InvalidCredentialsMessage.Visible = false;
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             if (allBangKeDto.Length == 0)
@@ -116,6 +147,7 @@ namespace web_app.main_pages
 
         protected void BangKeTraLuong_ExportDOC(object sender, EventArgs e)
         {
+            InvalidCredentialsMessage.Visible = false;
             var thangKeKhai = DateUtil.GetDateTime(ReportMonth.Value.Trim());
             var allBangKeDto = DcapServiceUtil.SearchBangKe(thangKeKhai);
             if (allBangKeDto.Length == 0)
@@ -179,6 +211,58 @@ namespace web_app.main_pages
             int rowCount = gvBangKe.PageSize;
             _stt = pageIndex * rowCount + 1;
             OnSearchBangKe();
+        }
+
+        protected void BangKeTraLuong_PreUpdatePaid(object sender, EventArgs e)
+        {
+            List<BangKeDto> bangKeDtos = GetAllBangKeDtos();
+            if (bangKeDtos.Count == 0)
+            {
+                return;
+            }
+            UpdatePaidLabel.Text = "Cập nhật trả lương cho các thành viên được chọn?";
+            UpdatePaidPopup.ShowPopupWindow();
+        }
+
+        protected void OnClosePopupWindow(object sender, EventArgs e)
+        {
+            UpdatePaidPopup.HidePopupWindow();
+        }
+
+        protected void BangKeTraLuong_UpdatePaid(object sender, EventArgs e)
+        {
+            InvalidCredentialsMessage.Visible = false;
+            List<BangKeDto> bangKeDtos = GetAllBangKeDtos();
+            var returnCode = DcapServiceUtil.UpdatePaid(bangKeDtos.ToArray());
+            if (string.Compare(returnCode, "0", true) == 0)
+            {
+                OnSearchBangKe();
+                InvalidCredentialsMessage.Text = "Cập nhật trả lương thành công!";
+            }
+            else
+            {
+                InvalidCredentialsMessage.Text = "Cập nhật trả lương không thành công!";
+            }
+            InvalidCredentialsMessage.Visible = true;
+            UpdatePaidPopup.HidePopupWindow();
+        }
+
+        private List<BangKeDto> GetAllBangKeDtos()
+        {
+            var bangKeDtos = new List<BangKeDto>();
+            foreach (GridViewRow row in gvBangKe.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chkRow = (row.Cells[0].FindControl("chkRow") as CheckBox);
+                    var bangKeDto = new BangKeDto();
+                    bangKeDto.UserName = row.Cells[3].Text;
+                    bangKeDto.Thang = row.Cells[10].Text;
+                    bangKeDto.IsPaid = chkRow.Checked ? 1 : -1;
+                    bangKeDtos.Add(bangKeDto);
+                }
+            }
+            return bangKeDtos;
         }
     }
 }
