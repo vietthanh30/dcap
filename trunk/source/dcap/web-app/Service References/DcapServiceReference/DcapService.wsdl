@@ -199,6 +199,21 @@
           <s:element minOccurs="1" maxOccurs="1" name="IsPaid" type="s:long" />
         </s:sequence>
       </s:complexType>
+      <s:element name="SearchBangKeExt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="beginDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchBangKeExtResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchBangKeExtResult" type="tns:ArrayOfBangKeDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SearchBangKeHoaHong">
         <s:complexType>
           <s:sequence>
@@ -279,6 +294,21 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="SearchManagerNodeDto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="capQuanLy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchManagerNodeDtoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchManagerNodeDtoResult" type="tns:ArrayOfMemberNodeDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="IsContainMemberNode">
         <s:complexType>
           <s:sequence>
@@ -320,6 +350,22 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetParentNodeByChildNoResult" type="tns:MemberNodeDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParentManagerNodeByChildNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="capQuanLy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parentField" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParentManagerNodeByChildNoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParentManagerNodeByChildNoResult" type="tns:MemberNodeDto" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -514,6 +560,12 @@
   <wsdl:message name="SearchBangKeSoapOut">
     <wsdl:part name="parameters" element="tns:SearchBangKeResponse" />
   </wsdl:message>
+  <wsdl:message name="SearchBangKeExtSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchBangKeExt" />
+  </wsdl:message>
+  <wsdl:message name="SearchBangKeExtSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchBangKeExtResponse" />
+  </wsdl:message>
   <wsdl:message name="SearchBangKeHoaHongSoapIn">
     <wsdl:part name="parameters" element="tns:SearchBangKeHoaHong" />
   </wsdl:message>
@@ -532,6 +584,12 @@
   <wsdl:message name="SearchMemberNodeDtoSoapOut">
     <wsdl:part name="parameters" element="tns:SearchMemberNodeDtoResponse" />
   </wsdl:message>
+  <wsdl:message name="SearchManagerNodeDtoSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchManagerNodeDto" />
+  </wsdl:message>
+  <wsdl:message name="SearchManagerNodeDtoSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchManagerNodeDtoResponse" />
+  </wsdl:message>
   <wsdl:message name="IsContainMemberNodeSoapIn">
     <wsdl:part name="parameters" element="tns:IsContainMemberNode" />
   </wsdl:message>
@@ -549,6 +607,12 @@
   </wsdl:message>
   <wsdl:message name="GetParentNodeByChildNoSoapOut">
     <wsdl:part name="parameters" element="tns:GetParentNodeByChildNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParentManagerNodeByChildNoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParentManagerNodeByChildNo" />
+  </wsdl:message>
+  <wsdl:message name="GetParentManagerNodeByChildNoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParentManagerNodeByChildNoResponse" />
   </wsdl:message>
   <wsdl:message name="UpdatePaidSoapIn">
     <wsdl:part name="parameters" element="tns:UpdatePaid" />
@@ -657,6 +721,10 @@
       <wsdl:input message="tns:SearchBangKeSoapIn" />
       <wsdl:output message="tns:SearchBangKeSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SearchBangKeExt">
+      <wsdl:input message="tns:SearchBangKeExtSoapIn" />
+      <wsdl:output message="tns:SearchBangKeExtSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SearchBangKeHoaHong">
       <wsdl:input message="tns:SearchBangKeHoaHongSoapIn" />
       <wsdl:output message="tns:SearchBangKeHoaHongSoapOut" />
@@ -669,6 +737,10 @@
       <wsdl:input message="tns:SearchMemberNodeDtoSoapIn" />
       <wsdl:output message="tns:SearchMemberNodeDtoSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SearchManagerNodeDto">
+      <wsdl:input message="tns:SearchManagerNodeDtoSoapIn" />
+      <wsdl:output message="tns:SearchManagerNodeDtoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="IsContainMemberNode">
       <wsdl:input message="tns:IsContainMemberNodeSoapIn" />
       <wsdl:output message="tns:IsContainMemberNodeSoapOut" />
@@ -680,6 +752,10 @@
     <wsdl:operation name="GetParentNodeByChildNo">
       <wsdl:input message="tns:GetParentNodeByChildNoSoapIn" />
       <wsdl:output message="tns:GetParentNodeByChildNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentManagerNodeByChildNo">
+      <wsdl:input message="tns:GetParentManagerNodeByChildNoSoapIn" />
+      <wsdl:output message="tns:GetParentManagerNodeByChildNoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="UpdatePaid">
       <wsdl:input message="tns:UpdatePaidSoapIn" />
@@ -799,6 +875,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SearchBangKeExt">
+      <soap:operation soapAction="http://tempuri.org/SearchBangKeExt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SearchBangKeHoaHong">
       <soap:operation soapAction="http://tempuri.org/SearchBangKeHoaHong" style="document" />
       <wsdl:input>
@@ -826,6 +911,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SearchManagerNodeDto">
+      <soap:operation soapAction="http://tempuri.org/SearchManagerNodeDto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="IsContainMemberNode">
       <soap:operation soapAction="http://tempuri.org/IsContainMemberNode" style="document" />
       <wsdl:input>
@@ -846,6 +940,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetParentNodeByChildNo">
       <soap:operation soapAction="http://tempuri.org/GetParentNodeByChildNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentManagerNodeByChildNo">
+      <soap:operation soapAction="http://tempuri.org/GetParentManagerNodeByChildNo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1036,6 +1139,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SearchBangKeExt">
+      <soap12:operation soapAction="http://tempuri.org/SearchBangKeExt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SearchBangKeHoaHong">
       <soap12:operation soapAction="http://tempuri.org/SearchBangKeHoaHong" style="document" />
       <wsdl:input>
@@ -1063,6 +1175,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SearchManagerNodeDto">
+      <soap12:operation soapAction="http://tempuri.org/SearchManagerNodeDto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="IsContainMemberNode">
       <soap12:operation soapAction="http://tempuri.org/IsContainMemberNode" style="document" />
       <wsdl:input>
@@ -1083,6 +1204,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetParentNodeByChildNo">
       <soap12:operation soapAction="http://tempuri.org/GetParentNodeByChildNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentManagerNodeByChildNo">
+      <soap12:operation soapAction="http://tempuri.org/GetParentManagerNodeByChildNo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -20,6 +20,11 @@ namespace web_app.main_pages
                 Response.Redirect("~/admin/Login.aspx");
                 return;
             }
+            if (!UserUtil.IsQthtRole(userDto) && !UserUtil.IsQlktRole(userDto))
+            {
+                Response.Redirect("~/Default.aspx");
+                return;
+            }
             if (!IsPostBack)
             {
                 FillToPage();

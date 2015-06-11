@@ -7,81 +7,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace web_app {
+namespace web_app.main_pages {
     
     
-    public partial class _Default {
+    public partial class BangLuongExt {
         
         /// <summary>
-        /// MemberHeaderPanel control.
+        /// i2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel MemberHeaderPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl i2;
         
         /// <summary>
-        /// AdminHeaderPanel control.
+        /// BeginDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AdminHeaderPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText BeginDate;
         
         /// <summary>
-        /// MemberContentPanel control.
+        /// i3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel MemberContentPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl i3;
         
         /// <summary>
-        /// AdminContentPanel control.
+        /// EndDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AdminContentPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText EndDate;
         
         /// <summary>
-        /// AccountAmount control.
+        /// SearchButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AccountAmount;
+        protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// ManagerAmount control.
+        /// InvalidCredentialsMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ManagerAmount;
+        protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
         
         /// <summary>
-        /// NewMemberAmount control.
+        /// gvBangKe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NewMemberAmount;
+        protected global::System.Web.UI.WebControls.GridView gvBangKe;
         
         /// <summary>
-        /// NewMemberList control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal NewMemberList;
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }

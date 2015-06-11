@@ -1058,6 +1058,10 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKe", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeResponse SearchBangKe(web_app.DcapServiceReference.SearchBangKeRequest request);
         
+        // CODEGEN: Generating message contract since element name SearchBangKeExtResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKeExt", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchBangKeExtResponse SearchBangKeExt(web_app.DcapServiceReference.SearchBangKeExtRequest request);
+        
         // CODEGEN: Generating message contract since element name SearchBangKeHoaHongResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKeHoaHong", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeHoaHongResponse SearchBangKeHoaHong(web_app.DcapServiceReference.SearchBangKeHoaHongRequest request);
@@ -1070,6 +1074,10 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchMemberNodeDto", ReplyAction="*")]
         web_app.DcapServiceReference.SearchMemberNodeDtoResponse SearchMemberNodeDto(web_app.DcapServiceReference.SearchMemberNodeDtoRequest request);
         
+        // CODEGEN: Generating message contract since element name capQuanLy from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchManagerNodeDto", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchManagerNodeDtoResponse SearchManagerNodeDto(web_app.DcapServiceReference.SearchManagerNodeDtoRequest request);
+        
         // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsContainMemberNode", ReplyAction="*")]
         web_app.DcapServiceReference.IsContainMemberNodeResponse IsContainMemberNode(web_app.DcapServiceReference.IsContainMemberNodeRequest request);
@@ -1081,6 +1089,10 @@ namespace web_app.DcapServiceReference {
         // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetParentNodeByChildNo", ReplyAction="*")]
         web_app.DcapServiceReference.GetParentNodeByChildNoResponse GetParentNodeByChildNo(web_app.DcapServiceReference.GetParentNodeByChildNoRequest request);
+        
+        // CODEGEN: Generating message contract since element name capQuanLy from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetParentManagerNodeByChildNo", ReplyAction="*")]
+        web_app.DcapServiceReference.GetParentManagerNodeByChildNoResponse GetParentManagerNodeByChildNo(web_app.DcapServiceReference.GetParentManagerNodeByChildNoRequest request);
         
         // CODEGEN: Generating message contract since element name bangKeDtos from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePaid", ReplyAction="*")]
@@ -1762,6 +1774,78 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchBangKeExtRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchBangKeExt", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchBangKeExtRequestBody Body;
+        
+        public SearchBangKeExtRequest() {
+        }
+        
+        public SearchBangKeExtRequest(web_app.DcapServiceReference.SearchBangKeExtRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchBangKeExtRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public System.Nullable<System.DateTime> beginDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.Nullable<System.DateTime> endDate;
+        
+        public SearchBangKeExtRequestBody() {
+        }
+        
+        public SearchBangKeExtRequestBody(System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
+            this.beginDate = beginDate;
+            this.endDate = endDate;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchBangKeExtResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchBangKeExtResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchBangKeExtResponseBody Body;
+        
+        public SearchBangKeExtResponse() {
+        }
+        
+        public SearchBangKeExtResponse(web_app.DcapServiceReference.SearchBangKeExtResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchBangKeExtResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.BangKeDto[] SearchBangKeExtResult;
+        
+        public SearchBangKeExtResponseBody() {
+        }
+        
+        public SearchBangKeExtResponseBody(web_app.DcapServiceReference.BangKeDto[] SearchBangKeExtResult) {
+            this.SearchBangKeExtResult = SearchBangKeExtResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class SearchBangKeHoaHongRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchBangKeHoaHong", Namespace="http://tempuri.org/", Order=0)]
@@ -1978,6 +2062,78 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchManagerNodeDtoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchManagerNodeDto", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchManagerNodeDtoRequestBody Body;
+        
+        public SearchManagerNodeDtoRequest() {
+        }
+        
+        public SearchManagerNodeDtoRequest(web_app.DcapServiceReference.SearchManagerNodeDtoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchManagerNodeDtoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string capQuanLy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string accountNumber;
+        
+        public SearchManagerNodeDtoRequestBody() {
+        }
+        
+        public SearchManagerNodeDtoRequestBody(string capQuanLy, string accountNumber) {
+            this.capQuanLy = capQuanLy;
+            this.accountNumber = accountNumber;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchManagerNodeDtoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchManagerNodeDtoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchManagerNodeDtoResponseBody Body;
+        
+        public SearchManagerNodeDtoResponse() {
+        }
+        
+        public SearchManagerNodeDtoResponse(web_app.DcapServiceReference.SearchManagerNodeDtoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchManagerNodeDtoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.MemberNodeDto[] SearchManagerNodeDtoResult;
+        
+        public SearchManagerNodeDtoResponseBody() {
+        }
+        
+        public SearchManagerNodeDtoResponseBody(web_app.DcapServiceReference.MemberNodeDto[] SearchManagerNodeDtoResult) {
+            this.SearchManagerNodeDtoResult = SearchManagerNodeDtoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class IsContainMemberNodeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="IsContainMemberNode", Namespace="http://tempuri.org/", Order=0)]
@@ -2183,6 +2339,82 @@ namespace web_app.DcapServiceReference {
         
         public GetParentNodeByChildNoResponseBody(web_app.DcapServiceReference.MemberNodeDto GetParentNodeByChildNoResult) {
             this.GetParentNodeByChildNoResult = GetParentNodeByChildNoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetParentManagerNodeByChildNoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetParentManagerNodeByChildNo", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetParentManagerNodeByChildNoRequestBody Body;
+        
+        public GetParentManagerNodeByChildNoRequest() {
+        }
+        
+        public GetParentManagerNodeByChildNoRequest(web_app.DcapServiceReference.GetParentManagerNodeByChildNoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetParentManagerNodeByChildNoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string capQuanLy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string accountNumber;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string parentField;
+        
+        public GetParentManagerNodeByChildNoRequestBody() {
+        }
+        
+        public GetParentManagerNodeByChildNoRequestBody(string capQuanLy, string accountNumber, string parentField) {
+            this.capQuanLy = capQuanLy;
+            this.accountNumber = accountNumber;
+            this.parentField = parentField;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetParentManagerNodeByChildNoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetParentManagerNodeByChildNoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetParentManagerNodeByChildNoResponseBody Body;
+        
+        public GetParentManagerNodeByChildNoResponse() {
+        }
+        
+        public GetParentManagerNodeByChildNoResponse(web_app.DcapServiceReference.GetParentManagerNodeByChildNoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetParentManagerNodeByChildNoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.MemberNodeDto GetParentManagerNodeByChildNoResult;
+        
+        public GetParentManagerNodeByChildNoResponseBody() {
+        }
+        
+        public GetParentManagerNodeByChildNoResponseBody(web_app.DcapServiceReference.MemberNodeDto GetParentManagerNodeByChildNoResult) {
+            this.GetParentManagerNodeByChildNoResult = GetParentManagerNodeByChildNoResult;
         }
     }
     
@@ -2595,6 +2827,20 @@ namespace web_app.DcapServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchBangKeExtResponse web_app.DcapServiceReference.DcapServiceSoap.SearchBangKeExt(web_app.DcapServiceReference.SearchBangKeExtRequest request) {
+            return base.Channel.SearchBangKeExt(request);
+        }
+        
+        public web_app.DcapServiceReference.BangKeDto[] SearchBangKeExt(System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
+            web_app.DcapServiceReference.SearchBangKeExtRequest inValue = new web_app.DcapServiceReference.SearchBangKeExtRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchBangKeExtRequestBody();
+            inValue.Body.beginDate = beginDate;
+            inValue.Body.endDate = endDate;
+            web_app.DcapServiceReference.SearchBangKeExtResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchBangKeExt(inValue);
+            return retVal.Body.SearchBangKeExtResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         web_app.DcapServiceReference.SearchBangKeHoaHongResponse web_app.DcapServiceReference.DcapServiceSoap.SearchBangKeHoaHong(web_app.DcapServiceReference.SearchBangKeHoaHongRequest request) {
             return base.Channel.SearchBangKeHoaHong(request);
         }
@@ -2637,6 +2883,20 @@ namespace web_app.DcapServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchManagerNodeDtoResponse web_app.DcapServiceReference.DcapServiceSoap.SearchManagerNodeDto(web_app.DcapServiceReference.SearchManagerNodeDtoRequest request) {
+            return base.Channel.SearchManagerNodeDto(request);
+        }
+        
+        public web_app.DcapServiceReference.MemberNodeDto[] SearchManagerNodeDto(string capQuanLy, string accountNumber) {
+            web_app.DcapServiceReference.SearchManagerNodeDtoRequest inValue = new web_app.DcapServiceReference.SearchManagerNodeDtoRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchManagerNodeDtoRequestBody();
+            inValue.Body.capQuanLy = capQuanLy;
+            inValue.Body.accountNumber = accountNumber;
+            web_app.DcapServiceReference.SearchManagerNodeDtoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchManagerNodeDto(inValue);
+            return retVal.Body.SearchManagerNodeDtoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         web_app.DcapServiceReference.IsContainMemberNodeResponse web_app.DcapServiceReference.DcapServiceSoap.IsContainMemberNode(web_app.DcapServiceReference.IsContainMemberNodeRequest request) {
             return base.Channel.IsContainMemberNode(request);
         }
@@ -2675,6 +2935,21 @@ namespace web_app.DcapServiceReference {
             inValue.Body.parentField = parentField;
             web_app.DcapServiceReference.GetParentNodeByChildNoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetParentNodeByChildNo(inValue);
             return retVal.Body.GetParentNodeByChildNoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.GetParentManagerNodeByChildNoResponse web_app.DcapServiceReference.DcapServiceSoap.GetParentManagerNodeByChildNo(web_app.DcapServiceReference.GetParentManagerNodeByChildNoRequest request) {
+            return base.Channel.GetParentManagerNodeByChildNo(request);
+        }
+        
+        public web_app.DcapServiceReference.MemberNodeDto GetParentManagerNodeByChildNo(string capQuanLy, string accountNumber, string parentField) {
+            web_app.DcapServiceReference.GetParentManagerNodeByChildNoRequest inValue = new web_app.DcapServiceReference.GetParentManagerNodeByChildNoRequest();
+            inValue.Body = new web_app.DcapServiceReference.GetParentManagerNodeByChildNoRequestBody();
+            inValue.Body.capQuanLy = capQuanLy;
+            inValue.Body.accountNumber = accountNumber;
+            inValue.Body.parentField = parentField;
+            web_app.DcapServiceReference.GetParentManagerNodeByChildNoResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetParentManagerNodeByChildNo(inValue);
+            return retVal.Body.GetParentManagerNodeByChildNoResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

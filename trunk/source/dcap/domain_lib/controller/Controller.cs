@@ -80,6 +80,11 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchBangKe(thangKeKhai);
         }
 
+        public BangKeDto[] SearchBangKeExt(DateTime? beginDate, DateTime? endDate)
+        {
+            return m_PersistenceManager.SearchBangKeExt(beginDate, endDate);
+        }
+
         public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
         {
             return m_PersistenceManager.SearchBangKeHoaHong(accountNumber, thangKeKhai);
@@ -95,6 +100,11 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchMemberNodeDto(accountNumber);
         }
 
+        public MemberNodeDto[] SearchManagerNodeDto(string capQuanLy, string accountNumber)
+        {
+            return m_PersistenceManager.SearchManagerNodeDto(capQuanLy, accountNumber);
+        }
+
         public bool IsContainMemberNode(long rootNumber, string accountNumber)
         {
             return m_PersistenceManager.IsContainMemberNode(rootNumber, accountNumber);
@@ -108,6 +118,16 @@ namespace domain_lib.controller
         public MemberNodeDto GetParentNodeByChildNo(string accountNumber, string parentField)
         {
             return m_PersistenceManager.GetParentNodeByChildNo(accountNumber, parentField);
+        }
+
+        public MemberNodeDto GetParentManagerNodeByChildNo(string capQuanLy, string accountNumber, string parentField)
+        {
+            var modelName = m_PersistenceManager.GetManagerModelName(capQuanLy);
+            if (string.IsNullOrEmpty(modelName))
+            {
+                return null;
+            }
+            return m_PersistenceManager.GetParentNodeByChildNo(modelName, accountNumber, parentField);
         }
 
         public string UpdatePaid(BangKeDto[] bangKeDtos)

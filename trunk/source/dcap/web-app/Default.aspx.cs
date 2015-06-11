@@ -21,94 +21,99 @@ namespace web_app
                 Response.Redirect("~/admin/Login.aspx");
                 return;
             }
-            if (!IsPostBack)
+            var isAdminRole = UserUtil.IsQthtRole(userDto) || UserUtil.IsQlktRole(userDto);
+            if (!IsPostBack && isAdminRole)
             {
                 FillToPage();
             }
+            AdminHeaderPanel.Visible = isAdminRole;
+            AdminContentPanel.Visible = isAdminRole;
+            MemberHeaderPanel.Visible = !isAdminRole;
+            MemberContentPanel.Visible = !isAdminRole;
         }
 
         private void FillToPage()
         {
-            long memberAmount = DcapServiceUtil.GetMemberAmount();
-            MemberAmount.Text = memberAmount.ToString();
+//            long memberAmount = DcapServiceUtil.GetMemberAmount();
+//            MemberAmount.Text = memberAmount.ToString();
             long accountAmount = DcapServiceUtil.GetAccountAmount();
             AccountAmount.Text = accountAmount.ToString();
             long managerAmount = DcapServiceUtil.GetManagerAmount();
             ManagerAmount.Text = managerAmount.ToString();
-            long managerL6Amount = DcapServiceUtil.GetManagerL6Amount();
-            ManagerL6Amount.Text = managerL6Amount.ToString();
+//            long managerL6Amount = DcapServiceUtil.GetManagerL6Amount();
+//            ManagerL6Amount.Text = managerL6Amount.ToString();
             UserDto[] newMemberList = DcapServiceUtil.GetNewMemberList();
             FillToNewMemberList(newMemberList);
-            UserDto[] newManagerList = DcapServiceUtil.GetNewManagerList();
-            FillToNewManagerList(newManagerList);
-            int reportYear = DcapServiceUtil.GetReportYear();
-            ReportYearLabel.Text = reportYear.ToString();
-            AccountBonusDto[] acountBonusList = DcapServiceUtil.GetAcountBonusList();
-            FillToAccountBonusTable(acountBonusList);
+//            UserDto[] newManagerList = DcapServiceUtil.GetNewManagerList();
+//            FillToNewManagerList(newManagerList);
+//            int reportYear = DcapServiceUtil.GetReportYear();
+//            ReportYearLabel.Text = reportYear.ToString();
+//            AccountBonusDto[] acountBonusList = DcapServiceUtil.GetAcountBonusList();
+//            FillToAccountBonusTable(acountBonusList);
         }
 
-        private void FillToAccountBonusTable(AccountBonusDto[] acountBonusList)
-        {
-            AccountBonusTable.Text = "<table class=\"table no-margin\">";
-            AccountBonusTable.Text += "<thead>";
-            AccountBonusTable.Text += "<tr>";
-            AccountBonusTable.Text += "<th>Tháng</th>";
-            AccountBonusTable.Text += "<th>Tổng số</th>";
-            AccountBonusTable.Text += "<th>Trạng Thái</th>";
-            AccountBonusTable.Text += "</tr>";
-            AccountBonusTable.Text += "</thead>";
-            AccountBonusTable.Text += "<tbody>";
-            foreach (var accountBonusDto in acountBonusList)
-            {
-                AccountBonusTable.Text += "<tr>";
-                var dThang = DateUtil.GetDateTime(accountBonusDto.Thang);
-                string thang;
-                if (dThang != null)
-                {
-                    thang = "Tháng " + ((DateTime)dThang).Month;
-                }
-                else
-                {
-                    thang = string.Empty;
-                }
-                AccountBonusTable.Text += "<td><a href=\"#\">" + thang + "</a></td>";
-                AccountBonusTable.Text += "<td>" + accountBonusDto.Tong + "</td>";
-                var isPaid = accountBonusDto.IsPaid;
-                if (isPaid == 1)
-                {
-                    AccountBonusTable.Text += "<td><span class=\"label label-success\">Đã trả thưởng</span></td>";
-                }
-                else
-                {
-                    AccountBonusTable.Text += "<td><span class=\"label label-warning\">Chưa trả thưởng</span></td>";
-                }
-                AccountBonusTable.Text += "</tr>";
-            }
-            AccountBonusTable.Text += "</tbody>";
-            AccountBonusTable.Text += "</table>";
-        }
-
-        private void FillToNewManagerList(UserDto[] newManagerList)
-        {
-            NewManagerAmount.Text = newManagerList.Length + " Quản lý";
-            NewManagerList.Text = "<ul class=\"users-list clearfix\">";
-            foreach (var userDto in newManagerList)
-            {
-                NewManagerList.Text += "<li>";
-                var imageUrl = userDto.ImageUrl;
-                if (string.IsNullOrEmpty(imageUrl))
-                {
-                    imageUrl = "~/dist/img/avatar5.png";
-                }
-                imageUrl = imageUrl.Replace("~", "");
-                NewManagerList.Text += "<img src=\"" + imageUrl + "\" runat=\"server\" alt=\"User Image\"/>";
-                NewManagerList.Text += "<a class=\"users-list-name\" href=\"#\" title=\"" + userDto.FullName + "\">" + userDto.FullName + "</a>";
-                var createdDate = DateUtil.GetDateTimeAsDdmmyyyy(userDto.CreatedDate);
-                NewManagerList.Text += "<span class=\"users-list-date\">" + createdDate + "</span>";
-                NewManagerList.Text += "</li>";
-            }
-            NewManagerList.Text += "</ul>";
-        }
+//        private void FillToAccountBonusTable(AccountBonusDto[] acountBonusList)
+//        {
+//            AccountBonusTable.Text = "<table class=\"table no-margin\">";
+//            AccountBonusTable.Text += "<thead>";
+//            AccountBonusTable.Text += "<tr>";
+//            AccountBonusTable.Text += "<th>Tháng</th>";
+//            AccountBonusTable.Text += "<th>Tổng số</th>";
+//            AccountBonusTable.Text += "<th>Trạng Thái</th>";
+//            AccountBonusTable.Text += "</tr>";
+//            AccountBonusTable.Text += "</thead>";
+//            AccountBonusTable.Text += "<tbody>";
+//            foreach (var accountBonusDto in acountBonusList)
+//            {
+//                AccountBonusTable.Text += "<tr>";
+//                var dThang = DateUtil.GetDateTime(accountBonusDto.Thang);
+//                string thang;
+//                if (dThang != null)
+//                {
+//                    thang = "Tháng " + ((DateTime)dThang).Month;
+//                }
+//                else
+//                {
+//                    thang = string.Empty;
+//                }
+//                AccountBonusTable.Text += "<td><a href=\"#\">" + thang + "</a></td>";
+//                AccountBonusTable.Text += "<td>" + accountBonusDto.Tong + "</td>";
+//                var isPaid = accountBonusDto.IsPaid;
+//                if (isPaid == 1)
+//                {
+//                    AccountBonusTable.Text += "<td><span class=\"label label-success\">Đã trả thưởng</span></td>";
+//                }
+//                else
+//                {
+//                    AccountBonusTable.Text += "<td><span class=\"label label-warning\">Chưa trả thưởng</span></td>";
+//                }
+//                AccountBonusTable.Text += "</tr>";
+//            }
+//            AccountBonusTable.Text += "</tbody>";
+//            AccountBonusTable.Text += "</table>";
+//        }
+//
+//        private void FillToNewManagerList(UserDto[] newManagerList)
+//        {
+//            NewManagerAmount.Text = newManagerList.Length + " Quản lý";
+//            NewManagerList.Text = "<ul class=\"users-list clearfix\">";
+//            foreach (var userDto in newManagerList)
+//            {
+//                NewManagerList.Text += "<li>";
+//                var imageUrl = userDto.ImageUrl;
+//                if (string.IsNullOrEmpty(imageUrl))
+//                {
+//                    imageUrl = "~/dist/img/avatar5.png";
+//                }
+//                imageUrl = imageUrl.Replace("~", "");
+//                NewManagerList.Text += "<img src=\"" + imageUrl + "\" runat=\"server\" alt=\"User Image\"/>";
+//                NewManagerList.Text += "<a class=\"users-list-name\" href=\"#\" title=\"" + userDto.FullName + "\">" + userDto.FullName + "</a>";
+//                var createdDate = DateUtil.GetDateTimeAsDdmmyyyy(userDto.CreatedDate);
+//                NewManagerList.Text += "<span class=\"users-list-date\">" + createdDate + "</span>";
+//                NewManagerList.Text += "</li>";
+//            }
+//            NewManagerList.Text += "</ul>";
+//        }
 
         private void FillToNewMemberList(UserDto[] newMemberList)
         {

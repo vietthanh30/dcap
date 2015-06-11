@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using core_lib.common;
 using domain_lib.dto;
 using domain_lib.model;
@@ -409,6 +410,31 @@ namespace domain_lib.persistence
             }
         }
 
+        private long GetAccountIdBy(string modelName, string accountNumber)
+        {
+            long accountNumberVal;
+            if (!long.TryParse(accountNumber, out accountNumberVal))
+            {
+                return -1;
+            }
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select a.AccountId from Account a, " + modelName + " b "
+                    + " where a.AccountId = b.AccountId and a.AccountNumber = :accountNumber");
+                query.SetParameter("accountNumber", accountNumberVal);
+
+                // Get the matching objects
+                var accountId = query.UniqueResult();
+
+                // Set return value
+                if (accountId == null)
+                {
+                    return -1;
+                }
+                return Convert.ToInt64(accountId);
+            }
+        }
+
         private Hashtable GetMapAccountIdBy(string[] userNames)
         {
             var result = new Hashtable();
@@ -458,6 +484,22 @@ namespace domain_lib.persistence
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery("select count(a.AccountId) from Account a "
+                    + " where a.ParentId = :parentAccountId ");
+                query.SetParameter("parentAccountId", parentAccountId);
+
+                // Get the matching objects
+                var count = query.UniqueResult();
+
+                // Set return value
+                return Convert.ToInt32(count);
+            }
+        }
+
+        private int CountAccountByParentId(string modelName, long parentAccountId)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select count(a.AccountId) from " + modelName + " a "
                     + " where a.ParentId = :parentAccountId ");
                 query.SetParameter("parentAccountId", parentAccountId);
 
@@ -931,7 +973,7 @@ namespace domain_lib.persistence
         {
             var strThang = DateUtil.GetDateTimeAsStringWithEnProvider(thangKeKhai, ConstUtil.MONTH_FORMAT);
 
-            var allResults = new List<BangKeDto>();
+            List<BangKeDto> allResults;
 
             using (ISession session = m_SessionFactory.OpenSession())
             {
@@ -941,46 +983,78 @@ namespace domain_lib.persistence
                 criteria.AddOrder(Order.Desc("SoTien"));
 
                 // Get the matching objects
-                IList<BangKeVW> list = criteria.List<BangKeVW>();
+                var list = criteria.List<BangKeVW>();
 
                 // Set return value
-                var stt = 0;
-                foreach (var row in list)
-                {
-                    stt++;
-                    var hoTen = row.HoTen;
-                    var userName = row.UserName;
-                    var maGioiTinh = row.GioiTinh;
-                    var soCmnd = row.SoCmnd;
-                    var ngayCap = row.NgayCap;
-                    var diaChi = row.DiaChi;
-                    var soTaiKhoan = row.SoTaiKhoan;
-                    var chiNhanhNH = row.ChiNhanhNH;
-                    var soDienThoai = row.SoDienThoai;
-                    var ngayDangKy = row.NgayDangKy;
-                    var soTien = row.SoTien;
-                    var thang = row.Thang;
-
-                    var bangKeDto = new BangKeDto();
-                    bangKeDto.STT = stt;
-                    bangKeDto.HoTen = hoTen;
-                    bangKeDto.UserName = userName;
-                    bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(maGioiTinh);
-                    bangKeDto.SoCmnd = soCmnd;
-                    bangKeDto.NgayCap = DateUtil.GetDateTimeAsDdmmyyyy(ngayCap);
-                    bangKeDto.DiaChi = diaChi;
-                    bangKeDto.SoTaiKhoan = soTaiKhoan;
-                    bangKeDto.ChiNhanhNH = chiNhanhNH;
-                    bangKeDto.SoDienThoai = soDienThoai;
-                    bangKeDto.NgayDangKy = DateUtil.GetDateTimeAsDdmmyyyy(ngayDangKy);
-                    bangKeDto.SoTien = soTien;
-                    bangKeDto.Thang = thang.Substring(4, 2) + "/" + thang.Substring(0, 4);
-
-                    allResults.Add(bangKeDto);
-                }
+                allResults = CreateAllBangKeDto(list);
             }
-            UpdatePaidStatus(allResults);
             return allResults.ToArray();
+        }
+
+        public BangKeDto[] SearchBangKeExt(DateTime? beginDate, DateTime? endDate)
+        {
+            var strBeginDate = DateUtil.GetDateTimeAsStringWithEnProvider(beginDate, ConstUtil.MONTH_FORMAT);
+
+            var strEndDate = DateUtil.GetDateTimeAsStringWithEnProvider(endDate, ConstUtil.MONTH_FORMAT);
+
+            List<BangKeDto> allResults;
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                ICriteria criteria = session.CreateCriteria(typeof(BangKeVW));
+                criteria.Add(Expression.Ge("Thang", strBeginDate));
+                criteria.Add(Expression.Le("Thang", strEndDate));
+                criteria.AddOrder(Order.Desc("SoTien"));
+
+                // Get the matching objects
+                var list = criteria.List<BangKeVW>();
+
+                // Set return value
+                allResults = CreateAllBangKeDto(list);
+            }
+            return allResults.ToArray();
+        }
+
+        private List<BangKeDto> CreateAllBangKeDto(IEnumerable<BangKeVW> allBangKeVw)
+        {
+            var allBangKeDto = new List<BangKeDto>();
+            var stt = 0;
+            foreach (var row in allBangKeVw)
+            {
+                stt++;
+                var hoTen = row.HoTen;
+                var userName = row.UserName;
+                var maGioiTinh = row.GioiTinh;
+                var soCmnd = row.SoCmnd;
+                var ngayCap = row.NgayCap;
+                var diaChi = row.DiaChi;
+                var soTaiKhoan = row.SoTaiKhoan;
+                var chiNhanhNH = row.ChiNhanhNH;
+                var soDienThoai = row.SoDienThoai;
+                var ngayDangKy = row.NgayDangKy;
+                var soTien = row.SoTien;
+                var thang = row.Thang;
+
+                var bangKeDto = new BangKeDto();
+                bangKeDto.STT = stt;
+                bangKeDto.HoTen = hoTen;
+                bangKeDto.UserName = userName;
+                bangKeDto.GioiTinh = GioiTinhUtil.DecodeGioitinh(maGioiTinh);
+                bangKeDto.SoCmnd = soCmnd;
+                bangKeDto.NgayCap = DateUtil.GetDateTimeAsDdmmyyyy(ngayCap);
+                bangKeDto.DiaChi = diaChi;
+                bangKeDto.SoTaiKhoan = soTaiKhoan;
+                bangKeDto.ChiNhanhNH = chiNhanhNH;
+                bangKeDto.SoDienThoai = soDienThoai;
+                bangKeDto.NgayDangKy = DateUtil.GetDateTimeAsDdmmyyyy(ngayDangKy);
+                bangKeDto.SoTien = soTien;
+                bangKeDto.Thang = thang.Substring(4, 2) + "/" + thang.Substring(0, 4);
+
+                allBangKeDto.Add(bangKeDto);
+            }
+            UpdatePaidStatus(allBangKeDto);
+            return allBangKeDto;
         }
 
         private void UpdatePaidStatus(List<BangKeDto> allResults)
@@ -1182,6 +1256,42 @@ namespace domain_lib.persistence
             return allUserDto.ToArray();
         }
 
+        public MemberNodeDto[] SearchManagerNodeDto(string capQuanLy, string accountNumber)
+        {
+            var modelName = GetManagerModelName(capQuanLy);
+            var memberNodeDtos = new List<MemberNodeDto>();
+            var rootId = GetAccountIdBy(modelName, accountNumber);
+            var childNumber = CountAccountByParentId(modelName, rootId);
+            if (childNumber == 0)
+            {
+                MemberNodeDto rootDto = GetNodeDto(modelName, accountNumber);
+                if (rootDto == null)
+                {
+                    return memberNodeDtos.ToArray();
+                }
+                memberNodeDtos.Add(rootDto);
+            }
+            else
+            {
+                var mapDtoNode = GetMapManagerNodeDto(modelName);
+                Hashtable mapParentNode = GetMapParentNode(mapDtoNode);
+                memberNodeDtos = GetMemberNodeDtoLoop(rootId, mapDtoNode, mapParentNode);
+            }
+
+            return memberNodeDtos.ToArray();
+        }
+
+        public string GetManagerModelName(string capQuanLy)
+        {
+            int capQuanLyVal;
+            var code = int.TryParse(capQuanLy, out capQuanLyVal);
+            if (!code)
+            {
+                return string.Empty;
+            }
+            return "ManagerL" + capQuanLyVal;
+        }
+
         public MemberNodeDto[] SearchMemberNodeDto(string accountNumber)
         {
             var memberNodeDtos = new List<MemberNodeDto>();
@@ -1317,6 +1427,33 @@ namespace domain_lib.persistence
             return mapMemberNodeDto;
         }
 
+        private Hashtable GetMapManagerNodeDto(string modelName)
+        {
+            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u " +
+                    " where m.MemberID = a.MemberId and a.AccountId = b.AccountId and a.UserId = u.UserID";
+
+            var mapMemberNodeDto = new Hashtable();
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+
+                // Get the matching objects
+                var allMemberInfo = query.List<MemberInfo>();
+
+                foreach (var memberInfo in allMemberInfo)
+                {
+                    var memberNodeDto = new MemberNodeDto();
+                    memberNodeDto.AccountId = memberInfo.AccountId;
+                    memberNodeDto.ParentId = memberInfo.ParentId;
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    mapMemberNodeDto.Add(memberNodeDto.AccountId, memberNodeDto);
+                }
+            }
+
+            return mapMemberNodeDto;
+        }
+
         public MemberNodeDto GetNodeDto(string accountNumber)
         {
             var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
@@ -1370,6 +1507,104 @@ namespace domain_lib.persistence
         {
             var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u, Account a2 " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID and a.AccountId = a2." + parentField;
+            var sqlParams = new Hashtable();
+            if (!string.IsNullOrEmpty(accountNumber))
+            {
+                long accountNumberVal;
+                var status = long.TryParse(accountNumber, out accountNumberVal);
+                if (status)
+                {
+                    sqlStr += " and a2.AccountNumber = :accountNumber";
+                    sqlParams.Add("accountNumber", accountNumberVal);
+                }
+                else
+                {
+                    sqlStr += " and 1=0";
+                }
+            }
+            else
+            {
+                sqlStr += " and 1=0";
+            }
+
+            MemberNodeDto memberNodeDto = null;
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
+
+                // Get the matching objects
+                MemberInfo memberInfo = (MemberInfo)query.UniqueResult();
+
+                if (memberInfo != null)
+                {
+                    memberNodeDto = new MemberNodeDto();
+                    memberNodeDto.AccountId = memberInfo.AccountNumber;
+                    memberNodeDto.ParentId = memberInfo.ParentId;
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                }
+            }
+
+            return memberNodeDto;
+        }
+
+        public MemberNodeDto GetNodeDto(string modelName, string accountNumber)
+        {
+            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u " +
+                    " where m.MemberID = a.MemberId and a.AccountId = b.AccountId and a.UserId = u.UserID";
+            var sqlParams = new Hashtable();
+            if (!string.IsNullOrEmpty(accountNumber))
+            {
+                long accountNumberVal;
+                var status = long.TryParse(accountNumber, out accountNumberVal);
+                if (status)
+                {
+                    sqlStr += " and a.AccountNumber = :accountNumber";
+                    sqlParams.Add("accountNumber", accountNumberVal);
+                }
+                else
+                {
+                    sqlStr += " and 1=0";
+                }
+            }
+            else
+            {
+                sqlStr += " and 1=0";
+            }
+
+            MemberNodeDto memberNodeDto = null;
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery(sqlStr);
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
+
+                // Get the matching objects
+                MemberInfo memberInfo = (MemberInfo)query.UniqueResult();
+
+                if (memberInfo != null)
+                {
+                    memberNodeDto = new MemberNodeDto();
+                    memberNodeDto.AccountId = memberInfo.AccountNumber;
+                    memberNodeDto.ParentId = memberInfo.ParentId;
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                }
+            }
+
+            return memberNodeDto;
+        }
+
+        public MemberNodeDto GetParentNodeByChildNo(string modelName, string accountNumber, string parentField)
+        {
+            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u, " + modelName + " b2, Account a2 " +
+                    " where m.MemberID = a.MemberId and a.AccountId = b.AccountId and a.UserId = u.UserID and a2.AccountId = b2.AccountId and b.AccountId = b2." + parentField;
             var sqlParams = new Hashtable();
             if (!string.IsNullOrEmpty(accountNumber))
             {
@@ -1669,7 +1904,7 @@ namespace domain_lib.persistence
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery(sqlStr);
-                query.SetMaxResults(8);
+                query.SetMaxResults(16);
 
                 // Get the matching objects
                 var list = query.List();

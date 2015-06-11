@@ -48,6 +48,11 @@ namespace web_app.common
             return dcapService.SearchBangKe(thangKeKhai);
         }
 
+        public static BangKeDto[] SearchBangKeExt(DateTime? beginDate, DateTime? endDate)
+        {
+            return dcapService.SearchBangKeExt(beginDate, endDate);
+        }
+
         public static HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
         {
             return dcapService.SearchBangKeHoaHong(accountNumber, thangKeKhai);
@@ -63,6 +68,11 @@ namespace web_app.common
             return dcapService.SearchMemberNodeDto(accountNumber);
         }
 
+        public static MemberNodeDto[] SearchManagerNodeDto(string capQuanLy, string accountNumber)
+        {
+            return dcapService.SearchManagerNodeDto(capQuanLy, accountNumber);
+        }
+
         public static bool IsContainMemberNode(long rootNumber, string accountNumber)
         {
             return dcapService.IsContainMemberNode(rootNumber, accountNumber);
@@ -71,6 +81,11 @@ namespace web_app.common
         public static MemberNodeDto GetNodeDto(string accountNumber)
         {
             return dcapService.GetNodeDto(accountNumber);
+        }
+
+        public static MemberNodeDto GetParentManagerNodeByChildNo(string capQuanLy, string accountNumber)
+        {
+            return dcapService.GetParentManagerNodeByChildNo(capQuanLy, accountNumber, "ParentId");
         }
 
         public static MemberNodeDto GetParentNodeByChildNo(string accountNumber)

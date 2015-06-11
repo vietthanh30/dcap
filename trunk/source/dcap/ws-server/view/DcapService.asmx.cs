@@ -67,6 +67,12 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public BangKeDto[] SearchBangKeExt(DateTime? beginDate, DateTime? endDate)
+        {
+            return controller.SearchBangKeExt(beginDate, endDate);
+        }
+
+        [WebMethod]
         public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
         {
             return controller.SearchBangKeHoaHong(accountNumber, thangKeKhai);
@@ -85,6 +91,12 @@ namespace ws_server.view
         }
 
         [WebMethod]
+        public MemberNodeDto[] SearchManagerNodeDto(string capQuanLy, string accountNumber)
+        {
+            return controller.SearchManagerNodeDto(capQuanLy, accountNumber);
+        }
+
+        [WebMethod]
         public bool IsContainMemberNode(long rootNumber, string accountNumber)
         {
             return controller.IsContainMemberNode(rootNumber, accountNumber);
@@ -100,6 +112,12 @@ namespace ws_server.view
         public MemberNodeDto GetParentNodeByChildNo(string accountNumber, string parentField)
         {
             return controller.GetParentNodeByChildNo(accountNumber, parentField);
+        }
+
+        [WebMethod]
+        public MemberNodeDto GetParentManagerNodeByChildNo(string capQuanLy, string accountNumber, string parentField)
+        {
+            return controller.GetParentManagerNodeByChildNo(capQuanLy, accountNumber, parentField);
         }
 
         [WebMethod]

@@ -65,6 +65,8 @@
     <Content Include="admin\TraCuuThanhVien.aspx" />
     <Content Include="dist\img\delete-icon.png" />
     <Content Include="dist\img\edit-icon.png" />
+    <Content Include="main-pages\BangLuongExt.aspx" />
+    <Content Include="main-pages\ManagerNetwork.aspx" />
     <Content Include="members\bang-ke-hoa-hong.aspx" />
     <Content Include="members\EditMemberInfo.aspx" />
     <Content Include="admin\Register2.aspx" />
@@ -960,6 +962,20 @@
     <Compile Include="common\HierarchicalDataSet.cs" />
     <Compile Include="common\TextCell.cs" />
     <Compile Include="common\UserUtil.cs" />
+    <Compile Include="main-pages\BangLuongExt.aspx.cs">
+      <DependentUpon>BangLuongExt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="main-pages\BangLuongExt.aspx.designer.cs">
+      <DependentUpon>BangLuongExt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="main-pages\ManagerNetwork.aspx.cs">
+      <DependentUpon>ManagerNetwork.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="main-pages\ManagerNetwork.aspx.designer.cs">
+      <DependentUpon>ManagerNetwork.aspx</DependentUpon>
+    </Compile>
     <Compile Include="members\bang-ke-hoa-hong.aspx.cs">
       <DependentUpon>bang-ke-hoa-hong.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

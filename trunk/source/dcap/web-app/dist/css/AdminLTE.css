@@ -2799,13 +2799,13 @@ table.text-center th {
  * ---------------------
  */
 .users-list > li {
-  width: 25%;
+  width: 12.5%;
   float: left;
   padding: 10px;
   text-align: center;
 }
 .users-list > li img {
-  border-radius: 50%;
+  border-radius: 25%;
   max-width: 100%;
   height: auto;
 }

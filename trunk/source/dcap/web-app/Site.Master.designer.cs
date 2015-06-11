@@ -112,15 +112,6 @@ namespace web_app {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftContentAdmin;
         
         /// <summary>
-        /// A7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A7;
-        
-        /// <summary>
         /// A3 control.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,24 @@ namespace web_app {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
         
         /// <summary>
+        /// A11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A11;
+        
+        /// <summary>
+        /// A7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A7;
+        
+        /// <summary>
         /// A10 control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,42 @@ namespace web_app {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A10;
+        
+        /// <summary>
+        /// A12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A12;
+        
+        /// <summary>
+        /// A13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A13;
+        
+        /// <summary>
+        /// A14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A14;
+        
+        /// <summary>
+        /// A15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A15;
         
         /// <summary>
         /// LeftContentKT control.
@@ -157,6 +202,15 @@ namespace web_app {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A4;
         
         /// <summary>
+        /// A17 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A17;
+        
+        /// <summary>
         /// A5 control.
         /// </summary>
         /// <remarks>
@@ -164,6 +218,15 @@ namespace web_app {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A5;
+        
+        /// <summary>
+        /// A16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A16;
         
         /// <summary>
         /// LeftContentTV control.

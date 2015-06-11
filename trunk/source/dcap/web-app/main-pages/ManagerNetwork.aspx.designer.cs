@@ -7,81 +7,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace web_app {
+namespace web_app.main_pages {
     
     
-    public partial class _Default {
+    public partial class ManagerNetwork {
         
         /// <summary>
-        /// MemberHeaderPanel control.
+        /// ErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel MemberHeaderPanel;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// AdminHeaderPanel control.
+        /// ManagerNetworkValidationSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AdminHeaderPanel;
+        protected global::System.Web.UI.WebControls.ValidationSummary ManagerNetworkValidationSummary;
         
         /// <summary>
-        /// MemberContentPanel control.
+        /// CapQuanLy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel MemberContentPanel;
+        protected global::System.Web.UI.WebControls.DropDownList CapQuanLy;
         
         /// <summary>
-        /// AdminContentPanel control.
+        /// CapQuanLyRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AdminContentPanel;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CapQuanLyRequired;
         
         /// <summary>
-        /// AccountAmount control.
+        /// IdMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AccountAmount;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText IdMember;
         
         /// <summary>
-        /// ManagerAmount control.
+        /// SearchButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ManagerAmount;
+        protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// NewMemberAmount control.
+        /// InvalidCredentialsMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NewMemberAmount;
+        protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
         
         /// <summary>
-        /// NewMemberList control.
+        /// ParentInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal NewMemberList;
+        protected global::System.Web.UI.WebControls.Label ParentInfo;
+        
+        /// <summary>
+        /// TreeThanhVien control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TreeView TreeThanhVien;
     }
 }
