@@ -1,7 +1,7 @@
 use dcap
 go
 
-create view dbo.bang_ke_full_vw as
+create view dbo.BANG_KE_FULL_VW as
 with bonus as (
 SELECT     SUM(BONUS_AMOUNT) AS TONG, 
 SUM(
