@@ -86,6 +86,15 @@
                 <asp:BoundField DataField="SoDienThoai" HeaderText="Số ĐT" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
+                <asp:BoundField DataField="HeThong" HeaderText="Hệ thống" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="QuanLy" HeaderText="Quản lý" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="ThuongThem" HeaderText="Thưởng thêm" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
                 <asp:BoundField DataField="SoTien" HeaderText="Tổng điểm" >
                 <ItemStyle HorizontalAlign="Right" />
                 </asp:BoundField>

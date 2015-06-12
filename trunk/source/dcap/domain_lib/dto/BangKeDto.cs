@@ -41,6 +41,12 @@ namespace domain_lib.dto
 
         private long _isPaid = -1;
 
+        private double _heThong = -1.0;
+
+        private double _quanLy = -1.0;
+
+        private double _thuongThem = -1.0;
+
         #endregion
 
     	#region Constructor
@@ -186,6 +192,24 @@ namespace domain_lib.dto
         {
             get { return _isPaid; }
             set { _isPaid = value; }
+        }
+
+        public virtual double HeThong
+        {
+            get { return _heThong; }
+            set { _heThong = value; }
+        }
+
+        public virtual double QuanLy
+        {
+            get { return _quanLy; }
+            set { _quanLy = value; }
+        }
+
+        public virtual double ThuongThem
+        {
+            get { return _thuongThem; }
+            set { _thuongThem = value; }
         }
 
         #endregion

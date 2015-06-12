@@ -86,7 +86,7 @@ namespace web_app.main_pages
                 return;
             }
             var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
+                "Ngân Hàng", "Số ĐT", "Hệ thống", "Quản lý", "Thưởng thêm", "Tổng tiền", "Thuế 10%", "Thực nhận", "Tháng", "Ký nhận"};
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
             var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
@@ -138,7 +138,12 @@ namespace web_app.main_pages
                 dataRow[columnNames[index++]] = bangKeDto.SoTaiKhoan;
                 dataRow[columnNames[index++]] = bangKeDto.ChiNhanhNH;
                 dataRow[columnNames[index++]] = bangKeDto.SoDienThoai;
-                dataRow[columnNames[index++]] = bangKeDto.SoTien*1000000;
+                dataRow[columnNames[index++]] = bangKeDto.HeThong * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.QuanLy * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.ThuongThem * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.SoTien * 1000000;
+                dataRow[columnNames[index++]] = bangKeDto.SoTien * 100000;
+                dataRow[columnNames[index++]] = bangKeDto.SoTien * 900000;
                 dataRow[columnNames[index]] = bangKeDto.Thang;
                 dataTable.Rows.Add(dataRow);
             }
@@ -155,7 +160,7 @@ namespace web_app.main_pages
                 return;
             }
             var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Tổng tiền", "Tháng", "Ký nhận"};
+                "Ngân Hàng", "Số ĐT", "Hệ thống", "Quản lý", "Thưởng thêm", "Tổng tiền", "Thuế 10%", "Thực nhận", "Tháng", "Ký nhận"};
             var tableName = "BANG_KE_VW";
             var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";

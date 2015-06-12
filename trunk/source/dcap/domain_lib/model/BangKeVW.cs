@@ -33,6 +33,12 @@ namespace domain_lib.model
 
         private DateTime? _ngayDangKy;
 
+        private double _heThong = -1.0;
+
+        private double _quanLy = -1.0;
+
+        private double _thuongThem = -1.0;
+
         private double _soTien = -1.0;
 
         private string _thang = String.Empty;
@@ -146,6 +152,24 @@ namespace domain_lib.model
         {
             get { return _ngayDangKy; }
             set { _ngayDangKy = value; }
+        }
+
+        public virtual double HeThong
+        {
+            get { return _heThong; }
+            set { _heThong = value; }
+        }
+
+        public virtual double QuanLy
+        {
+            get { return _quanLy; }
+            set { _quanLy = value; }
+        }
+
+        public virtual double ThuongThem
+        {
+            get { return _thuongThem; }
+            set { _thuongThem = value; }
         }
 
         /// <summary>

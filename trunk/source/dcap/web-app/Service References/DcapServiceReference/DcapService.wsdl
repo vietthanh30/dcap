@@ -197,6 +197,9 @@
           <s:element minOccurs="1" maxOccurs="1" name="SoTien" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Thang" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="IsPaid" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="HeThong" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuanLy" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThuongThem" type="s:double" />
         </s:sequence>
       </s:complexType>
       <s:element name="SearchBangKeExt">

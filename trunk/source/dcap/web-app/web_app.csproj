@@ -64,7 +64,9 @@
     <Content Include="admin\DuyetCapQuanLy.aspx" />
     <Content Include="admin\TraCuuThanhVien.aspx" />
     <Content Include="dist\img\delete-icon.png" />
+    <Content Include="dist\img\den-bat-muoi.jpg" />
     <Content Include="dist\img\edit-icon.png" />
+    <Content Include="dist\img\may-ozone-ht401.jpg" />
     <Content Include="main-pages\BangLuongExt.aspx" />
     <Content Include="main-pages\ManagerNetwork.aspx" />
     <Content Include="members\bang-ke-hoa-hong.aspx" />

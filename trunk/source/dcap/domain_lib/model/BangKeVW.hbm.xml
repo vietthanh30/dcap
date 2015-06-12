@@ -3,7 +3,7 @@
 xmlns="urn:nhibernate-mapping-2.2"
 namespace="domain_lib.model"
 assembly="domain_lib">
-  <class name="BangKeVW" table="BANG_KE_VW" lazy="false">
+  <class name="BangKeVW" table="BANG_KE_FULL_VW" lazy="false">
     <id name="Stt" column="STT" unsaved-value="-1">
       <generator class="native" />
     </id>
@@ -54,6 +54,18 @@ assembly="domain_lib">
 
     <property name="SoTien">
       <column name="TONG" not-null="false"/>
+    </property>
+
+    <property name="HeThong">
+      <column name="HE_THONG" not-null="false"/>
+    </property>
+
+    <property name="QuanLy">
+      <column name="QUAN_LY" not-null="false"/>
+    </property>
+
+    <property name="ThuongThem">
+      <column name="THUONG_THEM" not-null="false"/>
     </property>
 
   </class>

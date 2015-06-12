@@ -1035,6 +1035,9 @@ namespace domain_lib.persistence
                 var ngayDangKy = row.NgayDangKy;
                 var soTien = row.SoTien;
                 var thang = row.Thang;
+                var heThong = row.HeThong;
+                var quanLy = row.QuanLy;
+                var thuongThem = row.ThuongThem;
 
                 var bangKeDto = new BangKeDto();
                 bangKeDto.STT = stt;
@@ -1050,6 +1053,9 @@ namespace domain_lib.persistence
                 bangKeDto.NgayDangKy = DateUtil.GetDateTimeAsDdmmyyyy(ngayDangKy);
                 bangKeDto.SoTien = soTien;
                 bangKeDto.Thang = thang.Substring(4, 2) + "/" + thang.Substring(0, 4);
+                bangKeDto.HeThong = heThong;
+                bangKeDto.QuanLy = quanLy;
+                bangKeDto.ThuongThem = thuongThem;
 
                 allBangKeDto.Add(bangKeDto);
             }

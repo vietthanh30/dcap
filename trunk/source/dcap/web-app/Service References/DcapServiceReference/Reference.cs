@@ -481,6 +481,12 @@ namespace web_app.DcapServiceReference {
         
         private long IsPaidField;
         
+        private double HeThongField;
+        
+        private double QuanLyField;
+        
+        private double ThuongThemField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -682,6 +688,45 @@ namespace web_app.DcapServiceReference {
                 if ((this.IsPaidField.Equals(value) != true)) {
                     this.IsPaidField = value;
                     this.RaisePropertyChanged("IsPaid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=15)]
+        public double HeThong {
+            get {
+                return this.HeThongField;
+            }
+            set {
+                if ((this.HeThongField.Equals(value) != true)) {
+                    this.HeThongField = value;
+                    this.RaisePropertyChanged("HeThong");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=16)]
+        public double QuanLy {
+            get {
+                return this.QuanLyField;
+            }
+            set {
+                if ((this.QuanLyField.Equals(value) != true)) {
+                    this.QuanLyField = value;
+                    this.RaisePropertyChanged("QuanLy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=17)]
+        public double ThuongThem {
+            get {
+                return this.ThuongThemField;
+            }
+            set {
+                if ((this.ThuongThemField.Equals(value) != true)) {
+                    this.ThuongThemField = value;
+                    this.RaisePropertyChanged("ThuongThem");
                 }
             }
         }
