@@ -37,8 +37,7 @@ namespace web_app.main_pages
             MemberAmount.Text = memberAmount.ToString();
             long accountAmount = DcapServiceUtil.GetAccountAmount();
             AccountAmount.Text = accountAmount.ToString();
-            long managerAmount = DcapServiceUtil.GetManagerAmount();
-            ManagerAmount.Text = managerAmount.ToString();
+            ManagerAmount.Text = DcapServiceUtil.GetManagerAmount();
             long managerL6Amount = DcapServiceUtil.GetManagerL6Amount();
             ManagerL6Amount.Text = managerL6Amount.ToString();
             UserDto[] newMemberList = DcapServiceUtil.GetNewMemberList();

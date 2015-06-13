@@ -148,6 +148,24 @@ namespace web_app {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A10;
         
         /// <summary>
+        /// A18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A18;
+        
+        /// <summary>
+        /// A19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A19;
+        
+        /// <summary>
         /// A12 control.
         /// </summary>
         /// <remarks>
