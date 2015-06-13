@@ -1,6 +1,9 @@
 use dcap
 go
 
+drop view dbo.BANG_KE_FULL_VW
+go
+
 create view dbo.BANG_KE_FULL_VW as
 with bonus as (
 SELECT     SUM(BONUS_AMOUNT) AS TONG, 

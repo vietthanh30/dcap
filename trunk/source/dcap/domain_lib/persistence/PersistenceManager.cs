@@ -8,6 +8,7 @@ using domain_lib.model;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Expression;
+using NHibernate.Transform;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace domain_lib.persistence
@@ -991,25 +992,24 @@ namespace domain_lib.persistence
             return allResults.ToArray();
         }
 
-        public BangKeDto[] SearchBangKeExt(DateTime? beginDate, DateTime? endDate)
+        public BangKeDto[] SearchBangKeExt(string accountNumber, DateTime? beginDate, DateTime? endDate)
         {
-            var strBeginDate = DateUtil.GetDateTimeAsStringWithEnProvider(beginDate, ConstUtil.MONTH_FORMAT);
-
-            var strEndDate = DateUtil.GetDateTimeAsStringWithEnProvider(endDate, ConstUtil.MONTH_FORMAT);
-
             List<BangKeDto> allResults;
 
+            long accountNumberVal;
+            if (!long.TryParse(accountNumber, out accountNumberVal))
+            {
+                accountNumberVal = -1;
+            }
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                // Create a criteria object with the specified criteria
-                ICriteria criteria = session.CreateCriteria(typeof(BangKeVW));
-                criteria.Add(Expression.Ge("Thang", strBeginDate));
-                criteria.Add(Expression.Le("Thang", strEndDate));
-                criteria.AddOrder(Order.Desc("SoTien"));
-
+                var query = session.GetNamedQuery("GetBangKeAdvance");
+                query.SetParameter("pAccountNumber", accountNumberVal);
+                query.SetParameter("pStart", beginDate);
+                query.SetParameter("pEnd", endDate);
                 // Get the matching objects
-                var list = criteria.List<BangKeVW>();
-
+                var list = query.List<BangKeVW>();
+                
                 // Set return value
                 allResults = CreateAllBangKeDto(list);
             }

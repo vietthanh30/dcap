@@ -42,11 +42,90 @@ namespace web_app.main_pages
         private void OnSearchBangKe()
         {
             InvalidCredentialsMessage.Visible = false;
-            var beginDate = DateUtil.GetDateTime(BeginDate.Value.Trim());
-            var endDate = DateUtil.GetDateTime(EndDate.Value.Trim());
-            var allBangKeDto = DcapServiceUtil.SearchBangKeExt(beginDate, endDate);
+            BangKeDto[] allBangKeDto;
+            if (!GetAllBangKeDto(out allBangKeDto))
+            {
+                return;
+            }
             gvBangKe.DataSource = allBangKeDto;
             gvBangKe.DataBind();
+            if (allBangKeDto.Length == 0)
+            {
+                InvalidCredentialsMessage.Text = "Không tìm thấy bảng lương thỏa mãn";
+                InvalidCredentialsMessage.Visible = true;
+            }
+        }
+
+        private bool GetAllBangKeDto(out BangKeDto[] allBangKeDto)
+        {
+            var idMember = IdMember.Value.Trim();
+            var sBeginDate = BeginDate.Value.Trim();
+            var beginDate = DateUtil.GetDateTime(sBeginDate);
+            var sEndDate = EndDate.Value.Trim();
+            var endDate = DateUtil.GetDateTime(sEndDate);
+            if (!IsValidSearchCondition(idMember, sBeginDate, sEndDate))
+            {
+                allBangKeDto = new BangKeDto[0];
+                return false;
+            }
+            if (endDate == null)
+            {
+                endDate = DateTime.Now;
+            }
+            allBangKeDto = DcapServiceUtil.SearchBangKeExt(idMember, beginDate, endDate);
+            return true;
+        }
+
+        private bool IsValidSearchCondition(string idMember, string beginDate, string endDate)
+        {
+            long accountNumber;
+            if(!string.IsNullOrEmpty(idMember) && !long.TryParse(idMember, out accountNumber))
+            {
+                InvalidCredentialsMessage.Text = "Id thành viên không đúng định dạng";
+                InvalidCredentialsMessage.Visible = true;
+                return false;
+            }
+            if (string.IsNullOrEmpty(beginDate))
+            {
+                InvalidCredentialsMessage.Text = "Ngày bắt đầu bắt buộc nhập";
+                InvalidCredentialsMessage.Visible = true;
+                return false;
+            }
+            if (!DateUtil.IsValidDate(beginDate))
+            {
+                InvalidCredentialsMessage.Text = "Ngày bắt đầu không đúng định dạng";
+                InvalidCredentialsMessage.Visible = true;
+                return false;
+            }
+            if (DateUtil.CompareWithCurrentDate(beginDate) > 1)
+            {
+                InvalidCredentialsMessage.Text = "Ngày bắt đầu không không được sau ngày hiện tại";
+                InvalidCredentialsMessage.Visible = true;
+                return false;
+            }
+            if (string.IsNullOrEmpty(endDate))
+            {
+                return true;
+            }
+            if (!DateUtil.IsValidDate(endDate))
+            {
+                InvalidCredentialsMessage.Text = "Ngày kết thúc không đúng định dạng";
+                InvalidCredentialsMessage.Visible = true;
+                return false;
+            }
+            if (DateUtil.CompareDate(beginDate, endDate) > 1)
+            {
+                InvalidCredentialsMessage.Text = "Ngày bắt đầu không không được sau ngày kết thúc";
+                InvalidCredentialsMessage.Visible = true;
+                return false;
+            }
+            if (DateUtil.CompareWithCurrentDate(endDate) > 1)
+            {
+                InvalidCredentialsMessage.Text = "Ngày kết thúc không không được sau ngày hiện tại";
+                InvalidCredentialsMessage.Visible = true;
+                return false;
+            }
+            return true;
         }
 
         protected void BangKeTraLuong_SearchBangKe(object sender, EventArgs e)
@@ -57,11 +136,15 @@ namespace web_app.main_pages
         protected void BangKeTraLuong_ExportExcel(object sender, EventArgs e)
         {
             InvalidCredentialsMessage.Visible = false;
-            var beginDate = DateUtil.GetDateTime(BeginDate.Value.Trim());
-            var endDate = DateUtil.GetDateTime(EndDate.Value.Trim());
-            var allBangKeDto = DcapServiceUtil.SearchBangKeExt(beginDate, endDate);
+            BangKeDto[] allBangKeDto;
+            if (!GetAllBangKeDto(out allBangKeDto))
+            {
+                return;
+            }
             if (allBangKeDto.Length == 0)
             {
+                InvalidCredentialsMessage.Text = "Không tìm thấy bảng lương thỏa mãn";
+                InvalidCredentialsMessage.Visible = true;
                 return;
             }
             var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
@@ -132,11 +215,15 @@ namespace web_app.main_pages
         protected void BangKeTraLuong_ExportDOC(object sender, EventArgs e)
         {
             InvalidCredentialsMessage.Visible = false;
-            var beginDate = DateUtil.GetDateTime(BeginDate.Value.Trim());
-            var endDate = DateUtil.GetDateTime(EndDate.Value.Trim());
-            var allBangKeDto = DcapServiceUtil.SearchBangKeExt(beginDate, endDate);
+            BangKeDto[] allBangKeDto;
+            if (!GetAllBangKeDto(out allBangKeDto))
+            {
+                return;
+            }
             if (allBangKeDto.Length == 0)
             {
+                InvalidCredentialsMessage.Text = "Không tìm thấy bảng lương thỏa mãn";
+                InvalidCredentialsMessage.Visible = true;
                 return;
             }
             var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 

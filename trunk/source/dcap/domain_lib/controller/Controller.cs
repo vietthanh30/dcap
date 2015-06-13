@@ -80,9 +80,9 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchBangKe(thangKeKhai);
         }
 
-        public BangKeDto[] SearchBangKeExt(DateTime? beginDate, DateTime? endDate)
+        public BangKeDto[] SearchBangKeExt(string accountNumber, DateTime? beginDate, DateTime? endDate)
         {
-            return m_PersistenceManager.SearchBangKeExt(beginDate, endDate);
+            return m_PersistenceManager.SearchBangKeExt(accountNumber, beginDate, endDate);
         }
 
         public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)

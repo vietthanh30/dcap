@@ -13,6 +13,15 @@ namespace web_app.main_pages {
     public partial class BangLuongExt {
         
         /// <summary>
+        /// IdMember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText IdMember;
+        
+        /// <summary>
         /// i2 control.
         /// </summary>
         /// <remarks>

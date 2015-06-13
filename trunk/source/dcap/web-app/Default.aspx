@@ -25,32 +25,32 @@
 <div class="row">
 <div class="row">
 <div class="col-md-12">
-<h1>I. Máy khử độc Ozone HT401</h1>
+<h2>I. MÁY KHỬ ĐỘC OZONE HT401</h2>
 <p><img width=360 height=240 src="~/dist/img/may-ozone-ht401.jpg" runat="server" align=left
 hspace=12>Ngày nay khi công nghệ ngày càng hiện đại, việc sản xuất các chất bảo quản và các chất bảo vệ thực vật càng dễ dàng. Nhưng người sản xuất các giống rau, củ, quả, thịt, cá.. đang và đã lạm dụng thuốc trừ sâu và thuốc kính thích cũng như thuốc bảo vệ thực vật quá yêu cầu cho phép. Hơn ai hết, chúng ta phải tự bảo vệ bản thân mình trước khi người sản xuất ý thức được lòi giống chúng ta đa bị đầu độc bởi thức ăn, không khí và nước uống. Sau bao ngày nghiên cứu và đưa thử nghiệm thực tế, công ty Hitech VietNam chúng tôi cho ra đời sản phẩm máy khử độc rau, củ, quả, thịt, cá… dùng công nghệ tạo khí O3 ( ozon ) có tác dụng phân hủy và khử 99, 9% lượng độc tố trên thực phẩm.</p>
-<p style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal'><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>
+<p><span>
 - Khả năng phân huỷ hoàn toàn thuốc trừ sâu và diệt 99, 99% những vi khuẩn có hại trong rau quả thực phẩm.
-- Khử mùi hôi tanh, các chất ướp trong thịt, cá
-- Bảo quản rau quả thực phẩm tươi ngon lâu hơn
-- Sản xuất nước ngậm Ozone dùng rửa sạch bát đĩa, chai lọ sữa cho em bé
-- Sử dụng đơn giản, quá trình làm sạch rau quả hoàn toàn tự động
+<br/>
+- Khử mùi hôi tanh, các chất ướp trong thịt, cá.
+<br/>
+- Bảo quản rau quả thực phẩm tươi ngon lâu hơn.
+<br/>
+- Sản xuất nước ngậm Ozone dùng rửa sạch bát đĩa, chai lọ sữa cho em bé.
+<br/>
+- Sử dụng đơn giản, quá trình làm sạch rau quả hoàn toàn tự động.
 </span></p>
 </div>
 </div>
 <div class="row">
 <div class="col-md-12">
-<h1>II. Đèn bắt muỗi Quang Phong</h1>
+<h2>II. ĐÈN BẮT MUỖI QUANG PHONG</h2>
 <p style='text-align:justify'><img width=360 height=265
 src="~/dist/img/den-bat-muoi.jpg" runat="server" align=left hspace=12>
 Cuộc sống của bạn có đang bị ảnh hưởng bởi các loại côn trùng, ruồi, muỗi gây hại không? Nếu có thì bạn cần tìm ngay 1 giải pháp ngăn chặn ảnh hưởng của những loại côn trùng này. Đặc biệt nếu trong gia đình bạn có trẻ nhỏ thì việc ngăn chặn các loại côn trùng nguy hiểm càng trở nên cần thiết.</p>
-<p style='text-align:justify'>Có rất nhiều biện pháp diệt côn trùng, nhưng đi kèm với những biện pháp đó là những ảnh hưởng không tốt tới sức khỏe của chúng ta. Ví dụ như hương muỗi, thuộc diệt côn trùng,...</p>
+<p style='text-align:justify'>Có rất nhiều biện pháp diệt côn trùng, nhưng đi kèm với những biện pháp đó là những ảnh hưởng không tốt tới sức khỏe của chúng ta. Ví dụ như hương muỗi, thuốc diệt côn trùng,...</p>
 <p style='text-align:justify'>Vậy giải pháp nào sẽ giúp bạn vừa diệt được côn trùng mà không gây ảnh hưởng đền sức khỏe của chúng ta?</p>
-
-<h2><span style='font-size:12.0pt;line-height:115%'><br>
-Đèn diệt côn trùng, giải pháp diệt côn trùng an toàn nhất</span></h2>
-
-<p style='text-align:justify'>Đèn diệt côn trùng là sản phẩm được nhập nguyên chiếc bởi công ty Hitech. Với thiết kế nhỏ gọn, có thể treo lên hoặc đặt trên bàn hay trên sàn, hơn nữa đèn diệt côn trùng hoàn toàn không sử dụng hóa chất và dòng điện của đèn không gây hại tới con người.</p>
+<h3><span>Đèn diệt côn trùng, giải pháp diệt côn trùng an toàn nhất</span></h3>
+<p style='text-align:justify'>Với thiết kế nhỏ gọn, có thể treo lên hoặc đặt trên bàn hay trên sàn, hơn nữa đèn diệt côn trùng hoàn toàn không sử dụng hóa chất và dòng điện của đèn không gây hại tới con người.</p>
 </div>
 </div>
 </div>

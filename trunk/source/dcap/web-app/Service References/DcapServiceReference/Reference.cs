@@ -1103,7 +1103,7 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKe", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeResponse SearchBangKe(web_app.DcapServiceReference.SearchBangKeRequest request);
         
-        // CODEGEN: Generating message contract since element name SearchBangKeExtResult from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKeExt", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeExtResponse SearchBangKeExt(web_app.DcapServiceReference.SearchBangKeExtRequest request);
         
@@ -1838,16 +1838,20 @@ namespace web_app.DcapServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
     public partial class SearchBangKeExtRequestBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public System.Nullable<System.DateTime> beginDate;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string accountNumber;
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.Nullable<System.DateTime> beginDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
         public System.Nullable<System.DateTime> endDate;
         
         public SearchBangKeExtRequestBody() {
         }
         
-        public SearchBangKeExtRequestBody(System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
+        public SearchBangKeExtRequestBody(string accountNumber, System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
+            this.accountNumber = accountNumber;
             this.beginDate = beginDate;
             this.endDate = endDate;
         }
@@ -2876,9 +2880,10 @@ namespace web_app.DcapServiceReference {
             return base.Channel.SearchBangKeExt(request);
         }
         
-        public web_app.DcapServiceReference.BangKeDto[] SearchBangKeExt(System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
+        public web_app.DcapServiceReference.BangKeDto[] SearchBangKeExt(string accountNumber, System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
             web_app.DcapServiceReference.SearchBangKeExtRequest inValue = new web_app.DcapServiceReference.SearchBangKeExtRequest();
             inValue.Body = new web_app.DcapServiceReference.SearchBangKeExtRequestBody();
+            inValue.Body.accountNumber = accountNumber;
             inValue.Body.beginDate = beginDate;
             inValue.Body.endDate = endDate;
             web_app.DcapServiceReference.SearchBangKeExtResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchBangKeExt(inValue);

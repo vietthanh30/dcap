@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+xmlns="urn:nhibernate-mapping-2.2"
+namespace="domain_lib.model"
+assembly="domain_lib">
+  <sql-query name="GetBangKeAdvance">
+    <return class="BangKeVW" alias="BangKeVW" />
+    SELECT STT as {BangKeVW.Stt}, TEN_NHAN_VIEN as {BangKeVW.HoTen}, USER_NAME as {BangKeVW.UserName}, GIOI_TINH as {BangKeVW.GioiTinh}
+    , SO_CMND as {BangKeVW.SoCmnd}, NGAY_CAP as {BangKeVW.NgayCap}, DIA_CHI as {BangKeVW.DiaChi}, SO_TAI_KHOAN as {BangKeVW.SoTaiKhoan}
+    , CHI_NHANH_NH as {BangKeVW.ChiNhanhNH}, SO_DIEN_THOAI as {BangKeVW.SoDienThoai}, NGAY_DANG_KY as {BangKeVW.NgayDangKy}
+    , HE_THONG as {BangKeVW.HeThong}, QUAN_LY as {BangKeVW.QuanLy}, THUONG_THEM as {BangKeVW.ThuongThem}, TONG as {BangKeVW.SoTien}
+    , THANG as {BangKeVW.Thang} FROM dbo.BANG_KE_ADVANCE(:pAccountNumber,:pStart,:pEnd)
+  </sql-query>
+</hibernate-mapping>
