@@ -54,6 +54,7 @@ begin
 		END) AS THUONG_THEM,
 		MONTH , ACCOUNT_ID
 		FROM         dbo.ACCOUNT_BONUS
+		WHERE CREATED_DATE BETWEEN @pStart AND @pEnd
 		GROUP BY MONTH, ACCOUNT_ID)
 	insert @worktable
 	select ROW_NUMBER() OVER (ORDER BY ab.TONG desc) AS STT, child.HO_TEN AS TEN_NHAN_VIEN, usr.USER_NAME, child.GIOI_TINH, child.SO_CMND, 
@@ -62,6 +63,7 @@ begin
 	FROM bonus AS ab INNER JOIN
 		dbo.ACCOUNT AS ca ON ab.ACCOUNT_ID = ca.ACCOUNT_ID INNER JOIN
 		dbo.MEMBER_INFO AS child ON ca.MEMBER_ID = child.MEMBER_ID INNER JOIN
-		dbo.USERS AS usr ON ca.USER_ID = usr.USER_ID;
+		dbo.USERS AS usr ON ca.USER_ID = usr.USER_ID
+	WHERE ca.ACCOUNT_NUMBER = @pAccountNumber;
     RETURN;
 end
