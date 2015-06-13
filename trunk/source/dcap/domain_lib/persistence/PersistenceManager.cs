@@ -411,6 +411,26 @@ namespace domain_lib.persistence
             }
         }
 
+		private long GetAccountIdByUserName(string userName)
+		{
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select a.AccountId from Account a, Users u "
+                    + " where a.UserId = u.UserID and u.UserName = :userName");
+                query.SetParameter("userName", userName.ToUpper());
+
+                // Get the matching objects
+                var accountId = query.UniqueResult();
+
+                // Set return value
+                if (accountId == null)
+                {
+                    return -1;
+                }
+                return Convert.ToInt64(accountId);
+            }
+		}
+		
         private long GetAccountIdBy(string modelName, string accountNumber)
         {
             long accountNumberVal;
@@ -992,7 +1012,7 @@ namespace domain_lib.persistence
             return allResults.ToArray();
         }
 
-        public BangKeDto[] SearchBangKeExt(string accountNumber, DateTime? beginDate, DateTime? endDate)
+        public BangKeDto[] SearchBangKeExt(string accountNumber, string userName, DateTime? beginDate, DateTime? endDate)
         {
             List<BangKeDto> allResults;
 
@@ -1001,6 +1021,10 @@ namespace domain_lib.persistence
             {
                 accountNumberVal = -1;
             }
+			if (accountNumberVal == -1 and !string.IsNullOrEmpty(userName))
+			{
+				accountNumberVal = GetAccountIdByUserName(userName);
+			}
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.GetNamedQuery("GetBangKeAdvance");

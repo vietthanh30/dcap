@@ -67,9 +67,9 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public BangKeDto[] SearchBangKeExt(string accountNumber, DateTime? beginDate, DateTime? endDate)
+        public BangKeDto[] SearchBangKeExt(string accountNumber, string userName, DateTime? beginDate, DateTime? endDate)
         {
-            return controller.SearchBangKeExt(accountNumber, beginDate, endDate);
+            return controller.SearchBangKeExt(accountNumber, userName, beginDate, endDate);
         }
 
         [WebMethod]

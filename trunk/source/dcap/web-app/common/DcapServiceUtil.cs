@@ -48,9 +48,9 @@ namespace web_app.common
             return dcapService.SearchBangKe(thangKeKhai);
         }
 
-        public static BangKeDto[] SearchBangKeExt(string accountNumber, DateTime? beginDate, DateTime? endDate)
+        public static BangKeDto[] SearchBangKeExt(string accountNumber, string userName, DateTime? beginDate, DateTime? endDate)
         {
-            return dcapService.SearchBangKeExt(accountNumber, beginDate, endDate);
+            return dcapService.SearchBangKeExt(accountNumber, userName, beginDate, endDate);
         }
 
         public static HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)

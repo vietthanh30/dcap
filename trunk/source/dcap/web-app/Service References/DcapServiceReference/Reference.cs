@@ -1841,17 +1841,21 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string accountNumber;
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public System.Nullable<System.DateTime> beginDate;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string userName;
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public System.Nullable<System.DateTime> beginDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
         public System.Nullable<System.DateTime> endDate;
         
         public SearchBangKeExtRequestBody() {
         }
         
-        public SearchBangKeExtRequestBody(string accountNumber, System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
+        public SearchBangKeExtRequestBody(string accountNumber, string userName, System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
             this.accountNumber = accountNumber;
+            this.userName = userName;
             this.beginDate = beginDate;
             this.endDate = endDate;
         }
@@ -2880,10 +2884,11 @@ namespace web_app.DcapServiceReference {
             return base.Channel.SearchBangKeExt(request);
         }
         
-        public web_app.DcapServiceReference.BangKeDto[] SearchBangKeExt(string accountNumber, System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
+        public web_app.DcapServiceReference.BangKeDto[] SearchBangKeExt(string accountNumber, string userName, System.Nullable<System.DateTime> beginDate, System.Nullable<System.DateTime> endDate) {
             web_app.DcapServiceReference.SearchBangKeExtRequest inValue = new web_app.DcapServiceReference.SearchBangKeExtRequest();
             inValue.Body = new web_app.DcapServiceReference.SearchBangKeExtRequestBody();
             inValue.Body.accountNumber = accountNumber;
+            inValue.Body.userName = userName;
             inValue.Body.beginDate = beginDate;
             inValue.Body.endDate = endDate;
             web_app.DcapServiceReference.SearchBangKeExtResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchBangKeExt(inValue);

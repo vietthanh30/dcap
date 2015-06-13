@@ -58,6 +58,7 @@ namespace web_app.main_pages
 
         private bool GetAllBangKeDto(out BangKeDto[] allBangKeDto)
         {
+            var userName = UserName.Value.Trim();
             var idMember = IdMember.Value.Trim();
             var sBeginDate = BeginDate.Value.Trim();
             var beginDate = DateUtil.GetDateTime(sBeginDate);
@@ -72,7 +73,7 @@ namespace web_app.main_pages
             {
                 endDate = DateTime.Now;
             }
-            allBangKeDto = DcapServiceUtil.SearchBangKeExt(idMember, beginDate, endDate);
+            allBangKeDto = DcapServiceUtil.SearchBangKeExt(idMember, userName, beginDate, endDate);
             return true;
         }
 

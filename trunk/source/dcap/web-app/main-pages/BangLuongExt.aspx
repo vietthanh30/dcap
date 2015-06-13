@@ -21,6 +21,12 @@
 					<input type="text" class="form-control" runat="server" id="IdMember" placeholder="Nhập Id thành viên">
 				</div>
 				<div class="col-xs-4">
+					<label for="UserName">Tên đăng nhập</label>
+					<input type="text" class="form-control" runat="server" id="UserName" placeholder="Nhập tên đăng nhập">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
 					<label for="BeginDate">Từ ngày</label>
                     <div class="input-group">
                       <div class="input-group-addon">
