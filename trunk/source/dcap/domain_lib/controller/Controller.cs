@@ -1023,7 +1023,7 @@ namespace domain_lib.controller
             return m_PersistenceManager.GetRowCount("Account");
         }
 
-        public long GetManagerAmount()
+        public string GetManagerAmount()
         {
             var managerL1 = m_PersistenceManager.GetRowCount("ManagerL1");
             var managerL2 = m_PersistenceManager.GetRowCount("ManagerL2");
@@ -1031,7 +1031,7 @@ namespace domain_lib.controller
             var managerL4 = m_PersistenceManager.GetRowCount("ManagerL4");
             var managerL5 = m_PersistenceManager.GetRowCount("ManagerL5");
             var managerL6 = m_PersistenceManager.GetRowCount("ManagerL6");
-            return managerL1 + managerL2 + managerL3 + managerL4 + managerL5 + managerL6;
+            return "Cấp 1: " + managerL1 + "|Cấp 2: " + managerL2 + "|Cấp 3: " + managerL3 + "|Cấp 4: " + managerL4 + "|Cấp 5: " + managerL5 + "|Cấp 6: " + managerL6;
         }
 
         public long GetManagerL6Amount()

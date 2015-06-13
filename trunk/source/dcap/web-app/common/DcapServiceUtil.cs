@@ -108,7 +108,7 @@ namespace web_app.common
             return dcapService.GetAccountAmount();
         }
 
-        public static long GetManagerAmount()
+        public static string GetManagerAmount()
         {
             return dcapService.GetManagerAmount();
         }

@@ -1162,7 +1162,7 @@ namespace web_app.DcapServiceReference {
         long GetAccountAmount();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManagerAmount", ReplyAction="*")]
-        long GetManagerAmount();
+        string GetManagerAmount();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManagerL6Amount", ReplyAction="*")]
         long GetManagerL6Amount();
@@ -3039,7 +3039,7 @@ namespace web_app.DcapServiceReference {
             return base.Channel.GetAccountAmount();
         }
         
-        public long GetManagerAmount() {
+        public string GetManagerAmount() {
             return base.Channel.GetManagerAmount();
         }
         

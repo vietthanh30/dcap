@@ -163,7 +163,7 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public long GetManagerAmount()
+        public string GetManagerAmount()
         {
             return controller.GetManagerAmount();
         }

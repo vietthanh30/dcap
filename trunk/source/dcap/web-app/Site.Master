@@ -168,6 +168,21 @@
                   </ul>
                 </li>
                 <li class="treeview">
+                  <a href="#" runat="server"><i class='fa fa-link'></i> <span>Quản lý điểm thưởng</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                    <li>
+                      <a id="A11" href="~/admin/NewBonusAdd.aspx" runat="server">
+                        <i class="fa fa-circle-o"></i> <span>Thưởng thêm</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a id="A7" href="~/admin/ApprovalBonusAdd.aspx" runat="server">
+                        <i class="fa fa-circle-o"></i> <span>Duyệt thưởng thêm</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="treeview">
                   <a href="#" runat="server"><i class='fa fa-link'></i> <span>Mạng lưới thành viên</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li>

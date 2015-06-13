@@ -62,6 +62,8 @@
     <Content Include="admin\ChangePasswordSuccess.aspx" />
     <Content Include="admin\CImage.aspx" />
     <Content Include="admin\DuyetCapQuanLy.aspx" />
+    <Content Include="admin\NewBonusAdd.aspx" />
+    <Content Include="admin\ApprovalBonusAdd.aspx" />
     <Content Include="admin\TraCuuThanhVien.aspx" />
     <Content Include="dist\img\delete-icon.png" />
     <Content Include="dist\img\den-bat-muoi.jpg" />
@@ -950,6 +952,20 @@
     </Compile>
     <Compile Include="admin\DuyetCapQuanLy.aspx.designer.cs">
       <DependentUpon>DuyetCapQuanLy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\NewBonusAdd.aspx.cs">
+      <DependentUpon>NewBonusAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\NewBonusAdd.aspx.designer.cs">
+      <DependentUpon>NewBonusAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ApprovalBonusAdd.aspx.cs">
+      <DependentUpon>ApprovalBonusAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ApprovalBonusAdd.aspx.designer.cs">
+      <DependentUpon>ApprovalBonusAdd.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\TraCuuThanhVien.aspx.cs">
       <DependentUpon>TraCuuThanhVien.aspx</DependentUpon>
