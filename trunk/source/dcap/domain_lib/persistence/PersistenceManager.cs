@@ -1021,9 +1021,13 @@ namespace domain_lib.persistence
             {
                 accountNumberVal = -1;
             }
-			if (accountNumberVal == -1 and !string.IsNullOrEmpty(userName))
+			if (accountNumberVal == -1 && !string.IsNullOrEmpty(userName))
 			{
 				accountNumberVal = GetAccountIdByUserName(userName);
+                if (accountNumberVal == -1)
+                {
+                    return new BangKeDto[0];
+                }
 			}
             using (ISession session = m_SessionFactory.OpenSession())
             {
