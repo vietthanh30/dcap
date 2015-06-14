@@ -14,6 +14,7 @@
     <AssemblyName>web_app</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,6 +69,9 @@
     <Content Include="dist\img\delete-icon.png" />
     <Content Include="dist\img\den-bat-muoi.jpg" />
     <Content Include="dist\img\edit-icon.png" />
+    <Content Include="dist\img\event\1.JPG" />
+    <Content Include="dist\img\event\2.JPG" />
+    <Content Include="dist\img\event\3.JPG" />
     <Content Include="dist\img\may-ozone-ht401.jpg" />
     <Content Include="main-pages\BangLuongExt.aspx" />
     <Content Include="main-pages\ManagerNetwork.aspx" />
