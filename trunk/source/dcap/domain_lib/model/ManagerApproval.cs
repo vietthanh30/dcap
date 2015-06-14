@@ -22,7 +22,11 @@ namespace domain_lib.model
 
         private string _approvedBy = string.Empty;
 
-        private DateTime _createdDate = default(DateTime);
+        private DateTime _createdDate = DateTime.Now;
+
+        private long _accountNumber = -1;
+
+        private string _userName = String.Empty;
 
         #endregion
 
@@ -30,6 +34,14 @@ namespace domain_lib.model
 
         public ManagerApproval()
         {
+        }
+
+        public ManagerApproval(long id, long accountNumber, int managerLevel, string userName)
+        {
+			this._id = id;
+			this._accountNumber = accountNumber;
+			this._managerLevel = managerLevel;
+			this._userName = userName;
         }
 
     	#endregion
@@ -101,7 +113,24 @@ namespace domain_lib.model
             set { _createdDate = value; }
         }
 
-        
+        /// <summary>
+        /// AccountNumber
+        /// </summary>
+        public virtual long AccountNumber
+        {
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
+        }
+
+        /// <summary>
+        /// UserName
+        /// </summary>
+        public virtual string UserName
+        {
+            get { return _userName; }
+            set { _userName = value; }
+        }
+
         #endregion
 
         #region Method Overrides

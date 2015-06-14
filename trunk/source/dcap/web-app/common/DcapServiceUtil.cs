@@ -142,5 +142,15 @@ namespace web_app.common
         {
             return dcapService.UpdatePaid(bangKeDtos);
         }
+		
+		public static ManagerApprovalDto[] SearchManagerApproval(string capQuanLy, string accountNumber)
+		{
+            return dcapService.SearchManagerApproval(capQuanLy, accountNumber);
+		}
+		
+		public static string UpdateManagerApproval(ManagerApprovalDto dto)
+		{
+            return dcapService.UpdateManagerApproval(dto);
+		}
     }
 }

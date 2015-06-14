@@ -25,5 +25,101 @@ namespace web_app.admin
                 return;
             }
         }
+
+        protected void DuyetCapQuanLy_Search(object sender, EventArgs e)
+        {
+            OnSearchManagerApproval();
+        }
+
+        private void OnSearchManagerApproval()
+        {
+            var capQuanLy = CapQuanLySearch.SelectedValue;
+            var idThanhVien = IdThanhVienSearch.Value.Trim();
+            var managerApprovalDtos = DcapServiceUtil.SearchManagerApproval(capQuanLy, idMember);
+            if (managerApprovalDtos.Length > 0)
+            {
+                LoadManagerApproval(managerApprovalDtos);
+                InvalidCredentialsMessage.Visible = false;
+            }
+            else
+            {
+                InvalidCredentialsMessage.Text = "Không tìm thấy duyệt cấp quản lý thỏa mãn";
+                InvalidCredentialsMessage.Visible = true;
+                ResetGvManagerApproval();
+            }
+        }
+
+        private void ResetGvManagerApproval()
+        {
+            gvManagerApproval.DataSource = new ManagerApprovalDto[0];
+            gvManagerApproval.DataBind();
+        }
+
+        private void LoadManagerApproval(ManagerApprovalDto[] managerApprovalDtos)
+        {
+            gvManagerApproval.DataSource = managerApprovalDtos;
+            gvManagerApproval.DataBind();
+        }
+
+        protected void OnClosePopupWindow(object sender, EventArgs e)
+        {
+            ManagerApprovalPopup.HidePopupWindow();
+        }
+
+        protected void imgBtnApprove_Click(object sender, ImageClickEventArgs e)
+        {
+            var row = (GridViewRow)(sender as Control).Parent.Parent;
+			var managerLevel = row.Cells[1].Text;
+            var userName = row.Cells[2].Text;
+            var accountNumber = row.Cells[3].Text;
+			ManagerLevelApproval.Text = managerLevel;
+			AccountNumberApproval.Text = accountNumber;
+            DeleteMemberLabel.Text = "Duyệt cấp quản lý " + managerLevel + " cho thành viên " + userName + " [" + accountNumber + "]?";
+            DeleteMemberPopup.ShowPopupWindow();
+        }
+
+        protected void DuyetCapQuanLy_ApproveManager(object sender, EventArgs e)
+        {
+            InvalidCredentialsMessage.Visible = false;
+			ManagerApprovalDto dto;
+			if (GetManagerApprovalDto(out dto))
+			{
+				dto.ApprovedBy = User.Identity.Name;
+				var returnCode = DcapServiceUtil.UpdateManagerApproval(dto);
+				if (string.Compare(returnCode, "0", true) == 0)
+				{
+					OnSearchManagerApproval();
+					InvalidCredentialsMessage.Text = "Duyệt cấp quản lý thành công!";
+				}
+				else
+				{
+					InvalidCredentialsMessage.Text = "Duyệt cấp quản lý không thành công!";
+				}
+			}
+            else
+            {
+                InvalidCredentialsMessage.Text = "Duyệt cấp quản lý không thành công!";
+            }
+            InvalidCredentialsMessage.Visible = true;
+            OnClosePopupWindow(sender, e);
+        }
+		
+		private bool GetManagerApprovalDto(out ManagerApprovalDto dto)
+		{
+			ManagerApprovalDto dto = new ManagerApprovalDto();
+			int managerLevel;
+			long accountNumber;
+			if (!int.TryParse(ManagerLevelApproval.Text, out managerLevel))
+			{
+				return false;
+			}
+			if (!long.TryParse(AccountNumberApproval.Text, out accountNumber))
+			{
+				return false;
+			}
+			dto.ManagerLevel = managerLevel;
+			dto.AccountNumber = accountNumber;
+			return dto;
+		}
     }
 }

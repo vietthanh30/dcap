@@ -135,6 +135,16 @@ namespace domain_lib.controller
             return m_PersistenceManager.UpdatePaid(bangKeDtos);
         }
 
+		public ManagerApprovalDto[] SearchManagerApproval(string capQuanLy, string accountNumber)
+		{
+            return m_PersistenceManager.SearchManagerApproval(capQuanLy, accountNumber);
+		}
+		
+		public string UpdateManagerApproval(ManagerApprovalDto dto)
+		{
+            return m_PersistenceManager.UpdateManagerApproval(dto);
+		}
+
         public int CalculateAccountLog()
         {
             try

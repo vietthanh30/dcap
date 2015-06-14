@@ -127,6 +127,18 @@ namespace ws_server.view
         }
 
         [WebMethod]
+		public ManagerApprovalDto[] SearchManagerApproval(string capQuanLy, string accountNumber)
+		{
+            return controller.SearchManagerApproval(capQuanLy, accountNumber);
+		}
+		
+        [WebMethod]
+		public string UpdateManagerApproval(ManagerApprovalDto dto)
+		{
+            return controller.UpdateManagerApproval(dto);
+		}
+
+        [WebMethod]
         public int CalculateAccountLog()
         {
             return controller.CalculateAccountLog();

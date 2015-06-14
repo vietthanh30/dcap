@@ -1720,6 +1720,64 @@ namespace domain_lib.persistence
             return "0";
         }
 
+		public ManagerApprovalDto[] SearchManagerApproval(string capQuanLy, string accountNumber)
+		{
+            List<ManagerApprovalDto> allResults;
+
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                var query = session.CreateQuery("select new ManagerApproval(ma.Id, a.AccountNumber, ma.ManagerLevel, u.UserName) "
+					+ " from ManagerApproval ma, Account a, Users u "
+                    + " where ma.IsApproved = :isApproved and ma.AccountId = a.AccountId and a.UserId = u.UserID"
+					+ " order by ma.CreatedDate asc");
+				query.SetParameter("isApproved", "N");
+
+                // Get the matching objects
+                var list = query.List<ManagerApproval>();
+
+                // Set return value
+                allResults = CreateAllManagerApprovalDto(list);
+            }
+            return allResults.ToArray();
+		}
+		
+		private List<> CreateAllManagerApprovalDto(IEnumerable<ManagerApproval> list)
+		{
+			List<ManagerApprovalDto> allResults new List<ManagerApprovalDto>();
+			foreach(ManagerApproval model in list)
+			{
+				ManagerApprovalDto dto = new ManagerApprovalDto();
+				dto.Id = model.Id;
+				dto.AccountNumber = model.AccountNumber;
+				dto.ManagerLevel = model.ManagerLevel;
+				dto.UserName = model.UserName;
+				allResults.Add(dto);
+			}
+			return allResults;
+		}
+		
+		public string UpdateManagerApproval(ManagerApprovalDto dto)
+		{
+			var mapParams = new Hashtable();
+			mapParams.Add("ManagerLevel", dto.ManagerLevel);
+			var accountId = GetAccountIdBy(dto.AccountNumber);
+			mapParams.Add("AccountId", accountId);
+			mapParams.Add("IsApproved", "N");
+			var list = RetrieveEquals<ManagerApproval>(mapParams);
+			if (list.Count == 0)
+			{
+				return "-1";
+			}
+			foreach(ManagerApproval model in list)
+			{
+				model.IsApproved = "I";
+				model.ApprovedBy = dto.ApprovedBy;
+				model.ApprovedDate = DateTime.Now;
+                Save(model);
+			}
+            return "0";
+		}
+
         public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
         {
             DateTime now = DateTime.Now;
