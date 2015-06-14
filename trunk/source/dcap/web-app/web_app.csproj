@@ -921,6 +921,9 @@
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.HoaHongMemberDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.ManagerApprovalDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.MemberNodeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

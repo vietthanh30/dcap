@@ -983,6 +983,112 @@ namespace web_app.DcapServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ManagerApprovalDto", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class ManagerApprovalDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long IdField;
+        
+        private long AccountNumberField;
+        
+        private int ManagerLevelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ApprovedByField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public long AccountNumber {
+            get {
+                return this.AccountNumberField;
+            }
+            set {
+                if ((this.AccountNumberField.Equals(value) != true)) {
+                    this.AccountNumberField = value;
+                    this.RaisePropertyChanged("AccountNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int ManagerLevel {
+            get {
+                return this.ManagerLevelField;
+            }
+            set {
+                if ((this.ManagerLevelField.Equals(value) != true)) {
+                    this.ManagerLevelField = value;
+                    this.RaisePropertyChanged("ManagerLevel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string ApprovedBy {
+            get {
+                return this.ApprovedByField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ApprovedByField, value) != true)) {
+                    this.ApprovedByField = value;
+                    this.RaisePropertyChanged("ApprovedBy");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AccountBonusDto", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class AccountBonusDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1143,6 +1249,14 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePaid", ReplyAction="*")]
         web_app.DcapServiceReference.UpdatePaidResponse UpdatePaid(web_app.DcapServiceReference.UpdatePaidRequest request);
         
+        // CODEGEN: Generating message contract since element name capQuanLy from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchManagerApproval", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchManagerApprovalResponse SearchManagerApproval(web_app.DcapServiceReference.SearchManagerApprovalRequest request);
+        
+        // CODEGEN: Generating message contract since element name dto from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateManagerApproval", ReplyAction="*")]
+        web_app.DcapServiceReference.UpdateManagerApprovalResponse UpdateManagerApproval(web_app.DcapServiceReference.UpdateManagerApprovalRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
         int CalculateAccountLog();
         
@@ -1161,8 +1275,9 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccountAmount", ReplyAction="*")]
         long GetAccountAmount();
         
+        // CODEGEN: Generating message contract since element name GetManagerAmountResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManagerAmount", ReplyAction="*")]
-        string GetManagerAmount();
+        web_app.DcapServiceReference.GetManagerAmountResponse GetManagerAmount(web_app.DcapServiceReference.GetManagerAmountRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManagerL6Amount", ReplyAction="*")]
         long GetManagerL6Amount();
@@ -2543,6 +2658,207 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchManagerApprovalRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchManagerApproval", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchManagerApprovalRequestBody Body;
+        
+        public SearchManagerApprovalRequest() {
+        }
+        
+        public SearchManagerApprovalRequest(web_app.DcapServiceReference.SearchManagerApprovalRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchManagerApprovalRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string capQuanLy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string accountNumber;
+        
+        public SearchManagerApprovalRequestBody() {
+        }
+        
+        public SearchManagerApprovalRequestBody(string capQuanLy, string accountNumber) {
+            this.capQuanLy = capQuanLy;
+            this.accountNumber = accountNumber;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchManagerApprovalResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchManagerApprovalResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchManagerApprovalResponseBody Body;
+        
+        public SearchManagerApprovalResponse() {
+        }
+        
+        public SearchManagerApprovalResponse(web_app.DcapServiceReference.SearchManagerApprovalResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchManagerApprovalResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.ManagerApprovalDto[] SearchManagerApprovalResult;
+        
+        public SearchManagerApprovalResponseBody() {
+        }
+        
+        public SearchManagerApprovalResponseBody(web_app.DcapServiceReference.ManagerApprovalDto[] SearchManagerApprovalResult) {
+            this.SearchManagerApprovalResult = SearchManagerApprovalResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateManagerApprovalRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateManagerApproval", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.UpdateManagerApprovalRequestBody Body;
+        
+        public UpdateManagerApprovalRequest() {
+        }
+        
+        public UpdateManagerApprovalRequest(web_app.DcapServiceReference.UpdateManagerApprovalRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class UpdateManagerApprovalRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.ManagerApprovalDto dto;
+        
+        public UpdateManagerApprovalRequestBody() {
+        }
+        
+        public UpdateManagerApprovalRequestBody(web_app.DcapServiceReference.ManagerApprovalDto dto) {
+            this.dto = dto;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateManagerApprovalResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateManagerApprovalResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.UpdateManagerApprovalResponseBody Body;
+        
+        public UpdateManagerApprovalResponse() {
+        }
+        
+        public UpdateManagerApprovalResponse(web_app.DcapServiceReference.UpdateManagerApprovalResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class UpdateManagerApprovalResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string UpdateManagerApprovalResult;
+        
+        public UpdateManagerApprovalResponseBody() {
+        }
+        
+        public UpdateManagerApprovalResponseBody(string UpdateManagerApprovalResult) {
+            this.UpdateManagerApprovalResult = UpdateManagerApprovalResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetManagerAmountRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetManagerAmount", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetManagerAmountRequestBody Body;
+        
+        public GetManagerAmountRequest() {
+        }
+        
+        public GetManagerAmountRequest(web_app.DcapServiceReference.GetManagerAmountRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetManagerAmountRequestBody {
+        
+        public GetManagerAmountRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetManagerAmountResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetManagerAmountResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.GetManagerAmountResponseBody Body;
+        
+        public GetManagerAmountResponse() {
+        }
+        
+        public GetManagerAmountResponse(web_app.DcapServiceReference.GetManagerAmountResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetManagerAmountResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetManagerAmountResult;
+        
+        public GetManagerAmountResponseBody() {
+        }
+        
+        public GetManagerAmountResponseBody(string GetManagerAmountResult) {
+            this.GetManagerAmountResult = GetManagerAmountResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetNewMemberListRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetNewMemberList", Namespace="http://tempuri.org/", Order=0)]
@@ -3020,6 +3336,33 @@ namespace web_app.DcapServiceReference {
             return retVal.Body.UpdatePaidResult;
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchManagerApprovalResponse web_app.DcapServiceReference.DcapServiceSoap.SearchManagerApproval(web_app.DcapServiceReference.SearchManagerApprovalRequest request) {
+            return base.Channel.SearchManagerApproval(request);
+        }
+        
+        public web_app.DcapServiceReference.ManagerApprovalDto[] SearchManagerApproval(string capQuanLy, string accountNumber) {
+            web_app.DcapServiceReference.SearchManagerApprovalRequest inValue = new web_app.DcapServiceReference.SearchManagerApprovalRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchManagerApprovalRequestBody();
+            inValue.Body.capQuanLy = capQuanLy;
+            inValue.Body.accountNumber = accountNumber;
+            web_app.DcapServiceReference.SearchManagerApprovalResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchManagerApproval(inValue);
+            return retVal.Body.SearchManagerApprovalResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.UpdateManagerApprovalResponse web_app.DcapServiceReference.DcapServiceSoap.UpdateManagerApproval(web_app.DcapServiceReference.UpdateManagerApprovalRequest request) {
+            return base.Channel.UpdateManagerApproval(request);
+        }
+        
+        public string UpdateManagerApproval(web_app.DcapServiceReference.ManagerApprovalDto dto) {
+            web_app.DcapServiceReference.UpdateManagerApprovalRequest inValue = new web_app.DcapServiceReference.UpdateManagerApprovalRequest();
+            inValue.Body = new web_app.DcapServiceReference.UpdateManagerApprovalRequestBody();
+            inValue.Body.dto = dto;
+            web_app.DcapServiceReference.UpdateManagerApprovalResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).UpdateManagerApproval(inValue);
+            return retVal.Body.UpdateManagerApprovalResult;
+        }
+        
         public int CalculateAccountLog() {
             return base.Channel.CalculateAccountLog();
         }
@@ -3044,8 +3387,16 @@ namespace web_app.DcapServiceReference {
             return base.Channel.GetAccountAmount();
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.GetManagerAmountResponse web_app.DcapServiceReference.DcapServiceSoap.GetManagerAmount(web_app.DcapServiceReference.GetManagerAmountRequest request) {
+            return base.Channel.GetManagerAmount(request);
+        }
+        
         public string GetManagerAmount() {
-            return base.Channel.GetManagerAmount();
+            web_app.DcapServiceReference.GetManagerAmountRequest inValue = new web_app.DcapServiceReference.GetManagerAmountRequest();
+            inValue.Body = new web_app.DcapServiceReference.GetManagerAmountRequestBody();
+            web_app.DcapServiceReference.GetManagerAmountResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).GetManagerAmount(inValue);
+            return retVal.Body.GetManagerAmountResult;
         }
         
         public long GetManagerL6Amount() {

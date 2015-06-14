@@ -36,6 +36,7 @@ namespace web_app.admin
             {
                 InvalidCredentialsMessage.Text = userDto.Message;
                 InvalidCredentialsMessage.Visible = true;
+                CaptchaImage.Text = string.Empty;
             }
         }
     }

@@ -13,13 +13,40 @@ namespace web_app.admin {
     public partial class DuyetCapQuanLy {
         
         /// <summary>
-        /// CapQuanLy control.
+        /// ErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
+        
+        /// <summary>
+        /// ManagerApprovalValidationGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ManagerApprovalValidationGroup;
+        
+        /// <summary>
+        /// CapQuanLySearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList CapQuanLySearch;
+        
+        /// <summary>
+        /// CapQuanLySearchRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CapQuanLySearchRequired;
         
         /// <summary>
         /// IdThanhVienSearch control.
@@ -29,15 +56,6 @@ namespace web_app.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText IdThanhVienSearch;
-        
-        /// <summary>
-        /// SearchButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
         /// SearchButton control.
@@ -67,31 +85,13 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.Label InvalidCredentialsMessage;
         
         /// <summary>
-        /// gvMemberInfo control.
+        /// gvManagerApproval control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvManagerApproval;
-        
-        /// <summary>
-        /// ErrorMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
-        
-        /// <summary>
-        /// ManagerApprovalValidationGroup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ManagerApprovalValidationGroup;
         
         /// <summary>
         /// ManagerApprovalPopup control.
@@ -130,6 +130,24 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.Label ManagerApprovalLabel;
         
         /// <summary>
+        /// ManagerLevelApproval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ManagerLevelApproval;
+        
+        /// <summary>
+        /// AccountNumberApproval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField AccountNumberApproval;
+        
+        /// <summary>
         /// AcceptApprovalButton control.
         /// </summary>
         /// <remarks>
@@ -146,24 +164,5 @@ namespace web_app.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CancelApprovalButton;
-        
-        /// <summary>
-        /// ContinueDestinationPageUrl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ManagerLevelApproval;
-        
-        /// <summary>
-        /// ContinueDestinationPageUrl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField AccountNumberApproval;
-        
     }
 }

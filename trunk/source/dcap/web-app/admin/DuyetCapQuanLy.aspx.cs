@@ -35,7 +35,7 @@ namespace web_app.admin
         {
             var capQuanLy = CapQuanLySearch.SelectedValue;
             var idThanhVien = IdThanhVienSearch.Value.Trim();
-            var managerApprovalDtos = DcapServiceUtil.SearchManagerApproval(capQuanLy, idMember);
+            var managerApprovalDtos = DcapServiceUtil.SearchManagerApproval(capQuanLy, idThanhVien);
             if (managerApprovalDtos.Length > 0)
             {
                 LoadManagerApproval(managerApprovalDtos);
@@ -61,6 +61,22 @@ namespace web_app.admin
             gvManagerApproval.DataBind();
         }
 
+        int _stt = 1;
+
+        public string GetStt()
+        {
+            return Convert.ToString(_stt++);
+        }
+
+        protected void gvManagerApproval_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvManagerApproval.PageIndex = e.NewPageIndex;
+            int pageIndex = e.NewPageIndex;
+            int rowCount = gvManagerApproval.PageSize;
+            _stt = pageIndex * rowCount + 1;
+            OnSearchManagerApproval();
+        }
+
         protected void OnClosePopupWindow(object sender, EventArgs e)
         {
             ManagerApprovalPopup.HidePopupWindow();
@@ -72,10 +88,10 @@ namespace web_app.admin
 			var managerLevel = row.Cells[1].Text;
             var userName = row.Cells[2].Text;
             var accountNumber = row.Cells[3].Text;
-			ManagerLevelApproval.Text = managerLevel;
-			AccountNumberApproval.Text = accountNumber;
-            DeleteMemberLabel.Text = "Duyệt cấp quản lý " + managerLevel + " cho thành viên " + userName + " [" + accountNumber + "]?";
-            DeleteMemberPopup.ShowPopupWindow();
+			ManagerLevelApproval.Value = managerLevel;
+            AccountNumberApproval.Value = accountNumber;
+            ManagerApprovalLabel.Text = "Duyệt cấp quản lý " + managerLevel + " cho thành viên " + userName + " [" + accountNumber + "]?";
+            ManagerApprovalPopup.ShowPopupWindow();
         }
 
         protected void DuyetCapQuanLy_ApproveManager(object sender, EventArgs e)
@@ -106,20 +122,20 @@ namespace web_app.admin
 		
 		private bool GetManagerApprovalDto(out ManagerApprovalDto dto)
 		{
-			ManagerApprovalDto dto = new ManagerApprovalDto();
+			dto = new ManagerApprovalDto();
 			int managerLevel;
 			long accountNumber;
-			if (!int.TryParse(ManagerLevelApproval.Text, out managerLevel))
+			if (!int.TryParse(ManagerLevelApproval.Value, out managerLevel))
 			{
 				return false;
 			}
-			if (!long.TryParse(AccountNumberApproval.Text, out accountNumber))
+            if (!long.TryParse(AccountNumberApproval.Value, out accountNumber))
 			{
 				return false;
 			}
 			dto.ManagerLevel = managerLevel;
 			dto.AccountNumber = accountNumber;
-			return dto;
+			return true;
 		}
     }
 }

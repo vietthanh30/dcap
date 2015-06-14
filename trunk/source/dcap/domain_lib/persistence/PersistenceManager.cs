@@ -1741,9 +1741,9 @@ namespace domain_lib.persistence
             return allResults.ToArray();
 		}
 		
-		private List<> CreateAllManagerApprovalDto(IEnumerable<ManagerApproval> list)
+		private List<ManagerApprovalDto> CreateAllManagerApprovalDto(IEnumerable<ManagerApproval> list)
 		{
-			List<ManagerApprovalDto> allResults new List<ManagerApprovalDto>();
+			List<ManagerApprovalDto> allResults = new List<ManagerApprovalDto>();
 			foreach(ManagerApproval model in list)
 			{
 				ManagerApprovalDto dto = new ManagerApprovalDto();
@@ -1760,7 +1760,7 @@ namespace domain_lib.persistence
 		{
 			var mapParams = new Hashtable();
 			mapParams.Add("ManagerLevel", dto.ManagerLevel);
-			var accountId = GetAccountIdBy(dto.AccountNumber);
+			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
 			mapParams.Add("AccountId", accountId);
 			mapParams.Add("IsApproved", "N");
 			var list = RetrieveEquals<ManagerApproval>(mapParams);
