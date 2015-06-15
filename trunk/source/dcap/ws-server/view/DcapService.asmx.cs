@@ -145,6 +145,12 @@ namespace ws_server.view
 		}
 		
         [WebMethod]
+		public string CreateBonusApproval(BonusApprovalDto dto)
+		{
+            return controller.CreateBonusApproval(dto);
+		}
+
+        [WebMethod]
 		public string UpdateBonusApproval(BonusApprovalDto dto)
 		{
             return controller.UpdateBonusApproval(dto);

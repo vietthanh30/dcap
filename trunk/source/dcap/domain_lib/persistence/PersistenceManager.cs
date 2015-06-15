@@ -1864,7 +1864,7 @@ namespace domain_lib.persistence
 			return allResults;
 		}
 		
-		public string UpdateBonusApproval(BonusApprovalDto dto)
+		public string CreateBonusApproval(BonusApprovalDto dto)
 		{
 			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
 			if (accountId == -1)
@@ -1882,6 +1882,30 @@ namespace domain_lib.persistence
             return "0";
 		}
 
+		public string UpdateBonusApproval(BonusApprovalDto dto)
+		{
+			var mapParams = new Hashtable();
+			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
+			mapParams.Add("AccountId", accountId);
+			mapParams.Add("BonusType", dto.BonusType);
+			mapParams.Add("IsApproved", "N");
+			var list = RetrieveEquals<BonusApproval>(mapParams);
+			if (list.Count == 0)
+			{
+				return "-1";
+			}
+			foreach(BonusApproval model in list)
+			{
+				model.IsApproved = "Y";
+				model.ApprovedBy = dto.ApprovedBy;
+				model.ApprovedDate = DateTime.Now;
+                Save(model);
+				// Save AccountBonus
+				SaveAccountBonus(model.AccountId, model.BonusAmount, model.BonusType);
+			}
+            return "0";
+		}
+		
         public AccountBonus SaveAccountBonus(long accountId, double bonusAmount, string bonusType)
         {
             DateTime now = DateTime.Now;

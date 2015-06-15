@@ -158,6 +158,11 @@ namespace web_app.common
             return dcapService.SearchBonusApproval(accountNumber, userName, isApproved);
 		}
 		
+		public static string CreateBonusApproval(BonusApprovalDto dto)
+		{
+            return dcapService.CreateBonusApproval(dto);
+		}
+		
 		public static string UpdateBonusApproval(BonusApprovalDto dto)
 		{
             return dcapService.UpdateBonusApproval(dto);

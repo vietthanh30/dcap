@@ -122,7 +122,7 @@ namespace web_app.admin
             }
             var userName = User.Identity.Name;
 			var dto = CreateBonusApprovalDto(accountNumberVal, bonusAmountVal, bonusType, isApproved, userName);
-            returnCode = DcapServiceUtil.UpdateBonusApproval(dto);
+            returnCode = DcapServiceUtil.CreateBonusApproval(dto);
             int code;
             var status = int.TryParse(returnCode, out code);
             if (status && code == 0)
