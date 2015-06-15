@@ -66,6 +66,7 @@
     <Content Include="admin\NewBonusAdd.aspx" />
     <Content Include="admin\ApprovalBonusAdd.aspx" />
     <Content Include="admin\TraCuuThanhVien.aspx" />
+    <Content Include="dist\img\approve-icon.png" />
     <Content Include="dist\img\delete-icon.png" />
     <Content Include="dist\img\den-bat-muoi.jpg" />
     <Content Include="dist\img\edit-icon.png" />
