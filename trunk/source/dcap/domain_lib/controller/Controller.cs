@@ -1008,7 +1008,7 @@ namespace domain_lib.controller
 
         private void CalculateTtBonus(AccountPreCalc accountPreCalc)
         {
-            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 1.2, "TT");
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.8, "TT");
         }
 
         private bool IsCalculated(AccountPreCalc accountPreCalc)
