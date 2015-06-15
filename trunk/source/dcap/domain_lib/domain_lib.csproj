@@ -67,6 +67,7 @@
     <Compile Include="model\AccountLogHist.cs" />
     <Compile Include="model\AccountPreCalc.cs" />
     <Compile Include="model\BangKeVW.cs" />
+    <Compile Include="model\BonusApproval.cs" />
     <Compile Include="model\HoaHongMemberVW.cs" />
     <Compile Include="model\ManagerApproval.cs" />
     <Compile Include="model\ManagerLevelLog.cs" />
@@ -165,6 +166,9 @@
     <EmbeddedResource Include="model\BangKeAdvanceVW.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="model\BonusApproval.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
