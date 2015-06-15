@@ -62,19 +62,19 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="http://placehold.it/900x500/39CCCC/ffffff&text=I+Love+Bootstrap" alt="First slide">
+                                    <img src="~/dist/img/event/1.JPG" runat="server" alt="First slide">
                                     <div class="carousel-caption">
                                         First Slide
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <img src="http://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap" alt="Second slide">
+                                    <img src="~/dist/img/event/2.JPG" runat="server" alt="Second slide">
                                     <div class="carousel-caption">
                                         Second Slide
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
+                                    <img src="~/dist/img/event/3.JPG" runat="server" alt="Third slide">
                                     <div class="carousel-caption">
                                         Third Slide
                                     </div>
@@ -105,7 +105,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <p>
-                            <img id="Img1" width="360"  src="~/dist/img/may-ozone-ht401.jpg" runat="server"
+                            <img id="Img1" width="360" src="~/dist/img/may-ozone-ht401.jpg" runat="server"
                                 align="left" hspace="12">
                             <span ><font color=red>Tính năng tác dụng:</font></span>
                             <br />
