@@ -145,6 +145,16 @@ namespace domain_lib.controller
             return m_PersistenceManager.UpdateManagerApproval(dto);
 		}
 
+		public BonusApprovalDto[] SearchBonusApproval(string accountNumber, string userName, string isApproved)
+		{
+            return m_PersistenceManager.SearchBonusApproval(accountNumber, userName, isApproved);
+		}
+		
+		public string UpdateBonusApproval(BonusApprovalDto dto)
+		{
+            return m_PersistenceManager.UpdateBonusApproval(dto);
+		}
+
         public int CalculateAccountLog()
         {
             try

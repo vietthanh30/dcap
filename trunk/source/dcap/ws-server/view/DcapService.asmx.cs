@@ -139,6 +139,18 @@ namespace ws_server.view
 		}
 
         [WebMethod]
+		public BonusApprovalDto[] SearchBonusApproval(string accountNumber, string userName, string isApproved)
+		{
+            return controller.SearchBonusApproval(accountNumber, userName, isApproved);
+		}
+		
+        [WebMethod]
+		public string UpdateBonusApproval(BonusApprovalDto dto)
+		{
+            return controller.UpdateBonusApproval(dto);
+		}
+
+        [WebMethod]
         public int CalculateAccountLog()
         {
             return controller.CalculateAccountLog();

@@ -1,55 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
 
-namespace domain_lib.model
+namespace domain_lib.dto
 {
-    public class BonusApproval
+    public class BonusApprovalDto
     {
         #region Declarations
 
-        // Member variables
+        // Property variables
         private long _id = -1;
 
-        private long _accountId = -1;
-
+        // Member variables
         private string _bonusType = string.Empty;
 
-        private double _bonusAmount = 0;
+        private double _bonusAmount = -1.0;
 
-        private DateTime _createdDate = default(DateTime);
-
-        private string _createdBy = string.Empty;
+        private long _accountNumber = -1;
 
         private string _isApproved = string.Empty;
 
-        private DateTime? _approvedDate ;
+        private string _createdBy = string.Empty;
 
         private string _approvedBy = string.Empty;
+        
+        private string _userName = string.Empty;
         
         #endregion
 
     	#region Constructor
 
-        public BonusApproval()
+        public BonusApprovalDto()
         {
         }
-		
-		public BonusApproval(long id, long accountNumber, double bonusAmount, string isApproved, string userName)
-		{
-			this._id = id;
-			this._accountNumber = accountNumber;
-			this._bonusAmount = bonusAmount;
-			this._isApproved = isApproved;
-			this._userName = userName;
-		}
 
     	#endregion
 
         #region Properties
+
         /// <summary>
-        /// Account ID
+        /// Id
         /// </summary>
         public virtual long Id
         {
@@ -57,15 +48,6 @@ namespace domain_lib.model
             set { _id = value; }
         }
 
-        /// <summary>
-        /// Account ID
-        /// </summary>
-        public virtual long AccountId
-        {
-            get { return _accountId; }
-            set { _accountId = value; }
-        }
-        
         /// <summary>
         /// Bonus Type.
         /// </summary>
@@ -76,12 +58,21 @@ namespace domain_lib.model
         }
 
         /// <summary>
-        /// Bonus Amount
+        /// BonusAmount
         /// </summary>
         public virtual double BonusAmount
         {
             get { return _bonusAmount; }
             set { _bonusAmount = value; }
+        }
+
+        /// <summary>
+        /// AccountNumber
+        /// </summary>
+        public virtual long AccountNumber
+        {
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
         }
 
         /// <summary>
@@ -103,6 +94,15 @@ namespace domain_lib.model
         }
 
         /// <summary>
+        /// UserName
+        /// </summary>
+        public virtual string UserName
+        {
+            get { return _userName; }
+            set { _userName = value; }
+        }
+
+        /// <summary>
         /// Is approved
         /// </summary>
         public virtual string IsApproved
@@ -111,31 +111,13 @@ namespace domain_lib.model
             set { _isApproved= value; }
         }
 
-        /// <summary>
-        /// Created Date.
-        /// </summary>
-        public virtual DateTime CreatedDate
-        {
-            get { return _createdDate; }
-            set { _createdDate = value; }
-        }
-
-        /// <summary>
-        /// Created Date.
-        /// </summary>
-        public virtual DateTime? ApprovedDate
-        {
-            get { return _approvedDate; }
-            set { _approvedDate = value; }
-        }
-
         #endregion
 
         #region Method Overrides
 
         public override string ToString()
         {
-            return _bonusType + ":" + _accountId;
+            return _userName + "|" + _accountNumber + "|" + _bonusAmount;
         }
 
         #endregion

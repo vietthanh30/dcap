@@ -34,6 +34,14 @@ namespace web_app.admin
         private void OnSearchManagerApproval()
         {
             var capQuanLy = CapQuanLySearch.SelectedValue;
+			int capQuanLyVal;
+			if (!int.TryParse(capQuanLy, out capQuanLyVal))
+			{
+                InvalidCredentialsMessage.Text = "Cấp quản lý không có trong danh sách.";
+                InvalidCredentialsMessage.Visible = true;
+                ResetGvManagerApproval();
+				return;
+			}
             var idThanhVien = IdThanhVienSearch.Value.Trim();
             var managerApprovalDtos = DcapServiceUtil.SearchManagerApproval(capQuanLy, idThanhVien);
             if (managerApprovalDtos.Length > 0)

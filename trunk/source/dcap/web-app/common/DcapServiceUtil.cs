@@ -152,5 +152,15 @@ namespace web_app.common
 		{
             return dcapService.UpdateManagerApproval(dto);
 		}
+
+		public static BonusApprovalDto[] SearchBonusApproval(string accountNumber, string userName, string isApproved)
+		{
+            return dcapService.SearchBonusApproval(accountNumber, userName, isApproved);
+		}
+		
+		public static string UpdateBonusApproval(BonusApprovalDto dto)
+		{
+            return dcapService.UpdateBonusApproval(dto);
+		}
     }
 }

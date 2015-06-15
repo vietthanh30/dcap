@@ -1723,14 +1723,40 @@ namespace domain_lib.persistence
 		public ManagerApprovalDto[] SearchManagerApproval(string capQuanLy, string accountNumber)
 		{
             List<ManagerApprovalDto> allResults;
-
+			long accountNumberVal = -1;
+			int capQuanLyVal = -1;
+			if (!string.IsNullOrEmpty(accountNumber) && !long.TryParse(accountNumber, out accountNumberVal))
+			{
+				return new ManagerApprovalDto[0];
+			}
+			if (!string.IsNullOrEmpty(capQuanLy) && !int.TryParse(capQuanLy, out capQuanLyVal))
+			{
+				return new ManagerApprovalDto[0];
+			}
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select new ManagerApproval(ma.Id, a.AccountNumber, ma.ManagerLevel, u.UserName) "
+				var sqlStr = "select new ManagerApproval(ma.Id, a.AccountNumber, ma.ManagerLevel, u.UserName) "
 					+ " from ManagerApproval ma, Account a, Users u "
-                    + " where ma.IsApproved = :isApproved and ma.AccountId = a.AccountId and a.UserId = u.UserID"
-					+ " order by ma.CreatedDate asc");
-				query.SetParameter("isApproved", "N");
+                    + " where ma.IsApproved = :isApproved and ma.AccountId = a.AccountId and a.UserId = u.UserID";
+				var sqlParams = new Hashtable();
+				sqlParams.Add("isApproved", "N");
+				
+				if (accountNumberVal != -1){
+					sqlStr += " and a.AccountNumber = :accountNumber";
+					sqlParams.Add("accountNumber", accountNumberVal);
+				}
+				if (capQuanLyVal != -1)
+				{
+					sqlStr += " and ma.ManagerLevel = :managerLevel";
+					sqlParams.Add("managerLevel", capQuanLyVal);
+				}
+				sqlStr += " order by ma.CreatedDate asc";
+				
+                var query = session.CreateQuery(sqlStr);				
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
 
                 // Get the matching objects
                 var list = query.List<ManagerApproval>();
@@ -1775,6 +1801,84 @@ namespace domain_lib.persistence
 				model.ApprovedDate = DateTime.Now;
                 Save(model);
 			}
+            return "0";
+		}
+
+		public BonusApprovalDto[] SearchBonusApproval(string accountNumber, string userName, string isApproved)
+		{
+            List<BonusApprovalDto> allResults;
+			long accountNumberVal = -1;
+			if (!string.IsNullOrEmpty(accountNumber) && !long.TryParse(accountNumber, out accountNumberVal))
+			{
+				return new BonusApprovalDto[0];
+			}
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+				var sqlStr = "select new BonusApproval(ba.Id, a.AccountNumber, ba.BonusAmount, ba.IsApproved, u.UserName) "
+					+ " from BonusApproval ba, Account a, Users u "
+                    + " where ba.AccountId = a.AccountId and a.UserId = u.UserID";
+				var sqlParams = new Hashtable();				
+				if (accountNumberVal != -1){
+					sqlStr += " and a.AccountNumber = :accountNumber";
+					sqlParams.Add("accountNumber", accountNumberVal);
+				}
+				if (accountNumberVal == -1 && !string.IsNullOrEmpty(userName))
+				{
+					sqlStr += " and u.UserName = :userName";
+					sqlParams.Add("userName", userName.ToUpper());
+				}
+				if (!string.IsNullOrEmpty(isApproved))
+				{
+					sqlStr += " and ba.IsApproved = :isApproved";
+					sqlParams.Add("isApproved", isApproved);
+				}
+				sqlStr += " order by ba.CreatedDate asc";
+				
+                var query = session.CreateQuery(sqlStr);				
+                foreach (var key in sqlParams.Keys)
+                {
+                    query.SetParameter(key.ToString(), sqlParams[key]);
+                }
+				
+                // Get the matching objects
+                var list = query.List<ManagerApproval>();
+
+                // Set return value
+                allResults = CreateAllManagerApprovalDto(list);
+            }
+            return allResults.ToArray();
+		}
+		
+		private List<ManagerApprovalDto> CreateAllManagerApprovalDto(IEnumerable<ManagerApproval> list)
+		{
+			List<ManagerApprovalDto> allResults = new List<ManagerApprovalDto>();
+			foreach(ManagerApproval model in list)
+			{
+				ManagerApprovalDto dto = new ManagerApprovalDto();
+				dto.Id = model.Id;
+				dto.AccountNumber = model.AccountNumber;
+				dto.ManagerLevel = model.ManagerLevel;
+				dto.UserName = model.UserName;
+				allResults.Add(dto);
+			}
+			return allResults;
+		}
+		
+		public string UpdateBonusApproval(BonusApprovalDto dto)
+		{
+			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
+			if (accountId == -1)
+			{
+				return "-1";
+			}
+			var model = new BonusApproval();
+			model.AccountId = accountId;
+			model.bonusType = dto.BonusType;
+			model.BonusAmount = dto.BonusAmount;
+			model.IsApproved = dto.IsApproved;
+			model.CreatedBy = dto.CreatedBy;
+			model.CreatedDate = DateTime.Now;
+			Save(model);
             return "0";
 		}
 
