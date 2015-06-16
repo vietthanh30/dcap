@@ -34,8 +34,82 @@
                         <div class="box-group" id="accordion">
                             <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                             <div class="panel box box-primary">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Thông tin chung
+                                        </a>
+                                    </h4>
+                                </div>
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="box-body">
+                                        ĐC: Phường Tây Mỗ - Q.Nam Từ Liêm - Hà Nội
+                                        <br />
+                                        ĐT: 04.62888000
+                                        <br />
+                                        Email: htvn.jsc@gmail.com
+                                        <br />
+                                        Giấy phép đăng ký doanh nghiệp cấp ngày 29/10/2013.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel box box-danger">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Nét nhận dạng
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse">
+                                    <div class="box-body">
+                                        <font color="green"><b>- Sắc phục xanh</b> </font>
+                                        <br />
+                                        <font color="green"><b>- Công nghệ sạch</b> </font>
+                                        <br />
+                                        <font color="green"><b>- Vì môi trường</b></font>
+                                        <br />
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel box box-danger">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Phương châm hoạt
+                                            động </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="box-body">
+                                        1. Với cán bộ, CNV công ty là:
+                                        <br />
+                                        <font color="red"><b>Kỷ luật - Công nghệ - Trí tuệ - Cạnh tranh</b></font>
+                                        <br />
+                                        2. Với khách hàng và đối tác là:
+                                        <br />
+                                        <font color="red"><b>Tận tụy - Hòa đồng - Công tâm - Minh bạch</b></font>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel box box-danger">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Chiến lược
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse">
+                                    <div class="box-body">
+                                        <font color="red">1. Chiến lược con người: </font>Đào tạo và rèn luyện:
+                                        <br />
+                                        - Đội ngũ lãnh đạo năng lực, chuyên nghiệp, thích nghi nhanh với môi trường mới.
+                                        <br />
+                                        - Đội ngũ CNVC, CTV nhiệt tình, kỷ luật.
+                                        <br />
+                                        <font color="red">2. Chiến lược sản phẩm: </font>Nghiên cứu chế tạo sản phẩm:
+                                        <br />
+                                        - Độc đáo, chất lượng, thị hiếu, cạnh tranh.
+                                        <br />
+                                        - Chế độ bảo hành, bảo trì gắn với chế độ trách nhiệm của từng cá nhân.
                                     </div>
                                 </div>
                             </div>
@@ -70,46 +144,70 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="~/dist/img/event/1.JPG" runat="server" alt="">
-<%--                                    <div class="carousel-caption">--%>
-<%--                                        First Slide--%>
-<%--                                    </div>--%>
+                                    <img src="~/dist/img/event/1.JPG" runat="server" alt="Giải thưởng">
+                                    <div class="carousel-caption">
+                                        Giải thưởng
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img src="~/dist/img/event/2.JPG" runat="server" alt="">
-<%--                                    <div class="carousel-caption">--%>
-<%--                                        Second Slide--%>
-<%--                                    </div>--%>
+                                    <img src="~/dist/img/event/2.JPG" runat="server" alt="Giải thưởng">
+                                    <div class="carousel-caption">
+                                        Giải thưởng
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img src="~/dist/img/event/3.JPG" runat="server" alt="">
-<%--                                    <div class="carousel-caption">--%>
-<%--                                        Third Slide--%>
-<%--                                    </div>--%>
+                                    <img src="~/dist/img/event/3.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        Trụ sở hội Gia đình liệt sỹ Việt Nam
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img3" src="~/dist/img/event/4.JPG" runat="server" alt="">
+                                    <img id="Img3" src="~/dist/img/event/4.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        CTHĐQT kiêm GĐ công ty Hitech VN
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img4" src="~/dist/img/event/5.JPG" runat="server" alt="">
+                                    <img id="Img4" src="~/dist/img/event/5.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        Trung tướng LÊ VĂN HÂN
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img5" src="~/dist/img/event/6.JPG" runat="server" alt="">
+                                    <img id="Img5" src="~/dist/img/event/6.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        P.GĐ Phạm Quang Thắng
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img6" src="~/dist/img/event/7.JPG" runat="server" alt="">
+                                    <img id="Img6" src="~/dist/img/event/7.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        Trụ sở hội Gia đình liệt sỹ Việt Nam
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img7" src="~/dist/img/event/8.JPG" runat="server" alt="">
+                                    <img id="Img7" src="~/dist/img/event/8.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        Trụ sở hội Gia đình liệt sỹ Việt Nam
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img8" src="~/dist/img/event/9.JPG" runat="server" alt="">
+                                    <img id="Img8" src="~/dist/img/event/9.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        Lễ ra mắt Văn phòng giao dịch
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img9" src="~/dist/img/event/10.JPG" runat="server" alt="">
+                                    <img id="Img9" src="~/dist/img/event/10.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        Trao quà tình nghĩa
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <img id="Img10" src="~/dist/img/event/11.JPG" runat="server" alt="">
+                                    <img id="Img10" src="~/dist/img/event/11.JPG" runat="server" alt="Trụ sở hội Gia đình liệt sỹ Việt Nam">
+                                    <div class="carousel-caption">
+                                        Trường mần non xã Khánh Thành, Yên Khánh, Ninh Bình
+                                    </div>
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -137,9 +235,9 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <p>
-                            <img id="Img1" width="360" src="~/dist/img/may-ozone-ht401.jpg" runat="server"
-                                align="left" hspace="12">
-                            <span ><font color=red>Tính năng tác dụng:</font></span>
+                            <img id="Img1" width="360" src="~/dist/img/may-ozone-ht401.jpg" runat="server" align="left"
+                                hspace="12">
+                            <span><font color="red"><b>Tính năng tác dụng:</b></font></span>
                             <br />
                             - Diệt trừ vi khuẩn virus, vi trùng, nấm mốc.v.v...
                             <br />
@@ -147,7 +245,7 @@
                             <br />
                             - Làm sạch nước và không khí, khử mùi hôi tanh
                             <br />
-                            <span ><font color=red>Thông số kỹ thuật:</font></span>
+                            <span><font color="red"><b>Thông số kỹ thuật:</b></font></span>
                             <br />
                             - Công suất Ozone: 450mg/h x 2cửa ra
                             <br />
@@ -157,9 +255,9 @@
                             <br />
                             - Trọng lượng: 1.4Kg
                             <br />
-                            <font color=red>Phụ kiện:</font> 02 dây sủi, 03 quả sủi
+                            <font color="red"><b>Phụ kiện:</b></font> 02 dây sủi, 03 quả sủi
                             <br />
-                            <font color=red>Bảo hành:</font>
+                            <font color="red"><b>Bảo hành:</b></font>
                             <br />
                             - Đổi mới trong vòng 9 tháng
                             <br />
@@ -185,23 +283,22 @@
                         <p style='text-align: justify'>
                             <img id="Img2" width="360" height="265" src="~/dist/img/den-bat-muoi.jpg" runat="server"
                                 align="left" hspace="12">
-                            Cuộc sống của bạn có đang bị ảnh hưởng bởi các loại côn trùng, ruồi, muỗi gây hại
-                            không? Nếu có thì bạn cần tìm ngay 1 giải pháp ngăn chặn ảnh hưởng của những loại
-                            côn trùng này. Đặc biệt nếu trong gia đình bạn có trẻ nhỏ thì việc ngăn chặn các
-                            loại côn trùng nguy hiểm càng trở nên cần thiết.</p>
-                        <p style='text-align: justify'>
-                            Có rất nhiều biện pháp diệt côn trùng, nhưng đi kèm với những biện pháp đó là những
-                            ảnh hưởng không tốt tới sức khỏe của chúng ta. Ví dụ như hương muỗi, thuốc diệt
-                            côn trùng,...</p>
-                        <p style='text-align: justify'>
-                            Vậy giải pháp nào sẽ giúp bạn vừa diệt được côn trùng mà không gây ảnh hưởng đền
-                            sức khỏe của chúng ta?</p>
-                        <h4>
-                            <span>Đèn diệt côn trùng, giải pháp diệt côn trùng an toàn nhất</span></h4>
-                        <p style='text-align: justify'>
-                            Với thiết kế nhỏ gọn, có thể treo lên hoặc đặt trên bàn hay trên sàn, hơn nữa đèn
-                            diệt côn trùng hoàn toàn không sử dụng hóa chất và dòng điện của đèn không gây hại
-                            tới con người.</p>
+                        </p>
+                        <font color="red"><b>Nguyên lý chung:</b> </font>
+                        <br />
+                        - Dùng ánh sáng màu xanh dương để dụ muỗi (Quang)
+                        <br />
+                        - Dùng quạt hút để nhốt và làm chết muỗi (Phong)
+                        <br />
+                        <font color="red"><b>Công dụng:</b></font>
+                        <br />
+                        - Diệt bắt muỗi và một số côn trùng có cánh.
+                        <br />
+                        - Tiết kiệm điên, không gây ồn, không ảnh hưởng đến sức khỏe con người.
+                        <br />
+                        - HDSD: Treo hoặc đặt cách mặt sàn 0,2 đến 1,0m, rút phích cắm nguồn ra khỏi mạng
+                        điện khi có sấm sét
+                        <br />
                     </div>
                 </div>
                 <!-- /.box -->
