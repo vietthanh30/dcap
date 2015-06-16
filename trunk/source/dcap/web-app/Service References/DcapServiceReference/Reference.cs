@@ -1089,6 +1089,160 @@ namespace web_app.DcapServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BonusApprovalDto", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class BonusApprovalDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BonusTypeField;
+        
+        private double BonusAmountField;
+        
+        private long AccountNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CreatedByField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ApprovedByField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IsApprovedField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string BonusType {
+            get {
+                return this.BonusTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BonusTypeField, value) != true)) {
+                    this.BonusTypeField = value;
+                    this.RaisePropertyChanged("BonusType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public double BonusAmount {
+            get {
+                return this.BonusAmountField;
+            }
+            set {
+                if ((this.BonusAmountField.Equals(value) != true)) {
+                    this.BonusAmountField = value;
+                    this.RaisePropertyChanged("BonusAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public long AccountNumber {
+            get {
+                return this.AccountNumberField;
+            }
+            set {
+                if ((this.AccountNumberField.Equals(value) != true)) {
+                    this.AccountNumberField = value;
+                    this.RaisePropertyChanged("AccountNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string CreatedBy {
+            get {
+                return this.CreatedByField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
+                    this.CreatedByField = value;
+                    this.RaisePropertyChanged("CreatedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string ApprovedBy {
+            get {
+                return this.ApprovedByField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ApprovedByField, value) != true)) {
+                    this.ApprovedByField = value;
+                    this.RaisePropertyChanged("ApprovedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string IsApproved {
+            get {
+                return this.IsApprovedField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IsApprovedField, value) != true)) {
+                    this.IsApprovedField = value;
+                    this.RaisePropertyChanged("IsApproved");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AccountBonusDto", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class AccountBonusDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1256,6 +1410,18 @@ namespace web_app.DcapServiceReference {
         // CODEGEN: Generating message contract since element name dto from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateManagerApproval", ReplyAction="*")]
         web_app.DcapServiceReference.UpdateManagerApprovalResponse UpdateManagerApproval(web_app.DcapServiceReference.UpdateManagerApprovalRequest request);
+        
+        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBonusApproval", ReplyAction="*")]
+        web_app.DcapServiceReference.SearchBonusApprovalResponse SearchBonusApproval(web_app.DcapServiceReference.SearchBonusApprovalRequest request);
+        
+        // CODEGEN: Generating message contract since element name dto from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CreateBonusApproval", ReplyAction="*")]
+        web_app.DcapServiceReference.CreateBonusApprovalResponse CreateBonusApproval(web_app.DcapServiceReference.CreateBonusApprovalRequest request);
+        
+        // CODEGEN: Generating message contract since element name dto from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateBonusApproval", ReplyAction="*")]
+        web_app.DcapServiceReference.UpdateBonusApprovalResponse UpdateBonusApproval(web_app.DcapServiceReference.UpdateBonusApprovalRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CalculateAccountLog", ReplyAction="*")]
         int CalculateAccountLog();
@@ -2798,6 +2964,218 @@ namespace web_app.DcapServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchBonusApprovalRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchBonusApproval", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchBonusApprovalRequestBody Body;
+        
+        public SearchBonusApprovalRequest() {
+        }
+        
+        public SearchBonusApprovalRequest(web_app.DcapServiceReference.SearchBonusApprovalRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchBonusApprovalRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string accountNumber;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string userName;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string isApproved;
+        
+        public SearchBonusApprovalRequestBody() {
+        }
+        
+        public SearchBonusApprovalRequestBody(string accountNumber, string userName, string isApproved) {
+            this.accountNumber = accountNumber;
+            this.userName = userName;
+            this.isApproved = isApproved;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SearchBonusApprovalResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SearchBonusApprovalResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.SearchBonusApprovalResponseBody Body;
+        
+        public SearchBonusApprovalResponse() {
+        }
+        
+        public SearchBonusApprovalResponse(web_app.DcapServiceReference.SearchBonusApprovalResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SearchBonusApprovalResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.BonusApprovalDto[] SearchBonusApprovalResult;
+        
+        public SearchBonusApprovalResponseBody() {
+        }
+        
+        public SearchBonusApprovalResponseBody(web_app.DcapServiceReference.BonusApprovalDto[] SearchBonusApprovalResult) {
+            this.SearchBonusApprovalResult = SearchBonusApprovalResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CreateBonusApprovalRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateBonusApproval", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.CreateBonusApprovalRequestBody Body;
+        
+        public CreateBonusApprovalRequest() {
+        }
+        
+        public CreateBonusApprovalRequest(web_app.DcapServiceReference.CreateBonusApprovalRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class CreateBonusApprovalRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.BonusApprovalDto dto;
+        
+        public CreateBonusApprovalRequestBody() {
+        }
+        
+        public CreateBonusApprovalRequestBody(web_app.DcapServiceReference.BonusApprovalDto dto) {
+            this.dto = dto;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CreateBonusApprovalResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateBonusApprovalResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.CreateBonusApprovalResponseBody Body;
+        
+        public CreateBonusApprovalResponse() {
+        }
+        
+        public CreateBonusApprovalResponse(web_app.DcapServiceReference.CreateBonusApprovalResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class CreateBonusApprovalResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string CreateBonusApprovalResult;
+        
+        public CreateBonusApprovalResponseBody() {
+        }
+        
+        public CreateBonusApprovalResponseBody(string CreateBonusApprovalResult) {
+            this.CreateBonusApprovalResult = CreateBonusApprovalResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateBonusApprovalRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateBonusApproval", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.UpdateBonusApprovalRequestBody Body;
+        
+        public UpdateBonusApprovalRequest() {
+        }
+        
+        public UpdateBonusApprovalRequest(web_app.DcapServiceReference.UpdateBonusApprovalRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class UpdateBonusApprovalRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public web_app.DcapServiceReference.BonusApprovalDto dto;
+        
+        public UpdateBonusApprovalRequestBody() {
+        }
+        
+        public UpdateBonusApprovalRequestBody(web_app.DcapServiceReference.BonusApprovalDto dto) {
+            this.dto = dto;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateBonusApprovalResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateBonusApprovalResponse", Namespace="http://tempuri.org/", Order=0)]
+        public web_app.DcapServiceReference.UpdateBonusApprovalResponseBody Body;
+        
+        public UpdateBonusApprovalResponse() {
+        }
+        
+        public UpdateBonusApprovalResponse(web_app.DcapServiceReference.UpdateBonusApprovalResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class UpdateBonusApprovalResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string UpdateBonusApprovalResult;
+        
+        public UpdateBonusApprovalResponseBody() {
+        }
+        
+        public UpdateBonusApprovalResponseBody(string UpdateBonusApprovalResult) {
+            this.UpdateBonusApprovalResult = UpdateBonusApprovalResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetManagerAmountRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetManagerAmount", Namespace="http://tempuri.org/", Order=0)]
@@ -3361,6 +3739,47 @@ namespace web_app.DcapServiceReference {
             inValue.Body.dto = dto;
             web_app.DcapServiceReference.UpdateManagerApprovalResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).UpdateManagerApproval(inValue);
             return retVal.Body.UpdateManagerApprovalResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.SearchBonusApprovalResponse web_app.DcapServiceReference.DcapServiceSoap.SearchBonusApproval(web_app.DcapServiceReference.SearchBonusApprovalRequest request) {
+            return base.Channel.SearchBonusApproval(request);
+        }
+        
+        public web_app.DcapServiceReference.BonusApprovalDto[] SearchBonusApproval(string accountNumber, string userName, string isApproved) {
+            web_app.DcapServiceReference.SearchBonusApprovalRequest inValue = new web_app.DcapServiceReference.SearchBonusApprovalRequest();
+            inValue.Body = new web_app.DcapServiceReference.SearchBonusApprovalRequestBody();
+            inValue.Body.accountNumber = accountNumber;
+            inValue.Body.userName = userName;
+            inValue.Body.isApproved = isApproved;
+            web_app.DcapServiceReference.SearchBonusApprovalResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).SearchBonusApproval(inValue);
+            return retVal.Body.SearchBonusApprovalResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.CreateBonusApprovalResponse web_app.DcapServiceReference.DcapServiceSoap.CreateBonusApproval(web_app.DcapServiceReference.CreateBonusApprovalRequest request) {
+            return base.Channel.CreateBonusApproval(request);
+        }
+        
+        public string CreateBonusApproval(web_app.DcapServiceReference.BonusApprovalDto dto) {
+            web_app.DcapServiceReference.CreateBonusApprovalRequest inValue = new web_app.DcapServiceReference.CreateBonusApprovalRequest();
+            inValue.Body = new web_app.DcapServiceReference.CreateBonusApprovalRequestBody();
+            inValue.Body.dto = dto;
+            web_app.DcapServiceReference.CreateBonusApprovalResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).CreateBonusApproval(inValue);
+            return retVal.Body.CreateBonusApprovalResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        web_app.DcapServiceReference.UpdateBonusApprovalResponse web_app.DcapServiceReference.DcapServiceSoap.UpdateBonusApproval(web_app.DcapServiceReference.UpdateBonusApprovalRequest request) {
+            return base.Channel.UpdateBonusApproval(request);
+        }
+        
+        public string UpdateBonusApproval(web_app.DcapServiceReference.BonusApprovalDto dto) {
+            web_app.DcapServiceReference.UpdateBonusApprovalRequest inValue = new web_app.DcapServiceReference.UpdateBonusApprovalRequest();
+            inValue.Body = new web_app.DcapServiceReference.UpdateBonusApprovalRequestBody();
+            inValue.Body.dto = dto;
+            web_app.DcapServiceReference.UpdateBonusApprovalResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).UpdateBonusApproval(inValue);
+            return retVal.Body.UpdateBonusApprovalResult;
         }
         
         public int CalculateAccountLog() {

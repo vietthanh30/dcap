@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="controller\Controller.cs" />
     <Compile Include="dto\AccountBonusDto.cs" />
+    <Compile Include="dto\BonusApprovalDto.cs" />
     <Compile Include="dto\HoaHongMemberDto.cs" />
     <Compile Include="dto\ManagerApprovalDto.cs" />
     <Compile Include="dto\MemberNodeDto.cs" />

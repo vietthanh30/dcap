@@ -25,6 +25,10 @@ namespace web_app.main_pages
                 Response.Redirect("~/Default.aspx");
                 return;
             }
+            if (!IsPostBack)
+            {
+                OnSearchNetwork();
+            }
         }
 
         protected void MemberNetwork_SearchNetwork(object sender, EventArgs e)

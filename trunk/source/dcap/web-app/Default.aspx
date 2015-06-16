@@ -59,25 +59,53 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="5" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="6" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="7" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="8" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="9" class=""></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="~/dist/img/event/1.JPG" runat="server" alt="First slide">
-                                    <div class="carousel-caption">
-                                        First Slide
-                                    </div>
+                                    <img src="~/dist/img/event/1.JPG" runat="server" alt="">
+<%--                                    <div class="carousel-caption">--%>
+<%--                                        First Slide--%>
+<%--                                    </div>--%>
                                 </div>
                                 <div class="item">
-                                    <img src="~/dist/img/event/2.JPG" runat="server" alt="Second slide">
-                                    <div class="carousel-caption">
-                                        Second Slide
-                                    </div>
+                                    <img src="~/dist/img/event/2.JPG" runat="server" alt="">
+<%--                                    <div class="carousel-caption">--%>
+<%--                                        Second Slide--%>
+<%--                                    </div>--%>
                                 </div>
                                 <div class="item">
-                                    <img src="~/dist/img/event/3.JPG" runat="server" alt="Third slide">
-                                    <div class="carousel-caption">
-                                        Third Slide
-                                    </div>
+                                    <img src="~/dist/img/event/3.JPG" runat="server" alt="">
+<%--                                    <div class="carousel-caption">--%>
+<%--                                        Third Slide--%>
+<%--                                    </div>--%>
+                                </div>
+                                <div class="item">
+                                    <img id="Img3" src="~/dist/img/event/4.JPG" runat="server" alt="">
+                                </div>
+                                <div class="item">
+                                    <img id="Img4" src="~/dist/img/event/5.JPG" runat="server" alt="">
+                                </div>
+                                <div class="item">
+                                    <img id="Img5" src="~/dist/img/event/6.JPG" runat="server" alt="">
+                                </div>
+                                <div class="item">
+                                    <img id="Img6" src="~/dist/img/event/7.JPG" runat="server" alt="">
+                                </div>
+                                <div class="item">
+                                    <img id="Img7" src="~/dist/img/event/8.JPG" runat="server" alt="">
+                                </div>
+                                <div class="item">
+                                    <img id="Img8" src="~/dist/img/event/9.JPG" runat="server" alt="">
+                                </div>
+                                <div class="item">
+                                    <img id="Img9" src="~/dist/img/event/10.JPG" runat="server" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -164,8 +192,8 @@
                         <p style='text-align: justify'>
                             Vậy giải pháp nào sẽ giúp bạn vừa diệt được côn trùng mà không gây ảnh hưởng đền
                             sức khỏe của chúng ta?</p>
-                        <h3>
-                            <span>Đèn diệt côn trùng, giải pháp diệt côn trùng an toàn nhất</span></h3>
+                        <h4>
+                            <span>Đèn diệt côn trùng, giải pháp diệt côn trùng an toàn nhất</span></h4>
                         <p style='text-align: justify'>
                             Với thiết kế nhỏ gọn, có thể treo lên hoặc đặt trên bàn hay trên sàn, hơn nữa đèn
                             diệt côn trùng hoàn toàn không sử dụng hóa chất và dòng điện của đèn không gây hại

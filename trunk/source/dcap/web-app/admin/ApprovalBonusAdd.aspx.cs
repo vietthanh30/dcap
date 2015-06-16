@@ -24,6 +24,10 @@ namespace web_app.admin
                 Response.Redirect("~/Default.aspx");
                 return;
             }
+            if (!IsPostBack)
+            {
+                OnSearchBonusApproval();
+            }
         }
 
         protected void ApprovalBonusAdd_Search(object sender, EventArgs e)
@@ -44,7 +48,7 @@ namespace web_app.admin
             }
             else
             {
-                InvalidCredentialsMessage.Text = "Không tìm thấy thưởng thêm thỏa mãn";
+                InvalidCredentialsMessage.Text = "Không tìm thấy thưởng thêm cần duyệt";
                 InvalidCredentialsMessage.Visible = true;
                 ResetGvBonusApproval();
             }

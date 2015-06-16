@@ -1858,14 +1858,23 @@ namespace domain_lib.persistence
 				dto.Id = model.Id;
 				dto.AccountNumber = model.AccountNumber;
 				dto.BonusAmount = model.BonusAmount;
-				dto.IsApproved = model.IsApproved;
+				dto.IsApproved = DecodeApproveStatus(model.IsApproved);
 				dto.UserName = model.UserName;
 				allResults.Add(dto);
 			}
 			return allResults;
 		}
-		
-		public string CreateBonusApproval(BonusApprovalDto dto)
+
+        private string DecodeApproveStatus(string isApproved)
+        {
+            if (string.Compare(isApproved, "Y", true) == 0)
+            {
+                return "Đã duyệt";
+            }
+            return "Chưa duyệt";
+        }
+
+        public string CreateBonusApproval(BonusApprovalDto dto)
 		{
 			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
 			if (accountId == -1)
@@ -1874,7 +1883,7 @@ namespace domain_lib.persistence
 			}
 			var model = new BonusApproval();
 			model.AccountId = accountId;
-			model.bonusType = dto.BonusType;
+			model.BonusType = dto.BonusType;
 			model.BonusAmount = dto.BonusAmount;
 			model.IsApproved = dto.IsApproved;
 			model.CreatedBy = dto.CreatedBy;

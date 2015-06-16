@@ -71,8 +71,16 @@
     <Content Include="dist\img\den-bat-muoi.jpg" />
     <Content Include="dist\img\edit-icon.png" />
     <Content Include="dist\img\event\1.JPG" />
+    <Content Include="dist\img\event\10.jpg" />
+    <Content Include="dist\img\event\11.JPG" />
     <Content Include="dist\img\event\2.JPG" />
     <Content Include="dist\img\event\3.JPG" />
+    <Content Include="dist\img\event\4.jpg" />
+    <Content Include="dist\img\event\5.jpg" />
+    <Content Include="dist\img\event\6.jpg" />
+    <Content Include="dist\img\event\7.jpg" />
+    <Content Include="dist\img\event\8.jpg" />
+    <Content Include="dist\img\event\9.jpg" />
     <Content Include="dist\img\may-ozone-ht401.jpg" />
     <Content Include="main-pages\BangLuongExt.aspx" />
     <Content Include="main-pages\ManagerNetwork.aspx" />
@@ -917,6 +925,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.BangKeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.BonusApprovalDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DcapServiceReference\web_app.DcapServiceReference.HoaHongMemberDto.datasource">

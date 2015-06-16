@@ -3,7 +3,7 @@
 xmlns="urn:nhibernate-mapping-2.2"
 namespace="domain_lib.model"
 assembly="domain_lib">
-  <class name="BonusApproval" table="ACCOUNT_APPROVAL" lazy="false">
+  <class name="BonusApproval" table="BONUS_APPROVAL" lazy="false">
     <id name="Id" column="ID" unsaved-value="-1">
       <generator class="identity" />
     </id>

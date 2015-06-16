@@ -24,6 +24,10 @@ namespace web_app.admin
                 Response.Redirect("~/Default.aspx");
                 return;
             }
+            if (!IsPostBack)
+            {
+                OnSearchBonusApproval();
+            }
         }
 
         protected void NewBonusAdd_Search(object sender, EventArgs e)
@@ -78,7 +82,7 @@ namespace web_app.admin
             OnSearchBonusApproval();
         }
 
-        protected void NewBonusAdd_PreAddNewBonus(object sender, ImageClickEventArgs e)
+        protected void NewBonusAdd_PreAddNewBonus(object sender, EventArgs e)
         {
             NewBonusAddPopup.ShowPopupWindow();
         }
@@ -122,7 +126,7 @@ namespace web_app.admin
             }
             var userName = User.Identity.Name;
 			var dto = CreateBonusApprovalDto(accountNumberVal, bonusAmountVal, bonusType, isApproved, userName);
-            returnCode = DcapServiceUtil.CreateBonusApproval(dto);
+            var returnCode = DcapServiceUtil.CreateBonusApproval(dto);
             int code;
             var status = int.TryParse(returnCode, out code);
             if (status && code == 0)

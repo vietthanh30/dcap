@@ -121,7 +121,7 @@ namespace web_app.admin {
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// RegisterUserValidationSummary control.
+        /// NewBonusAddValidationSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -191,6 +191,5 @@ namespace web_app.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CancelNewBonusButton;
-        
     }
 }

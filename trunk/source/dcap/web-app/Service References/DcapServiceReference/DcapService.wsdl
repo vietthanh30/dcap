@@ -431,6 +431,67 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SearchBonusApproval">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isApproved" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchBonusApprovalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchBonusApprovalResult" type="tns:ArrayOfBonusApprovalDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBonusApprovalDto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BonusApprovalDto" nillable="true" type="tns:BonusApprovalDto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BonusApprovalDto">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="BonusType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BonusAmount" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountNumber" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsApproved" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateBonusApproval">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dto" type="tns:BonusApprovalDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBonusApprovalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateBonusApprovalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBonusApproval">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dto" type="tns:BonusApprovalDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBonusApprovalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateBonusApprovalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="CalculateAccountLog">
         <s:complexType />
       </s:element>
@@ -680,6 +741,24 @@
   <wsdl:message name="UpdateManagerApprovalSoapOut">
     <wsdl:part name="parameters" element="tns:UpdateManagerApprovalResponse" />
   </wsdl:message>
+  <wsdl:message name="SearchBonusApprovalSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchBonusApproval" />
+  </wsdl:message>
+  <wsdl:message name="SearchBonusApprovalSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchBonusApprovalResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateBonusApprovalSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateBonusApproval" />
+  </wsdl:message>
+  <wsdl:message name="CreateBonusApprovalSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateBonusApprovalResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBonusApprovalSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBonusApproval" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBonusApprovalSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBonusApprovalResponse" />
+  </wsdl:message>
   <wsdl:message name="CalculateAccountLogSoapIn">
     <wsdl:part name="parameters" element="tns:CalculateAccountLog" />
   </wsdl:message>
@@ -828,6 +907,18 @@
     <wsdl:operation name="UpdateManagerApproval">
       <wsdl:input message="tns:UpdateManagerApprovalSoapIn" />
       <wsdl:output message="tns:UpdateManagerApprovalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBonusApproval">
+      <wsdl:input message="tns:SearchBonusApprovalSoapIn" />
+      <wsdl:output message="tns:SearchBonusApprovalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateBonusApproval">
+      <wsdl:input message="tns:CreateBonusApprovalSoapIn" />
+      <wsdl:output message="tns:CreateBonusApprovalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBonusApproval">
+      <wsdl:input message="tns:UpdateBonusApprovalSoapIn" />
+      <wsdl:output message="tns:UpdateBonusApprovalSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="CalculateAccountLog">
       <wsdl:input message="tns:CalculateAccountLogSoapIn" />
@@ -1044,6 +1135,33 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateManagerApproval">
       <soap:operation soapAction="http://tempuri.org/UpdateManagerApproval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBonusApproval">
+      <soap:operation soapAction="http://tempuri.org/SearchBonusApproval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBonusApproval">
+      <soap:operation soapAction="http://tempuri.org/CreateBonusApproval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBonusApproval">
+      <soap:operation soapAction="http://tempuri.org/UpdateBonusApproval" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1326,6 +1444,33 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateManagerApproval">
       <soap12:operation soapAction="http://tempuri.org/UpdateManagerApproval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBonusApproval">
+      <soap12:operation soapAction="http://tempuri.org/SearchBonusApproval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBonusApproval">
+      <soap12:operation soapAction="http://tempuri.org/CreateBonusApproval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBonusApproval">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBonusApproval" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
