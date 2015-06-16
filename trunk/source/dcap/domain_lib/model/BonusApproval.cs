@@ -28,6 +28,10 @@ namespace domain_lib.model
 
         private string _approvedBy = string.Empty;
         
+		private long _accountNumber = -1;
+		
+		private string _userName = string.Empty;
+		
         #endregion
 
     	#region Constructor
@@ -127,6 +131,24 @@ namespace domain_lib.model
         {
             get { return _approvedDate; }
             set { _approvedDate = value; }
+        }
+
+        /// <summary>
+        /// AccountNumber
+        /// </summary>
+        public virtual long AccountNumber
+        {
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
+        }
+
+        /// <summary>
+        /// UserName
+        /// </summary>
+        public virtual string UserName
+        {
+            get { return _userName; }
+            set { _userName = value; }
         }
 
         #endregion

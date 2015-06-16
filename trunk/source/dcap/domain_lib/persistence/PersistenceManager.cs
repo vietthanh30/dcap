@@ -1844,20 +1844,21 @@ namespace domain_lib.persistence
                 var list = query.List<ManagerApproval>();
 
                 // Set return value
-                allResults = CreateAllManagerApprovalDto(list);
+                allResults = CreateAllBonusApprovalDto(list);
             }
             return allResults.ToArray();
 		}
 		
-		private List<ManagerApprovalDto> CreateAllManagerApprovalDto(IEnumerable<ManagerApproval> list)
+		private List<BonusApprovalDto> CreateAllBonusApprovalDto(IEnumerable<BonusApproval> list)
 		{
-			List<ManagerApprovalDto> allResults = new List<ManagerApprovalDto>();
+			List<BonusApprovalDto> allResults = new List<BonusApprovalDto>();
 			foreach(ManagerApproval model in list)
 			{
-				ManagerApprovalDto dto = new ManagerApprovalDto();
+				BonusApprovalDto dto = new BonusApprovalDto();
 				dto.Id = model.Id;
 				dto.AccountNumber = model.AccountNumber;
-				dto.ManagerLevel = model.ManagerLevel;
+				dto.BonusAmount = model.BonusAmount;
+				dto.IsApproved = model.IsApproved;
 				dto.UserName = model.UserName;
 				allResults.Add(dto);
 			}
