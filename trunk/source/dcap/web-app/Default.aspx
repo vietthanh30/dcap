@@ -66,6 +66,7 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="7" class=""></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="8" class=""></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="9" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="10" class=""></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
@@ -106,6 +107,9 @@
                                 </div>
                                 <div class="item">
                                     <img id="Img9" src="~/dist/img/event/10.JPG" runat="server" alt="">
+                                </div>
+                                <div class="item">
+                                    <img id="Img10" src="~/dist/img/event/11.JPG" runat="server" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
