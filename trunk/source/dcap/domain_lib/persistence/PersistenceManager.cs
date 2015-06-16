@@ -1841,7 +1841,7 @@ namespace domain_lib.persistence
                 }
 				
                 // Get the matching objects
-                var list = query.List<ManagerApproval>();
+                var list = query.List<BonusApproval>();
 
                 // Set return value
                 allResults = CreateAllBonusApprovalDto(list);
@@ -1852,7 +1852,7 @@ namespace domain_lib.persistence
 		private List<BonusApprovalDto> CreateAllBonusApprovalDto(IEnumerable<BonusApproval> list)
 		{
 			List<BonusApprovalDto> allResults = new List<BonusApprovalDto>();
-			foreach(ManagerApproval model in list)
+			foreach(BonusApproval model in list)
 			{
 				BonusApprovalDto dto = new BonusApprovalDto();
 				dto.Id = model.Id;
