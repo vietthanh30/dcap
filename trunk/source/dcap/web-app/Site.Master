@@ -148,7 +148,7 @@
                   </a>
                 </li>
                 <li class="treeview">
-                  <a href="#" runat="server"><i class='fa fa-link'></i> <span>Quản lý thành viên</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <a id="QltvAdmin" href="#" runat="server"><i class='fa fa-link'></i> <span>Quản lý thành viên</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li>
                       <a id="A11" href="~/admin/Register.aspx" runat="server">
@@ -168,7 +168,7 @@
                   </ul>
                 </li>
                 <li class="treeview">
-                  <a href="#" runat="server"><i class='fa fa-link'></i> <span>Quản lý điểm thưởng</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <a id="QldtAdmin" href="#" runat="server"><i class='fa fa-link'></i> <span>Quản lý điểm thưởng</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li>
                       <a id="A18" href="~/admin/NewBonusAdd.aspx" runat="server">
@@ -183,7 +183,7 @@
                   </ul>
                 </li>
                 <li class="treeview">
-                  <a href="#" runat="server"><i class='fa fa-link'></i> <span>Mạng lưới thành viên</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <a id="MltvAdmin" href="#" runat="server"><i class='fa fa-link'></i> <span>Mạng lưới thành viên</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li>
                       <a id="A12" href="~/main-pages/member-network.aspx" runat="server">
@@ -198,7 +198,7 @@
                   </ul>
                 </li>
                 <li class="treeview">
-                  <a href="#" runat="server"><i class='fa fa-link'></i> <span>Bảng lương</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <a id="BktlAdmin" href="#" runat="server"><i class='fa fa-link'></i> <span>Bảng lương</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li>
                       <a id="A14" href="~/main-pages/bang-ke-tra-luong.aspx" runat="server">
@@ -219,7 +219,7 @@
               <ul class="sidebar-menu">
                 <li class="header"></li>
                 <li class="treeview">
-                  <a href="#" runat="server"><i class='fa fa-link'></i> <span>Mạng lưới thành viên</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <a id="MltvKT" href="#" runat="server"><i class='fa fa-link'></i> <span>Mạng lưới thành viên</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li>
                       <a id="A4" href="~/main-pages/member-network.aspx" runat="server">
@@ -234,7 +234,7 @@
                   </ul>
                 </li>
                 <li class="treeview">
-                  <a href="#" runat="server"><i class='fa fa-link'></i> <span>Bảng lương</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <a id="BktlKT" href="#" runat="server"><i class='fa fa-link'></i> <span>Bảng lương</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li>
                       <a id="A5" href="~/main-pages/bang-ke-tra-luong.aspx" runat="server">

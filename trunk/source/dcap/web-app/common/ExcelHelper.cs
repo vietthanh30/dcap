@@ -62,7 +62,7 @@ namespace web_app.common
                 sheets.Append(sheet);
                 workbook.Append(fileVersion);
                 workbook.Append(sheets);
-                SheetData sheetData = CreateSheetData(dt);
+                SheetData sheetData = CreateSheetData(dt, stylesPart);
                 worksheet.Append(sheetData);
                 worksheetPart.Worksheet = worksheet;
                 UpdateBorderStyle(workbookPart, worksheetPart, dt);
@@ -96,7 +96,7 @@ namespace web_app.common
         /// <param name="objects">list of the object type</param>
         /// <param name="headerNames">Header names of the object</param>
         /// <returns></returns>
-        private static SheetData CreateSheetData(DataTable dt)
+        private static SheetData CreateSheetData(DataTable dt, WorkbookStylesPart stylesPart)
         {
             var sheetData = new SheetData();
             if (dt.Rows.Count > 0)
@@ -113,8 +113,8 @@ namespace web_app.common
                 header.RowIndex = (uint)index;
                 for (int col = 0; col < numCols; col++)
                 {
-                    var c = new HeaderCell(headers[col].ToString(),
-                                           dt.Columns[col].ToString(), index);
+                    HeaderCell c = new HeaderCell(headers[col].ToString(),
+                                           dt.Columns[col].ToString(), index, stylesPart.Stylesheet,System.Drawing.Color.LightGray,12, true);
                     header.Append(c);
                 }
                 sheetData.Append(header);
