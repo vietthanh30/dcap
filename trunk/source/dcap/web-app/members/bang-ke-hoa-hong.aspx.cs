@@ -68,8 +68,6 @@ namespace web_app.members
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Id thành viên", "Trực tiếp", "Cân cặp", "Hệ thống", "Quản lý", 
-                "Thưởng thêm", "Tháng", "Tổng"};
             var fileName = String.Format("BKHH_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
             var fileDir = String.Format("BKHH_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
@@ -78,8 +76,7 @@ namespace web_app.members
             {
                 Directory.CreateDirectory(directory);
             }
-            var tableName = "HOA_HONG_MEMBER_VW";
-            var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
+            var dt = OnCreateDataTable(allBangKeDto);
             ExcelHelper excelFacade = new ExcelHelper();
             excelFacade.Create(filePath, dt);
 
@@ -102,13 +99,19 @@ namespace web_app.members
             file.Delete();
         }
 
-        private DataTable CreateDataTable(String tableName, String[] columnNames, HoaHongMemberDto[] allBangKeDto)
+        private DataTable OnCreateDataTable(HoaHongMemberDto[] allBangKeDto)
         {
-            var dataTable = new DataTable(tableName);
-            foreach (var columnName in columnNames)
-            {
-                dataTable.Columns.Add(columnName);
-            }
+            var columnNames = new[] {"stt", "Id thành viên", "Trực tiếp", "Cân cặp", "Hệ thống", "Quản lý", 
+                "Thưởng thêm", "Tháng", "Tổng"};
+            var columnTypes = new[] {typeof(int), typeof(string), typeof(double), typeof(double), typeof(double), typeof(double), 
+                typeof(double), typeof(string), typeof(double)};
+            var tableName = "HOA_HONG_MEMBER_VW";
+            return CreateDataTable(tableName, columnNames, columnTypes, allBangKeDto);
+        }
+
+        private DataTable CreateDataTable(String tableName, String[] columnNames, Type[] columnTypes, HoaHongMemberDto[] allBangKeDto)
+        {
+            var dataTable = ExcelHelper.CreateEmptyDataTable(tableName, columnNames, columnTypes);
             foreach (var bangKeDto in allBangKeDto)
             {
                 var dataRow = dataTable.NewRow();
@@ -142,10 +145,7 @@ namespace web_app.members
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Id thành viên", "Trực tiếp", "Cân cặp", "Hệ thống", "Quản lý", 
-                "Thưởng thêm", "Tháng", "Tổng"};
-            var tableName = "HOA_HONG_MEMBER_VW";
-            var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
+            var dt = OnCreateDataTable(allBangKeDto);
             var fileName = String.Format("BKHH_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";
             var fileDir = String.Format("BKHH_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;

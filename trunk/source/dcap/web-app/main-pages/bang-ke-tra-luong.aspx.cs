@@ -85,8 +85,6 @@ namespace web_app.main_pages
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Hệ thống", "Quản lý", "Thưởng thêm", "Tổng tiền", "Thuế 10%", "Thực nhận", "Tháng", "Ký nhận"};
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
             var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
@@ -95,8 +93,7 @@ namespace web_app.main_pages
             {
                 Directory.CreateDirectory(directory);
             }
-            var tableName = "BANG_KE_VW";
-            var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
+            var dt = OnCreateDataTable(allBangKeDto);
             ExcelHelper excelFacade = new ExcelHelper();
             excelFacade.Create(filePath, dt);
 
@@ -119,13 +116,20 @@ namespace web_app.main_pages
             file.Delete();
         }
 
-        private DataTable CreateDataTable(String tableName, String[] columnNames, BangKeDto[] allBangKeDto)
+        private DataTable OnCreateDataTable(BangKeDto[] allBangKeDto)
         {
-            var dataTable = new DataTable(tableName);
-            foreach (var columnName in columnNames)
-            {
-                dataTable.Columns.Add(columnName);
-            }
+            var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
+                "Ngân Hàng", "Số ĐT", "Hệ thống", "Quản lý", "Thưởng thêm", "Tổng tiền", "Thuế 10%", "Thực nhận", "Tháng", "Ký nhận"};
+            var columnTypes = new[] {typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), 
+                typeof(string), typeof(string), typeof(double), typeof(double), typeof(double), typeof(double), typeof(double), 
+                typeof(double), typeof(string), typeof(string)};
+            var tableName = "BANG_KE_VW";
+            return CreateDataTable(tableName, columnNames, columnTypes, allBangKeDto);
+        }
+
+        private DataTable CreateDataTable(String tableName, String[] columnNames, Type[] columnTypes, BangKeDto[] allBangKeDto)
+        {
+            var dataTable = ExcelHelper.CreateEmptyDataTable(tableName, columnNames, columnTypes);
             foreach (var bangKeDto in allBangKeDto)
             {
                 var dataRow = dataTable.NewRow();
@@ -159,10 +163,7 @@ namespace web_app.main_pages
             {
                 return;
             }
-            var columnNames = new[] {"stt", "Tên nhân viên", "Tên đăng nhập", "Số cmnd", "Địa chỉ", "Số TK", 
-                "Ngân Hàng", "Số ĐT", "Hệ thống", "Quản lý", "Thưởng thêm", "Tổng tiền", "Thuế 10%", "Thực nhận", "Tháng", "Ký nhận"};
-            var tableName = "BANG_KE_VW";
-            var dt = CreateDataTable(tableName, columnNames, allBangKeDto);
+            var dt = OnCreateDataTable(allBangKeDto);
             var fileName = String.Format("BKTL_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";
             var fileDir = String.Format("BKTL_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;

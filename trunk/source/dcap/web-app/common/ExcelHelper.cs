@@ -13,6 +13,16 @@ namespace web_app.common
 {
     public class ExcelHelper
     {
+        public static DataTable CreateEmptyDataTable(String tableName, String[] columnNames, Type[] columnTypes)
+        {
+            var dataTable = new DataTable(tableName);
+            for (int i = 0; i < columnNames.Length; i++)
+            {
+                dataTable.Columns.Add(columnNames[i], columnTypes[i]);
+            }
+            return dataTable;
+        }
+
         /// <summary>
         /// Write excel file of a list of object as T
         /// Assume that maximum of 24 columns 
@@ -62,7 +72,7 @@ namespace web_app.common
                 sheets.Append(sheet);
                 workbook.Append(fileVersion);
                 workbook.Append(sheets);
-                SheetData sheetData = CreateSheetData(dt, stylesPart);
+                SheetData sheetData = CreateSheetData(dt);
                 worksheet.Append(sheetData);
                 worksheetPart.Worksheet = worksheet;
                 UpdateBorderStyle(workbookPart, worksheetPart, dt);
@@ -96,7 +106,7 @@ namespace web_app.common
         /// <param name="objects">list of the object type</param>
         /// <param name="headerNames">Header names of the object</param>
         /// <returns></returns>
-        private static SheetData CreateSheetData(DataTable dt, WorkbookStylesPart stylesPart)
+        private static SheetData CreateSheetData(DataTable dt)
         {
             var sheetData = new SheetData();
             if (dt.Rows.Count > 0)
@@ -113,8 +123,7 @@ namespace web_app.common
                 header.RowIndex = (uint)index;
                 for (int col = 0; col < numCols; col++)
                 {
-                    HeaderCell c = new HeaderCell(headers[col].ToString(),
-                                           dt.Columns[col].ToString(), index, stylesPart.Stylesheet,System.Drawing.Color.LightGray,12, true);
+                    HeaderCell c = new HeaderCell(headers[col].ToString(), dt.Columns[col].ToString(), index);
                     header.Append(c);
                 }
                 sheetData.Append(header);
