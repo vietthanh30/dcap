@@ -55,31 +55,23 @@ namespace web_app
             HeadLoginName1.Text = headLoginName;
             HeadLoginName2.Text = headLoginNameAdmin;
             HeadLoginName3.Text = headLoginName;
-			var currentPage = "http://" + Request.Url.Authority + Request.Url.AbsolutePath;
-			A1.href = currentPage;
-            UpdateLeftPanel(roleCode, currentPage);
+            UpdateLeftPanel(roleCode);
 			
         }
 
-        private void UpdateLeftPanel(string roleCode, string currentPage)
+        private void UpdateLeftPanel(string roleCode)
         {
             if (string.Compare(ConstUtil.QTHT, roleCode, true) == 0)
             {
                 LeftContentAdmin.Visible = true;
                 LeftContentKT.Visible = false;
                 LeftContentTV.Visible = false;
-				QltvAdmin.href = currentPage;
-				QldtAdmin.href = currentPage;
-				MltvAdmin.href = currentPage;
-				BktlAdmin.href = currentPage;
             }
             if (string.Compare(ConstUtil.QLKT, roleCode, true) == 0)
             {
                 LeftContentAdmin.Visible = false;
                 LeftContentKT.Visible = true;
                 LeftContentTV.Visible = false;
-				MltvKT.href = currentPage;
-				BktlKT.href = currentPage;
             }
             if (string.Compare(ConstUtil.QLTV, roleCode, true) == 0)
             {
