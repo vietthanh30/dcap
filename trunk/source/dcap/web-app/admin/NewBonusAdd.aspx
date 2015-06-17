@@ -99,7 +99,7 @@
     <ASPP:PopupPanel HeaderText="Thêm mới Thưởng thêm" ID="NewBonusAddPopup" runat="server" OnCloseWindowClick="OnClosePopupWindow">
     <PopupWindow>
     <ASPP:PopupWindow ID="NewBonusAddWindow" runat="server">
-            <asp:Panel runat="server" BorderStyle="Ridge" style="width: 600px; height: 400px">
+            <asp:Panel runat="server" BorderStyle="Ridge" style="width: 600px; height: 300px">
                 <div class="box-body">   
                 <div class="row">
 					<div class="col-xs-8">
