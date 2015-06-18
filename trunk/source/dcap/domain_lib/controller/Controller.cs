@@ -198,6 +198,7 @@ namespace domain_lib.controller
                                         };
                         m_PersistenceManager.Save(error);
                         m_PersistenceManager.Delete(log);
+                        throw new Exception("CalculateAccountLog Error: " + ex.Message);
                     }
                 }
 
