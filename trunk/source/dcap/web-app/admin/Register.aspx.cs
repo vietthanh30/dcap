@@ -261,5 +261,33 @@ namespace web_app.admin
             }
             return "-1";
         }
+		
+		protected void RegisterUser_OnDirectParentChange(object sender, EventArgs e)
+		{
+            var directParentId = DirectParentId.Value.Trim();
+			var directParentName = GetMemberNameById(directParentId);
+			DirectParentName.Value = directParentName;
+		}
+		
+		protected void RegisterUser_OnParentChange(object sender, EventArgs e)
+		{
+            var parentId = ParentId.Value.Trim();
+			var parentName = GetMemberNameById(parentId);
+			ParentName.Value = parentName;
+		}
+
+        private string GetMemberNameById(string accountNumber)
+        {
+			MemberNodeDto dto = GetNodeDto(accountNumber);
+			var description = dto.Description;
+            if (String.IsNullOrEmpty(description))
+            {
+                return description;
+            }
+            var arr1 = description.Split(new [] {'|'});
+            var fullName = arr1[0];
+            var accountInfo = arr1[1].Substring(arr1[1].IndexOf(" ") + 1);
+            return fullName + accountInfo;
+        }
     }
 }
