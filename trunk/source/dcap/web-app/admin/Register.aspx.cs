@@ -37,8 +37,8 @@ namespace web_app.admin
 
         protected void RegisterUser_CreatingUser(object sender, EventArgs e)
         {
-            var parentId = ParentId.Value.Trim();
-            var directParentId = DirectParentId.Value.Trim();
+            var parentId = ParentId.Text.Trim();
+            var directParentId = DirectParentId.Text.Trim();
             var userName = HoTen.Value.Trim();
             var sNgaySinh = NgaySinh.Value.Trim();
             var ngaySinh = DateUtil.GetDateTime(sNgaySinh);
@@ -161,8 +161,8 @@ namespace web_app.admin
 
         private void ResetAccountInfo()
         {
-            ParentId.Value = string.Empty;
-            DirectParentId.Value = string.Empty;
+            ParentId.Text = string.Empty;
+            DirectParentId.Text = string.Empty;
             HoTen.Value = string.Empty;
             NgaySinh.Value = string.Empty;
             SoCmnd.Value = string.Empty;
@@ -177,8 +177,8 @@ namespace web_app.admin
 
         protected void RegisterUser_SearchUser(object sender, EventArgs e)
         {
-            var parentId = ParentId.Value.Trim();
-            var directParentId = DirectParentId.Value.Trim();
+            var parentId = ParentId.Text.Trim();
+            var directParentId = DirectParentId.Text.Trim();
             var userName = HoTen.Value.Trim();
             var sNgaySinh = NgaySinh.Value.Trim();
             var ngaySinh = DateUtil.GetDateTime(sNgaySinh);
@@ -264,21 +264,25 @@ namespace web_app.admin
 		
 		protected void RegisterUser_OnDirectParentChange(object sender, EventArgs e)
 		{
-            var directParentId = DirectParentId.Value.Trim();
+            var directParentId = DirectParentId.Text.Trim();
 			var directParentName = GetMemberNameById(directParentId);
 			DirectParentName.Value = directParentName;
 		}
 		
 		protected void RegisterUser_OnParentChange(object sender, EventArgs e)
 		{
-            var parentId = ParentId.Value.Trim();
+            var parentId = ParentId.Text.Trim();
 			var parentName = GetMemberNameById(parentId);
 			ParentName.Value = parentName;
 		}
 
         private string GetMemberNameById(string accountNumber)
         {
-			MemberNodeDto dto = GetNodeDto(accountNumber);
+            MemberNodeDto dto = DcapServiceUtil.GetNodeDto(accountNumber);
+            if (dto == null)
+            {
+                return string.Empty;
+            }
 			var description = dto.Description;
             if (String.IsNullOrEmpty(description))
             {
@@ -286,8 +290,8 @@ namespace web_app.admin
             }
             var arr1 = description.Split(new [] {'|'});
             var fullName = arr1[0];
-            var accountInfo = arr1[1].Substring(arr1[1].IndexOf(" ") + 1);
-            return fullName + accountInfo;
+            var accountInfo = arr1[1].Substring(0, arr1[1].IndexOf(" "));
+            return fullName + "|" + accountInfo;
         }
     }
 }

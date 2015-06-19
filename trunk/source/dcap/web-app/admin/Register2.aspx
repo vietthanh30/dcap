@@ -1,9 +1,9 @@
-﻿<%@ Page Title="RegisterAdmin" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Đăng ký quản lý" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Register2.aspx.cs" Inherits="web_app.admin.Register2" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
-    Đăng ký thành viên
+    Đăng ký quản lý
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>

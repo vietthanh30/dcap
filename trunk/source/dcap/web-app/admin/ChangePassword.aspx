@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Change Password" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Đổi mật khẩu" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="ChangePassword.aspx.cs" Inherits="web_app.admin.ChangePassword" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
@@ -62,8 +62,8 @@
             </div><!-- /.box -->
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Hủy bỏ"/>&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="ChangePasswordPushButton" runat="server" 
+                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" class="btn btn-primary" CommandName="Cancel" Text="Hủy bỏ"/>&nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="ChangePasswordPushButton" runat="server" class="btn btn-primary" 
                         Text="Đổi mật khẩu" ValidationGroup="ChangeUserPasswordValidationGroup" 
                         onclick="ChangeUserPassword_ChangingPassword"/>
                 </p>

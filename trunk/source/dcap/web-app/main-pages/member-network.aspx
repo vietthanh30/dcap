@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="member-network.aspx.cs" Inherits="web_app.main_pages.member_network" %>
+﻿<%@ Page Title="Cây thành viên" Language="C#" MasterPageFile="~/Site.master" CodeBehind="member-network.aspx.cs" Inherits="web_app.main_pages.member_network" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
-    Mạng lưới thành viên
+    Cây thành viên
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active">Bảng kê</li>
+    <li class="active">Cây thành viên</li>
     </ol>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">

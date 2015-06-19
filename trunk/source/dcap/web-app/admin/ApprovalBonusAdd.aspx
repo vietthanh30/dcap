@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ApprovalBonusAdd.aspx.cs" Inherits="web_app.admin.ApprovalBonusAdd" %>
+﻿<%@ Page Title="Duyệt thưởng thêm" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ApprovalBonusAdd.aspx.cs" Inherits="web_app.admin.ApprovalBonusAdd" %>
 <%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl"
     TagPrefix="ASPP" %>
 <asp:Content ID="Content5" ContentPlaceHolderID="HeadContent" runat="server">

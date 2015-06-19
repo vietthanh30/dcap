@@ -1,13 +1,13 @@
-﻿<%@ Page Title="EditMemberInfo" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Thông tin cá nhân" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="EditMemberInfo.aspx.cs" Inherits="web_app.members.EditMemberInfo" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
-    Đăng ký thành viên
+    Thông tin thành viên
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active">Đăng ký thành viên</li>
+    <li class="active">Thông tin thành viên</li>
     </ol>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">

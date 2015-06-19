@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="bang-ke-hoa-hong.aspx.cs" Inherits="web_app.members.bang_ke_hoa_hong" %>
+﻿<%@ Page Title="Tra cứu bảng lương" Language="C#" MasterPageFile="~/Site.master" CodeBehind="bang-ke-hoa-hong.aspx.cs" Inherits="web_app.members.bang_ke_hoa_hong" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
