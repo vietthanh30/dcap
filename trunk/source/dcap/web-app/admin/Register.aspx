@@ -44,8 +44,16 @@
 					<input type="text" class="form-control" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
 					</div>
 					<div class="col-xs-4">
+					<input type="text" class="form-control" id="DirectParentName" runat="server" readonly="true" onchange="RegisterUser_OnDirectParentChange">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
 					<label for="ParentId">Tuyến trên</label>
 					<input type="text" class="form-control" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
+					</div>
+					<div class="col-xs-4">
+					<input type="text" class="form-control" id="ParentName" runat="server" readonly="true" onchange="RegisterUser_OnParentChange">
 					</div>
 				</div>
 				<div class="row">
