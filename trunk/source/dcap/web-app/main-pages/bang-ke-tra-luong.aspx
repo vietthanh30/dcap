@@ -126,7 +126,7 @@
         <asp:Panel ID="UpdatePaidPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
         <div class="box-body">   
         <div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
             <asp:Label ID="UpdatePaidLabel" runat="server"></asp:Label>
 				</div>
 		</div>

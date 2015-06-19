@@ -91,6 +91,26 @@ namespace domain_lib.model
             this._createdBy = createdBy;
         }
 
+        public MemberInfo(long accountNumber, string hoTen, long parentId, long parentDirectId, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
+                    string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
+        {
+            this._accountNumber = accountNumber;
+            this._hoTen = hoTen;
+            this._parentId = parentId;
+            this._parentDirectId = parentDirectId;
+            this._ngaySinh = ngaySinh;
+            this._soCmnd = soCmnd;
+            this._ngayCap = ngayCap;
+            this._soDienThoai = soDienThoai;
+            this._diaChi = diaChi;
+            this._gioiTinh = gioiTinh;
+            this._soTaiKhoan = soTaiKhoan;
+            this._chiNhanhNh = chiNhanhNH;
+            this._imageUrl = imageUrl;
+            this._createdDate = createdDate;
+            this._createdBy = createdBy;
+        }
+
         public MemberInfo(long accountNumber, string hoTen, string userName, long parentId, long parentDirectId, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
                     string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
         {

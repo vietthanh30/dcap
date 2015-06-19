@@ -102,7 +102,7 @@ namespace web_app
 //                var imageUrl = userDto.ImageUrl;
 //                if (string.IsNullOrEmpty(imageUrl))
 //                {
-//                    imageUrl = "~/dist/img/avatar5.png";
+//                    imageUrl = GioiTinhUtil.GetDefaultPhotoUrlBy(userDto.GioiTinh);
 //                }
 //                imageUrl = imageUrl.Replace("~", "");
 //                NewManagerList.Text += "<img src=\"" + imageUrl + "\" runat=\"server\" alt=\"User Image\"/>";
@@ -124,7 +124,7 @@ namespace web_app
                 var imageUrl = userDto.ImageUrl;
                 if (string.IsNullOrEmpty(imageUrl))
                 {
-                    imageUrl = "~/dist/img/avatar5.png";
+                    imageUrl = GioiTinhUtil.GetDefaultPhotoUrlBy(userDto.GioiTinh);
                 }
                 imageUrl = imageUrl.Replace("~", "");
                 NewMemberList.Text += "<img src=\"" + imageUrl + "\" runat=\"server\" alt=\"User Image\"/>";

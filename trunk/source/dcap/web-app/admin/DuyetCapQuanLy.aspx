@@ -111,7 +111,7 @@
         <asp:Panel ID="ManagerApprovalPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
         <div class="box-body">   
         <div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
             <asp:Label ID="ManagerApprovalLabel" runat="server"></asp:Label>
 			<asp:HiddenField ID="ManagerLevelApproval" runat="server" />
 			<asp:HiddenField ID="AccountNumberApproval" runat="server" />

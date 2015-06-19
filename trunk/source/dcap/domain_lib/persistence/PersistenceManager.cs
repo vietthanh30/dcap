@@ -280,7 +280,7 @@ namespace domain_lib.persistence
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select new MemberInfo(a.AccountNumber, m.HoTen, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+                var query = session.CreateQuery("select new MemberInfo(a.AccountNumber, m.HoTen, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
                     + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a "
                     + " where m.MemberID = a.MemberId and a.UserId = :userId");
                 query.SetParameter("userId", userDto.UserID);
@@ -294,6 +294,8 @@ namespace domain_lib.persistence
                 {
                     userDto.AccountNumber = memberInfo.AccountNumber;
                     userDto.FullName = memberInfo.HoTen;
+                    userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
+                    userDto.ParentDirectId = GetAccountNumberBy(memberInfo.ParentDirectId);
                     userDto.NgaySinh = memberInfo.NgaySinh;
                     userDto.SoCmnd = memberInfo.SoCmnd;
                     userDto.NgayCap = memberInfo.NgayCap;

@@ -101,24 +101,24 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="GioiTinh">Giới tính</label>
                     <asp:RadioButtonList ID="GioiTinh" runat="server" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" ToolTip="Nhập giới tính">
-                        <asp:ListItem Text="Nam" Value="M" />
+                        <asp:ListItem Text="Nam&nbsp;&nbsp;" Value="M" />
                         <asp:ListItem Text="Nữ" Value="F" />
                     </asp:RadioButtonList>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 					<label for="DiaChi">Địa chỉ</label>
 					<input type="text" class="form-control" id="DiaChi" maxlength="500" runat="server" placeholder="Nhập địa chỉ">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="SoTaiKhoan">Số tài khoản</label>
 					<input type="text" class="form-control" id="SoTaiKhoan" maxlength="50" runat="server" placeholder="Nhập số TK">
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 					<label for="ChiNhanhNH">Ngân hàng</label>
 					<input type="text" class="form-control" id="ChiNhanhNH" maxlength="100" runat="server" placeholder="Nhập thông tin ngân hàng">
 					</div>

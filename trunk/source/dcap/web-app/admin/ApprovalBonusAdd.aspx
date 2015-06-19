@@ -96,7 +96,7 @@
         <asp:Panel ID="ApprovalBonusPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
         <div class="box-body">   
         <div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
             <asp:Label ID="ApprovalBonusLabel" runat="server"></asp:Label>
 			<asp:HiddenField ID="AccountNumberApproval" runat="server" />
 			</div>

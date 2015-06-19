@@ -42,7 +42,7 @@
 					<div class="col-xs-4">
 					<label for="UserRole">Quyền người dùng</label>
                     <asp:RadioButtonList ID="UserRole" runat="server" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" ToolTip="Nhập quyền người dùng">
-                        <asp:ListItem Text="Quản trị hệ thống" Value="QTHT" />
+                        <asp:ListItem Text="Quản trị hệ thống&nbsp;&nbsp;" Value="QTHT" />
                         <asp:ListItem Text="Quản lý kế toán" Value="QLKT" />
                     </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="UserRole" 
