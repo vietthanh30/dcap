@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ApprovalBonusAdd.aspx.cs" Inherits="web_app.admin.ApprovalBonusAdd" %>
+﻿<%@ Page Title="Duyệt thưởng thêm" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ApprovalBonusAdd.aspx.cs" Inherits="web_app.admin.ApprovalBonusAdd" %>
 <%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl"
     TagPrefix="ASPP" %>
 <asp:Content ID="Content5" ContentPlaceHolderID="HeadContent" runat="server">
@@ -96,7 +96,7 @@
         <asp:Panel ID="ApprovalBonusPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
         <div class="box-body">   
         <div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
             <asp:Label ID="ApprovalBonusLabel" runat="server"></asp:Label>
 			<asp:HiddenField ID="AccountNumberApproval" runat="server" />
 			</div>

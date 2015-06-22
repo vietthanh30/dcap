@@ -158,7 +158,8 @@ namespace web_app.main_pages
             }
             var dt = OnCreateDataTable(allBangKeDto);
             ExcelHelper excelFacade = new ExcelHelper();
-            excelFacade.Create(filePath, dt);
+            //excelFacade.Create(filePath, dt, true);
+			excelFacade.Create(filePath, dt);
 
             FileInfo file = new FileInfo(filePath);
             Response.Clear();

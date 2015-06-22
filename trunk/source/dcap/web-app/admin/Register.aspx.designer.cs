@@ -64,7 +64,7 @@ namespace web_app.admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText DirectParentId;
+        protected global::System.Web.UI.WebControls.TextBox DirectParentId;
         
         /// <summary>
         /// DirectParentName control.
@@ -82,7 +82,7 @@ namespace web_app.admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ParentId;
+        protected global::System.Web.UI.WebControls.TextBox ParentId;
         
         /// <summary>
         /// ParentName control.

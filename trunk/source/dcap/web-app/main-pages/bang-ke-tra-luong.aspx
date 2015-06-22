@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="bang-ke-tra-luong.aspx.cs" Inherits="web_app.main_pages.bang_ke_tra_luong" %>
+﻿<%@ Page Title="Bảng lương tháng" Language="C#" MasterPageFile="~/Site.master" CodeBehind="bang-ke-tra-luong.aspx.cs" Inherits="web_app.main_pages.bang_ke_tra_luong" %>
 <%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl"
     TagPrefix="ASPP" %>
 
@@ -126,7 +126,7 @@
         <asp:Panel ID="UpdatePaidPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
         <div class="box-body">   
         <div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
             <asp:Label ID="UpdatePaidLabel" runat="server"></asp:Label>
 				</div>
 		</div>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManagerNetwork.aspx.cs" Inherits="web_app.main_pages.ManagerNetwork" %>
+﻿<%@ Page Title="Cây quản lý" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManagerNetwork.aspx.cs" Inherits="web_app.main_pages.ManagerNetwork" %>
 <asp:Content ID="Content5" ContentPlaceHolderID="HeadContent" runat="server">
     <h1>
     Cây quản lý

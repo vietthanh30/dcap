@@ -1,9 +1,9 @@
-﻿<%@ Page Title="RegisterAdmin" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Đăng ký quản lý" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Register2.aspx.cs" Inherits="web_app.admin.Register2" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
-    Đăng ký thành viên
+    Đăng ký quản lý
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
@@ -42,7 +42,7 @@
 					<div class="col-xs-4">
 					<label for="UserRole">Quyền người dùng</label>
                     <asp:RadioButtonList ID="UserRole" runat="server" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" ToolTip="Nhập quyền người dùng">
-                        <asp:ListItem Text="Quản trị hệ thống" Value="QTHT" />
+                        <asp:ListItem Text="Quản trị hệ thống&nbsp;&nbsp;" Value="QTHT" />
                         <asp:ListItem Text="Quản lý kế toán" Value="QLKT" />
                     </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="UserRole" 

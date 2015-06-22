@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NewBonusAdd.aspx.cs" Inherits="web_app.admin.NewBonusAdd" %>
+﻿<%@ Page Title="Thưởng thêm" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NewBonusAdd.aspx.cs" Inherits="web_app.admin.NewBonusAdd" %>
 <%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl"
     TagPrefix="ASPP" %>
 <asp:Content ID="Content5" ContentPlaceHolderID="HeadContent" runat="server">
@@ -100,15 +100,20 @@
     <PopupWindow>
     <ASPP:PopupWindow ID="NewBonusAddWindow" runat="server">
             <asp:Panel runat="server" BorderStyle="Ridge" style="width: 600px; height: 300px">
+            <div class="row">
+            <!-- left column -->
+            <div class="col-xs-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
                 <div class="box-body">   
                 <div class="row">
-					<div class="col-xs-8">
+					<div class="col-xs-10">
                     <asp:Label ID="InvalidCredentialsMessage2" runat="server" class="failureNotification" ForeColor="Red"
                      Text="" Visible="False"></asp:Label>
                      </div>
                 </div>          
                 <div class="row">
-					<div class="col-xs-8">
+					<div class="col-xs-10">
                     <span class="failureNotification">
                         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
                     </span>
@@ -117,19 +122,19 @@
                     </div>
                 </div>          
                 <div class="row">
-					<div class="col-xs-8">
+					<div class="col-xs-10">
                     <asp:Label ID="AccountCode" runat="server" Text="" ForeColor="Blue" Visible="False"></asp:Label>
                     </div>
                 </div>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="AccountNumber">Id thành viên</label>
 					<input type="text" class="form-control" maxlength="10" id="AccountNumber" runat="server" placeholder="Nhập ID thành viên">
                     <asp:RequiredFieldValidator ID="AccountNumberRequired" runat="server" ControlToValidate="AccountNumber" 
                         CssClass="failureNotification" ErrorMessage="Id thành viên bắt buộc nhập." ToolTip="Id thành viên bắt buộc nhập." 
                         ValidationGroup="NewBonusAddValidationGroup">*</asp:RequiredFieldValidator>
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="BonusAmount">Điểm thưởng</label>
 					<input type="text" class="form-control" maxlength="10" id="BonusAmount" runat="server" placeholder="Nhập Điểm thưởng">
                     <asp:RequiredFieldValidator ID="BonusAmountRequired" runat="server" ControlToValidate="BonusAmount" 
@@ -147,6 +152,9 @@
                         class="btn btn-primary" 
                     onclick="OnClosePopupWindow" />
                 </div> 
+            </div><!-- /.box -->
+            </div><!-- /.box -->
+            </div><!--/.col (left) -->
         </asp:Panel>
         </ASPP:PopupWindow>
         </PopupWindow>

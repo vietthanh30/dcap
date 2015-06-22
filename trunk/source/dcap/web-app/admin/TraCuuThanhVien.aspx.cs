@@ -241,13 +241,13 @@ namespace web_app.admin
             {
                 sParentId = Convert.ToString(userDto.ParentId);
             }
-            ParentId.Value = sParentId;
+            ParentId.Value = GetMemberDescById(sParentId);
             var sParentDirectId = string.Empty;
             if (userDto.ParentDirectId != -1)
             {
                 sParentDirectId = Convert.ToString(userDto.ParentDirectId);
             }
-            DirectParentId.Value = sParentDirectId;
+            DirectParentId.Value = GetMemberDescById(sParentDirectId);
             NgaySinh.Value = DateUtil.GetDateTimeAsDdmmyyyy(userDto.NgaySinh);
             SoCmnd.Value = userDto.SoCmnd;
             NgayCap.Value = DateUtil.GetDateTimeAsDdmmyyyy(userDto.NgayCap);
@@ -256,6 +256,22 @@ namespace web_app.admin
             GioiTinh.SelectedValue = userDto.GioiTinh;
             SoTaiKhoan.Value = userDto.SoTaiKhoan;
             ChiNhanhNH.Value = userDto.ChiNhanhNH;
+        }
+
+        private string GetMemberDescById(string accountNumber)
+        {
+            MemberNodeDto dto = DcapServiceUtil.GetNodeDto(accountNumber);
+            if (dto == null)
+            {
+                return string.Empty;
+            }
+            var description = dto.Description;
+            if (String.IsNullOrEmpty(description))
+            {
+                return description;
+            }
+            var arr1 = description.Split(new[] { '|' });
+            return arr1[1];
         }
 
         protected void OnClosePopupWindow(object sender, EventArgs e)

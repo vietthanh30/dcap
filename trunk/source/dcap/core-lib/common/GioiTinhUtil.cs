@@ -40,5 +40,12 @@ namespace core_lib.common
             }
             return string.Empty;
         }
+
+        public static string GetDefaultPhotoUrlBy(string maGioiTinh)
+        {
+            return string.Compare(maGioiTinh, ConstUtil.MA_GT_NU, true) == 0
+                       ? "~/dist/img/avatar2.png"
+                       : "~/dist/img/avatar5.png";
+        }
     }
 }

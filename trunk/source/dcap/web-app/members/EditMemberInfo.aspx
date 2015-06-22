@@ -1,13 +1,13 @@
-﻿<%@ Page Title="EditMemberInfo" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Thông tin cá nhân" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="EditMemberInfo.aspx.cs" Inherits="web_app.members.EditMemberInfo" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
-    Đăng ký thành viên
+    Thông tin cá nhân
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active">Đăng ký thành viên</li>
+    <li class="active">Thông tin cá nhân</li>
     </ol>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -85,24 +85,24 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="GioiTinh">Giới tính</label>
                     <asp:RadioButtonList ID="GioiTinh" runat="server" Enabled="false" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table">
-                        <asp:ListItem Text="Nam" Value="M" />
+                        <asp:ListItem Text="Nam&nbsp;&nbsp;" Value="M" />
                         <asp:ListItem Text="Nữ" Value="F" />
                     </asp:RadioButtonList>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 					<label for="DiaChi">Địa chỉ</label>
 					<input type="text" class="form-control" readonly="true" id="DiaChi" runat="server">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="SoTaiKhoan">Số tài khoản</label>
 					<input type="text" class="form-control" readonly="true" id="SoTaiKhoan" runat="server">
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 					<label for="ChiNhanhNH">Ngân hàng</label>
 					<input type="text" class="form-control" readonly="true" id="ChiNhanhNH" runat="server">
 					</div>

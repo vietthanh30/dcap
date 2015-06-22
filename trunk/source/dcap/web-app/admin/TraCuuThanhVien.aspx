@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TraCuuThanhVien.aspx.cs" Inherits="web_app.admin.TraCuuThanhVien" %>
+﻿<%@ Page Title="Tra cứu thành viên" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TraCuuThanhVien.aspx.cs" Inherits="web_app.admin.TraCuuThanhVien" %>
 <%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl"
     TagPrefix="ASPP" %>
 
@@ -116,15 +116,20 @@
     <PopupWindow>
     <ASPP:PopupWindow ID="EditPopupWindow" runat="server">
             <asp:Panel runat="server" BorderStyle="Ridge" style="width: 800px; height: 600px">
+            <div class="row">
+            <!-- left column -->
+            <div class="col-xs-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
                 <div class="box-body">   
                 <div class="row">
-					<div class="col-xs-8">
+					<div class="col-xs-10">
                     <asp:Label ID="Label1" runat="server" class="failureNotification"
                      Text="" Visible="False"></asp:Label>
                      </div>
                 </div>          
                 <div class="row">
-					<div class="col-xs-8">
+					<div class="col-xs-10">
                     <span class="failureNotification">
                         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
                     </span>
@@ -133,22 +138,22 @@
                     </div>
                 </div>          
                 <div class="row">
-					<div class="col-xs-8">
+					<div class="col-xs-10">
                     <asp:Label ID="AccountCode" runat="server" Text="" ForeColor="Blue" Visible="False"></asp:Label>
                     </div>
                 </div>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="DirectParentId">Người giới thiệu</label>
 					<input type="text" class="form-control" readonly="true" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="ParentId">Tuyến trên</label>
 					<input type="text" class="form-control" readonly="true" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="HoTen">Họ tên</label>
 					<input type="text" class="form-control" readonly="true" id="HoTen" runat="server" placeholder="Nhập họ tên">
                     <asp:RequiredFieldValidator ID="HoTenRequired" runat="server" ControlToValidate="HoTen" 
@@ -157,7 +162,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="NgaySinh">Ngày sinh</label>
                     <div class="input-group">
                       <div class="input-group-addon">
@@ -166,7 +171,7 @@
                       <input type="text" id="NgaySinh" runat="server" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" >
                     </div><!-- /.input group -->
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="SoCmnd">Số CMND</label>
 					<input type="text" class="form-control" readonly="true" id="SoCmnd" maxlength="15" runat="server" placeholder="Nhập số CMND">
                     <asp:RequiredFieldValidator ID="SoCmndRequired" runat="server" ControlToValidate="SoCmnd" 
@@ -175,7 +180,7 @@
 					</div>
 				</div>
 				<div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-5">
 					<label for="NgayCap">Ngày cấp</label>
                     <div class="input-group">
                       <div class="input-group-addon">
@@ -184,37 +189,37 @@
                         <input type="text" ID="NgayCap" runat="server" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" >
                     </div><!-- /.input group -->
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-5">
 					<label for="SoDienThoai">Số điện thoại</label>
 					<input type="text" class="form-control" id="SoDienThoai" maxlength="15" runat="server" placeholder="Nhập số điện thoại">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="GioiTinh">Giới tính</label>
                     <asp:RadioButtonList ID="GioiTinh" runat="server" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" ToolTip="Nhập giới tính">
-                        <asp:ListItem Text="Nam" Value="M" />
+                        <asp:ListItem Text="Nam&nbsp;&nbsp;" Value="M" />
                         <asp:ListItem Text="Nữ" Value="F" />
                     </asp:RadioButtonList>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-7">
 					<label for="DiaChi">Địa chỉ</label>
 					<input type="text" class="form-control" id="DiaChi" maxlength="500" runat="server" placeholder="Nhập địa chỉ">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="SoTaiKhoan">Số tài khoản</label>
 					<input type="text" class="form-control" id="SoTaiKhoan" maxlength="50" runat="server" placeholder="Nhập số TK">
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-7">
 					<label for="ChiNhanhNH">Ngân hàng</label>
 					<input type="text" class="form-control" id="ChiNhanhNH" maxlength="100" runat="server" placeholder="Nhập thông tin ngân hàng">
 					</div>
 				</div>
 					
 				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-xs-8">
 					<label for="exampleInputFile">Ảnh</label>
 					<input type="file" runat="server" id="filePhotoUpload">
 					<p class="help-block">Chọn ảnh chân dung</p>
@@ -230,7 +235,10 @@
                 <asp:Button ID="CancelEditButton" runat="server" Text="Hủy bỏ" 
                         class="btn btn-primary" 
                     onclick="OnClosePopupWindow" />
-                </div> 
+                </div>  
+            </div><!-- /.box -->
+            </div><!-- /.box -->
+            </div><!--/.col (left) -->
         </asp:Panel>
         </ASPP:PopupWindow>
         </PopupWindow>
@@ -242,7 +250,7 @@
         <asp:Panel ID="DeleteMemberPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
         <div class="box-body">   
         <div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
             <asp:Label ID="DeleteMemberLabel" runat="server"></asp:Label>
 				</div>
 		</div>

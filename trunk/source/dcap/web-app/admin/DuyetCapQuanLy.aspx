@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DuyetCapQuanLy.aspx.cs" Inherits="web_app.admin.DuyetCapQuanLy" %>
+﻿<%@ Page Title="Duyệt cấp quản lý" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DuyetCapQuanLy.aspx.cs" Inherits="web_app.admin.DuyetCapQuanLy" %>
 <%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl"
     TagPrefix="ASPP" %>
 <asp:Content ID="Content5" ContentPlaceHolderID="HeadContent" runat="server">
@@ -111,7 +111,7 @@
         <asp:Panel ID="ManagerApprovalPanel" runat="server" BorderStyle="Ridge" style="width: 500px;">
         <div class="box-body">   
         <div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
             <asp:Label ID="ManagerApprovalLabel" runat="server"></asp:Label>
 			<asp:HiddenField ID="ManagerLevelApproval" runat="server" />
 			<asp:HiddenField ID="AccountNumberApproval" runat="server" />

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Đăng ký thành viên" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Register.aspx.cs" Inherits="web_app.admin.Register" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
@@ -41,19 +41,21 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="DirectParentId">Người giới thiệu</label>
-					<input type="text" class="form-control" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
+					<asp:TextBox CssClass="form-control" id="DirectParentId" AutoPostBack="true" runat="server" placeholder="Nhập ID người giới thiệu" OnTextChanged="RegisterUser_OnDirectParentChange"/>
 					</div>
 					<div class="col-xs-4">
-					<input type="text" class="form-control" id="DirectParentName" runat="server" readonly="true" onchange="RegisterUser_OnDirectParentChange">
+					<label for="DirectParentName">&nbsp;</label>
+					<input type="text" class="form-control" id="DirectParentName" runat="server" readonly="true">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="ParentId">Tuyến trên</label>
-					<input type="text" class="form-control" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
+					<asp:TextBox type="text" CssClass="form-control" id="ParentId" runat="server" AutoPostBack="true" placeholder="Nhập ID thành viên tuyến trên" OnTextChanged="RegisterUser_OnParentChange"/>
 					</div>
 					<div class="col-xs-4">
-					<input type="text" class="form-control" id="ParentName" runat="server" readonly="true" onchange="RegisterUser_OnParentChange">
+					<label for="ParentName">&nbsp;</label>
+					<input type="text" class="form-control" id="ParentName" runat="server" readonly="true">
 					</div>
 				</div>
 				<div class="row">
@@ -99,24 +101,24 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="GioiTinh">Giới tính</label>
                     <asp:RadioButtonList ID="GioiTinh" runat="server" class="form-control" RepeatDirection="Horizontal" RepeatLayout="Table" ToolTip="Nhập giới tính">
-                        <asp:ListItem Text="Nam" Value="M" />
+                        <asp:ListItem Text="Nam&nbsp;&nbsp;" Value="M" />
                         <asp:ListItem Text="Nữ" Value="F" />
                     </asp:RadioButtonList>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 					<label for="DiaChi">Địa chỉ</label>
 					<input type="text" class="form-control" id="DiaChi" maxlength="500" runat="server" placeholder="Nhập địa chỉ">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 					<label for="SoTaiKhoan">Số tài khoản</label>
 					<input type="text" class="form-control" id="SoTaiKhoan" maxlength="50" runat="server" placeholder="Nhập số TK">
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 					<label for="ChiNhanhNH">Ngân hàng</label>
 					<input type="text" class="form-control" id="ChiNhanhNH" maxlength="100" runat="server" placeholder="Nhập thông tin ngân hàng">
 					</div>

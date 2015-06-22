@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" CodeBehind="member-network.aspx.cs" Inherits="web_app.members.member_network_ext" %>
+﻿<%@ Page Title="Mạng lưới thành viên" Language="C#" MasterPageFile="~/Site.master" CodeBehind="member-network.aspx.cs" Inherits="web_app.members.member_network_ext" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <h1>
@@ -6,7 +6,7 @@
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active">Bảng kê</li>
+    <li class="active">Mạng lưới thành viên</li>
     </ol>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">

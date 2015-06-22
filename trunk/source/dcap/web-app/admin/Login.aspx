@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Đăng nhập" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Login.aspx.cs" Inherits="web_app.admin.Login" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
@@ -62,7 +62,7 @@
             </div><!-- /.box -->
         </fieldset>
         <p class="submitButton">
-            <asp:Button ID="LoginButton" runat="server" Text="Đăng nhập" 
+            <asp:Button ID="LoginButton" runat="server" Text="Đăng nhập" class="btn btn-primary" 
                 ValidationGroup="LoginUserValidationGroup" onclick="ValidateUser"/>
         </p>
     </div>

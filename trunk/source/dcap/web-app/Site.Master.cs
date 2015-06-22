@@ -36,7 +36,7 @@ namespace web_app
             var imageUrl = userDto.ImageUrl;
             if (String.IsNullOrEmpty(imageUrl))
             {
-                imageUrl = "~/dist/img/avatar5.png";
+                imageUrl = GioiTinhUtil.GetDefaultPhotoUrlBy(userDto.GioiTinh);
             }
             var headLoginName = userDto.FullName;
             string headLoginNameAdmin;

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BangLuongExt.aspx.cs" Inherits="web_app.main_pages.BangLuongExt" %>
+﻿<%@ Page Title="Bảng lương nâng cao" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BangLuongExt.aspx.cs" Inherits="web_app.main_pages.BangLuongExt" %>
 <asp:Content ID="Content5" ContentPlaceHolderID="HeadContent" runat="server">
     <h1>
     Bảng lương nâng cao
