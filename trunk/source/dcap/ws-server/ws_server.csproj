@@ -33,9 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+    <Reference Include="core_lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\log4net\log4net.dll</HintPath>
+      <HintPath>..\..\lib\core_lib.dll</HintPath>
+    </Reference>
+    <Reference Include="domain_lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\domain_lib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -75,16 +79,6 @@
     <Folder Include="calculation\" />
     <Folder Include="common\" />
     <Folder Include="members\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\core-lib\core_lib.csproj">
-      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
-      <Name>core_lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\domain_lib\domain_lib.csproj">
-      <Project>{4965CB44-7651-4EF2-B0EB-DF17D8397D78}</Project>
-      <Name>domain_lib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

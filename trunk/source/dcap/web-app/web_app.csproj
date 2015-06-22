@@ -37,6 +37,10 @@
     <Reference Include="ASP.Web.UI.PopupControl">
       <HintPath>..\lib\ASP.Web.UI.PopupControl.dll</HintPath>
     </Reference>
+    <Reference Include="core_lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\core_lib.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\excel-dll\DocumentFormat.OpenXml.dll</HintPath>
@@ -1121,12 +1125,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\core-lib\core_lib.csproj">
-      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
-      <Name>core_lib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DcapServiceReference\" />
