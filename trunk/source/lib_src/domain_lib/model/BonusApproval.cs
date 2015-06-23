@@ -31,7 +31,9 @@ namespace domain_lib.model
 		private long _accountNumber = -1;
 		
 		private string _userName = string.Empty;
-		
+
+        private string _prefixAccountNumber = string.Empty;
+
         #endregion
 
     	#region Constructor
@@ -40,9 +42,10 @@ namespace domain_lib.model
         {
         }
 		
-		public BonusApproval(long id, long accountNumber, double bonusAmount, string isApproved, string userName)
+		public BonusApproval(long id, string prefixAccountNumber, long accountNumber, double bonusAmount, string isApproved, string userName)
 		{
 			this._id = id;
+		    this._prefixAccountNumber = prefixAccountNumber;
 			this._accountNumber = accountNumber;
 			this._bonusAmount = bonusAmount;
 			this._isApproved = isApproved;
@@ -149,6 +152,15 @@ namespace domain_lib.model
         {
             get { return _userName; }
             set { _userName = value; }
+        }
+
+        /// <summary>
+        /// PrefixAccountNumber.
+        /// </summary>
+        public virtual string PrefixAccountNumber
+        {
+            get { return _prefixAccountNumber; }
+            set { _prefixAccountNumber = value; }
         }
 
         #endregion

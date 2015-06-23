@@ -17,7 +17,7 @@ namespace domain_lib.dto
 
         private double _bonusAmount = -1.0;
 
-        private long _accountNumber = -1;
+        private string _accountNumber = string.Empty;
 
         private string _isApproved = string.Empty;
 
@@ -69,7 +69,7 @@ namespace domain_lib.dto
         /// <summary>
         /// AccountNumber
         /// </summary>
-        public virtual long AccountNumber
+        public virtual string AccountNumber
         {
             get { return _accountNumber; }
             set { _accountNumber = value; }

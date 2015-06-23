@@ -243,6 +243,21 @@ namespace domain_lib.persistence
             }
         }
 
+        public CurrentIdentity GetCurrentIdentity(string tableName)
+        {
+            using (ISession session = m_SessionFactory.OpenSession())
+            {
+                // Create a criteria object with the specified criteria
+                string sqlStr = "SELECT IDENT_CURRENT(:tableName) as Value";
+                ISQLQuery sqlQuery = session.CreateSQLQuery(sqlStr);
+                sqlQuery.AddScalar("Value", NHibernateUtil.UInt64);
+                sqlQuery.SetResultTransformer(Transformers.AliasToBean(typeof(CurrentIdentity)));
+
+                // Set return value
+                return sqlQuery.UniqueResult<CurrentIdentity>();
+            }
+        }
+
         public UserDto checkUser(string userName, string password)
         {
             var userDto = new UserDto();
@@ -390,16 +405,22 @@ namespace domain_lib.persistence
 
         private long GetAccountIdBy(string accountNumber)
         {
+            if (accountNumber.Length != 7)
+            {
+                return -1;
+            }
+            string prefixAccountNumber = accountNumber.Substring(0, 3);
             long accountNumberVal;
-            if (!long.TryParse(accountNumber, out accountNumberVal))
+            if (!long.TryParse(accountNumber.Substring(3), out accountNumberVal))
             {
                 return -1;
             }
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery("select a.AccountId from Account a "
-                    + " where a.AccountNumber = :accountNumber");
+                    + " where a.AccountNumber = :accountNumber and a.PrefixAccountNumber = :prefixAccountNumber");
                 query.SetParameter("accountNumber", accountNumberVal);
+                query.SetParameter("prefixAccountNumber", prefixAccountNumber);
 
                 // Get the matching objects
                 var accountId = query.UniqueResult();
@@ -1130,10 +1151,10 @@ namespace domain_lib.persistence
             }
         }
 
-        public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        public HoaHongMemberDto[] SearchBangKeHoaHong(string accountNumber, DateTime? thangKeKhai)
         {
             var strThang = DateUtil.GetDateTimeAsStringWithEnProvider(thangKeKhai, ConstUtil.MONTH_FORMAT);
-            var accountId = GetAccountIdBy(accountNumber.ToString());
+            var accountId = GetAccountIdBy(accountNumber);
 
             var allResults = new List<HoaHongMemberDto>();
 
@@ -1198,23 +1219,23 @@ namespace domain_lib.persistence
             return allResults.ToArray();
         }
 
-        private long GetAccountNumberBy(long accountId)
+        private string GetAccountNumberBy(long accountId)
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select a.AccountNumber from Account a "
+                var query = session.CreateQuery("select a.PrefixAccountNumber, a.AccountNumber from Account a "
                     + " where a.AccountId = :accountId");
                 query.SetParameter("accountId", accountId);
 
                 // Get the matching objects
-                var accountNumber = query.UniqueResult();
+                var arr = query.UniqueResult<object[]>();
 
                 // Set return value
-                if (accountNumber == null)
+                if (arr == null)
                 {
-                    return -1;
+                    return "";
                 }
-                return Convert.ToInt64(accountNumber);
+                return arr[0] + string.Format("{0:0000}",Convert.ToInt64(arr[1]));
             }
         }
 
@@ -1816,7 +1837,7 @@ namespace domain_lib.persistence
 			}
             using (ISession session = m_SessionFactory.OpenSession())
             {
-				var sqlStr = "select new BonusApproval(ba.Id, a.AccountNumber, ba.BonusAmount, ba.IsApproved, u.UserName) "
+                var sqlStr = "select new BonusApproval(ba.Id, a.PrefixAccountNumber, a.AccountNumber, ba.BonusAmount, ba.IsApproved, u.UserName) "
 					+ " from BonusApproval ba, Account a, Users u "
                     + " where ba.AccountId = a.AccountId and a.UserId = u.UserID";
 				var sqlParams = new Hashtable();				
@@ -1858,7 +1879,7 @@ namespace domain_lib.persistence
 			{
 				BonusApprovalDto dto = new BonusApprovalDto();
 				dto.Id = model.Id;
-				dto.AccountNumber = model.AccountNumber;
+				dto.AccountNumber = DecodeAccountNumber(model.PrefixAccountNumber, model.AccountNumber);
 				dto.BonusAmount = model.BonusAmount;
 				dto.IsApproved = DecodeApproveStatus(model.IsApproved);
 				dto.UserName = model.UserName;
@@ -1866,6 +1887,11 @@ namespace domain_lib.persistence
 			}
 			return allResults;
 		}
+
+        private string DecodeAccountNumber(string prefixAccountNumber, long accountNumber)
+        {
+            return prefixAccountNumber + string.Format("{0:0000}", accountNumber);
+        }
 
         private string DecodeApproveStatus(string isApproved)
         {
@@ -1897,7 +1923,7 @@ namespace domain_lib.persistence
 		public string UpdateBonusApproval(BonusApprovalDto dto)
 		{
 			var mapParams = new Hashtable();
-			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
+			var accountId = GetAccountIdBy(dto.AccountNumber);
 			mapParams.Add("AccountId", accountId);
 			mapParams.Add("BonusType", dto.BonusType);
 			mapParams.Add("IsApproved", "N");

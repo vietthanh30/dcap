@@ -44,5 +44,9 @@ assembly="domain_lib">
       <column name="CREATED_BY" not-null="false" />
     </property>
 
+    <property name="PrefixAccountNumber">
+      <column name="PREFIX_ACCOUNT_NUMBER" not-null="true" />
+    </property>
+
   </class>
 </hibernate-mapping>

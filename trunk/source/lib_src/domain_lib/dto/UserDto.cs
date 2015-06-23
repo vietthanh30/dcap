@@ -45,9 +45,9 @@ namespace domain_lib.dto
 
         private string _message = string.Empty;
 
-        private long _parentId = -1;
+        private string _parentId = string.Empty;
 
-        private long _parentDirectId = -1;
+        private string _parentDirectId = string.Empty;
 
         #endregion
 
@@ -82,7 +82,7 @@ namespace domain_lib.dto
         /// <summary>
         /// Parent ID
         /// </summary>
-        public virtual long ParentId
+        public virtual string ParentId
         {
             get { return _parentId; }
             set { _parentId = value; }
@@ -91,7 +91,7 @@ namespace domain_lib.dto
         /// <summary>
         /// Parent Direct ID
         /// </summary>
-        public virtual long ParentDirectId
+        public virtual string ParentDirectId
         {
             get { return _parentDirectId; }
             set { _parentDirectId = value; }

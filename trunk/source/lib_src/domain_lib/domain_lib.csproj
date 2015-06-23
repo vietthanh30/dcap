@@ -72,6 +72,7 @@
     <Compile Include="model\AccountPreCalc.cs" />
     <Compile Include="model\BangKeVW.cs" />
     <Compile Include="model\BonusApproval.cs" />
+    <Compile Include="model\CurrentIdentity.cs" />
     <Compile Include="model\HoaHongMemberVW.cs" />
     <Compile Include="model\ManagerApproval.cs" />
     <Compile Include="model\ManagerLevelLog.cs" />

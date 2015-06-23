@@ -85,7 +85,7 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchBangKeExt(accountNumber, userName, beginDate, endDate);
         }
 
-        public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        public HoaHongMemberDto[] SearchBangKeHoaHong(string accountNumber, DateTime? thangKeKhai)
         {
             return m_PersistenceManager.SearchBangKeHoaHong(accountNumber, thangKeKhai);
         }

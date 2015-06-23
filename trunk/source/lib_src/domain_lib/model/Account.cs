@@ -28,6 +28,8 @@ namespace domain_lib.model
 
         private string _createdBy = string.Empty;
 
+        private string _prefixAccountNumber = string.Empty;
+
         #endregion
 
     	#region Constructor
@@ -128,6 +130,15 @@ namespace domain_lib.model
         {
             get { return _createdBy; }
             set { _createdBy = value; }
+        }
+
+        /// <summary>
+        /// PrefixAccountNumber.
+        /// </summary>
+        public virtual string PrefixAccountNumber
+        {
+            get { return _prefixAccountNumber; }
+            set { _prefixAccountNumber = value; }
         }
 
         #endregion
