@@ -41,7 +41,7 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="DirectParentId">Người giới thiệu</label>
-					<asp:TextBox CssClass="form-control" id="DirectParentId" AutoPostBack="true" runat="server" placeholder="Nhập ID người giới thiệu" OnTextChanged="RegisterUser_OnDirectParentChange"/>
+					<asp:TextBox CssClass="form-control" id="DirectParentId" maxlength="7" AutoPostBack="true" runat="server" placeholder="Nhập ID người giới thiệu" OnTextChanged="RegisterUser_OnDirectParentChange"/>
 					</div>
 					<div class="col-xs-4">
 					<label for="DirectParentName">&nbsp;</label>
@@ -51,7 +51,7 @@
 				<div class="row">
 					<div class="col-xs-4">
 					<label for="ParentId">Tuyến trên</label>
-					<asp:TextBox type="text" CssClass="form-control" id="ParentId" runat="server" AutoPostBack="true" placeholder="Nhập ID thành viên tuyến trên" OnTextChanged="RegisterUser_OnParentChange"/>
+					<asp:TextBox type="text" CssClass="form-control" id="ParentId" maxlength="7" runat="server" AutoPostBack="true" placeholder="Nhập ID thành viên tuyến trên" OnTextChanged="RegisterUser_OnParentChange"/>
 					</div>
 					<div class="col-xs-4">
 					<label for="ParentName">&nbsp;</label>

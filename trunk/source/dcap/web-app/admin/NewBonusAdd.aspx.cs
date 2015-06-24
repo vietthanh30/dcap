@@ -98,9 +98,8 @@ namespace web_app.admin
             var bonusAmount = BonusAmount.Value.Trim();
 			var bonusType = "ADD";
 			var isApproved = "N";
-			long accountNumberVal;
 			double bonusAmountVal;
-			if (!long.TryParse(accountNumber, out accountNumberVal))
+			if (!DcapServiceUtil.IsValidAccountNumber(accountNumber))
 			{
                 InvalidCredentialsMessage2.Text = "Id thành viên không đúng định dạng. Vui lòng nhập lại.";
                 InvalidCredentialsMessage2.Visible = true;
@@ -125,7 +124,7 @@ namespace web_app.admin
                 return;
             }
             var userName = User.Identity.Name;
-			var dto = CreateBonusApprovalDto(accountNumberVal, bonusAmountVal, bonusType, isApproved, userName);
+			var dto = CreateBonusApprovalDto(accountNumber, bonusAmountVal, bonusType, isApproved, userName);
             var returnCode = DcapServiceUtil.CreateBonusApproval(dto);
             int code;
             var status = int.TryParse(returnCode, out code);
@@ -152,7 +151,7 @@ namespace web_app.admin
             }
         }
 		
-		private BonusApprovalDto CreateBonusApprovalDto(long accountNumber, double bonusAmount, string bonusType, string isApproved, string createdBy)
+		private BonusApprovalDto CreateBonusApprovalDto(string accountNumber, double bonusAmount, string bonusType, string isApproved, string createdBy)
 		{
 			var dto = new BonusApprovalDto();
 			dto.AccountNumber = accountNumber;

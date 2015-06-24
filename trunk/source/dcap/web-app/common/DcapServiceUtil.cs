@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using core_lib.common;
 using web_app.DcapServiceReference;
 
 namespace web_app.common
@@ -9,6 +10,29 @@ namespace web_app.common
     public class DcapServiceUtil
     {
         private static DcapServiceReference.DcapServiceSoapClient dcapService = new DcapServiceReference.DcapServiceSoapClient();
+
+        public static bool IsValidAccountNumber(string accountNumber)
+        {
+            if (string.IsNullOrEmpty(accountNumber) || accountNumber.Length != 7)
+            {
+                return false;
+            }
+            if (!char.IsLetter(accountNumber[0]))
+            {
+                return false;
+            }
+            long accountNumberVal;
+            if (!long.TryParse(accountNumber.Substring(3), out accountNumberVal))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static string GetPrefixAccountNumber()
+        {
+            return ParameterUtil.GetParameter("PrefixAccountNumber");
+        }
 
         public static UserDto login(string userName, string password)
         {
@@ -23,7 +47,8 @@ namespace web_app.common
         public static string CreateUser(String parentId, String directParentId, String userName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
             String chiNhanhNH, String photoUrl, string createdBy)
         {
-            return dcapService.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            return dcapService.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan,
+                chiNhanhNH, photoUrl, createdBy, GetPrefixAccountNumber());
         }
 
         public static string UpdateUser(String userName, String fullName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
@@ -53,7 +78,7 @@ namespace web_app.common
             return dcapService.SearchBangKeExt(accountNumber, userName, beginDate, endDate);
         }
 
-        public static HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        public static HoaHongMemberDto[] SearchBangKeHoaHong(string accountNumber, DateTime? thangKeKhai)
         {
             return dcapService.SearchBangKeHoaHong(accountNumber, thangKeKhai);
         }
@@ -73,7 +98,7 @@ namespace web_app.common
             return dcapService.SearchManagerNodeDto(capQuanLy, accountNumber);
         }
 
-        public static bool IsContainMemberNode(long rootNumber, string accountNumber)
+        public static bool IsContainMemberNode(string rootNumber, string accountNumber)
         {
             return dcapService.IsContainMemberNode(rootNumber, accountNumber);
         }

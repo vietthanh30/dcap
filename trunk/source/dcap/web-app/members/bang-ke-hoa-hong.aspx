@@ -51,7 +51,7 @@
                 <asp:TemplateField HeaderText="STT">
                 <ItemTemplate><%#GetStt() %></ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="AccountId" HeaderText="Id thành viên" DataFormatString="{0:0000000}" >
+                <asp:BoundField DataField="AccountId" HeaderText="Id thành viên" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="TrucTiep" HeaderText="Trực tiếp" >
@@ -80,7 +80,7 @@
                 <PagerSettings Mode="NumericFirstLast" 
                     NextPageText="" PageButtonCount="5" 
                     PreviousPageText="" FirstPageText="Đầu" LastPageText="Cuối" />
-                <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
+                <PagerStyle CssClass="GridPager" HorizontalAlign="Left" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->

@@ -13,7 +13,7 @@ namespace domain_lib.dto
         private long _userId = -1;
 
         // Member variables
-        private long _accountNumber = -1;
+        private string _accountNumber = string.Empty;
 
         private string _userName = String.Empty;
 
@@ -73,7 +73,7 @@ namespace domain_lib.dto
         /// <summary>
         /// Account Number
         /// </summary>
-        public virtual long AccountNumber
+        public virtual string AccountNumber
         {
             get { return _accountNumber; }
             set { _accountNumber = value; }

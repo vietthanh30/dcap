@@ -30,6 +30,13 @@ namespace web_app.members
         {
             OnSearchNetwork();
         }
+		
+		private void ResetMemberTreeView(out MemberNodeDto[] allMemberNodeDto)
+		{
+			allMemberNodeDto = new MemberNodeDto[0];
+			ParentInfo.Text = "";
+			ParentDirectInfo.Text = "";
+		}
 
         private void OnSearchNetwork()
         {
@@ -39,54 +46,61 @@ namespace web_app.members
                 Response.Redirect("~/admin/Login.aspx");
                 return;
             }
+			MemberNodeDto[] allMemberNodeDto;
             var rootNumber = userDto.AccountNumber;
             var idMember = IdMember.Value.Trim();
-            if (string.IsNullOrEmpty(idMember))
-            {
-                idMember = rootNumber.ToString();
-            }
-            MemberNodeDto[] allMemberNodeDto;
             long parentId = -1;
-            if (!DcapServiceUtil.IsContainMemberNode(rootNumber, idMember))
+            if(!string.IsNullOrEmpty(idMember) && !DcapServiceUtil.IsValidAccountNumber(idMember))
             {
-                allMemberNodeDto = new MemberNodeDto[0];
-                ParentInfo.Text = "";
-                ParentDirectInfo.Text = "";
-                InvalidCredentialsMessage.Text = "Id không thuộc quản lý của thành viên.";
+                InvalidCredentialsMessage.Text = "Id thành viên không đúng định dạng";
                 InvalidCredentialsMessage.Visible = true;
-            }
-            else
-            {
-                allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
-                if (allMemberNodeDto.Length == 0)
-                {
-                    InvalidCredentialsMessage.Text = "Không tồn tại cây thành viên " + idMember;
-                    InvalidCredentialsMessage.Visible = true;
-                }
-                else
-                {
-                    InvalidCredentialsMessage.Visible = false;
-                    MemberNodeDto parentDirectNodeDto = DcapServiceUtil.GetParentDirectNodeByChildNo(idMember);
-                    if (parentDirectNodeDto == null)
-                    {
-                        ParentDirectInfo.Text = "";
-                    }
-                    else
-                    {
-                        ParentDirectInfo.Text = "Người giới thiệu: " + parentDirectNodeDto.Description;
-                    }
-                    var parentNodeDto = DcapServiceUtil.GetParentNodeByChildNo(idMember);
-                    if (parentNodeDto == null)
-                    {
-                        ParentInfo.Text = "";
-                    }
-                    else
-                    {
-                        parentId = parentNodeDto.AccountId;
-                        ParentInfo.Text = "Tuyến trên: " + parentNodeDto.Description;
-                    }
-                }
-            }
+                ResetMemberTreeView(out allMemberNodeDto);
+            } else 
+			{
+				if (string.IsNullOrEmpty(idMember))
+				{
+					idMember = rootNumber;
+				}
+				if (!DcapServiceUtil.IsContainMemberNode(rootNumber, idMember))
+				{
+					ResetMemberTreeView(out allMemberNodeDto);
+					InvalidCredentialsMessage.Text = "Id không thuộc quản lý của thành viên.";
+					InvalidCredentialsMessage.Visible = true;
+				}
+				else
+				{
+					allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
+					if (allMemberNodeDto.Length == 0)
+					{
+						InvalidCredentialsMessage.Text = "Không tồn tại cây thành viên " + idMember;
+						InvalidCredentialsMessage.Visible = true;
+						ResetMemberTreeView(out allMemberNodeDto);
+					}
+					else
+					{
+						InvalidCredentialsMessage.Visible = false;
+						MemberNodeDto parentDirectNodeDto = DcapServiceUtil.GetParentDirectNodeByChildNo(idMember);
+						if (parentDirectNodeDto == null)
+						{
+							ParentDirectInfo.Text = "";
+						}
+						else
+						{
+							ParentDirectInfo.Text = "Người giới thiệu: " + parentDirectNodeDto.Description;
+						}
+						var parentNodeDto = DcapServiceUtil.GetParentNodeByChildNo(idMember);
+						if (parentNodeDto == null)
+						{
+							ParentInfo.Text = "";
+						}
+						else
+						{
+							parentId = parentNodeDto.AccountId;
+							ParentInfo.Text = "Tuyến trên: " + parentNodeDto.Description;
+						}
+					}
+				}
+			}
             var headerNames = new[] { "AccountId", "ParentId", "Description" };
             var columnTypes = new[] {typeof (long), typeof (long), typeof (string)};
             var ds = CreateMemberNodeDataSet(allMemberNodeDto, headerNames, columnTypes);

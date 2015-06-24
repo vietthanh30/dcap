@@ -20,11 +20,11 @@
 			<div class="row">
 				<div class="col-xs-4">
 					<label for="IdThanhVienSearch">Id thành viên</label>
-					<input type="text" class="form-control" runat="server" id="IdThanhVienSearch" placeholder="Nhập Id thành viên">
+					<input type="text" class="form-control" maxlength="7" runat="server" id="IdThanhVienSearch" placeholder="Nhập Id thành viên">
 				</div>
 				<div class="col-xs-4">
 					<label for="UserNameSearch">Tên đăng nhập</label>
-					<input type="text" class="form-control" runat="server" id="UserNameSearch" placeholder="Nhập Tên đăng nhập">
+					<input type="text" class="form-control" runat="server" maxlength="50" id="UserNameSearch" placeholder="Nhập Tên đăng nhập">
 				</div>
 				<div class="col-xs-4">
 					<label for="IsApprovedSearch">Trạng thái</label>
@@ -67,7 +67,7 @@
                 <asp:TemplateField HeaderText="STT">
                 <ItemTemplate><%#GetStt() %></ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="AccountNumber" HeaderText="Id Thành viên" DataFormatString="{0:0000000}" >
+                <asp:BoundField DataField="AccountNumber" HeaderText="Id Thành viên" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="UserName" HeaderText="Tên đăng nhập" >
@@ -84,7 +84,7 @@
                 <PagerSettings Mode="NumericFirstLast" 
                     NextPageText="" PageButtonCount="5" 
                     PreviousPageText="" FirstPageText="Đầu" LastPageText="Cuối" />
-                <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
+                <PagerStyle CssClass="GridPager" HorizontalAlign="Left" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->
@@ -129,7 +129,7 @@
 				<div class="row">
 					<div class="col-xs-5">
 					<label for="AccountNumber">Id thành viên</label>
-					<input type="text" class="form-control" maxlength="10" id="AccountNumber" runat="server" placeholder="Nhập ID thành viên">
+					<input type="text" class="form-control" maxlength="7" id="AccountNumber" runat="server" placeholder="Nhập ID thành viên">
                     <asp:RequiredFieldValidator ID="AccountNumberRequired" runat="server" ControlToValidate="AccountNumber" 
                         CssClass="failureNotification" ErrorMessage="Id thành viên bắt buộc nhập." ToolTip="Id thành viên bắt buộc nhập." 
                         ValidationGroup="NewBonusAddValidationGroup">*</asp:RequiredFieldValidator>

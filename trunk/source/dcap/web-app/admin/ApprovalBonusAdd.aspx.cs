@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using core_lib.common;
 using web_app.common;
 using web_app.DcapServiceReference;
 
@@ -104,7 +105,7 @@ namespace web_app.admin
 			if (GetBonusApprovalDto(out dto))
 			{
 				dto.ApprovedBy = User.Identity.Name;
-				dto.BonusType = "ADD";
+				dto.BonusType = ConstUtil.BONUS_TYPE_ADD_CODE;
 				var returnCode = DcapServiceUtil.UpdateBonusApproval(dto);
 				if (string.Compare(returnCode, "0", true) == 0)
 				{
@@ -127,12 +128,12 @@ namespace web_app.admin
 		private bool GetBonusApprovalDto(out BonusApprovalDto dto)
 		{
 			dto = new BonusApprovalDto();
-			long accountNumber;
-            if (!long.TryParse(AccountNumberApproval.Value, out accountNumber))
+            string accountNumber = AccountNumberApproval.Value;
+            if (!DcapServiceUtil.IsValidAccountNumber(accountNumber))
 			{
 				return false;
 			}
-			dto.AccountNumber = accountNumber;
+            dto.AccountNumber = accountNumber;
 			return true;
 		}
     }

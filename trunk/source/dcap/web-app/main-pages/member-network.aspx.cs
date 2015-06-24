@@ -36,42 +36,58 @@ namespace web_app.main_pages
             OnSearchNetwork();
         }
 
+		private void ResetMemberTreeView(out MemberNodeDto[] allMemberNodeDto)
+		{
+			allMemberNodeDto = new MemberNodeDto[0];
+			ParentInfo.Text = "";
+			ParentDirectInfo.Text = "";
+		}
+
         private void OnSearchNetwork()
         {
+			MemberNodeDto[] allMemberNodeDto;
             var idMember = IdMember.Value.Trim();
-            var allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
-            if (allMemberNodeDto.Length == 0)
+            long parentId = -1;
+            if(!string.IsNullOrEmpty(idMember) && !DcapServiceUtil.IsValidAccountNumber(idMember))
             {
-                InvalidCredentialsMessage.Text = "Không tồn tại cây thành viên " + idMember;
+                InvalidCredentialsMessage.Text = "Id thành viên không đúng định dạng";
                 InvalidCredentialsMessage.Visible = true;
-            }
-            else
-            {
-                InvalidCredentialsMessage.Visible = false;
-            }
+                ResetMemberTreeView(out allMemberNodeDto);
+            } else 
+			{
+				allMemberNodeDto = DcapServiceUtil.SearchMemberNodeDto(idMember);
+				if (allMemberNodeDto.Length == 0)
+				{
+					InvalidCredentialsMessage.Text = "Không tồn tại cây thành viên " + idMember;
+					InvalidCredentialsMessage.Visible = true;
+					ResetMemberTreeView(out allMemberNodeDto);
+				}
+				else
+				{
+					InvalidCredentialsMessage.Visible = false;
+					var parentDirectNodeDto = DcapServiceUtil.GetParentDirectNodeByChildNo(idMember);
+					if (parentDirectNodeDto == null)
+					{
+						ParentDirectInfo.Text = "";
+					}
+					else
+					{
+						ParentDirectInfo.Text = "Người giới thiệu: " + parentDirectNodeDto.Description;
+					}
+					var parentNodeDto = DcapServiceUtil.GetParentNodeByChildNo(idMember);
+					if (parentNodeDto == null)
+					{
+						ParentInfo.Text = "";
+					} else
+					{
+						parentId = parentNodeDto.AccountId;
+						ParentInfo.Text = "Tuyến trên: " + parentNodeDto.Description;
+					}
+				}
+			}			
             var headerNames = new[] { "AccountId", "ParentId", "Description" };
             var columnTypes = new[] {typeof (long), typeof (long), typeof (string)};
             var ds = CreateMemberNodeDataSet(allMemberNodeDto, headerNames, columnTypes);
-            var parentDirectNodeDto = DcapServiceUtil.GetParentDirectNodeByChildNo(idMember);
-            if (parentDirectNodeDto == null)
-            {
-                ParentDirectInfo.Text = "";
-            }
-            else
-            {
-                ParentDirectInfo.Text = "Người giới thiệu: " + parentDirectNodeDto.Description;
-            }
-            var parentNodeDto = DcapServiceUtil.GetParentNodeByChildNo(idMember);
-            long parentId;
-            if (parentNodeDto == null)
-            {
-                parentId = -1;
-                ParentInfo.Text = "";
-            } else
-            {
-                parentId = parentNodeDto.AccountId;
-                ParentInfo.Text = "Tuyến trên: " + parentNodeDto.Description;
-            }
             TreeThanhVien.DataSource = new HierarchicalDataSet(ds, "AccountId", "ParentId", parentId);
             TreeThanhVien.DataBind();
             TreeThanhVien.CollapseAll();

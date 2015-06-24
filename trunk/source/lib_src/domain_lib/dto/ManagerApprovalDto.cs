@@ -13,7 +13,7 @@ namespace domain_lib.dto
 		private long _id = -1;
 		
         // Member variables
-        private long _accountNumber = -1;
+        private string _accountNumber = string.Empty;
 
         private int _managerLevel = -1;
 
@@ -45,7 +45,7 @@ namespace domain_lib.dto
         /// <summary>
         /// AccountNumber
         /// </summary>
-        public virtual long AccountNumber
+        public virtual string AccountNumber
         {
             get { return _accountNumber; }
             set { _accountNumber = value; }

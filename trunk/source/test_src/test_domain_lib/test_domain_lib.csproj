@@ -41,14 +41,6 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="core_lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\core_lib.dll</HintPath>
-    </Reference>
-    <Reference Include="domain_lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\domain_lib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -62,6 +54,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib_src\core-lib\core_lib.csproj">
+      <Project>{8A7BE124-AB4D-42F0-B4F8-62A5B85CE15D}</Project>
+      <Name>core_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib_src\domain_lib\domain_lib.csproj">
+      <Project>{4965CB44-7651-4EF2-B0EB-DF17D8397D78}</Project>
+      <Name>domain_lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

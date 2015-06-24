@@ -37,17 +37,11 @@ namespace web_app.admin
 
         private void OnSearchThanhVien()
         {
-            var soCmnd = SoCmndSearch.Value.Trim();
-            var idThanhVien = IdThanhVienSearch.Value.Trim();
-            var hoTen = HoTenSearch.Value.Trim();
-            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+            UserDto[] userDtos;
+            if (!GetAllUserInfo(out userDtos))
             {
-                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-                InvalidCredentialsMessage.Visible = true;
-                ResetGvMemberInfo();
                 return;
             }
-            var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length > 0)
             {
                 LoadUserInfo(userDtos);
@@ -59,6 +53,31 @@ namespace web_app.admin
                 InvalidCredentialsMessage.Visible = true;
                 ResetGvMemberInfo();
             }
+        }
+
+        private bool GetAllUserInfo(out UserDto[] userDtos)
+        {
+            var soCmnd = SoCmndSearch.Value.Trim();
+            var idThanhVien = IdThanhVienSearch.Value.Trim();
+            var hoTen = HoTenSearch.Value.Trim();
+            if (!string.IsNullOrEmpty(idThanhVien) && !DcapServiceUtil.IsValidAccountNumber(idThanhVien))
+            {
+                InvalidCredentialsMessage.Text = "Id thành viên không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                userDtos = new UserDto[0];
+                ResetGvMemberInfo();
+                return false;
+            }
+            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+            {
+                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
+                InvalidCredentialsMessage.Visible = true;
+                userDtos = new UserDto[0];
+                ResetGvMemberInfo();
+                return false;
+            }
+            userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
+            return true;
         }
 
         private void ResetGvMemberInfo()
@@ -75,24 +94,17 @@ namespace web_app.admin
 
         protected void TraCuuThanhVien_ExportToWord(object sender, EventArgs e)
         {
-            var soCmnd = SoCmndSearch.Value.Trim();
-            var idThanhVien = IdThanhVienSearch.Value.Trim();
-            var hoTen = HoTenSearch.Value.Trim();
-            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+            InvalidCredentialsMessage.Visible = false;
+            UserDto[] userDtos;
+            if (!GetAllUserInfo(out userDtos))
             {
-                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-                InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            InvalidCredentialsMessage.Visible = false;
-            var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length == 0)
             {
                 return;
             }
-            var columnNames = new[] {"Họ tên", "Số cmnd", "Id thành viên", "Tên đăng nhập"};
-            var tableName = "MEMBERr_INFO";
-            var dt = CreateDataTable(tableName, columnNames, userDtos);
+            DataTable dt = OnCreateDataTable(userDtos);
             var fileName = String.Format("TCTV_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".doc";
             var fileDir = String.Format("TCTV_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
@@ -132,20 +144,24 @@ namespace web_app.admin
             file.Delete();
         }
 
-        private DataTable CreateDataTable(String tableName, String[] columnNames, UserDto[] userDtos)
+        private DataTable OnCreateDataTable(UserDto[] userDtos)
         {
-            var dataTable = new DataTable(tableName);
-            foreach (var columnName in columnNames)
-            {
-                dataTable.Columns.Add(columnName);
-            }
+            var columnNames = new[] { "Họ tên", "Số cmnd", "Id thành viên", "Tên đăng nhập" };
+            var columnTypes = new[] { typeof(string), typeof(string), typeof(string), typeof(string) };
+            var tableName = "MEMBER_INFO";
+            return CreateDataTable(tableName, columnNames, columnTypes, userDtos);
+        }
+
+        private DataTable CreateDataTable(String tableName, String[] columnNames, Type[] columnTypes, UserDto[] userDtos)
+        {
+            var dataTable = ExcelHelper.CreateEmptyDataTable(tableName, columnNames, columnTypes);
             foreach (var userDto in userDtos)
             {
                 var dataRow = dataTable.NewRow();
                 int index = 0;
                 dataRow[columnNames[index++]] = userDto.FullName;
                 dataRow[columnNames[index++]] = userDto.SoCmnd;
-                dataRow[columnNames[index++]] = string.Format("{0:0000000}", userDto.AccountNumber);
+                dataRow[columnNames[index++]] = userDto.AccountNumber;
                 dataRow[columnNames[index++]] = userDto.UserName;
                 dataTable.Rows.Add(dataRow);
             }
@@ -154,24 +170,17 @@ namespace web_app.admin
 
         protected void TraCuuThanhVien_ExportToExcel(object sender, EventArgs e)
         {
-            var soCmnd = SoCmndSearch.Value.Trim();
-            var idThanhVien = IdThanhVienSearch.Value.Trim();
-            var hoTen = HoTenSearch.Value.Trim();
-            if (string.IsNullOrEmpty(soCmnd) && string.IsNullOrEmpty(idThanhVien) && string.IsNullOrEmpty(hoTen))
+            InvalidCredentialsMessage.Visible = false;
+            UserDto[] userDtos;
+            if (!GetAllUserInfo(out userDtos))
             {
-                InvalidCredentialsMessage.Text = "Phải nhập tối thiểu 1 thông tin tìm kiếm.";
-                InvalidCredentialsMessage.Visible = true;
                 return;
             }
-            InvalidCredentialsMessage.Visible = false;
-            var userDtos = DcapServiceUtil.SearchUserInfo(soCmnd, idThanhVien, hoTen);
             if (userDtos.Length == 0)
             {
                 return;
             }
-            var columnNames = new[] { "Họ tên", "Số cmnd", "Id thành viên", "Tên đăng nhập" };
-            var tableName = "MEMBERr_INFO";
-            var dt = CreateDataTable(tableName, columnNames, userDtos);
+            var dt = OnCreateDataTable(userDtos);
             var fileName = String.Format("TCTV_{0:yyyyMMddHHmmssfff}", DateTime.Now) + ".xlsx";
             var fileDir = String.Format("TCTV_{0:yyyyMMdd}", DateTime.Now);
             var filePath = Server.MapPath("~/upload") + "\\" + fileDir + "\\" + fileName;
@@ -236,17 +245,9 @@ namespace web_app.admin
         private void LoadEditUserInfo(UserDto userDto)
         {
             HoTen.Value = userDto.FullName;
-            var sParentId = string.Empty;
-            if (userDto.ParentId != -1)
-            {
-                sParentId = Convert.ToString(userDto.ParentId);
-            }
+            var sParentId = userDto.ParentId;
             ParentId.Value = GetMemberDescById(sParentId);
-            var sParentDirectId = string.Empty;
-            if (userDto.ParentDirectId != -1)
-            {
-                sParentDirectId = Convert.ToString(userDto.ParentDirectId);
-            }
+            var sParentDirectId = userDto.ParentDirectId;
             DirectParentId.Value = GetMemberDescById(sParentDirectId);
             NgaySinh.Value = DateUtil.GetDateTimeAsDdmmyyyy(userDto.NgaySinh);
             SoCmnd.Value = userDto.SoCmnd;

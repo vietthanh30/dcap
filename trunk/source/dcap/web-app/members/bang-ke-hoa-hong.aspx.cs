@@ -117,7 +117,7 @@ namespace web_app.members
                 var dataRow = dataTable.NewRow();
                 int index = 0;
                 dataRow[columnNames[index++]] = bangKeDto.STT;
-                dataRow[columnNames[index++]] = string.Format("{0:0000000}", bangKeDto.AccountId);
+                dataRow[columnNames[index++]] = bangKeDto.AccountId;
                 dataRow[columnNames[index++]] = bangKeDto.TrucTiep * 1000000;
                 dataRow[columnNames[index++]] = bangKeDto.CanCap * 1000000;
                 dataRow[columnNames[index++]] = bangKeDto.HeThong * 1000000;

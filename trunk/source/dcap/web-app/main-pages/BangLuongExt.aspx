@@ -18,11 +18,11 @@
 			<div class="row">
 				<div class="col-xs-4">
 					<label for="IdMember">Id thành viên</label>
-					<input type="text" class="form-control" runat="server" id="IdMember" placeholder="Nhập Id thành viên">
+					<input type="text" class="form-control" maxlength="7" runat="server" id="IdMember" placeholder="Nhập Id thành viên">
 				</div>
 				<div class="col-xs-4">
 					<label for="UserName">Tên đăng nhập</label>
-					<input type="text" class="form-control" runat="server" id="UserName" placeholder="Nhập tên đăng nhập">
+					<input type="text" class="form-control" maxlength="50" runat="server" id="UserName" placeholder="Nhập tên đăng nhập">
 				</div>
 			</div>
 			<div class="row">
@@ -116,7 +116,7 @@
                 <PagerSettings Mode="NumericFirstLast" 
                     NextPageText="" PageButtonCount="5" 
                     PreviousPageText="" FirstPageText="Đầu" LastPageText="Cuối" />
-                <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
+                <PagerStyle CssClass="GridPager" HorizontalAlign="Left" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->

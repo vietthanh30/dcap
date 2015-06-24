@@ -50,6 +50,18 @@ namespace web_app.admin
             var gioiTinh = GioiTinh.SelectedValue.Trim();
             var soTaiKhoan = SoTaiKhoan.Value.Trim();
             var chiNhanhNH = ChiNhanhNH.Value.Trim();
+            if (!string.IsNullOrEmpty(parentId) && !DcapServiceUtil.IsValidAccountNumber(parentId))
+            {
+                InvalidCredentialsMessage.Text = "Id tuyến trên không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
+            if (!string.IsNullOrEmpty(directParentId) && !DcapServiceUtil.IsValidAccountNumber(directParentId))
+            {
+                InvalidCredentialsMessage.Text = "Id người giới thiệu không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                return;
+            }
             if (!string.IsNullOrEmpty(sNgaySinh) && ngaySinh == null)
             {
                 InvalidCredentialsMessage.Text = "Ngày sinh không đúng định dạng. Vui lòng nhập lại.";
@@ -114,7 +126,7 @@ namespace web_app.admin
             if (!error)
             {
                 var codes = returnCode.Split(new[] {'|'});
-                var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
+                var accountNumber = codes[0];
                 var tenDangNhap = codes[1];
                 AccountCode.Text = "Id thành viên: " + accountNumber + "; Tên đăng nhập: " + tenDangNhap + "/" + ConstUtil.DEFAULT_PASSWORD;
                 AccountCode.Visible = true;
@@ -217,7 +229,7 @@ namespace web_app.admin
                     foreach (var record in records)
                     {
                         var codes = record.Split(new[] { '|' });
-                        var accountNumber = string.Format("{0:0000000}", Convert.ToInt64(codes[0]));
+                        var accountNumber = codes[0];
                         var tenDangNhap = codes[1];
                         if (count == 0)
                         {

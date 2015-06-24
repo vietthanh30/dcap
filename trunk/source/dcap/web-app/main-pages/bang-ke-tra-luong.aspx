@@ -107,7 +107,7 @@
                 <PagerSettings Mode="NumericFirstLast" 
                     NextPageText="" PageButtonCount="5" 
                     PreviousPageText="" FirstPageText="Đầu" LastPageText="Cuối" />
-                <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
+                <PagerStyle CssClass="GridPager" HorizontalAlign="Left" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->

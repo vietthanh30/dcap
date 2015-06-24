@@ -35,9 +35,9 @@ namespace ws_server.view
 
         [WebMethod]
         public string CreateUser(String parentId, String directParentId, String userName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl, string createdBy)
+            String chiNhanhNH, String photoUrl, string createdBy, string prefixAccountNumber)
         {
-            return controller.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            return controller.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy, prefixAccountNumber);
         }
 
         [WebMethod]
@@ -73,7 +73,7 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, DateTime? thangKeKhai)
+        public HoaHongMemberDto[] SearchBangKeHoaHong(string accountNumber, DateTime? thangKeKhai)
         {
             return controller.SearchBangKeHoaHong(accountNumber, thangKeKhai);
         }
@@ -97,7 +97,7 @@ namespace ws_server.view
         }
 
         [WebMethod]
-        public bool IsContainMemberNode(long rootNumber, string accountNumber)
+        public bool IsContainMemberNode(string rootNumber, string accountNumber)
         {
             return controller.IsContainMemberNode(rootNumber, accountNumber);
         }

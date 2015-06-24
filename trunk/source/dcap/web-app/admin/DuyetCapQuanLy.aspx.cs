@@ -132,12 +132,12 @@ namespace web_app.admin
 		{
 			dto = new ManagerApprovalDto();
 			int managerLevel;
-			long accountNumber;
 			if (!int.TryParse(ManagerLevelApproval.Value, out managerLevel))
 			{
 				return false;
-			}
-            if (!long.TryParse(AccountNumberApproval.Value, out accountNumber))
+            }
+            string accountNumber = AccountNumberApproval.Value;
+            if (!DcapServiceUtil.IsValidAccountNumber(accountNumber))
 			{
 				return false;
 			}

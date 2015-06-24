@@ -50,16 +50,18 @@ namespace test_domain_lib
 //            var result = service.SearchMemberNodeDto("");
 //            Console.Out.WriteLine("SearchBangKe code: " + result);
 
-            long intervalTime;
-            if (!long.TryParse(ParameterUtil.GetParameter("IntervalTime"), out intervalTime))
-            {
-                intervalTime = 300000; //every 10 minutes
-            }
-            service.CalculateAccountLog();
-            service.CalculateBonusOfAccountTree();
-            service.CalculateBonusOfManagerTree();
-            Thread.Sleep((int) intervalTime);
-            Console.Out.Write(".");
+//            long intervalTime;
+//            if (!long.TryParse(ParameterUtil.GetParameter("IntervalTime"), out intervalTime))
+//            {
+//                intervalTime = 300000; //every 10 minutes
+//            }
+//            service.CalculateAccountLog();
+//            service.CalculateBonusOfAccountTree();
+//            service.CalculateBonusOfManagerTree();
+//            Thread.Sleep((int) intervalTime);
+//            Console.Out.Write(".");
+            CurrentIdentity currentIdentity = service.GetCurrentIdentity("ACCOUNT");
+            Console.Out.WriteLine("CurrentIdentity: " + currentIdentity);
         }
     }
 }

@@ -24,11 +24,14 @@ namespace web_app.DcapServiceReference {
         
         private long UserIDField;
         
-        private long AccountNumberField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountNumberField;
         
-        private long ParentIdField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ParentIdField;
         
-        private long ParentDirectIdField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ParentDirectIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserNameField;
@@ -95,39 +98,39 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
-        public long AccountNumber {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string AccountNumber {
             get {
                 return this.AccountNumberField;
             }
             set {
-                if ((this.AccountNumberField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
                     this.AccountNumberField = value;
                     this.RaisePropertyChanged("AccountNumber");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
-        public long ParentId {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string ParentId {
             get {
                 return this.ParentIdField;
             }
             set {
-                if ((this.ParentIdField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.ParentIdField, value) != true)) {
                     this.ParentIdField = value;
                     this.RaisePropertyChanged("ParentId");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public long ParentDirectId {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string ParentDirectId {
             get {
                 return this.ParentDirectIdField;
             }
             set {
-                if ((this.ParentDirectIdField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.ParentDirectIdField, value) != true)) {
                     this.ParentDirectIdField = value;
                     this.RaisePropertyChanged("ParentDirectId");
                 }
@@ -992,7 +995,8 @@ namespace web_app.DcapServiceReference {
         
         private long IdField;
         
-        private long AccountNumberField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountNumberField;
         
         private int ManagerLevelField;
         
@@ -1025,13 +1029,13 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
-        public long AccountNumber {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string AccountNumber {
             get {
                 return this.AccountNumberField;
             }
             set {
-                if ((this.AccountNumberField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
                     this.AccountNumberField = value;
                     this.RaisePropertyChanged("AccountNumber");
                 }
@@ -1103,7 +1107,8 @@ namespace web_app.DcapServiceReference {
         
         private double BonusAmountField;
         
-        private long AccountNumberField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CreatedByField;
@@ -1166,13 +1171,13 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public long AccountNumber {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string AccountNumber {
             get {
                 return this.AccountNumberField;
             }
             set {
-                if ((this.AccountNumberField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
                     this.AccountNumberField = value;
                     this.RaisePropertyChanged("AccountNumber");
                 }
@@ -1367,7 +1372,7 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKeExt", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeExtResponse SearchBangKeExt(web_app.DcapServiceReference.SearchBangKeExtRequest request);
         
-        // CODEGEN: Generating message contract since element name SearchBangKeHoaHongResult from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchBangKeHoaHong", ReplyAction="*")]
         web_app.DcapServiceReference.SearchBangKeHoaHongResponse SearchBangKeHoaHong(web_app.DcapServiceReference.SearchBangKeHoaHongRequest request);
         
@@ -1383,7 +1388,7 @@ namespace web_app.DcapServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchManagerNodeDto", ReplyAction="*")]
         web_app.DcapServiceReference.SearchManagerNodeDtoResponse SearchManagerNodeDto(web_app.DcapServiceReference.SearchManagerNodeDtoRequest request);
         
-        // CODEGEN: Generating message contract since element name accountNumber from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name rootNumber from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsContainMemberNode", ReplyAction="*")]
         web_app.DcapServiceReference.IsContainMemberNodeResponse IsContainMemberNode(web_app.DcapServiceReference.IsContainMemberNodeRequest request);
         
@@ -1678,10 +1683,13 @@ namespace web_app.DcapServiceReference {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
         public string createdBy;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
+        public string prefixAccountNumber;
+        
         public CreateUserRequestBody() {
         }
         
-        public CreateUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy) {
+        public CreateUserRequestBody(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy, string prefixAccountNumber) {
             this.parentId = parentId;
             this.directParentId = directParentId;
             this.userName = userName;
@@ -1695,6 +1703,7 @@ namespace web_app.DcapServiceReference {
             this.chiNhanhNH = chiNhanhNH;
             this.photoUrl = photoUrl;
             this.createdBy = createdBy;
+            this.prefixAccountNumber = prefixAccountNumber;
         }
     }
     
@@ -2199,8 +2208,8 @@ namespace web_app.DcapServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
     public partial class SearchBangKeHoaHongRequestBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public long accountNumber;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string accountNumber;
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
         public System.Nullable<System.DateTime> thangKeKhai;
@@ -2208,7 +2217,7 @@ namespace web_app.DcapServiceReference {
         public SearchBangKeHoaHongRequestBody() {
         }
         
-        public SearchBangKeHoaHongRequestBody(long accountNumber, System.Nullable<System.DateTime> thangKeKhai) {
+        public SearchBangKeHoaHongRequestBody(string accountNumber, System.Nullable<System.DateTime> thangKeKhai) {
             this.accountNumber = accountNumber;
             this.thangKeKhai = thangKeKhai;
         }
@@ -2487,8 +2496,8 @@ namespace web_app.DcapServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
     public partial class IsContainMemberNodeRequestBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public long rootNumber;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string rootNumber;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string accountNumber;
@@ -2496,7 +2505,7 @@ namespace web_app.DcapServiceReference {
         public IsContainMemberNodeRequestBody() {
         }
         
-        public IsContainMemberNodeRequestBody(long rootNumber, string accountNumber) {
+        public IsContainMemberNodeRequestBody(string rootNumber, string accountNumber) {
             this.rootNumber = rootNumber;
             this.accountNumber = accountNumber;
         }
@@ -3478,7 +3487,7 @@ namespace web_app.DcapServiceReference {
             return base.Channel.CreateUser(request);
         }
         
-        public string CreateUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy) {
+        public string CreateUser(string parentId, string directParentId, string userName, string ngaySinh, string soCmnd, string ngayCap, string soDienThoai, string diaChi, string gioiTinh, string soTaiKhoan, string chiNhanhNH, string photoUrl, string createdBy, string prefixAccountNumber) {
             web_app.DcapServiceReference.CreateUserRequest inValue = new web_app.DcapServiceReference.CreateUserRequest();
             inValue.Body = new web_app.DcapServiceReference.CreateUserRequestBody();
             inValue.Body.parentId = parentId;
@@ -3494,6 +3503,7 @@ namespace web_app.DcapServiceReference {
             inValue.Body.chiNhanhNH = chiNhanhNH;
             inValue.Body.photoUrl = photoUrl;
             inValue.Body.createdBy = createdBy;
+            inValue.Body.prefixAccountNumber = prefixAccountNumber;
             web_app.DcapServiceReference.CreateUserResponse retVal = ((web_app.DcapServiceReference.DcapServiceSoap)(this)).CreateUser(inValue);
             return retVal.Body.CreateUserResult;
         }
@@ -3594,7 +3604,7 @@ namespace web_app.DcapServiceReference {
             return base.Channel.SearchBangKeHoaHong(request);
         }
         
-        public web_app.DcapServiceReference.HoaHongMemberDto[] SearchBangKeHoaHong(long accountNumber, System.Nullable<System.DateTime> thangKeKhai) {
+        public web_app.DcapServiceReference.HoaHongMemberDto[] SearchBangKeHoaHong(string accountNumber, System.Nullable<System.DateTime> thangKeKhai) {
             web_app.DcapServiceReference.SearchBangKeHoaHongRequest inValue = new web_app.DcapServiceReference.SearchBangKeHoaHongRequest();
             inValue.Body = new web_app.DcapServiceReference.SearchBangKeHoaHongRequestBody();
             inValue.Body.accountNumber = accountNumber;
@@ -3650,7 +3660,7 @@ namespace web_app.DcapServiceReference {
             return base.Channel.IsContainMemberNode(request);
         }
         
-        public bool IsContainMemberNode(long rootNumber, string accountNumber) {
+        public bool IsContainMemberNode(string rootNumber, string accountNumber) {
             web_app.DcapServiceReference.IsContainMemberNodeRequest inValue = new web_app.DcapServiceReference.IsContainMemberNodeRequest();
             inValue.Body = new web_app.DcapServiceReference.IsContainMemberNodeRequestBody();
             inValue.Body.rootNumber = rootNumber;

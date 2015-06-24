@@ -22,12 +22,20 @@ namespace core_lib.common
         public const string QLTV = "QLTV";
 
         public const string MONTH_FORMAT = "yyyyMM";
+        public const string DISPLAY_MONTH_FORMAT = "MM/yyyy";
 
 		public const string MA_GT_NAM = "M";
         public const string MA_GT_NU = "F";
 
 		public const string TEN_GT_NAM = "Nam";
         public const string TEN_GT_NU = "Nữ";
+
+        public const string BONUS_TYPE_ADD_CODE = "ADD";
+		public const string BONUS_TYPE_TT_CODE = "TT";
+		public const string BONUS_TYPE_CC_CODE = "CC";
+		public const string BONUS_TYPE_HT_CODE = "HT";
+		public const string BONUS_TYPE_CC1_CODE = "CC1";
+		public const string BONUS_TYPE_QL1_CODE = "QL1";
 
         public static BonusType BONUS_TYPE_CAN_CAP = new BonusType
                                                           {

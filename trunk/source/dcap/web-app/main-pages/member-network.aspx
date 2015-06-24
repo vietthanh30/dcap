@@ -19,7 +19,7 @@
 			<div class="row">
 				<div class="col-xs-4">
 				<label for="IdMember">ID thành viên</label>
-				<input type="text" class="form-control" id="IdMember" runat="server" placeholder="Nhập ID thành viên">
+				<input type="text" class="form-control" maxlength="7" id="IdMember" runat="server" placeholder="Nhập ID thành viên">
 				</div>
 			</div>
             </div><!-- /.box-body -->

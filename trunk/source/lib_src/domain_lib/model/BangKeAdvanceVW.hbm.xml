@@ -9,6 +9,6 @@ assembly="domain_lib">
     , SO_CMND as {BangKeVW.SoCmnd}, NGAY_CAP as {BangKeVW.NgayCap}, DIA_CHI as {BangKeVW.DiaChi}, SO_TAI_KHOAN as {BangKeVW.SoTaiKhoan}
     , CHI_NHANH_NH as {BangKeVW.ChiNhanhNH}, SO_DIEN_THOAI as {BangKeVW.SoDienThoai}, NGAY_DANG_KY as {BangKeVW.NgayDangKy}
     , HE_THONG as {BangKeVW.HeThong}, QUAN_LY as {BangKeVW.QuanLy}, THUONG_THEM as {BangKeVW.ThuongThem}, TONG as {BangKeVW.SoTien}
-    , THANG as {BangKeVW.Thang} FROM dbo.BANG_KE_ADVANCE(:pAccountNumber,:pStart,:pEnd)
+    , THANG as {BangKeVW.Thang} FROM dbo.BANG_KE_ADVANCE(:pPrefixAccountNumber, :pAccountNumber,:pStart,:pEnd)
   </sql-query>
 </hibernate-mapping>

@@ -21,17 +21,17 @@
 			<div class="row">
 				<div class="col-xs-4">
 					<label for="SoCmndSearch">Số CMND</label>
-					<input type="text" class="form-control" runat="server" id="SoCmndSearch" placeholder="Nhập Số CMND">
+					<input type="text" class="form-control" maxlength="15" runat="server" id="SoCmndSearch" placeholder="Nhập Số CMND">
 				</div>
 				<div class="col-xs-4">
 					<label for="IdThanhVienSearch">Id thành viên</label>
-					<input type="text" class="form-control" runat="server" id="IdThanhVienSearch" placeholder="Nhập Id thành viên">
+					<input type="text" class="form-control" maxlength="7" runat="server" id="IdThanhVienSearch" placeholder="Nhập Id thành viên">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-8">
 					<label for="HoTenSearch">Họ tên</label>
-					<input type="text" class="form-control" runat="server" id="HoTenSearch" placeholder="Nhập Họ tên">
+					<input type="text" class="form-control" maxlength="100" runat="server" id="HoTenSearch" placeholder="Nhập Họ tên">
 				</div>
 			</div>
             </div><!-- /.box-body -->
@@ -72,7 +72,7 @@
                 <asp:BoundField DataField="SoCmnd" HeaderText="Số CMND" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="AccountNumber" HeaderText="Id Thành viên" DataFormatString="{0:0000000}" >
+                <asp:BoundField DataField="AccountNumber" HeaderText="Id Thành viên" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="UserName" HeaderText="Tên đăng nhập" >
@@ -97,7 +97,7 @@
                 <PagerSettings Mode="NumericFirstLast" 
                     NextPageText="" PageButtonCount="5" 
                     PreviousPageText="" FirstPageText="Đầu" LastPageText="Cuối" />
-                <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
+                <PagerStyle CssClass="GridPager" HorizontalAlign="Left" />
                 <RowStyle Font-Names="Arial" Font-Size="Small" HorizontalAlign="Left" VerticalAlign="Middle" />
             </asp:GridView>
         </div><!-- /.box-body -->
@@ -145,11 +145,11 @@
 				<div class="row">
 					<div class="col-xs-5">
 					<label for="DirectParentId">Người giới thiệu</label>
-					<input type="text" class="form-control" readonly="true" id="DirectParentId" runat="server" placeholder="Nhập ID người giới thiệu">
+					<input type="text" class="form-control" readonly="true" id="DirectParentId" runat="server">
 					</div>
 					<div class="col-xs-5">
 					<label for="ParentId">Tuyến trên</label>
-					<input type="text" class="form-control" readonly="true" id="ParentId" runat="server" placeholder="Nhập ID thành viên tuyến trên">
+					<input type="text" class="form-control" readonly="true" id="ParentId" runat="server">
 					</div>
 				</div>
 				<div class="row">

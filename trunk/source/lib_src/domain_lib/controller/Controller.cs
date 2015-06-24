@@ -41,6 +41,11 @@ namespace domain_lib.controller
         {
             m_PersistenceManager.Save(item);
         }
+        
+        public CurrentIdentity GetCurrentIdentity(string tableName)
+        {
+            return m_PersistenceManager.GetCurrentIdentity(tableName);
+        }
 
         public UserDto login(string userName, string password)
         {
@@ -53,9 +58,9 @@ namespace domain_lib.controller
         }
 
         public string CreateUser(String parentId, String directParentId, String userName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl, string createdBy)
+            String chiNhanhNH, String photoUrl, string createdBy, string prefixAccountNumber)
         {
-            return m_PersistenceManager.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            return m_PersistenceManager.CreateUser(parentId, directParentId, userName, ngaySinh, soCmnd, ngayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy, prefixAccountNumber);
         }
 
         public string UpdateUser(String userName, String fullName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
@@ -105,7 +110,7 @@ namespace domain_lib.controller
             return m_PersistenceManager.SearchManagerNodeDto(capQuanLy, accountNumber);
         }
 
-        public bool IsContainMemberNode(long rootNumber, string accountNumber)
+        public bool IsContainMemberNode(string rootNumber, string accountNumber)
         {
             return m_PersistenceManager.IsContainMemberNode(rootNumber, accountNumber);
         }

@@ -1,4 +1,4 @@
-CREATE FUNCTION [dbo].[BANG_KE_ADVANCE](@pAccountNumber numeric, @pStart date, @pEnd date)
+CREATE FUNCTION [dbo].[BANG_KE_ADVANCE](@pPrefixAccountNumber varchar(3), @pAccountNumber numeric, @pStart date, @pEnd date)
 RETURNS @worktable TABLE
 (
     STT bigint primary key NOT NULL,
@@ -64,6 +64,8 @@ begin
 		dbo.ACCOUNT AS ca ON ab.ACCOUNT_ID = ca.ACCOUNT_ID INNER JOIN
 		dbo.MEMBER_INFO AS child ON ca.MEMBER_ID = child.MEMBER_ID INNER JOIN
 		dbo.USERS AS usr ON ca.USER_ID = usr.USER_ID
-	WHERE ca.ACCOUNT_NUMBER = @pAccountNumber or @pAccountNumber = -1;
+	WHERE (ca.ACCOUNT_NUMBER = @pAccountNumber or @pAccountNumber = -1)
+	and (ca.PREFIX_ACCOUNT_NUMBER = @pPrefixAccountNumber or @pPrefixAccountNumber = '')
+	;
     RETURN;
 end

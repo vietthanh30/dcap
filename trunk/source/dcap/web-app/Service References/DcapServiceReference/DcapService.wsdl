@@ -20,9 +20,9 @@
       <s:complexType name="UserDto">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
-          <s:element minOccurs="1" maxOccurs="1" name="AccountNumber" type="s:long" />
-          <s:element minOccurs="1" maxOccurs="1" name="ParentId" type="s:long" />
-          <s:element minOccurs="1" maxOccurs="1" name="ParentDirectId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParentId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParentDirectId" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="FullName" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="NgaySinh" nillable="true" type="s:dateTime" />
@@ -86,6 +86,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="chiNhanhNH" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="photoUrl" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="prefixAccountNumber" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -222,7 +223,7 @@
       <s:element name="SearchBangKeHoaHong">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="accountNumber" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="thangKeKhai" nillable="true" type="s:dateTime" />
           </s:sequence>
         </s:complexType>
@@ -317,7 +318,7 @@
       <s:element name="IsContainMemberNode">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="rootNumber" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="rootNumber" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
           </s:sequence>
         </s:complexType>
@@ -411,7 +412,7 @@
       <s:complexType name="ManagerApprovalDto">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
-          <s:element minOccurs="1" maxOccurs="1" name="AccountNumber" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="ManagerLevel" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ApprovedBy" type="s:string" />
@@ -457,7 +458,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
           <s:element minOccurs="0" maxOccurs="1" name="BonusType" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="BonusAmount" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="AccountNumber" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="CreatedBy" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ApprovedBy" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />

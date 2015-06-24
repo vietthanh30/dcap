@@ -79,8 +79,7 @@ namespace web_app.main_pages
 
         private bool IsValidSearchCondition(string idMember, string beginDate, string endDate)
         {
-            long accountNumber;
-            if(!string.IsNullOrEmpty(idMember) && !long.TryParse(idMember, out accountNumber))
+            if(!string.IsNullOrEmpty(idMember) && !DcapServiceUtil.IsValidAccountNumber(idMember))
             {
                 InvalidCredentialsMessage.Text = "Id thành viên không đúng định dạng";
                 InvalidCredentialsMessage.Visible = true;

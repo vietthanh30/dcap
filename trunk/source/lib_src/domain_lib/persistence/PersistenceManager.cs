@@ -250,7 +250,8 @@ namespace domain_lib.persistence
                 // Create a criteria object with the specified criteria
                 string sqlStr = "SELECT IDENT_CURRENT(:tableName) as Value";
                 ISQLQuery sqlQuery = session.CreateSQLQuery(sqlStr);
-                sqlQuery.AddScalar("Value", NHibernateUtil.UInt64);
+                sqlQuery.AddScalar("Value", NHibernateUtil.Int64);
+                sqlQuery.SetString("tableName", tableName);
                 sqlQuery.SetResultTransformer(Transformers.AliasToBean(typeof(CurrentIdentity)));
 
                 // Set return value
@@ -295,7 +296,7 @@ namespace domain_lib.persistence
         {
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select new MemberInfo(a.AccountNumber, m.HoTen, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+                var query = session.CreateQuery("select new MemberInfo(a.PrefixAccountNumber, a.AccountNumber, m.HoTen, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
                     + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a "
                     + " where m.MemberID = a.MemberId and a.UserId = :userId");
                 query.SetParameter("userId", userDto.UserID);
@@ -307,7 +308,7 @@ namespace domain_lib.persistence
                 // Update userDto
                 if (memberInfo != null)
                 {
-                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.AccountNumber = EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber);
                     userDto.FullName = memberInfo.HoTen;
                     userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
                     userDto.ParentDirectId = GetAccountNumberBy(memberInfo.ParentDirectId);
@@ -409,7 +410,7 @@ namespace domain_lib.persistence
             {
                 return -1;
             }
-            string prefixAccountNumber = accountNumber.Substring(0, 3);
+            string prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();
             long accountNumberVal;
             if (!long.TryParse(accountNumber.Substring(3), out accountNumberVal))
             {
@@ -434,38 +435,48 @@ namespace domain_lib.persistence
             }
         }
 
-		private long GetAccountIdByUserName(string userName)
+		private bool GetAccountNumberByUserName(string userName, out string prefixAccountNumber, out long accountNumber)
 		{
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select a.AccountId from Account a, Users u "
+                var query = session.CreateQuery("select a.PrefixAccountNumber, a.AccountNumber from Account a, Users u "
                     + " where a.UserId = u.UserID and u.UserName = :userName");
                 query.SetParameter("userName", userName.ToUpper());
 
                 // Get the matching objects
-                var accountId = query.UniqueResult();
+                var objs = query.UniqueResult<object[]>();
 
                 // Set return value
-                if (accountId == null)
+                if (objs == null)
                 {
-                    return -1;
+                    prefixAccountNumber = string.Empty;
+                    accountNumber = -1;
+                    return false;
                 }
-                return Convert.ToInt64(accountId);
+                prefixAccountNumber = Convert.ToString(objs[0]);
+                accountNumber = Convert.ToInt64(objs[1]);
+                return true;
             }
 		}
 		
         private long GetAccountIdBy(string modelName, string accountNumber)
         {
+            if (accountNumber.Length != 7)
+            {
+                return -1;
+            }
+            string prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();
             long accountNumberVal;
-            if (!long.TryParse(accountNumber, out accountNumberVal))
+            if (!long.TryParse(accountNumber.Substring(3), out accountNumberVal))
             {
                 return -1;
             }
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.CreateQuery("select a.AccountId from Account a, " + modelName + " b "
-                    + " where a.AccountId = b.AccountId and a.AccountNumber = :accountNumber");
+                    + " where a.AccountId = b.AccountId and a.AccountNumber = :accountNumber and a.PrefixAccountNumber = :prefixAccountNumber");
                 query.SetParameter("accountNumber", accountNumberVal);
+                query.SetParameter("prefixAccountNumber", prefixAccountNumber);
 
                 // Get the matching objects
                 var accountId = query.UniqueResult();
@@ -655,7 +666,7 @@ namespace domain_lib.persistence
         }
 
         public string CreateUser(String parentId, String directParentId, String userName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl, string createdBy)
+            String chiNhanhNH, String photoUrl, string createdBy, string prefixAccountNumber)
         {
             if (String.IsNullOrEmpty(userName))
             {
@@ -700,12 +711,12 @@ namespace domain_lib.persistence
             var memberInfos = RetrieveEquals<MemberInfo>("SoCmnd", soCmnd);
             if (memberInfos.Count > 0)
             {
-                return CreateAccountForExistingMember(memberInfos[0], parentIdVal, directParentIdVal, photoUrl, createdBy);
+                return CreateAccountForExistingMember(memberInfos[0], parentIdVal, directParentIdVal, photoUrl, createdBy, prefixAccountNumber);
             }
-            return CreateAccountForNewMember(parentIdVal, directParentIdVal, userName, dateNgaySinh, soCmnd, dateNgayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy);
+            return CreateAccountForNewMember(parentIdVal, directParentIdVal, userName, dateNgaySinh, soCmnd, dateNgayCap, soDienThoai, diaChi, gioiTinh, soTaiKhoan, chiNhanhNH, photoUrl, createdBy, prefixAccountNumber);
         }
 
-        private string CreateAccountForExistingMember(MemberInfo memberInfo, long parentId, long directParentId, string photoUrl, string createdBy)
+        private string CreateAccountForExistingMember(MemberInfo memberInfo, long parentId, long directParentId, string photoUrl, string createdBy, string prefixAccountNumber)
         {
             var memberID = memberInfo.MemberID;
             var accountAmount = GetAccountAmountBy(memberID);
@@ -741,6 +752,7 @@ namespace domain_lib.persistence
 
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
+            account.PrefixAccountNumber = prefixAccountNumber.ToUpper();
             account.MemberId = memberID;
             account.ParentId = parentId;
             account.ParentDirectId = directParentId;
@@ -753,25 +765,17 @@ namespace domain_lib.persistence
 
             SaveNew(account);
 
-            return account.AccountNumber + "|" + user.UserName;
+            return EncodeAccountNumber(account.PrefixAccountNumber, account.AccountNumber) + "|" + user.UserName;
         }
 
         private long GetNextAccountNumber()
         {
-            using (ISession session = m_SessionFactory.OpenSession())
+            CurrentIdentity currentIdentity = GetCurrentIdentity("ACCOUNT");
+            if (currentIdentity == null)
             {
-                var query = session.CreateQuery("select max(a.AccountNumber) from Account a ");
-
-                // Get the matching objects
-                var max = query.UniqueResult();
-
-                // Set return value
-                if (max == null)
-                {
-                    return 1;
-                }
-                return Convert.ToInt32(max) + 1;
+                return 1;
             }
+            return (currentIdentity.Value + 1)%10000;
         }
 
         private string GetTenDangNhapByMemberId(long memberId)
@@ -899,7 +903,7 @@ namespace domain_lib.persistence
         }
 
         private string CreateAccountForNewMember(long parentId, long directParentId, String userName, DateTime? ngaySinh, String soCmnd, DateTime? ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
-            String chiNhanhNH, String photoUrl, string createdBy)
+            String chiNhanhNH, String photoUrl, string createdBy, string prefixAccountNumber)
         {
             var tenDangNhap = GetValidTenDangNhapBy(userName);
 
@@ -955,6 +959,7 @@ namespace domain_lib.persistence
 
             var account = new Account();
             account.AccountNumber = GetNextAccountNumber();
+            account.PrefixAccountNumber = prefixAccountNumber.ToUpper();
             account.MemberId = memberInfo.MemberID;
             account.ParentId = parentId;
             account.ParentDirectId = directParentId;
@@ -967,7 +972,7 @@ namespace domain_lib.persistence
 
             SaveNew(account);
 
-            return account.AccountNumber + "|" + user.UserName;
+            return EncodeAccountNumber(account.PrefixAccountNumber, account.AccountNumber) + "|" + user.UserName;
         }
 
         public string SearchUser(String parentId, String directParentId, String userName, string ngaySinh, String soCmnd, string ngayCap, String soDienThoai, String diaChi, String gioiTinh, String soTaiKhoan,
@@ -986,7 +991,7 @@ namespace domain_lib.persistence
 
             using (ISession session = m_SessionFactory.OpenSession())
             {
-                var query = session.CreateQuery("select a.AccountNumber, u.UserName from MemberInfo m, Users u, Account a "
+                var query = session.CreateQuery("select a.PrefixAccountNumber, a.AccountNumber, u.UserName from MemberInfo m, Users u, Account a "
                     + " where m.MemberID = a.MemberId and u.UserID = a.UserId and m.SoCmnd = :soCmnd");
                 query.SetParameter("soCmnd", soCmnd);
 
@@ -996,15 +1001,16 @@ namespace domain_lib.persistence
                 foreach (var row in list)
                 {
                     var values = (Object[])row;
-                    var accountNumber = values[0];
-                    var tenDangNhap = values[1];
+                    string prefixAccountNumber = Convert.ToString(values[0]);
+                    long accountNumber = Convert.ToInt64(values[1]);
+                    string tenDangNhap = Convert.ToString(values[2]);
                     if (String.IsNullOrEmpty(allResults))
                     {
-                        allResults = accountNumber + "|" + tenDangNhap;
+                        allResults = EncodeAccountNumber(prefixAccountNumber, accountNumber) + "|" + tenDangNhap;
                     }
                     else
                     {
-                        allResults = allResults + ";" + accountNumber + "|" + tenDangNhap;
+                        allResults = allResults + ";" + EncodeAccountNumber(prefixAccountNumber, accountNumber) + "|" + tenDangNhap;
                     }
                 }
             }
@@ -1038,16 +1044,23 @@ namespace domain_lib.persistence
         public BangKeDto[] SearchBangKeExt(string accountNumber, string userName, DateTime? beginDate, DateTime? endDate)
         {
             List<BangKeDto> allResults;
-
-            long accountNumberVal;
-            if (!long.TryParse(accountNumber, out accountNumberVal))
+            long accountNumberVal = -1;
+            string prefixAccountNumber = string.Empty;
+            if (!string.IsNullOrEmpty(accountNumber))
             {
-                accountNumberVal = -1;
+                if (accountNumber.Length != 7)
+                {
+                    return new BangKeDto[0];
+                }
+                prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();
+                if (!long.TryParse(accountNumber.Substring(3), out accountNumberVal))
+                {
+                    return new BangKeDto[0];
+                }
             }
 			if (accountNumberVal == -1 && !string.IsNullOrEmpty(userName))
 			{
-				accountNumberVal = GetAccountIdByUserName(userName);
-                if (accountNumberVal == -1)
+                if (!GetAccountNumberByUserName(userName, out prefixAccountNumber, out accountNumberVal))
                 {
                     return new BangKeDto[0];
                 }
@@ -1055,6 +1068,7 @@ namespace domain_lib.persistence
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.GetNamedQuery("GetBangKeAdvance");
+                query.SetParameter("pPrefixAccountNumber", prefixAccountNumber);
                 query.SetParameter("pAccountNumber", accountNumberVal);
                 query.SetParameter("pStart", beginDate);
                 query.SetParameter("pEnd", endDate);
@@ -1177,24 +1191,24 @@ namespace domain_lib.persistence
                 double tong;
                 foreach (var row in list)
                 {
-                    if (string.Compare(row.BonusType, "TT", true) == 0)
+                    if (string.Compare(row.BonusType, ConstUtil.BONUS_TYPE_TT_CODE, true) == 0)
                     {
                         trucTiep += row.Tong;
                     }
-                    if (string.Compare(row.BonusType, "CC", true) == 0)
+                    if (string.Compare(row.BonusType, ConstUtil.BONUS_TYPE_CC_CODE, true) == 0)
                     {
                         canCap += row.Tong;
                     }
-                    if (string.Compare(row.BonusType, "HT", true) == 0)
+                    if (string.Compare(row.BonusType, ConstUtil.BONUS_TYPE_HT_CODE, true) == 0)
                     {
                         heThong += row.Tong;
                     }
-                    if ((string.Compare(row.BonusType, "CC1", true) == 0)
-                        || (string.Compare(row.BonusType, "QL1", true) == 0))
+                    if ((string.Compare(row.BonusType, ConstUtil.BONUS_TYPE_CC1_CODE, true) == 0)
+                        || (string.Compare(row.BonusType, ConstUtil.BONUS_TYPE_QL1_CODE, true) == 0))
                     {
                         quanLy += row.Tong;
                     }
-                    if (string.Compare(row.BonusType, "ADD", true) == 0)
+                    if (string.Compare(row.BonusType, ConstUtil.BONUS_TYPE_ADD_CODE, true) == 0)
                     {
                         thuongThem += row.Tong;
                     }
@@ -1205,7 +1219,7 @@ namespace domain_lib.persistence
                     var dto = new HoaHongMemberDto();
                     dto.STT = 1;
                     dto.AccountId = accountId;
-                    dto.Thang = DateUtil.GetDateTimeAsStringWithEnProvider(thangKeKhai, "MM/yyyy");
+                    dto.Thang = DateUtil.GetDateTimeAsStringWithEnProvider(thangKeKhai, ConstUtil.DISPLAY_MONTH_FORMAT);
                     dto.TrucTiep = trucTiep;
                     dto.CanCap = canCap;
                     dto.HeThong = heThong;
@@ -1241,7 +1255,7 @@ namespace domain_lib.persistence
 
         public UserDto[] SearchUserInfo(string soCmnd, string idThanhVien, string hoTen)
         {
-            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+            var sqlStr = "select new MemberInfo(a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
                     + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a, Users u "+
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID";
             var sqlParams = new Hashtable();
@@ -1252,8 +1266,15 @@ namespace domain_lib.persistence
             }
             if (!string.IsNullOrEmpty(idThanhVien))
             {
+                if (idThanhVien.Length != 7)
+                {
+                    return new UserDto[0];
+                }
+                string prefixAccountNumber = idThanhVien.Substring(0, 3).ToUpper();
+                sqlStr += " and a.PrefixAccountNumber = :prefixAccountNumber";
+                sqlParams.Add("prefixAccountNumber", prefixAccountNumber);
                 long idThanhVienVal;
-                var status = long.TryParse(idThanhVien, out idThanhVienVal);
+                var status = long.TryParse(idThanhVien.Substring(3), out idThanhVienVal);
                 if (status)
                 {
                     sqlStr += " and a.AccountNumber = :accountNumber";
@@ -1261,7 +1282,7 @@ namespace domain_lib.persistence
                 }
                 else
                 {
-                    sqlStr += " and 1=0";
+                    return new UserDto[0];
                 }
             }
             if (!string.IsNullOrEmpty(hoTen))
@@ -1290,7 +1311,7 @@ namespace domain_lib.persistence
                         continue;
                     }
                     var userDto = new UserDto();
-                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.AccountNumber = EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber);
                     userDto.FullName = memberInfo.HoTen;
                     userDto.UserName = memberInfo.UserName;
                     userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
@@ -1396,13 +1417,13 @@ namespace domain_lib.persistence
             return mapParentNode;
         }
 
-        public bool IsContainMemberNode(long rootNumber, string accountNumber)
+        public bool IsContainMemberNode(string rootNumber, string accountNumber)
         {
-            if (string.IsNullOrEmpty(accountNumber) || string.Compare(rootNumber.ToString(), accountNumber) == 0)
+            if (string.IsNullOrEmpty(accountNumber) || string.Compare(rootNumber, accountNumber) == 0)
             {
                 return true;
             }
-            var rootId = GetAccountIdBy(rootNumber.ToString());
+            var rootId = GetAccountIdBy(rootNumber);
             var accountId = GetAccountIdBy(accountNumber);
             var childNumber = CountAccountByParentId(rootId);
             if (childNumber == 0)
@@ -1459,7 +1480,7 @@ namespace domain_lib.persistence
 
         private Hashtable GetMapMemberNodeDto()
         {
-            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
+            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID";
 
             var mapMemberNodeDto = new Hashtable();
@@ -1476,7 +1497,8 @@ namespace domain_lib.persistence
                     var memberNodeDto = new MemberNodeDto();
                     memberNodeDto.AccountId = memberInfo.AccountId;
                     memberNodeDto.ParentId = memberInfo.ParentId;
-                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" 
+                        + EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber) + "]";
                     mapMemberNodeDto.Add(memberNodeDto.AccountId, memberNodeDto);
                 }
             }
@@ -1486,7 +1508,7 @@ namespace domain_lib.persistence
 
         private Hashtable GetMapManagerNodeDto(string modelName)
         {
-            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u " +
+            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u " +
                     " where m.MemberID = a.MemberId and a.AccountId = b.AccountId and a.UserId = u.UserID";
 
             var mapMemberNodeDto = new Hashtable();
@@ -1503,7 +1525,8 @@ namespace domain_lib.persistence
                     var memberNodeDto = new MemberNodeDto();
                     memberNodeDto.AccountId = memberInfo.AccountId;
                     memberNodeDto.ParentId = memberInfo.ParentId;
-                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" 
+                        + EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber) + "]";
                     mapMemberNodeDto.Add(memberNodeDto.AccountId, memberNodeDto);
                 }
             }
@@ -1513,13 +1536,22 @@ namespace domain_lib.persistence
 
         public MemberNodeDto GetNodeDto(string accountNumber)
         {
-            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
+            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID";
             var sqlParams = new Hashtable();
             if (!string.IsNullOrEmpty(accountNumber))
             {
+				if (accountNumber.Length != 7)
+				{
+					return null;
+				}
+				
+				string prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();				
+				sqlStr += " and a.PrefixAccountNumber = :prefixAccountNumber";
+				sqlParams.Add("prefixAccountNumber", prefixAccountNumber);
+				
                 long accountNumberVal;
-                var status = long.TryParse(accountNumber, out accountNumberVal);
+                var status = long.TryParse(accountNumber.Substring(3), out accountNumberVal);
                 if (status)
                 {
                     sqlStr += " and a.AccountNumber = :accountNumber";
@@ -1527,12 +1559,12 @@ namespace domain_lib.persistence
                 }
                 else
                 {
-                    sqlStr += " and 1=0";
+                    return null;
                 }
             }
             else
             {
-                sqlStr += " and 1=0";
+                return null;
             }
 
             MemberNodeDto memberNodeDto = null;
@@ -1553,7 +1585,8 @@ namespace domain_lib.persistence
                     memberNodeDto = new MemberNodeDto();
                     memberNodeDto.AccountId = memberInfo.AccountNumber;
                     memberNodeDto.ParentId = memberInfo.ParentId;
-                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" 
+                        + EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber) + "]";
                 }
             }
 
@@ -1562,13 +1595,22 @@ namespace domain_lib.persistence
 
         public MemberNodeDto GetParentNodeByChildNo(string accountNumber, string parentField)
         {
-            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u, Account a2 " +
+            var sqlStr = "select new MemberInfo(a.AccountId, a.ParentId, a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, Users u, Account a2 " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID and a.AccountId = a2." + parentField;
             var sqlParams = new Hashtable();
             if (!string.IsNullOrEmpty(accountNumber))
             {
+				if (accountNumber.Length != 7)
+				{
+					return null;
+				}
+				
+				string prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();				
+				sqlStr += " and a2.PrefixAccountNumber = :prefixAccountNumber";
+				sqlParams.Add("prefixAccountNumber", prefixAccountNumber);
+					
                 long accountNumberVal;
-                var status = long.TryParse(accountNumber, out accountNumberVal);
+                var status = long.TryParse(accountNumber.Substring(3), out accountNumberVal);
                 if (status)
                 {
                     sqlStr += " and a2.AccountNumber = :accountNumber";
@@ -1576,12 +1618,12 @@ namespace domain_lib.persistence
                 }
                 else
                 {
-                    sqlStr += " and 1=0";
+                    return null;
                 }
             }
             else
             {
-                sqlStr += " and 1=0";
+				return null;
             }
 
             MemberNodeDto memberNodeDto = null;
@@ -1602,7 +1644,8 @@ namespace domain_lib.persistence
                     memberNodeDto = new MemberNodeDto();
                     memberNodeDto.AccountId = memberInfo.AccountNumber;
                     memberNodeDto.ParentId = memberInfo.ParentId;
-                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " ["
+                        + EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber) + "]";
                 }
             }
 
@@ -1611,13 +1654,22 @@ namespace domain_lib.persistence
 
         public MemberNodeDto GetNodeDto(string modelName, string accountNumber)
         {
-            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u " +
+            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u " +
                     " where m.MemberID = a.MemberId and a.AccountId = b.AccountId and a.UserId = u.UserID";
             var sqlParams = new Hashtable();
             if (!string.IsNullOrEmpty(accountNumber))
             {
+				if (accountNumber.Length != 7)
+				{
+					return null;
+				}
+				
+				string prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();				
+				sqlStr += " and a.PrefixAccountNumber = :prefixAccountNumber";
+				sqlParams.Add("prefixAccountNumber", prefixAccountNumber);
+				
                 long accountNumberVal;
-                var status = long.TryParse(accountNumber, out accountNumberVal);
+                var status = long.TryParse(accountNumber.Substring(3), out accountNumberVal);
                 if (status)
                 {
                     sqlStr += " and a.AccountNumber = :accountNumber";
@@ -1625,12 +1677,12 @@ namespace domain_lib.persistence
                 }
                 else
                 {
-                    sqlStr += " and 1=0";
+                    return null;
                 }
             }
             else
             {
-                sqlStr += " and 1=0";
+                return null;
             }
 
             MemberNodeDto memberNodeDto = null;
@@ -1651,7 +1703,8 @@ namespace domain_lib.persistence
                     memberNodeDto = new MemberNodeDto();
                     memberNodeDto.AccountId = memberInfo.AccountNumber;
                     memberNodeDto.ParentId = memberInfo.ParentId;
-                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " ["
+                        + EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber) + "]";
                 }
             }
 
@@ -1660,13 +1713,22 @@ namespace domain_lib.persistence
 
         public MemberNodeDto GetParentNodeByChildNo(string modelName, string accountNumber, string parentField)
         {
-            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u, " + modelName + " b2, Account a2 " +
+            var sqlStr = "select new MemberInfo(b.AccountId, b.ParentId, a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName) from MemberInfo m, Account a, " + modelName + " b, Users u, " + modelName + " b2, Account a2 " +
                     " where m.MemberID = a.MemberId and a.AccountId = b.AccountId and a.UserId = u.UserID and a2.AccountId = b2.AccountId and b.AccountId = b2." + parentField;
             var sqlParams = new Hashtable();
             if (!string.IsNullOrEmpty(accountNumber))
             {
+				if (accountNumber.Length != 7)
+				{
+					return null;
+				}
+				
+				string prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();
+				sqlStr += " and a2.PrefixAccountNumber = :prefixAccountNumber";
+				sqlParams.Add("prefixAccountNumber", prefixAccountNumber);
+				
                 long accountNumberVal;
-                var status = long.TryParse(accountNumber, out accountNumberVal);
+                var status = long.TryParse(accountNumber.Substring(3), out accountNumberVal);
                 if (status)
                 {
                     sqlStr += " and a2.AccountNumber = :accountNumber";
@@ -1674,12 +1736,12 @@ namespace domain_lib.persistence
                 }
                 else
                 {
-                    sqlStr += " and 1=0";
+                    return null;
                 }
             }
             else
             {
-                sqlStr += " and 1=0";
+                return null;
             }
 
             MemberNodeDto memberNodeDto = null;
@@ -1700,7 +1762,8 @@ namespace domain_lib.persistence
                     memberNodeDto = new MemberNodeDto();
                     memberNodeDto.AccountId = memberInfo.AccountNumber;
                     memberNodeDto.ParentId = memberInfo.ParentId;
-                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " [" + memberInfo.AccountNumber + "]";
+                    memberNodeDto.Description = memberInfo.HoTen + "|" + memberInfo.UserName + " ["
+                        + EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber) + "]";
                 }
             }
 
@@ -1746,11 +1809,20 @@ namespace domain_lib.persistence
 		public ManagerApprovalDto[] SearchManagerApproval(string capQuanLy, string accountNumber)
 		{
             List<ManagerApprovalDto> allResults;
+		    string prefixAccountNumber = string.Empty;
 			long accountNumberVal = -1;
 			int capQuanLyVal = -1;
-			if (!string.IsNullOrEmpty(accountNumber) && !long.TryParse(accountNumber, out accountNumberVal))
+			if (!string.IsNullOrEmpty(accountNumber))
 			{
-				return new ManagerApprovalDto[0];
+                if (accountNumber.Length != 7)
+                {
+                    return new ManagerApprovalDto[0];
+                }
+			    prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();
+                if (!long.TryParse(accountNumber.Substring(3), out accountNumberVal))
+                {
+                    return new ManagerApprovalDto[0];
+                }
 			}
 			if (!string.IsNullOrEmpty(capQuanLy) && !int.TryParse(capQuanLy, out capQuanLyVal))
 			{
@@ -1758,12 +1830,16 @@ namespace domain_lib.persistence
 			}
             using (ISession session = m_SessionFactory.OpenSession())
             {
-				var sqlStr = "select new ManagerApproval(ma.Id, a.AccountNumber, ma.ManagerLevel, u.UserName) "
+                var sqlStr = "select new ManagerApproval(ma.Id, a.PrefixAccountNumber, a.AccountNumber, ma.ManagerLevel, u.UserName) "
 					+ " from ManagerApproval ma, Account a, Users u "
                     + " where ma.IsApproved = :isApproved and ma.AccountId = a.AccountId and a.UserId = u.UserID";
 				var sqlParams = new Hashtable();
 				sqlParams.Add("isApproved", "N");
-				
+				if (!string.IsNullOrEmpty(prefixAccountNumber))
+                {
+                    sqlStr += " and a.PrefixAccountNumber = :prefixAccountNumber";
+                    sqlParams.Add("prefixAccountNumber", prefixAccountNumber);   
+				}
 				if (accountNumberVal != -1){
 					sqlStr += " and a.AccountNumber = :accountNumber";
 					sqlParams.Add("accountNumber", accountNumberVal);
@@ -1773,7 +1849,7 @@ namespace domain_lib.persistence
 					sqlStr += " and ma.ManagerLevel = :managerLevel";
 					sqlParams.Add("managerLevel", capQuanLyVal);
 				}
-				sqlStr += " order by ma.CreatedDate asc";
+                sqlStr += " order by ma.Id desc";
 				
                 var query = session.CreateQuery(sqlStr);				
                 foreach (var key in sqlParams.Keys)
@@ -1797,7 +1873,7 @@ namespace domain_lib.persistence
 			{
 				ManagerApprovalDto dto = new ManagerApprovalDto();
 				dto.Id = model.Id;
-				dto.AccountNumber = model.AccountNumber;
+				dto.AccountNumber = EncodeAccountNumber(model.PrefixAccountNumber, model.AccountNumber);
 				dto.ManagerLevel = model.ManagerLevel;
 				dto.UserName = model.UserName;
 				allResults.Add(dto);
@@ -1809,7 +1885,7 @@ namespace domain_lib.persistence
 		{
 			var mapParams = new Hashtable();
 			mapParams.Add("ManagerLevel", dto.ManagerLevel);
-			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
+			var accountId = GetAccountIdBy(dto.AccountNumber);
 			mapParams.Add("AccountId", accountId);
 			mapParams.Add("IsApproved", "N");
 			var list = RetrieveEquals<ManagerApproval>(mapParams);
@@ -1830,17 +1906,31 @@ namespace domain_lib.persistence
 		public BonusApprovalDto[] SearchBonusApproval(string accountNumber, string userName, string isApproved)
 		{
             List<BonusApprovalDto> allResults;
+		    string prefixAccountNumber = string.Empty;
 			long accountNumberVal = -1;
-			if (!string.IsNullOrEmpty(accountNumber) && !long.TryParse(accountNumber, out accountNumberVal))
+			if (!string.IsNullOrEmpty(accountNumber))
 			{
-				return new BonusApprovalDto[0];
+                if (accountNumber.Length != 7)
+                {
+                    return new BonusApprovalDto[0];
+                }
+			    prefixAccountNumber = accountNumber.Substring(0, 3).ToUpper();
+                if (!long.TryParse(accountNumber.Substring(3), out accountNumberVal))
+                {
+                    return new BonusApprovalDto[0];
+                }
 			}
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var sqlStr = "select new BonusApproval(ba.Id, a.PrefixAccountNumber, a.AccountNumber, ba.BonusAmount, ba.IsApproved, u.UserName) "
 					+ " from BonusApproval ba, Account a, Users u "
                     + " where ba.AccountId = a.AccountId and a.UserId = u.UserID";
-				var sqlParams = new Hashtable();				
+				var sqlParams = new Hashtable();
+                if (!string.IsNullOrEmpty(prefixAccountNumber))
+                {
+                    sqlStr += " and a.PrefixAccountNumber = :prefixAccountNumber";
+                    sqlParams.Add("prefixAccountNumber", prefixAccountNumber);   
+                }
 				if (accountNumberVal != -1){
 					sqlStr += " and a.AccountNumber = :accountNumber";
 					sqlParams.Add("accountNumber", accountNumberVal);
@@ -1855,7 +1945,7 @@ namespace domain_lib.persistence
 					sqlStr += " and ba.IsApproved = :isApproved";
 					sqlParams.Add("isApproved", isApproved);
 				}
-				sqlStr += " order by ba.CreatedDate asc";
+				sqlStr += " order by ba.Id desc";
 				
                 var query = session.CreateQuery(sqlStr);				
                 foreach (var key in sqlParams.Keys)
@@ -1879,7 +1969,7 @@ namespace domain_lib.persistence
 			{
 				BonusApprovalDto dto = new BonusApprovalDto();
 				dto.Id = model.Id;
-				dto.AccountNumber = DecodeAccountNumber(model.PrefixAccountNumber, model.AccountNumber);
+				dto.AccountNumber = EncodeAccountNumber(model.PrefixAccountNumber, model.AccountNumber);
 				dto.BonusAmount = model.BonusAmount;
 				dto.IsApproved = DecodeApproveStatus(model.IsApproved);
 				dto.UserName = model.UserName;
@@ -1888,7 +1978,7 @@ namespace domain_lib.persistence
 			return allResults;
 		}
 
-        private string DecodeAccountNumber(string prefixAccountNumber, long accountNumber)
+        private string EncodeAccountNumber(string prefixAccountNumber, long accountNumber)
         {
             return prefixAccountNumber + string.Format("{0:0000}", accountNumber);
         }
@@ -1904,7 +1994,7 @@ namespace domain_lib.persistence
 
         public string CreateBonusApproval(BonusApprovalDto dto)
 		{
-			var accountId = GetAccountIdBy(dto.AccountNumber.ToString());
+			var accountId = GetAccountIdBy(dto.AccountNumber);
 			if (accountId == -1)
 			{
 				return "-1";
@@ -2154,7 +2244,7 @@ namespace domain_lib.persistence
 
         public UserDto[] GetNewMemberList()
         {
-            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+            var sqlStr = "select new MemberInfo(a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
                     + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a, Users u " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID order by m.CreatedDate desc";
 
@@ -2175,7 +2265,7 @@ namespace domain_lib.persistence
                         continue;
                     }
                     var userDto = new UserDto();
-                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.AccountNumber = EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber);
                     userDto.FullName = memberInfo.HoTen;
                     userDto.UserName = memberInfo.UserName;
                     userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
@@ -2200,7 +2290,7 @@ namespace domain_lib.persistence
 
         public UserDto[] GetNewManagerList()
         {
-            var sqlStr = "select new MemberInfo(a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
+            var sqlStr = "select new MemberInfo(a.PrefixAccountNumber, a.AccountNumber, m.HoTen, u.UserName, a.ParentId, a.ParentDirectId, m.NgaySinh, m.SoCmnd, m.NgayCap, m.SoDienThoai, m.DiaChi, "
                     + " m.GioiTinh, m.SoTaiKhoan, m.ChiNhanhNH, m.ImageUrl, m.CreatedDate, m.CreatedBy) from MemberInfo m, Account a, Users u, ManagerL1 m1 " +
                     " where m.MemberID = a.MemberId and a.UserId = u.UserID and a.AccountId = m1.AccountId order by m.CreatedDate desc";
 
@@ -2221,7 +2311,7 @@ namespace domain_lib.persistence
                         continue;
                     }
                     var userDto = new UserDto();
-                    userDto.AccountNumber = memberInfo.AccountNumber;
+                    userDto.AccountNumber = EncodeAccountNumber(memberInfo.PrefixAccountNumber, memberInfo.AccountNumber);
                     userDto.FullName = memberInfo.HoTen;
                     userDto.UserName = memberInfo.UserName;
                     userDto.ParentId = GetAccountNumberBy(memberInfo.ParentId);
@@ -2277,7 +2367,7 @@ namespace domain_lib.persistence
                     }
                     var accountBonusDto = new AccountBonusDto();
                     accountBonusDto.IsPaid = accountBonus.IsPaid;
-                    accountBonusDto.Thang = accountBonus.Month.Substring(4, 2) + "/" + accountBonus.Month.Substring(0, 4); ;
+                    accountBonusDto.Thang = accountBonus.Month.Substring(4, 2) + "/" + accountBonus.Month.Substring(0, 4);
                     accountBonusDto.Tong = accountBonus.BonusAmount;
                     allAccountBonusDto.Add(accountBonusDto);
                 }

@@ -26,6 +26,8 @@ namespace domain_lib.model
 
         private long _accountNumber = -1;
 
+        private string _prefixAccountNumber = string.Empty;
+
         private string _userName = String.Empty;
 
         #endregion
@@ -36,9 +38,10 @@ namespace domain_lib.model
         {
         }
 
-        public ManagerApproval(long id, long accountNumber, int managerLevel, string userName)
+        public ManagerApproval(long id, string prefixAccountNumber, long accountNumber, int managerLevel, string userName)
         {
 			this._id = id;
+            this._prefixAccountNumber = prefixAccountNumber;
 			this._accountNumber = accountNumber;
 			this._managerLevel = managerLevel;
 			this._userName = userName;
@@ -129,6 +132,15 @@ namespace domain_lib.model
         {
             get { return _userName; }
             set { _userName = value; }
+        }
+
+        /// <summary>
+        /// PrefixAccountNumber.
+        /// </summary>
+        public virtual string PrefixAccountNumber
+        {
+            get { return _prefixAccountNumber; }
+            set { _prefixAccountNumber = value; }
         }
 
         #endregion

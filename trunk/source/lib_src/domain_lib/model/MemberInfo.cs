@@ -44,6 +44,8 @@ namespace domain_lib.model
 
         private long _accountNumber = -1;
 
+        private string _prefixAccountNumber = string.Empty;
+
         private string _userName = string.Empty;
 
         #endregion
@@ -54,9 +56,10 @@ namespace domain_lib.model
         {
         }
 
-        public MemberInfo(long accountNumber, string hoTen, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
+        public MemberInfo(string prefixAccountNumber, long accountNumber, string hoTen, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
                     string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
         {
+            this._prefixAccountNumber = prefixAccountNumber;
             this._accountNumber = accountNumber;
             this._hoTen = hoTen;
             this._ngaySinh = ngaySinh;
@@ -72,9 +75,10 @@ namespace domain_lib.model
             this._createdBy = createdBy;
         }
 
-        public MemberInfo(long accountNumber, string hoTen, string userName, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
+        public MemberInfo(string prefixAccountNumber, long accountNumber, string hoTen, string userName, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
                     string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
         {
+            this._prefixAccountNumber = prefixAccountNumber;
             this._accountNumber = accountNumber;
             this._hoTen = hoTen;
             this._userName = userName;
@@ -91,9 +95,10 @@ namespace domain_lib.model
             this._createdBy = createdBy;
         }
 
-        public MemberInfo(long accountNumber, string hoTen, long parentId, long parentDirectId, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
+        public MemberInfo(string prefixAccountNumber, long accountNumber, string hoTen, long parentId, long parentDirectId, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
                     string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
         {
+            this._prefixAccountNumber = prefixAccountNumber;
             this._accountNumber = accountNumber;
             this._hoTen = hoTen;
             this._parentId = parentId;
@@ -111,9 +116,10 @@ namespace domain_lib.model
             this._createdBy = createdBy;
         }
 
-        public MemberInfo(long accountNumber, string hoTen, string userName, long parentId, long parentDirectId, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
+        public MemberInfo(string prefixAccountNumber, long accountNumber, string hoTen, string userName, long parentId, long parentDirectId, DateTime ngaySinh, string soCmnd, DateTime ngayCap, string soDienThoai, string diaChi,
                     string gioiTinh, string soTaiKhoan, string chiNhanhNH, string imageUrl, DateTime createdDate, string createdBy)
         {
+            this._prefixAccountNumber = prefixAccountNumber;
             this._accountNumber = accountNumber;
             this._hoTen = hoTen;
             this._userName = userName;
@@ -132,10 +138,11 @@ namespace domain_lib.model
             this._createdBy = createdBy;
         }
 
-        public MemberInfo(long accountId, long parentId, long accountNumber, string hoTen, string userName)
+        public MemberInfo(long accountId, long parentId, string prefixAccountNumber, long accountNumber, string hoTen, string userName)
         {
             this._accountId = accountId;
             this._parentId = parentId;
+            this._prefixAccountNumber = prefixAccountNumber;
             this._accountNumber = accountNumber;
             this._hoTen = hoTen;
             this._userName = userName;
@@ -314,6 +321,15 @@ namespace domain_lib.model
         {
             get { return _createdBy; }
             set { _createdBy = value; }
+        }
+
+        /// <summary>
+        /// PrefixAccountNumber.
+        /// </summary>
+        public virtual string PrefixAccountNumber
+        {
+            get { return _prefixAccountNumber; }
+            set { _prefixAccountNumber = value; }
         }
 
         #endregion
