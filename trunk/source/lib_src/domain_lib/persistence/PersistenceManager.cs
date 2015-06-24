@@ -705,6 +705,11 @@ namespace domain_lib.persistence
             {
                 return "-9";
             }
+			long nextAccountId = GetNextAccountId();
+			if (nextAccountId >= 10000)
+			{
+				return "-10";
+			}
             var dateNgaySinh = DateUtil.GetDateTime(ngaySinh);
             var dateNgayCap = DateUtil.GetDateTime(ngayCap);
 
@@ -770,12 +775,17 @@ namespace domain_lib.persistence
 
         private long GetNextAccountNumber()
         {
+			return GetNextAccountId()%10000;
+		}
+		
+		private long GetNextAccountId()
+		{
             CurrentIdentity currentIdentity = GetCurrentIdentity("ACCOUNT");
             if (currentIdentity == null)
             {
                 return 1;
             }
-            return (currentIdentity.Value + 1)%10000;
+            return currentIdentity.Value + 1;
         }
 
         private string GetTenDangNhapByMemberId(long memberId)

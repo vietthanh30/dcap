@@ -163,6 +163,9 @@ namespace web_app.admin
                     case -9:
                         InvalidCredentialsMessage.Text = "Thành viên đã đăng ký đủ 40 tài khoản.";
                         break;
+                    case -10:
+                        InvalidCredentialsMessage.Text = "Id thành viên vượt giới hạn cho phép của hệ thống.";
+                        break;
                     default:
                         InvalidCredentialsMessage.Text = "Đăng ký không thành công.";
                         break;
