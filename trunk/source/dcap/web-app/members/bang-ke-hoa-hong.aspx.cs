@@ -31,6 +31,11 @@ namespace web_app.members
                                                                                "MM/yyyy");
                 OnSearchBangKe();
             }
+            if (!Page.ClientScript.IsStartupScriptRegistered("invokeMeMaster"))
+            {
+                Page.ClientScript.RegisterStartupScript
+                    (this.GetType(), "invokeMeMaster", "invokeMeMaster();", true);
+            }
         }
 
         private void OnSearchBangKe()

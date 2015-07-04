@@ -43,6 +43,12 @@ namespace core_lib.common
                                                               Amount = 0.2
                                                           };
 
+        public static BonusType BONUS_TYPE_TT = new BonusType
+                                                          {
+                                                              Type = "TT",
+                                                              Amount = 0.7
+                                                          };
+
         public static BonusType BONUS_TYPE_HE_THONG = new BonusType
         {
             Type = "HT",

@@ -13,6 +13,15 @@ namespace web_app {
     public partial class SiteMaster {
         
         /// <summary>
+        /// HeadContent1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent1;
+        
+        /// <summary>
         /// DropdownContent control.
         /// </summary>
         /// <remarks>
@@ -121,15 +130,6 @@ namespace web_app {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
         
         /// <summary>
-        /// QltvAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor QltvAdmin;
-        
-        /// <summary>
         /// A11 control.
         /// </summary>
         /// <remarks>
@@ -157,15 +157,6 @@ namespace web_app {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A10;
         
         /// <summary>
-        /// QldtAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor QldtAdmin;
-        
-        /// <summary>
         /// A18 control.
         /// </summary>
         /// <remarks>
@@ -184,15 +175,6 @@ namespace web_app {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A19;
         
         /// <summary>
-        /// MltvAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor MltvAdmin;
-        
-        /// <summary>
         /// A12 control.
         /// </summary>
         /// <remarks>
@@ -209,15 +191,6 @@ namespace web_app {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A13;
-        
-        /// <summary>
-        /// BktlAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor BktlAdmin;
         
         /// <summary>
         /// A14 control.
@@ -247,15 +220,6 @@ namespace web_app {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftContentKT;
         
         /// <summary>
-        /// MltvKT control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor MltvKT;
-        
-        /// <summary>
         /// A4 control.
         /// </summary>
         /// <remarks>
@@ -272,15 +236,6 @@ namespace web_app {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A17;
-        
-        /// <summary>
-        /// BktlKT control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor BktlKT;
         
         /// <summary>
         /// A5 control.

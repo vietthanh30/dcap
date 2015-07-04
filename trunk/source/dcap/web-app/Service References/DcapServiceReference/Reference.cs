@@ -755,7 +755,8 @@ namespace web_app.DcapServiceReference {
         
         private long STTField;
         
-        private long AccountIdField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountIdField;
         
         private double TrucTiepField;
         
@@ -795,13 +796,13 @@ namespace web_app.DcapServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
-        public long AccountId {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string AccountId {
             get {
                 return this.AccountIdField;
             }
             set {
-                if ((this.AccountIdField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.AccountIdField, value) != true)) {
                     this.AccountIdField = value;
                     this.RaisePropertyChanged("AccountId");
                 }

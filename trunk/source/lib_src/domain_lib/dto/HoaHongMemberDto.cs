@@ -13,7 +13,7 @@ namespace domain_lib.dto
         private long _stt = -1;
 
         // Member variables
-        private long _accountId = -1;
+        private string _accountId = string.Empty;
 
         private double _trucTiep = -1.0;
 
@@ -53,7 +53,7 @@ namespace domain_lib.dto
         /// <summary>
         /// AccountId.
         /// </summary>
-        public virtual long AccountId
+        public virtual string AccountId
         {
             get { return _accountId; }
             set { _accountId = value; }

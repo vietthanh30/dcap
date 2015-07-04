@@ -43,6 +43,13 @@ namespace web_app.admin
 				return;
 			}
             var idThanhVien = IdThanhVienSearch.Value.Trim();
+            if (!string.IsNullOrEmpty(idThanhVien) && !DcapServiceUtil.IsValidAccountNumber(idThanhVien))
+            {
+                InvalidCredentialsMessage.Text = "Id thành viên không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                ResetGvManagerApproval();
+                return;
+            }
             var managerApprovalDtos = DcapServiceUtil.SearchManagerApproval(capQuanLy, idThanhVien);
             if (managerApprovalDtos.Length > 0)
             {

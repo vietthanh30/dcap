@@ -1068,13 +1068,24 @@ namespace domain_lib.persistence
                     return new BangKeDto[0];
                 }
             }
-			if (accountNumberVal == -1 && !string.IsNullOrEmpty(userName))
-			{
-                if (!GetAccountNumberByUserName(userName, out prefixAccountNumber, out accountNumberVal))
+			if (!string.IsNullOrEmpty(userName))
+            {
+                long accountNumberVal2;
+                string prefixAccountNumber2;
+                if (!GetAccountNumberByUserName(userName, out prefixAccountNumber2, out accountNumberVal2))
                 {
                     return new BangKeDto[0];
                 }
-			}
+                if (accountNumberVal == -1)
+                {
+                    accountNumberVal = accountNumberVal2;
+                    prefixAccountNumber = prefixAccountNumber2;
+                } else if (accountNumberVal != accountNumberVal2
+                    || string.Compare(prefixAccountNumber, prefixAccountNumber2, true) != 0)
+                {
+                    return new BangKeDto[0];
+                }
+            }
             using (ISession session = m_SessionFactory.OpenSession())
             {
                 var query = session.GetNamedQuery("GetBangKeAdvance");
@@ -1228,7 +1239,7 @@ namespace domain_lib.persistence
                 {
                     var dto = new HoaHongMemberDto();
                     dto.STT = 1;
-                    dto.AccountId = accountId;
+                    dto.AccountId = accountNumber;
                     dto.Thang = DateUtil.GetDateTimeAsStringWithEnProvider(thangKeKhai, ConstUtil.DISPLAY_MONTH_FORMAT);
                     dto.TrucTiep = trucTiep;
                     dto.CanCap = canCap;
@@ -1429,7 +1440,7 @@ namespace domain_lib.persistence
 
         public bool IsContainMemberNode(string rootNumber, string accountNumber)
         {
-            if (string.IsNullOrEmpty(accountNumber) || string.Compare(rootNumber, accountNumber) == 0)
+            if (string.IsNullOrEmpty(accountNumber) || string.Compare(rootNumber, accountNumber, true) == 0)
             {
                 return true;
             }
@@ -1945,7 +1956,7 @@ namespace domain_lib.persistence
 					sqlStr += " and a.AccountNumber = :accountNumber";
 					sqlParams.Add("accountNumber", accountNumberVal);
 				}
-				if (accountNumberVal == -1 && !string.IsNullOrEmpty(userName))
+				if (!string.IsNullOrEmpty(userName))
 				{
 					sqlStr += " and u.UserName = :userName";
 					sqlParams.Add("userName", userName.ToUpper());

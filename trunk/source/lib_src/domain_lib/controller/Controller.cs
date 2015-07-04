@@ -202,7 +202,7 @@ namespace domain_lib.controller
                                             CreatedDate = DateTime.Now
                                         };
                         m_PersistenceManager.Save(error);
-                        m_PersistenceManager.Delete(log);
+//                        m_PersistenceManager.Delete(log);
                         throw new Exception("CalculateAccountLog Error: " + ex.Message);
                     }
                 }
@@ -227,7 +227,7 @@ namespace domain_lib.controller
                                   IsCalculated = "N",
                                   LevelIndex = levelIndex,
                                   CreatedDate = DateTime.Now,
-                                  BonusType = (account.ParentId == account.ParentDirectId && account.ParentDirectId == calculatedAccount.AccountId) ? "TT" : "LK"
+                                  BonusType = (account.ParentId == account.ParentDirectId && account.ParentDirectId == calculatedAccount.AccountId) ? ConstUtil.BONUS_TYPE_TT.Type : "LK"
                               };
 
             m_PersistenceManager.Save(preCalc);
@@ -242,7 +242,7 @@ namespace domain_lib.controller
                     IsCalculated = "N",
                     LevelIndex = -1,
                     CreatedDate = DateTime.Now,
-                    BonusType = "TT"
+                    BonusType = ConstUtil.BONUS_TYPE_TT.Type
                 };
 
                 m_PersistenceManager.Save(preCalc);
@@ -268,7 +268,7 @@ namespace domain_lib.controller
                 foreach (var accountPreCalc in preCalcQueue)
                 {
                     // truc tiep);
-                    if (accountPreCalc.BonusType == "TT")
+                    if (accountPreCalc.BonusType == ConstUtil.BONUS_TYPE_TT.Type)
                     {
                         CalculateTtBonus(accountPreCalc);
                     }
@@ -1014,29 +1014,29 @@ namespace domain_lib.controller
                     break;
             }
 
-            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, bonusAmmount, "HT");
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, bonusAmmount, ConstUtil.BONUS_TYPE_HE_THONG.Type);
         }
 
         private void CalculateMrBonus(AccountPreCalc accountPreCalc)
         {
-            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.2, "MR");
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, ConstUtil.BONUS_TYPE_MA_ROI.Amount, ConstUtil.BONUS_TYPE_MA_ROI.Type);
         }
 
         private void CalculateCcBonus(AccountPreCalc accountPreCalc)
         {
-            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.2, "CC");
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, ConstUtil.BONUS_TYPE_CAN_CAP.Amount, ConstUtil.BONUS_TYPE_CAN_CAP.Type);
         }
 
         private void CalculateTtBonus(AccountPreCalc accountPreCalc)
         {
-            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, 0.8, "TT");
+            m_PersistenceManager.SaveAccountBonus(accountPreCalc.CalcAccountId, ConstUtil.BONUS_TYPE_TT.Amount, ConstUtil.BONUS_TYPE_TT.Type);
         }
 
         private bool IsCalculated(AccountPreCalc accountPreCalc)
         {
             if (accountPreCalc.AccountLevel == -1)
                 return false;
-            if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "TT")
+            if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == ConstUtil.BONUS_TYPE_TT.Type)
                 return true;
             if (accountPreCalc.AccountLevel == 1 && accountPreCalc.BonusType == "LK" && accountPreCalc.LevelIndex > 1)
                 return true;

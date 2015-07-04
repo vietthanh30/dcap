@@ -39,6 +39,13 @@ namespace web_app.admin
         private void OnSearchBonusApproval()
         {
             var accountNumber = IdThanhVienSearch.Value.Trim();
+            if (!string.IsNullOrEmpty(accountNumber) && !DcapServiceUtil.IsValidAccountNumber(accountNumber))
+            {
+                InvalidCredentialsMessage.Text = "Id thành viên không đúng định dạng. Vui lòng nhập lại.";
+                InvalidCredentialsMessage.Visible = true;
+                ResetGvBonusApproval();
+                return;
+            }
             var userName = UserNameSearch.Value.Trim();
             var isApproved = "N";
             var bonusApprovalDtos = DcapServiceUtil.SearchBonusApproval(accountNumber, userName, isApproved);

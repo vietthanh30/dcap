@@ -1,9 +1,9 @@
-﻿<%@ Page Title="Tra cứu thành viên" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TraCuuThanhVien.aspx.cs" Inherits="web_app.admin.TraCuuThanhVien" %>
+<%@ Page Title="Tra cứu thành viên" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TraCuuThanhVien.aspx.cs" Inherits="web_app.admin.TraCuuThanhVien" %>
 <%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl"
     TagPrefix="ASPP" %>
 
 <asp:Content ID="HeaderContent1" runat="server" ContentPlaceHolderID="HeadContent1">
-	<!-- jQuery 2.1.4 -->
+    <!-- jQuery 2.1.4 -->
 	<script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
 	<!-- Bootstrap 3.3.2 JS -->
 	<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -29,6 +29,23 @@
 	
 	<!-- date-picker -->
 	<script src="../plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!-- DATA TABLES -->
+    <link href="../plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- DATA TABES SCRIPT -->
+    <script src="../plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function invokeMeMaster() {
+            $('[id$=tblMemberInfo]').dataTable({
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": false
+            });
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="HeadContent" runat="server">
     <h1>
@@ -86,6 +103,31 @@
         <div class="box">
                 
         <div class="box-body">
+            <table id="tblMemberInfo" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                    <th>STT</th>
+                    <th>Họ tên</th>
+                    <th>Số CMND</th>
+					<th>Id Thành viên</th>
+					<th>Tên đăng nhập</th>
+                    <th>Sửa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <asp:Label ID="lblMemberInfo" runat="server"></asp:Label>
+                </tbody>
+                <tfoot>
+                    <tr>
+                    <th>STT</th>
+                    <th>Họ tên</th>
+                    <th>Số CMND</th>
+					<th>Id Thành viên</th>
+					<th>Tên đăng nhập</th>
+                    <th>Sửa</th>
+                    </tr>
+                </tfoot>
+            </table>
             <asp:GridView ID="gvMemberInfo" runat="server" AutoGenerateColumns="false" 
                 EnableModelValidation="true" class="table table-bordered table-striped" 
                 BorderColor="#CCCCCC" AllowPaging="True" 

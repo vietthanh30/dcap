@@ -24,6 +24,12 @@ namespace win_sv_app.service
             {
                 intervalTime = 300000; //every 5 minutes
             }
+			double bonusTypeTtAmount;
+			if (!double.TryParse(ParameterUtil.GetParameter("BonusTypeTtAmount"), out bonusTypeTtAmount))
+            {
+                bonusTypeTtAmount = 0.7;
+            }
+			ConstUtil.BONUS_TYPE_TT.Amount = bonusTypeTtAmount;
             timer1 = new Timer();
             this.timer1.Interval = intervalTime;
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);

@@ -23,6 +23,11 @@ namespace web_app.admin
                 return;
             }
             ContinueDestinationPageUrl.Value = Request.QueryString["ReturnUrl"];
+            if (!Page.ClientScript.IsStartupScriptRegistered("invokeMeMaster"))
+            {
+                Page.ClientScript.RegisterStartupScript
+                    (this.GetType(), "invokeMeMaster", "invokeMeMaster();", true);
+            }
         }
 
         protected void RegisterUser_CreatedUser(object sender, EventArgs e)

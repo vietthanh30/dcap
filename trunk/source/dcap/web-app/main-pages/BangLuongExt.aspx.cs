@@ -37,6 +37,11 @@ namespace web_app.main_pages
                         ((DateTime) DateUtil.GetDateTime(BeginDate.Value)).AddMonths(1).AddDays(-1));
                 OnSearchBangKe();
             }
+            if (!Page.ClientScript.IsStartupScriptRegistered("invokeMeMaster"))
+            {
+                Page.ClientScript.RegisterStartupScript
+                    (this.GetType(), "invokeMeMaster", "invokeMeMaster();", true);
+            }
         }
 
         private void OnSearchBangKe()
