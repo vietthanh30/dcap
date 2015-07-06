@@ -268,9 +268,11 @@ namespace domain_lib.controller
                 foreach (var accountPreCalc in preCalcQueue)
                 {
                     // truc tiep);
+                    bool isCalculated = false;
                     if (accountPreCalc.BonusType == ConstUtil.BONUS_TYPE_TT.Type)
                     {
                         CalculateTtBonus(accountPreCalc);
+                        isCalculated = true;
                     }
 
                     if (IsCalculated(accountPreCalc))
@@ -279,12 +281,14 @@ namespace domain_lib.controller
                         if (((accountPreCalc.LevelIndex % 3) != 1) && (accountPreCalc.AccountLevel < 4))
                         {
                             CalculateCcBonus(accountPreCalc);
+                            isCalculated = true;
                         }
 
                         // ma roi
                         if (accountPreCalc.AccountLevel>1 )
                         {
                             CalculateHtBonus(accountPreCalc);
+                            isCalculated = true;
                         }
 
                         // insert into QL1 tree
@@ -296,9 +300,12 @@ namespace domain_lib.controller
                     }
 
                     //mark calculated
-                    accountPreCalc.IsCalculated = "Y";
-                    accountPreCalc.CalculatedDate = DateTime.Now;
-                    m_PersistenceManager.Save(accountPreCalc);
+                    if (isCalculated == true)
+                    {
+                        accountPreCalc.IsCalculated = "Y";
+                        accountPreCalc.CalculatedDate = DateTime.Now;
+                        m_PersistenceManager.Save(accountPreCalc);
+                    }
                 }
                 return 1;
             }
